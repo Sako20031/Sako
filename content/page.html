@@ -129,6 +129,7 @@
   .photo-frame{ position:relative; width:min(280px, 58vw); aspect-ratio:1; border-radius:50%; overflow:hidden; border:6px solid #221810; box-shadow:0 30px 60px -20px rgba(0,0,0,.6); background:radial-gradient(120% 120% at 30% 20%, #2c2116, #17110b 70%); display:flex; align-items:center; justify-content:center; }
   .photo-frame svg.deco{ position:absolute; inset:0; width:100%; height:100%; opacity:.16; color:#E3B563; }
   .photo-frame .monogram{ font-family:'Unbounded'; font-weight:800; font-size:clamp(3rem, 10vw, 4.6rem); color:#F1E6D2; position:relative; z-index:1; }
+  .photo-frame img.avatar-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; }
 
   .stripe{ height:12px; background:repeating-linear-gradient(-45deg, var(--red) 0 18px, var(--brass) 18px 36px, #F1E6D2 36px 54px); }
 
@@ -263,7 +264,7 @@
   <div class="wrap site-row">
     <div class="brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 5a2.5 2.5 0 1 0 3.2 3.8L18 5M6 19a2.5 2.5 0 1 1 3.2-3.8L18 19"/><path d="M9.2 8.8 20 15"/></svg>
-      <span class="brand-name">САПЫШЕВ БАРБЕР</span>
+      <span class="brand-name" id="brandName">САПЫШЕВ БАРБЕР</span>
     </div>
     <nav class="links">
       <a href="#services">Услуги</a>
@@ -277,12 +278,12 @@
 <section class="hero">
   <div class="wrap hero-inner">
     <div>
-      <div class="hero-eyebrow">Барбершоп · Аксай</div>
-      <h1 class="display">Адильжан<br>Сапышев</h1>
-      <p class="tagline">Мужские и детские стрижки, оформление бороды и стрижка под машинку. Аккуратно, по записи, без очередей.</p>
+      <div class="hero-eyebrow" id="heroEyebrow">Барбершоп · Аксай</div>
+      <h1 class="display" id="heroName">Адильжан<br>Сапышев</h1>
+      <p class="tagline" id="heroTagline">Мужские и детские стрижки, оформление бороды и стрижка под машинку. Аккуратно, по записи, без очередей.</p>
       <div class="hero-meta">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>4 микрорайон, дом 35, Аксай</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>Ежедневно · 10:00 – 20:00</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg><span id="heroAddress">4 микрорайон, дом 35, Аксай</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span id="heroHours">Ежедневно · 10:00 – 20:00</span></span>
       </div>
       <div class="hero-actions">
         <a href="#booking" class="btn btn-brass">Выбрать время</a>
@@ -291,9 +292,9 @@
     </div>
     <div class="hero-photo">
       <div class="photo-ring"></div>
-      <div class="photo-frame">
+      <div class="photo-frame" id="photoFrame">
         <svg class="deco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 5a2.5 2.5 0 1 0 3.2 3.8L18 5M6 19a2.5 2.5 0 1 1 3.2-3.8L18 19"/><path d="M9.2 8.8 20 15"/></svg>
-        <span class="monogram">АС</span>
+        <span class="monogram" id="monogram">АС</span>
       </div>
     </div>
   </div>
@@ -400,10 +401,10 @@
 <footer>
   <div class="wrap">
     <div class="foot-row">
-      <div class="foot-brand">САПЫШЕВ БАРБЕР</div>
+      <div class="foot-brand" id="footBrand">САПЫШЕВ БАРБЕР</div>
       <div class="foot-meta">
-        <span>4 микрорайон, дом 35, Аксай</span>
-        <span>Ежедневно · 10:00–20:00</span>
+        <span id="footAddress">4 микрорайон, дом 35, Аксай</span>
+        <span id="footHours">Ежедневно · 10:00–20:00</span>
       </div>
     </div>
     <div class="foot-fine">
@@ -443,6 +444,9 @@
   Store.getGallery = function(){ return api('/api/gallery').then(function(r){ return r.data || []; }); };
   Store.addPhoto = function(entry){ return api('/api/gallery', {method:'POST', body: JSON.stringify(entry)}); };
   Store.deletePhoto = function(id){ return api('/api/gallery/'+id, {method:'DELETE'}); };
+
+  Store.getSettings = function(){ return api('/api/settings').then(function(r){ return r.data || {}; }); };
+  Store.saveSettings = function(obj){ return api('/api/settings', {method:'POST', body: JSON.stringify(obj)}); };
 
   Store.getReviews = function(){ return api('/api/reviews').then(function(r){ return r.data || []; }); };
   Store.addReview = function(r){ return api('/api/reviews', {method:'POST', body: JSON.stringify(r)}); };
@@ -734,6 +738,7 @@
         '<button class="admin-tab" data-tab="bookings">Записи</button>'+
         '<button class="admin-tab" data-tab="services">Услуги</button>'+
         '<button class="admin-tab" data-tab="gallery">Фото</button>'+
+        '<button class="admin-tab" data-tab="brand">Бренд</button>'+
         '<button class="admin-tab" data-tab="settings">Настройки</button>'+
       '</div>'+
       '<div id="adminBody"></div>'
@@ -747,7 +752,75 @@
     if(adminTab==='bookings') renderAdminBookings(body);
     if(adminTab==='services') renderAdminServices(body);
     if(adminTab==='gallery') renderAdminGallery(body);
+    if(adminTab==='brand') renderAdminBrand(body);
     if(adminTab==='settings') renderAdminSettings(body);
+  }
+
+  function renderAdminBrand(body){
+    var s = currentSettings;
+    body.innerHTML =
+      '<div class="admin-card"><div class="step-label" style="margin-bottom:12px;">Фото / аватар</div>'+
+      (s.avatar_url ? '<img src="'+s.avatar_url+'" style="width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:12px;display:block;">' : '')+
+      '<input type="file" accept="image/*" id="avatarInput" style="margin-bottom:10px;">'+
+      '<div style="display:flex;gap:8px;">'+
+        '<button class="btn btn-brass btn-sm" id="avatarSave" disabled>Сохранить фото</button>'+
+        (s.avatar_url ? '<button class="btn btn-danger btn-sm" id="avatarClear">Убрать фото</button>' : '')+
+      '</div>'+
+      '<p class="hint" id="avatarHint"></p></div>'+
+      '<div class="admin-card"><div class="step-label" style="margin-bottom:12px;">Название и текст сайта</div>'+
+      '<label class="field" style="margin-bottom:10px;">Название сайта (шапка и подвал)<input type="text" id="bSiteName" value="'+escapeHtml(s.site_name||'Сапышев Барбер')+'"></label>'+
+      '<label class="field" style="margin-bottom:10px;">Имя мастера (главный экран)<input type="text" id="bOwnerName" value="'+escapeHtml(s.owner_name||'Адильжан Сапышев')+'"></label>'+
+      '<label class="field" style="margin-bottom:10px;">Слоган<input type="text" id="bTagline" value="'+escapeHtml(s.tagline||'Мужские и детские стрижки, оформление бороды и стрижка под машинку. Аккуратно, по записи, без очередей.')+'"></label>'+
+      '<label class="field" style="margin-bottom:10px;">Адрес<input type="text" id="bAddress" value="'+escapeHtml(s.address||'4 микрорайон, дом 35, Аксай')+'"></label>'+
+      '<label class="field" style="margin-bottom:10px;">Часы работы<input type="text" id="bHours" value="'+escapeHtml(s.hours||'Ежедневно · 10:00 – 20:00')+'"></label>'+
+      '<button class="btn btn-brass btn-block btn-sm" id="bSave">Сохранить</button>'+
+      '<p class="hint" id="bHint"></p></div>';
+
+    var pendingAvatar = null;
+    var fileInput = body.querySelector('#avatarInput');
+    var saveBtn = body.querySelector('#avatarSave');
+    fileInput.addEventListener('change', function(){
+      var file = fileInput.files[0];
+      if(!file) return;
+      var img = new Image();
+      var reader = new FileReader();
+      reader.onload = function(e){
+        img.onload = function(){
+          var maxW = 500;
+          var scale = Math.min(1, maxW/img.width);
+          var canvas = document.createElement('canvas');
+          canvas.width = img.width*scale; canvas.height = img.height*scale;
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          pendingAvatar = canvas.toDataURL('image/jpeg', 0.8);
+          saveBtn.disabled = false;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+    saveBtn.addEventListener('click', async function(){
+      if(!pendingAvatar) return;
+      await Store.saveSettings({avatar_url: pendingAvatar});
+      body.querySelector('#avatarHint').textContent = 'Фото сохранено.';
+      loadSettings().then(function(){ renderAdminBrand(body); });
+    });
+    var clearBtn = body.querySelector('#avatarClear');
+    if(clearBtn) clearBtn.addEventListener('click', async function(){
+      await Store.saveSettings({avatar_url: ''});
+      loadSettings().then(function(){ renderAdminBrand(body); });
+    });
+
+    body.querySelector('#bSave').addEventListener('click', async function(){
+      await Store.saveSettings({
+        site_name: body.querySelector('#bSiteName').value.trim(),
+        owner_name: body.querySelector('#bOwnerName').value.trim(),
+        tagline: body.querySelector('#bTagline').value.trim(),
+        address: body.querySelector('#bAddress').value.trim(),
+        hours: body.querySelector('#bHours').value.trim()
+      });
+      body.querySelector('#bHint').textContent = 'Сохранено.';
+      loadSettings();
+    });
   }
 
   function renderAdminBookings(body){
@@ -930,12 +1003,59 @@
     Store.me().then(function(isAdmin){ adminUnlocked = !!isAdmin; openAdmin(); });
   });
 
+  // ============================================================
+  //  BRANDING (site name / owner / address / avatar — editable so this
+  //  site can be resold and re-skinned for a different barbershop)
+  // ============================================================
+  var currentSettings = {};
+  function initials(name){
+    var parts = String(name||'').trim().split(/\s+/).filter(Boolean);
+    if(!parts.length) return 'АС';
+    return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+  }
+  function applySettings(s){
+    currentSettings = s || {};
+    var siteName = s.site_name || 'Сапышев Барбер';
+    var ownerName = s.owner_name || 'Адильжан Сапышев';
+    var tagline = s.tagline || 'Мужские и детские стрижки, оформление бороды и стрижка под машинку. Аккуратно, по записи, без очередей.';
+    var address = s.address || '4 микрорайон, дом 35, Аксай';
+    var hours = s.hours || 'Ежедневно · 10:00 – 20:00';
+    document.title = siteName;
+    document.getElementById('brandName').textContent = siteName.toUpperCase();
+    document.getElementById('footBrand').textContent = siteName.toUpperCase();
+    var nameParts = ownerName.split(' ');
+    document.getElementById('heroName').innerHTML = escapeHtml(nameParts[0]||'') + '<br>' + escapeHtml(nameParts.slice(1).join(' '));
+    document.getElementById('heroTagline').textContent = tagline;
+    document.getElementById('heroAddress').textContent = address;
+    document.getElementById('heroHours').textContent = hours;
+    document.getElementById('footAddress').textContent = address;
+    document.getElementById('footHours').textContent = hours.replace(' – ', '–').replace(' - ', '–');
+    var frame = document.getElementById('photoFrame');
+    var existingImg = frame.querySelector('img.avatar-img');
+    if(s.avatar_url){
+      if(!existingImg){
+        existingImg = document.createElement('img');
+        existingImg.className = 'avatar-img';
+        existingImg.alt = ownerName;
+        frame.appendChild(existingImg);
+      }
+      existingImg.src = s.avatar_url;
+      document.getElementById('monogram').style.display = 'none';
+    } else {
+      if(existingImg) existingImg.remove();
+      document.getElementById('monogram').textContent = initials(ownerName);
+      document.getElementById('monogram').style.display = '';
+    }
+  }
+  function loadSettings(){ return Store.getSettings().then(applySettings); }
+
   // ---------- boot ----------
   renderDates();
   watchTimes();
   loadServices();
   loadGallery();
   loadReviews();
+  loadSettings();
   initReveals();
 })();
 </script>
