@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server';
 import { sql, ensureDb } from '../../../lib/db';
 import { isAdmin } from '../../../lib/auth';
 
-// Generic branding key/value store — lets this site (and the WhatsApp
-// assistant) be re-skinned for any appointment-based business without any
-// further code changes or redeploys, only edits from the admin panel.
+// Generic branding key/value store — lets this site be re-skinned (name,
+// owner, address, hours, avatar) without any further code changes or
+// redeploys, only edits from the admin panel. Unrelated to the WhatsApp
+// assistant's client businesses, which each have their own row in
+// `businesses` (see lib/business.js).
 const ALLOWED_KEYS = [
   'site_name',
   'owner_name',
@@ -12,8 +14,6 @@ const ALLOWED_KEYS = [
   'address',
   'hours',
   'avatar_url',
-  'business_type',
-  'assistant_notes',
 ];
 
 export async function GET() {
