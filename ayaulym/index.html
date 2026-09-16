@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прости меня, Аяулым 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff8fb1;
+    --pink-deep:#ff5c8a;
+    --lilac:#c58cff;
+    --cream:#fff6f2;
+    --text:#5a2a3a;
+  }
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; padding:0; height:100%;
+    font-family:'Montserrat', sans-serif;
+    color:var(--text);
+    overflow-x:hidden;
+  }
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#ffd6e8 0%,#ffb3c6 35%,#e2a6ff 70%,#c9a0ff 100%);
+    background-size:300% 300%;
+    animation:gradientShift 14s ease infinite;
+    position:relative;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+
+  /* floating hearts background */
+  .hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+  }
+  .heart{
+    position:absolute;
+    bottom:-10%;
+    font-size:24px;
+    opacity:0.75;
+    animation:floatUp linear infinite;
+    filter:drop-shadow(0 0 4px rgba(255,255,255,0.5));
+  }
+  @keyframes floatUp{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.85; }
+    100%{ transform:translateY(-115vh) rotate(360deg); opacity:0; }
+  }
+
+  .card{
+    position:relative;
+    z-index:2;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(10px);
+    border-radius:28px;
+    padding:48px 36px;
+    max-width:560px;
+    width:92%;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(200,80,130,0.35), inset 0 0 0 1px rgba(255,255,255,0.6);
+    transition:transform .4s ease;
+  }
+
+  .card h1{
+    font-family:'Playfair Display', serif;
+    font-size:2.1rem;
+    margin:0 0 12px;
+    color:var(--pink-deep);
+    line-height:1.3;
+  }
+  .card p.sub{
+    font-size:1.02rem;
+    color:#7a4a5c;
+    margin:0 0 30px;
+    line-height:1.6;
+  }
+
+  .buttons{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    min-height:100px;
+    flex-wrap:wrap;
+  }
+
+  button{
+    border:none;
+    cursor:pointer;
+    font-family:'Montserrat', sans-serif;
+    font-weight:700;
+    border-radius:50px;
+    transition:all .25s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  #yesBtn{
+    background:linear-gradient(135deg, #ff8fb1, #ff5c8a);
+    color:#fff;
+    font-size:1.05rem;
+    padding:16px 34px;
+  }
+  #yesBtn:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 14px 30px rgba(255,92,138,0.45); }
+
+  #noBtn{
+    background:#f1e6ff;
+    color:#7a4a8c;
+    font-size:1.05rem;
+    padding:16px 34px;
+    position:relative;
+  }
+  #noBtn:hover{ background:#e8d6ff; }
+
+  .hidden{ display:none !important; }
+
+  /* forgiven screen */
+  #forgiven .heart-icon{
+    font-size:3.2rem;
+    display:block;
+    margin-bottom:10px;
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.15); }
+  }
+  #forgiven h2{
+    font-family:'Playfair Display', serif;
+    font-size:1.9rem;
+    color:var(--pink-deep);
+    margin:0 0 14px;
+  }
+  .compliments{
+    text-align:left;
+    margin:22px 0 6px;
+    padding:0;
+    list-style:none;
+  }
+  .compliments li{
+    background:linear-gradient(90deg, #fff0f6, #f6ecff);
+    border-left:4px solid var(--pink-deep);
+    padding:12px 16px;
+    border-radius:12px;
+    margin-bottom:10px;
+    font-size:0.98rem;
+    line-height:1.5;
+    color:#6b3a4d;
+    animation:fadeInUp .5s ease both;
+  }
+  .compliments li:nth-child(1){ animation-delay:.05s; }
+  .compliments li:nth-child(2){ animation-delay:.15s; }
+  .compliments li:nth-child(3){ animation-delay:.25s; }
+  .compliments li:nth-child(4){ animation-delay:.35s; }
+  .compliments li:nth-child(5){ animation-delay:.45s; }
+  .compliments li:nth-child(6){ animation-delay:.55s; }
+  @keyframes fadeInUp{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .signature{
+    margin-top:22px;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--pink-deep);
+    font-size:1.15rem;
+  }
+
+  .no-counter{
+    font-size:0.85rem;
+    color:#a06a80;
+    margin-top:16px;
+    min-height:18px;
+  }
+
+  @media (max-width:480px){
+    .card{ padding:34px 20px; }
+    .card h1{ font-size:1.6rem; }
+    .buttons{ gap:14px; }
+    #yesBtn, #noBtn{ padding:14px 22px; font-size:0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="heartsBg"></div>
+
+<div class="card" id="mainCard">
+
+  <div id="question">
+    <h1>Аяулым, ты меня простишь? 💗</h1>
+    <p class="sub">Я знаю, что был неправ. Мне очень жаль, и я правда хочу всё исправить.<br>Пожалуйста, ответь честно...</p>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="forgiveMe()">Да 😍</button>
+      <button id="noBtn" onclick="shrinkNo()">Нет 😢</button>
+    </div>
+    <div class="no-counter" id="noCounter"></div>
+  </div>
+
+  <div id="forgiven" class="hidden">
+    <span class="heart-icon">💖</span>
+    <h2>Спасибо, любимая!</h2>
+    <p class="sub">Ты самый дорогой человек в моей жизни, и я обещаю становиться лучше ради тебя.</p>
+    <ul class="compliments">
+      <li>✨ Ты невероятно красивая — и снаружи, и внутри.</li>
+      <li>🌸 У тебя самая тёплая и искренняя улыбка на свете.</li>
+      <li>💫 Ты умная, сильная и добрая — таких людей больше нет.</li>
+      <li>🌷 Рядом с тобой всё становится светлее и легче.</li>
+      <li>🤍 Ты заслуживаешь только счастья, заботы и любви.</li>
+      <li>💐 Аяулым — само твоё имя означает "дорогая", и ты действительно самая дорогая для меня.</li>
+    </ul>
+    <p class="signature">Люблю тебя, Аяулым 💗</p>
+  </div>
+
+</div>
+
+<script>
+  // floating hearts background
+  const heartsBg = document.getElementById('heartsBg');
+  const heartEmojis = ['💗','💕','💖','🌸','💐','✨'];
+  function spawnHeart(){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.fontSize = (14 + Math.random()*22) + 'px';
+    const duration = 8 + Math.random()*10;
+    h.style.animationDuration = duration + 's';
+    heartsBg.appendChild(h);
+    setTimeout(()=> h.remove(), duration*1000);
+  }
+  setInterval(spawnHeart, 400);
+  for(let i=0;i<12;i++) setTimeout(spawnHeart, i*300);
+
+  // yes/no button interaction
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const buttonsBox = document.querySelector('.buttons');
+  const noCounter = document.getElementById('noCounter');
+
+  let yesScale = 1;
+  let noScale = 1;
+  let noClicks = 0;
+
+  const noPhrases = [
+    'Нет 😢','Нет? 🥺','Точно нет? 😭','Подумай ещё раз... 🙈','Ну пожалуйста... 💔','Я передумаю 🥹','Последний шанс...'
+  ];
+
+  function shrinkNo(){
+    noClicks++;
+    yesScale = Math.min(yesScale + 0.22, 2.4);
+    noScale = Math.max(noScale - 0.16, 0.15);
+
+    yesBtn.style.transform = `scale(${yesScale})`;
+    noBtn.style.transform = `scale(${noScale})`;
+
+    noBtn.textContent = noPhrases[Math.min(noClicks-1, noPhrases.length-1)];
+
+    // make it a little cheeky: move the "no" button around once it's small
+    if(noScale < 0.6){
+      const maxX = buttonsBox.clientWidth * 0.3;
+      const maxY = 40;
+      const x = (Math.random()-0.5) * maxX;
+      const y = (Math.random()-0.5) * maxY;
+      noBtn.style.position = 'relative';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    if(noScale <= 0.16){
+      noCounter.textContent = 'Кажется, кнопка "Нет" совсем не хочет нажиматься... 😉';
+      noBtn.style.pointerEvents = 'none';
+    } else {
+      noCounter.textContent = '';
+    }
+  }
+
+  function forgiveMe(){
+    document.getElementById('question').classList.add('hidden');
+    document.getElementById('forgiven').classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
