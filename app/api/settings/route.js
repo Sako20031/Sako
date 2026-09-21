@@ -3,8 +3,10 @@ import { sql, ensureDb } from '../../../lib/db';
 import { isAdmin } from '../../../lib/auth';
 
 // Generic branding key/value store — lets this site be re-skinned (name,
-// owner, address, hours, avatar) for a different barbershop without any
-// further code changes or redeploys, only edits from the admin panel.
+// owner, address, hours, avatar) without any further code changes or
+// redeploys, only edits from the admin panel. Unrelated to the WhatsApp
+// assistant's client businesses, which each have their own row in
+// `businesses` (see lib/business.js).
 const ALLOWED_KEYS = [
   'site_name',
   'owner_name',
