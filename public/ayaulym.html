@@ -706,7 +706,7 @@
         <label class="field"><span>Подзаголовок под именем</span><input class="inp" id="tSubtitle" maxlength="300"></label>
         <label class="field"><span>Письмо</span><textarea class="inp" id="tLetter" rows="9"></textarea></label>
         <label class="field"><span>Текст приглашения</span><textarea class="inp" id="tInvite" rows="4"></textarea></label>
-        <label class="field"><span>Строка под приглашением (время, место — или оставь пустым)</span><input class="inp" id="tInviteNote" maxlength="300" placeholder="Например: Сегодня в 19:00 🕖"></label>
+        <label class="field"><span>Строка под приглашением (время, место)</span><input class="inp" id="tInviteNote" maxlength="300" placeholder="Например: Сегодня в 22:00 🕙"></label>
         <button class="btn small" id="textsSave">Сохранить тексты</button>
       </div>
     </div>
@@ -747,7 +747,7 @@
       'Сегодня я хочу пригласить тебя в ресторан.\n' +
       'От тебя — красивая улыбка и хорошее настроение,\n' +
       'а всё остальное оставь мне ♡',
-    invite_note: '',
+    invite_note: 'Сегодня в 22:00 🕙',
   };
   // Shown only while no compliments are added in the admin panel yet.
   const FALLBACK_COMPLIMENTS = [
@@ -948,7 +948,7 @@
     $('#subtitle').textContent = setting('subtitle');
     $('#letterBody').textContent = setting('letter');
     $('#inviteText').textContent = setting('invite');
-    const note = state.settings.invite_note || '';
+    const note = setting('invite_note');
     $('#inviteNote').textContent = note;
     $('#inviteNote').hidden = !note;
     renderAvatar($('#avatar'), 'mono');
@@ -1324,7 +1324,7 @@
     $('#tSubtitle').value = setting('subtitle');
     $('#tLetter').value = setting('letter');
     $('#tInvite').value = setting('invite');
-    $('#tInviteNote').value = state.settings.invite_note || '';
+    $('#tInviteNote').value = setting('invite_note');
     renderAvatar($('#admAvatar'));
   }
   function authFail(e) {
