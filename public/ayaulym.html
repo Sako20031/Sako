@@ -778,13 +778,13 @@
     return data;
   }
   let toastT;
-  function toast(msg, isErr) {
+  function toast(msg, isErr, ms) {
     const t = $('#toast');
     t.textContent = msg;
     t.classList.toggle('err', !!isErr);
     t.classList.add('show');
     clearTimeout(toastT);
-    toastT = setTimeout(() => t.classList.remove('show'), 2800);
+    toastT = setTimeout(() => t.classList.remove('show'), ms || 2800);
   }
   function plural(n, one, few, many) {
     const a = Math.abs(n) % 100, b = a % 10;
@@ -1300,7 +1300,8 @@
         const dots = $('#pinDots');
         dots.classList.add('err');
         setTimeout(() => { dots.classList.remove('err'); pin = ''; drawDots(); }, 500);
-        if (e.status !== 401) toast('Нет связи с сервером: ' + e.message, true);
+        if (e.status === 503) toast(e.message, true, 9000);
+        else if (e.status !== 401) toast('Нет связи с сервером: ' + e.message, true);
       }
     }
   }

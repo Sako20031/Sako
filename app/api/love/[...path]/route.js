@@ -22,6 +22,12 @@ const MAX_PHOTO_B64 = 1_600_000; // ~1.2 MB image
 const MAX_AUDIO_B64 = 4_200_000; // ~3 MB audio (Vercel body limit is 4.5 MB)
 
 const json = (data, status = 200) => NextResponse.json(data, { status });
+
+// Without a connected Postgres database the page still renders (with its
+// built-in texts), and the admin login explains what is missing.
+const hasDb = () => Boolean(process.env.POSTGRES_URL);
+const NO_DB = 'База данных не подключена: Vercel → проект → Storage → Create Database (Postgres) → Connect, затем Redeploy';
+const EMPTY = { settings: {}, photos: [], compliments: [], audio: [] };
 const forbidden = () => json({ error: 'forbidden' }, 403);
 const notFound = () => json({ error: 'not found' }, 404);
 const bad = (error) => json({ error }, 400);
@@ -47,8 +53,12 @@ async function readJson(req) {
 }
 
 export async function GET(req, { params }) {
-  await ensureLoveDb();
   const [what, id] = params.path;
+  if (!hasDb()) {
+    if (what === 'me') return json({ admin: false, noDb: true });
+    return what in EMPTY ? json(EMPTY[what]) : notFound();
+  }
+  await ensureLoveDb();
 
   if (what === 'me') return json({ admin: await isLoveAdmin() });
 
@@ -86,6 +96,7 @@ export async function GET(req, { params }) {
 }
 
 export async function POST(req, { params }) {
+  if (!hasDb()) return json({ error: NO_DB }, 503);
   await ensureLoveDb();
   const [what] = params.path;
   const body = await readJson(req);
@@ -166,6 +177,7 @@ export async function POST(req, { params }) {
 }
 
 export async function PATCH(req, { params }) {
+  if (!hasDb()) return json({ error: NO_DB }, 503);
   await ensureLoveDb();
   if (!(await isLoveAdmin())) return forbidden();
   const [what, id] = params.path;
@@ -184,6 +196,7 @@ export async function PATCH(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
+  if (!hasDb()) return json({ error: NO_DB }, 503);
   await ensureLoveDb();
   if (!(await isLoveAdmin())) return forbidden();
   const [what, id] = params.path;
