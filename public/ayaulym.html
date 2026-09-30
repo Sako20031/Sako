@@ -1010,7 +1010,7 @@
   function resetComplQueue() { complQueue = []; }
 
   /* ---------------- gallery ---------------- */
-  const photoUrl = (id) => API + 'photo/' + encodeURIComponent(id);
+  const photoUrl = (p) => p.url || API + 'photo/' + encodeURIComponent(p.id);
   function renderGallery() {
     const g = $('#gallery');
     g.innerHTML = '';
@@ -1028,7 +1028,7 @@
       img.loading = 'lazy';
       img.decoding = 'async';
       img.alt = p.caption || 'Наше фото';
-      img.src = photoUrl(p.id);
+      img.src = photoUrl(p);
       b.appendChild(img);
       const cap = document.createElement('div');
       cap.className = 'cap';
@@ -1050,7 +1050,7 @@
   function showLb() {
     const p = state.photos[lbIndex];
     if (!p) return;
-    $('#lbImg').src = photoUrl(p.id);
+    $('#lbImg').src = photoUrl(p);
     $('#lbImg').alt = p.caption || 'Наше фото';
     $('#lbCap').textContent = p.caption || '';
     const multi = state.photos.length > 1;
@@ -1087,6 +1087,8 @@
   const blobCache = {};
   let currentTrack = null;
   async function audioSrc(id) {
+    const track = state.audio.find((a) => a.id === id);
+    if (track && track.url) return track.url; // static file: served with range support
     // Fetch as a blob: iOS Safari won't stream <audio> from endpoints without
     // byte-range support, but plays blob: URLs fine.
     if (!blobCache[id]) {
@@ -1220,16 +1222,19 @@
 
   /* ---------------- loading data ---------------- */
   async function loadAll() {
-    const [settings, photos, compliments, audio] = await Promise.all([
+    const [settings, photos, compliments, audio, stat] = await Promise.all([
       api('settings').catch(() => ({})),
       api('photos').catch(() => []),
       api('compliments').catch(() => []),
       api('audio').catch(() => []),
+      // Content bundled with the site; works even without a database.
+      fetch('/ayaulym-files/content.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     ]);
-    state.settings = settings || {};
-    state.photos = photos || [];
-    state.compliments = compliments || [];
-    state.audio = audio || [];
+    const statId = (prefix, list) => (list || []).map((x, i) => Object.assign({ id: prefix + i, static: true }, x));
+    state.settings = Object.assign({}, stat.settings || {}, settings || {});
+    state.photos = (photos || []).concat(statId('sp', stat.photos));
+    state.compliments = (compliments && compliments.length) ? compliments : statId('sc', (stat.compliments || []).map((text) => ({ text })));
+    state.audio = (audio || []).concat(statId('sa', stat.audio));
     resetComplQueue();
     renderTexts();
     renderGallery();
@@ -1411,13 +1416,14 @@
   function renderAdmPhotos() {
     const g = $('#admPhotos');
     g.innerHTML = '';
-    $('#photoCountAdm').textContent = '(' + state.photos.length + ')';
-    if (!state.photos.length) { g.innerHTML = '<p class="hint">Пока пусто — добавь первое фото ☝️</p>'; return; }
-    state.photos.forEach((p) => {
+    const own = state.photos.filter((p) => !p.static);
+    $('#photoCountAdm').textContent = '(' + own.length + ')';
+    if (!own.length) { g.innerHTML = '<p class="hint">Пока пусто — добавь первое фото ☝️</p>'; return; }
+    own.forEach((p) => {
       const card = document.createElement('div');
       card.className = 'adm-photo';
       card.innerHTML = '<img loading="lazy" alt=""><div class="row"><input class="inp" maxlength="200" placeholder="Подпись"><button class="icon-btn" title="Сохранить подпись">✓</button><button class="icon-btn del" title="Удалить">🗑</button></div>';
-      $('img', card).src = photoUrl(p.id);
+      $('img', card).src = photoUrl(p);
       const inp = $('input', card);
       inp.value = p.caption || '';
       const [saveBtn, delBtn] = $$('button', card);
@@ -1450,7 +1456,7 @@
     if (!texts.length) { toast('Напиши хотя бы один комплимент 💗', true); return; }
     try {
       const r = await api('compliments', { method: 'POST', body: { texts } });
-      state.compliments.push(...r.added);
+      state.compliments = state.compliments.filter((c) => !c.static).concat(r.added);
       $('#complInput').value = '';
       resetComplQueue();
       renderAdmCompl();
@@ -1460,12 +1466,13 @@
   function renderAdmCompl() {
     const l = $('#admCompl');
     l.innerHTML = '';
-    $('#complCountAdm').textContent = '(' + state.compliments.length + ')';
-    if (!state.compliments.length) {
+    const own = state.compliments.filter((c) => !c.static);
+    $('#complCountAdm').textContent = '(' + own.length + ')';
+    if (!own.length) {
       l.innerHTML = '<p class="hint">Пока своих комплиментов нет — на сайте показываются несколько стандартных. Как только добавишь свои, будут только твои.</p>';
       return;
     }
-    state.compliments.forEach((c) => {
+    own.forEach((c) => {
       const it = document.createElement('div');
       it.className = 'list-item';
       it.innerHTML = '<span>💗</span><div class="t"></div><button class="icon-btn del" title="Удалить">🗑</button>';
@@ -1474,6 +1481,7 @@
         try {
           await api('compliment/' + encodeURIComponent(c.id), { method: 'DELETE' });
           state.compliments = state.compliments.filter((x) => x.id !== c.id);
+          if (!state.compliments.length) loadAll();
           resetComplQueue();
           renderAdmCompl();
         } catch (e) { errToast(e); }
@@ -1569,8 +1577,9 @@
   function renderAdmAudio() {
     const l = $('#admAudio');
     l.innerHTML = '';
-    if (!state.audio.length) { l.innerHTML = '<p class="hint">Пока нет ни одного аудио.</p>'; return; }
-    state.audio.forEach((a) => {
+    const own = state.audio.filter((a) => !a.static);
+    if (!own.length) { l.innerHTML = '<p class="hint">Пока нет ни одного аудио.</p>'; return; }
+    own.forEach((a) => {
       const it = document.createElement('div');
       it.className = 'list-item';
       it.innerHTML = '<button class="icon-btn" title="Послушать">▶</button><div class="t"><input class="inp" maxlength="200"></div><button class="icon-btn" title="Сохранить название">✓</button><button class="icon-btn del" title="Удалить">🗑</button>';
