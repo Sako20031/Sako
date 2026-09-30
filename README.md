@@ -11,5 +11,5 @@ Sakosakosako
 кнопки-сердечка, голосовые (запись прямо с телефона или загрузка файла до ~3 МБ),
 аватарка, тексты письма и приглашения.
 
-Всё хранится в той же базе Vercel Postgres, в отдельных таблицах `love_*`.
+Всё хранится в базе Vercel Postgres (Neon, подключена к проекту `sako`), в отдельных таблицах `love_*`. Комплименты по умолчанию — в `public/ayaulym-files/content.json`.
 Код: `public/ayaulym.html`, `app/api/love/[...path]/route.js`, `lib/love.js`.
