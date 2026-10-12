@@ -13,3 +13,9 @@ Sakosakosako
 
 Всё хранится в базе Vercel Postgres (Neon, подключена к проекту `sako`), в отдельных таблицах `love_*`. Комплименты по умолчанию — в `public/ayaulym-files/content.json`.
 Код: `public/ayaulym.html`, `app/api/love/[...path]/route.js`, `lib/love.js`.
+
+## /tumar — TUMAR Heritage
+
+Лендинг ювелирного ателье с казахскими медальонами: каталог с фильтрами, корзина,
+подбор тұмара (квиз), описание символов. Открывается по адресу `/tumar`.
+Статическая страница без бэкенда: `public/tumar.html`.

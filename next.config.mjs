@@ -4,6 +4,7 @@ const nextConfig = {
     return [
       { source: '/ayaulym', destination: '/ayaulym.html' },
       { source: '/love', destination: '/ayaulym.html' },
+      { source: '/tumar', destination: '/tumar.html' },
     ];
   },
 };
