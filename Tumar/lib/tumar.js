@@ -21,7 +21,24 @@ export function ensureTumarDb() {
   return initPromise;
 }
 
+// Bump when init() changes, so existing databases pick up the change.
+const SCHEMA_VERSION = '2';
+
 async function init() {
+  // Fast path: one query on a database that is already set up, instead of
+  // re-running every CREATE TABLE on each cold start.
+  try {
+    const { rows } = await sql`SELECT value FROM tumar_settings WHERE key = 'schema'`;
+    if (rows[0]?.value === SCHEMA_VERSION) return;
+  } catch {
+    // tumar_settings does not exist yet: first run.
+  }
+  await createSchema();
+  await sql`INSERT INTO tumar_settings (key, value) VALUES ('schema', ${SCHEMA_VERSION})
+    ON CONFLICT (key) DO UPDATE SET value = ${SCHEMA_VERSION}`;
+}
+
+async function createSchema() {
   await sql`CREATE TABLE IF NOT EXISTS tumar_products (
     id TEXT PRIMARY KEY,
     data TEXT NOT NULL,
