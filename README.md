@@ -40,5 +40,5 @@ echo "ANTHROPIC_API_KEY=ваш-ключ" > .env      # или OPENAI_API_KEY / G
 poetry install && poetry run playwright install chromium
 poetry run uvicorn main:app --reload --port 7001
 # во втором терминале:
-cd ../frontend && yarn && yarn dev            # открыть http://localhost:5173
+cd ../frontend && pnpm install && pnpm dev   # открыть http://localhost:5173
 ```
