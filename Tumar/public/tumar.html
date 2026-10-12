@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUMAR Heritage | Ювелирные Медальоны Великой Степи</title>
+    <meta name="description" content="Ювелирный дом TUMAR: медальоны и тұмары из золота 585 и 750 с казахской сакральной символикой. Ручная чеканка, доставка по Казахстану.">
+    <!-- Kazakh / English translations (loaded first so the page never flashes Russian) -->
+    <script src="/tumar-files/i18n.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ivory-main': '#F7F1E7',
+                        'beige-soft': '#EFE3D2',
+                        'sand-light': '#D2B797',
+                        'caramel': '#A77B52',
+                        'caramel-hover': '#936942',
+                        'headline-brown': '#765238',
+                        'antique-gold': '#B89A65',
+                        'chocolate-deep': '#493021',
+                        'cream-card': '#FAF6F0'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'luxury': '0 12px 36px -8px rgba(118, 82, 56, 0.08), 0 4px 12px -2px rgba(184, 154, 101, 0.06)',
+                        'luxury-hover': '0 20px 48px -10px rgba(118, 82, 56, 0.14), 0 8px 20px -4px rgba(184, 154, 101, 0.12)',
+                        'drawer': '-10px 0 35px rgba(73, 48, 33, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F7F1E7;
+            color: #493021;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-serif-luxury {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: -0.01em;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F1E7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D2B797;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B89A65;
+        }
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, transparent, #B89A65, transparent) 1;
+        }
+        .gold-shimmer {
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transition: all 0.6s ease;
+        }
+        .medallion-rotate:hover .medallion-svg {
+            transform: scale(1.05) rotate(2deg);
+        }
+        .medallion-svg {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col selection:bg-sand-light selection:text-chocolate-deep">
+
+    <!-- Top Announcement Bar -->
+    <aside aria-label="Announcement" data-g="announce" data-gl="Верхняя полоса" class="bg-beige-soft border-b border-sand-light/50 py-2 px-4 text-xs font-medium text-headline-brown text-center tracking-wider flex items-center justify-center gap-3">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-antique-gold"></span>
+        <span class="uppercase tracking-widest text-[11px]">Бесплатная доставка ценных отправлений по Казахстану &bullet; Доставка в Алматы и Астану за 24 часа</span>
+        <span class="hidden md:inline text-antique-gold">✦</span>
+        <span class="hidden md:inline text-caramel">Ручная чеканка мастера-зергера с благословением рода</span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-antique-gold"></span>
+    </aside>
+
+    <!-- Sticky Navigation -->
+    <header data-g="header" data-gl="Шапка и меню" class="sticky top-0 z-40 bg-ivory-main/90 backdrop-blur-md border-b border-sand-light/40 transition-all duration-300 shadow-sm" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" aria-label="Открыть меню" class="lg:hidden p-2 text-headline-brown hover:text-caramel transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </button>
+
+            <!-- Brand Logo with Kazakh Solar Sun Motif -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-antique-gold/80 flex items-center justify-center bg-beige-soft text-antique-gold transition-transform group-hover:rotate-45 duration-700">
+                    <!-- Stylized Kazakh Sun/Shanyrak Icon -->
+                    <svg class="w-6 h-6" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="14" stroke="#B89A65" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        <circle cx="20" cy="20" r="8" stroke="#765238" stroke-width="1.2"/>
+                        <circle cx="20" cy="20" r="3" fill="#B89A65"/>
+                        <path d="M20 6V11M20 29V34M6 20H11M29 20H34" stroke="#B89A65" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M10 10L14 14M26 26L30 30M10 30L14 26M26 14L30 10" stroke="#A77B52" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif tracking-[0.25em] text-2xl font-semibold text-headline-brown group-hover:text-caramel transition">TUMAR</span>
+                    <span class="text-[9px] tracking-[0.3em] uppercase text-antique-gold font-medium -mt-1">Heritage Atelier</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm tracking-wide font-medium text-chocolate-deep">
+                <a href="#collection" class="hover:text-caramel transition py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-caramel hover:after:w-full after:transition-all">Коллекция</a>
+                <a href="#symbols" class="hover:text-caramel transition py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-caramel hover:after:w-full after:transition-all">Смысл и Знаки</a>
+                <a href="#finder" class="hover:text-caramel transition py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-caramel hover:after:w-full after:transition-all">Подбор Тұмара</a>
+                <a href="#craftsmanship" class="hover:text-caramel transition py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-caramel hover:after:w-full after:transition-all">Мастерство</a>
+                <a href="#stories" class="hover:text-caramel transition py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-caramel hover:after:w-full after:transition-all">Отзывы</a>
+            </nav>
+
+            <!-- Right Controls: Language & Cart -->
+            <div class="flex items-center space-x-5 text-chocolate-deep">
+                <!-- Lang Switcher -->
+                <div data-noedit role="group" aria-label="Язык" class="lang-switch hidden sm:flex items-center gap-1.5 text-xs font-medium text-headline-brown bg-beige-soft px-2.5 py-1 rounded-full border border-sand-light/60">
+                    <button data-lang="kz" lang="kk" class="hover:text-caramel transition">KZ</button>
+                    <span class="text-sand-light" aria-hidden="true">|</span>
+                    <button data-lang="ru" lang="ru" class="hover:text-caramel transition">RU</button>
+                    <span class="text-sand-light" aria-hidden="true">|</span>
+                    <button data-lang="en" lang="en" class="hover:text-caramel transition">EN</button>
+                </div>
+
+                <!-- Search trigger -->
+                <button onclick="toggleSearchModal()" aria-label="Поиск" class="p-2 text-headline-brown hover:text-caramel transition rounded-full hover:bg-beige-soft">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                    </svg>
+                </button>
+
+                <!-- Cart button with counter -->
+                <button onclick="openCartDrawer()" aria-label="Корзина" class="relative p-2 text-headline-brown hover:text-caramel transition rounded-full hover:bg-beige-soft">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+                    </svg>
+                    <span id="cartCountBadge" data-noedit class="absolute -top-1 -right-1 bg-caramel text-ivory-main text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center transition-transform">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileDrawer" data-g="mobile" data-gl="Мобильное меню" class="fixed inset-0 z-50 bg-chocolate-deep/40 backdrop-blur-sm hidden transition-opacity">
+        <div class="fixed inset-y-0 left-0 w-3/4 max-w-sm bg-ivory-main border-r border-sand-light p-6 shadow-drawer flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-5 border-b border-sand-light/50">
+                    <div class="flex items-center gap-2">
+                        <span class="font-serif tracking-[0.2em] text-xl font-bold text-headline-brown">TUMAR</span>
+                    </div>
+                    <button onclick="toggleMobileMenu()" aria-label="Закрыть меню" class="text-headline-brown p-1 hover:text-caramel">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col space-y-4 mt-6 text-base font-medium text-chocolate-deep">
+                    <a href="#collection" onclick="toggleMobileMenu()" class="py-2 border-b border-sand-light/20 hover:text-caramel">Коллекция медальонов</a>
+                    <a href="#symbols" onclick="toggleMobileMenu()" class="py-2 border-b border-sand-light/20 hover:text-caramel">Священные знаки Степи</a>
+                    <a href="#finder" onclick="toggleMobileMenu()" class="py-2 border-b border-sand-light/20 hover:text-caramel">Подобрать свой Тұмар</a>
+                    <a href="#craftsmanship" onclick="toggleMobileMenu()" class="py-2 border-b border-sand-light/20 hover:text-caramel">Ателье и мастерство</a>
+                    <a href="#stories" onclick="toggleMobileMenu()" class="py-2 border-b border-sand-light/20 hover:text-caramel">Отзывы владельцев</a>
+                </nav>
+            </div>
+            <div class="pt-6 border-t border-sand-light/40">
+                <div data-noedit role="group" aria-label="Язык" class="lang-switch flex items-center gap-2 mb-5 text-sm font-medium text-headline-brown">
+                    <button data-lang="kz" lang="kk" class="px-3 py-1.5 rounded-full border border-sand-light/60">KZ</button>
+                    <button data-lang="ru" lang="ru" class="px-3 py-1.5 rounded-full border border-sand-light/60">RU</button>
+                    <button data-lang="en" lang="en" class="px-3 py-1.5 rounded-full border border-sand-light/60">EN</button>
+                </div>
+                <p class="text-xs text-headline-brown font-serif italic mb-2">«Тұмар — қорған, күш пен тектілік»</p>
+                <p class="text-xs text-chocolate-deep/70">Алматы: пр. Достык, 162<br>Астана: ул. Достык, 16</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION: Light Luxury Kazakh Steppe & Sunlit Yurt Atmosphere -->
+        <section data-g="hero" data-gl="Главный экран" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
+            <!-- Simulated Golden Steppe Sunset Background with Soft Natural Aesthetics -->
+            <div class="absolute inset-0 pointer-events-none select-none">
+                <!-- Warm sky gradient with subtle sun ray glow -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#F3ECE1] via-[#EFE3D2] to-[#F7F1E7]"></div>
+
+                <!-- Sun Glow Radial Filter -->
+                <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-r from-[#D2B797]/40 via-[#B89A65]/25 to-transparent rounded-full blur-3xl opacity-70"></div>
+
+                <!-- Steppe Hills & Gentle Horizon SVG Silhouette (Warm Earth & Golden Hour) -->
+                <svg class="absolute bottom-0 w-full h-[320px] text-sand-light/35" preserveAspectRatio="none" viewBox="0 0 1440 320" fill="currentColor">
+                    <path d="M0,192L48,181.3C96,171,192,149,288,160C384,171,480,213,576,208C672,203,768,149,864,138.7C960,128,1056,160,1152,181.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+
+                <!-- Distant Yurt & Steppe Horses Graphic Silhouettes in soft caramel tone -->
+                <div class="absolute bottom-16 right-10 md:right-28 opacity-40">
+                    <svg class="w-48 h-28" viewBox="0 0 200 120" fill="none">
+                        <!-- Yurt dome and base -->
+                        <path d="M40 90 Q 75 45 110 90 Z" fill="#A77B52"/>
+                        <path d="M75 45 L 75 35" stroke="#765238" stroke-width="2"/>
+                        <circle cx="75" cy="35" r="4" fill="#B89A65"/>
+                        <path d="M36 90 L 114 90 L 114 105 L 36 105 Z" fill="#8D735E"/>
+                        <path d="M68 90 L 68 105 L 82 105 L 82 90 Z" fill="#493021"/>
+                        <!-- Gentle horse silhouettes grazing -->
+                        <path d="M140 96 C140 90 145 84 150 82 C152 76 156 70 162 70 C165 72 165 75 163 78 C160 82 158 86 158 92 L159 105 L156 105 L153 96 L148 105 L145 105 Z" fill="#765238"/>
+                        <path d="M170 98 C170 92 174 88 178 86 C180 81 183 76 188 76 C190 78 190 80 189 82 C186 85 185 89 185 94 L186 105 L183 105 L181 98 L177 105 L174 105 Z" fill="#765238"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Content Area with refined typography -->
+            <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center flex flex-col items-center">
+
+                <!-- Cultural Tag Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-beige-soft/90 border border-antique-gold/40 text-xs tracking-[0.2em] uppercase font-medium text-headline-brown mb-8 shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-antique-gold" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.4 9.6H22L15.8 14.1L18.2 21.7L12 17.2L5.8 21.7L8.2 14.1L2 9.6H9.6L12 2Z"/>
+                    </svg>
+                    <span>Аутентичное наследие кочевников</span>
+                    <span class="text-sand-light">&bull;</span>
+                    <span class="text-antique-gold font-semibold">Алтын Орда</span>
+                </div>
+
+                <!-- Main Hero Heading -->
+                <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold text-headline-brown leading-[1.08] tracking-tight max-w-4xl mb-6">
+                    Сила предков <br class="hidden sm:inline">
+                    <span class="italic font-normal text-caramel">в благородном золоте</span> степи
+                </h1>
+
+                <!-- Subtitle with warm tone -->
+                <p class="max-w-2xl text-base sm:text-lg md:text-xl text-chocolate-deep/80 font-normal leading-relaxed mb-10">
+                    Каждый медальон — это вековой кодекс чести, сакральный оберег рода и ручная чеканка из чистого золота 585 и 750 пробы с аутентичным орнаментом.
+                </p>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                    <a href="#collection" class="w-full sm:w-auto px-8 py-4 bg-caramel hover:bg-caramel-hover text-ivory-main rounded-md font-medium text-sm tracking-wider uppercase shadow-luxury transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+                        Смотреть коллекцию
+                    </a>
+                    <a href="#symbols" class="w-full sm:w-auto px-8 py-4 bg-beige-soft/80 hover:bg-beige-soft text-headline-brown border border-antique-gold/70 rounded-md font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:border-caramel text-center">
+                        История и символы
+                    </a>
+                </div>
+
+                <!-- Trust Pillars -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mt-16 pt-10 border-t border-sand-light/50 w-full max-w-4xl text-left">
+                    <div class="flex items-start gap-3">
+                        <span class="text-antique-gold text-xl font-serif">I.</span>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-wider font-semibold text-headline-brown">Золото 585 & 750</h4>
+                            <p class="text-[12px] text-chocolate-deep/70">Государственное клеймо РК</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-antique-gold text-xl font-serif">II.</span>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-wider font-semibold text-headline-brown">Ручная чеканка</h4>
+                            <p class="text-[12px] text-chocolate-deep/70">Техники зергеров XIX века</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-antique-gold text-xl font-serif">III.</span>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-wider font-semibold text-headline-brown">Освящено смыслом</h4>
+                            <p class="text-[12px] text-chocolate-deep/70">Древняя казахская символика</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-antique-gold text-xl font-serif">IV.</span>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-wider font-semibold text-headline-brown">Пожизненная гарантия</h4>
+                            <p class="text-[12px] text-chocolate-deep/70">Паспорт и нумерация изделия</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Decorative Kazakh Horn Ornament Divider -->
+        <div class="py-6 flex items-center justify-center gap-4 bg-ivory-main">
+            <span class="h-[1px] w-16 sm:w-32 bg-gradient-to-r from-transparent to-antique-gold/60"></span>
+            <svg class="w-8 h-8 text-antique-gold" viewBox="0 0 40 40" fill="currentColor">
+                <!-- Qoshqar Muyiz traditional ornament element -->
+                <path d="M20,5 C25,5 29,8 29,13 C29,18 25,20 22,20 C19,20 18,18 18,16 C18,14 20,13 21,13 C21.5,13 22,13.2 22,13.6 C22,14 21.6,14.5 21,14.5 C20.5,14.5 20,14.2 20,13.8 C20,11.5 23,8 26.5,8 C29,8 31,10.5 31,13.5 C31,18 26,22 20,27 C14,22 9,18 9,13.5 C9,10.5 11,8 13.5,8 C17,8 20,11.5 20,13.8 C20,14.2 19.5,14.5 19,14.5 C18.4,14.5 18,14 18,13.6 C18,13.2 18.5,13 19,13 C20,13 22,14 22,16 C22,18 21,20 18,20 C15,20 11,18 11,13 C11,8 15,5 20,5 Z"/>
+            </svg>
+            <span class="h-[1px] w-16 sm:w-32 bg-gradient-to-l from-transparent to-antique-gold/60"></span>
+        </div>
+
+        <!-- SECTION: Sacred Kazakh Symbols & Meanings -->
+        <section id="symbols" data-g="symbols" data-gl="Символы и их значения" class="py-20 bg-beige-soft/40 border-y border-sand-light/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Сакральные архетипы</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-medium text-headline-brown mt-2 mb-4">
+                        Смысл каждого знака
+                    </h2>
+                    <p class="text-chocolate-deep/75 text-sm sm:text-base">
+                        В кочевой культуре украшения никогда не были просто декором. Медальон — это духовный щит, передающийся из поколения в поколение.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+                    <!-- Symbol Card 1: Тұмар -->
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
+                            <!-- Triangular Tumar icon -->
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                                <polygon points="20,8 34,32 6,32" stroke-width="1.8" stroke-linejoin="round"/>
+                                <polygon points="20,15 29,30 11,30" stroke-width="1" stroke-dasharray="2 1"/>
+                                <circle cx="20" cy="24" r="2.5" fill="#A77B52"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-headline-brown mb-1">Тұмар</h3>
+                        <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Оберег &bull; Защита</p>
+                        <p class="text-xs text-chocolate-deep/70 line-clamp-3">Треугольная форма, отражающая связь земли, неба и человека. Охраняет от дурного глаза.</p>
+                        <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Первозданный оберег Великой Степи</span>
+                            <span data-sym-title>Тұмар (Священный треугольник)</span>
+                            <span data-sym-desc>Треугольник вершиной вверх символизирует духовное вознесение и защиту трех миров. Носился ханами и батырами для сохранения жизненной энергии «Құт». Внутрь издревле зашивали щепотку родной степной земли или благословение аксакала.</span>
+                        </div>
+                    </div>
+
+                    <!-- Symbol Card 2: Бөрі -->
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
+                            <!-- Steppe Wolf Head -->
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                                <path d="M12 28 L14 18 L19 12 L22 18 L26 12 L28 20 L27 28 Z" stroke-width="1.8" stroke-linejoin="round"/>
+                                <circle cx="17" cy="20" r="1.5" fill="#765238"/>
+                                <circle cx="23" cy="20" r="1.5" fill="#765238"/>
+                                <path d="M19 25 L21 25" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-headline-brown mb-1">Көк Бөрі</h3>
+                        <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Дух свободы &bull; Сила</p>
+                        <p class="text-xs text-chocolate-deep/70 line-clamp-3">Тотемный предок тюрок. Олицетворение бесстрашия, преданности семье и непокорности духа.</p>
+                        <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Тотемический защитник и дух воли</span>
+                            <span data-sym-title>Көк Бөрі (Небесный Волк)</span>
+                            <span data-sym-desc>Волк в мировоззрении кочевников никогда не был символом жестокости. Это символ беззаветной преданности своей стае, абсолютной независимости и умения побеждать превосходящего врага.</span>
+                        </div>
+                    </div>
+
+                    <!-- Symbol Card 3: Ұмай Ана -->
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
+                            <!-- Umai Ana Goddess Wings/Cradle -->
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                                <path d="M20 10 Q14 20 6 22 Q15 28 20 34 Q25 28 34 22 Q26 20 20 10 Z" stroke-width="1.8"/>
+                                <circle cx="20" cy="18" r="3" fill="#B89A65"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-headline-brown mb-1">Ұмай Ана</h3>
+                        <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Хранительница очага</p>
+                        <p class="text-xs text-chocolate-deep/70 line-clamp-3">Покровительница матерей, младенцев и женского счастья. Дарует мир и гармонию дому.</p>
+                        <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Покровительница детей и семейного счастья</span>
+                            <span data-sym-title>Ұмай Ана (Великая Мать)</span>
+                            <span data-sym-desc>Древняя богиня плодородия. Медальон с ее знаком оберегает дом от разногласий, дарует легкие роды и наполняет жилище теплом и светом.</span>
+                        </div>
+                    </div>
+
+                    <!-- Symbol Card 4: Бәйтерек -->
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
+                            <!-- World Tree with golden egg -->
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                                <path d="M20 34 L20 16 M14 28 C14 22 20 20 20 20 C20 20 26 22 26 28 M12 20 C12 16 20 15 20 15 C20 15 28 16 28 20" stroke-width="1.8" stroke-linecap="round"/>
+                                <circle cx="20" cy="10" r="4.5" fill="#B89A65"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-headline-brown mb-1">Бәйтерек</h3>
+                        <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Древо жизни &bull; Рост</p>
+                        <p class="text-xs text-chocolate-deep/70 line-clamp-3">Связующая нить миров: подземного, земного и небесного. Символ крепких родовых корней.</p>
+                        <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Ось мироздания и связь поколений</span>
+                            <span data-sym-title>Бәйтерек (Мировое Древо)</span>
+                            <span data-sym-desc>Корни дерева уходят в память предков, ствол символизирует настоящее время и силу живущих, а ветви с золотым яйцом птицы Самрук — будущее и процветание детей.</span>
+                        </div>
+                    </div>
+
+                    <!-- Symbol Card 5: Қос Қанат -->
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
+                            <!-- Eagle Wings -->
+                            <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                                <path d="M6 18 Q14 14 20 24 Q26 14 34 18 Q25 28 20 32 Q15 28 6 18 Z" stroke-width="1.8"/>
+                                <path d="M20 24 L20 32" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-headline-brown mb-1">Қос Қанат</h3>
+                        <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Крылья Беркута</p>
+                        <p class="text-xs text-chocolate-deep/70 line-clamp-3">Символ широты кругозора, величия духа, полета мыслей и покровительства верховного Тенгри.</p>
+                        <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Символ полета и высоты духа</span>
+                            <span data-sym-title>Қос Қанат (Крылья Беркута)</span>
+                            <span data-sym-desc>Кочевой орел парит выше облаков. Этот талисман развивает интуицию, ясный ум в принятии судьбоносных решений и дарует покровительство неба.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Catalog & Product Showcase -->
+        <section id="collection" data-g="collection" data-gl="Каталог: заголовок и фильтры" class="py-24 bg-ivory-main">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Каталог изделий</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-medium text-headline-brown mt-2">
+                            Коллекция медальонов
+                        </h2>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="flex flex-wrap items-center gap-2 mt-6 md:mt-0" id="filterTabs">
+                        <button onclick="filterProducts('all', this)" class="filter-tab active px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-caramel text-ivory-main transition">Все</button>
+                        <button onclick="filterProducts('men', this)" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-beige-soft text-headline-brown border border-sand-light/60 hover:bg-sand-light/30 transition">Мужские обереги</button>
+                        <button onclick="filterProducts('women', this)" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-beige-soft text-headline-brown border border-sand-light/60 hover:bg-sand-light/30 transition">Женские талисманы</button>
+                        <button onclick="filterProducts('750', this)" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-beige-soft text-headline-brown border border-sand-light/60 hover:bg-sand-light/30 transition">Золото 750</button>
+                        <button onclick="filterProducts('steppe', this)" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-beige-soft text-headline-brown border border-sand-light/60 hover:bg-sand-light/30 transition">Лимитированная серия</button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsContainer"></div>
+                <p id="productsEmpty" class="hidden text-center text-sm text-chocolate-deep/60 py-16">В этой категории пока нет изделий</p>
+            </div>
+        </section>
+
+        <!-- SECTION: Interactive Medallion Finder Quiz -->
+        <section id="finder" data-g="quiz" data-gl="Подбор тұмара (квиз)" class="py-20 bg-beige-soft border-y border-sand-light/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="bg-ivory-main rounded-2xl p-8 sm:p-12 border border-sand-light/80 shadow-luxury">
+                    <div class="text-center mb-10">
+                        <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Интерактивный ритуал</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-headline-brown mt-2">
+                            Подберите свой родовой Тұмар
+                        </h2>
+                        <p class="text-xs sm:text-sm text-chocolate-deep/75 mt-2">
+                            Ответьте на 3 вопроса, чтобы узнать, какой древний символ созвучен вашей душе и жизненному этапу.
+                        </p>
+                    </div>
+
+                    <!-- Quiz Container -->
+                    <div id="quizContainer">
+                        <!-- Step 1 -->
+                        <div id="quizStep1" class="quiz-step">
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-headline-brown mb-4 text-center">Шаг 1 из 3: Какое качество сейчас важнее всего для вас?</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <button onclick="selectQuizAnswer(1, 'power')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel hover:bg-beige-soft/40 transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Мужество и стойкость</span>
+                                    <span class="text-xs text-chocolate-deep/70">Преодоление сложных жизненных вызовов, лидерство</span>
+                                </button>
+                                <button onclick="selectQuizAnswer(1, 'family')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel hover:bg-beige-soft/40 transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Гармония и дом</span>
+                                    <span class="text-xs text-chocolate-deep/70">Защита детей, тепло семейного очага, благополучие</span>
+                                </button>
+                                <button onclick="selectQuizAnswer(1, 'wisdom')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel hover:bg-beige-soft/40 transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Мудрость и истоки</span>
+                                    <span class="text-xs text-chocolate-deep/70">Связь с корнями, продолжение великого рода</span>
+                                </button>
+                                <button onclick="selectQuizAnswer(1, 'freedom')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel hover:bg-beige-soft/40 transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Свобода мысли и полет</span>
+                                    <span class="text-xs text-chocolate-deep/70">Поиск своего призвания, новые масштабные проекты</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div id="quizStep2" class="quiz-step hidden">
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-headline-brown mb-4 text-center">Шаг 2 из 3: Для кого предназначен талисман?</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <button onclick="selectQuizAnswer(2, 'men')" class="p-5 text-center rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel transition">
+                                    <span class="block font-serif text-xl font-bold text-headline-brown mb-1">Для мужчины</span>
+                                    <span class="text-xs text-chocolate-deep/70">Опора семьи и защитник</span>
+                                </button>
+                                <button onclick="selectQuizAnswer(2, 'women')" class="p-5 text-center rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel transition">
+                                    <span class="block font-serif text-xl font-bold text-headline-brown mb-1">Для женщины</span>
+                                    <span class="text-xs text-chocolate-deep/70">Хранительница любви и тепла</span>
+                                </button>
+                                <button onclick="selectQuizAnswer(2, 'gift')" class="p-5 text-center rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel transition">
+                                    <span class="block font-serif text-xl font-bold text-headline-brown mb-1">Ценный дар роду</span>
+                                    <span class="text-xs text-chocolate-deep/70">На рождение или юбилей</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div id="quizStep3" class="quiz-step hidden">
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-headline-brown mb-4 text-center">Шаг 3 из 3: Какое благородное золото вам ближе?</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <button onclick="calculateQuizResult('750')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Классическое 750 пробы</span>
+                                    <span class="text-xs text-chocolate-deep/70">Глубокий сияющий оттенок чистого степного солнца</span>
+                                </button>
+                                <button onclick="calculateQuizResult('585')" class="p-4 text-left rounded-lg border border-sand-light/70 bg-cream-card hover:border-caramel transition">
+                                    <span class="block font-serif text-lg font-bold text-headline-brown">Розовое или теплое 585 пробы</span>
+                                    <span class="text-xs text-chocolate-deep/70">Мягкое приглушенное сияние для повседневного ношения</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quiz result texts (editable in the admin panel) -->
+                        <div class="hidden" id="quizTexts">
+                            <div data-quiz="power"><span data-q-title>Медальон «Көк Бөрі»</span><span data-q-desc>Вам покровительствует дух степного волка. Он придаст несокрушимую уверенность в делах и защитит ваш статус.</span></div>
+                            <div data-quiz="family"><span data-q-title>Медальон «Ұмай Ана»</span><span data-q-desc>Ваш выбор говорит о глубокой заботе о близких. Этот священный талисман сохранит мир, любовь и здоровье в вашем доме.</span></div>
+                            <div data-quiz="wisdom"><span data-q-title>Медальон «Бәйтерек»</span><span data-q-desc>Вам созвучна мощь родового древа. Этот Тұмар укрепит вашу связь с предками и принесет изобилие вашему шаңыраку.</span></div>
+                            <div data-quiz="freedom"><span data-q-title>Медальон «Қос Қанат»</span><span data-q-desc>Ваш путь — путь орлиного полета. Медальон поможет бесстрашно достигать высот и защитит от дурного глаза.</span></div>
+                        </div>
+
+                        <!-- Quiz Result -->
+                        <div id="quizResult" class="hidden text-center">
+                            <div class="inline-block p-4 rounded-full bg-beige-soft border border-antique-gold mb-4">
+                                <svg class="w-12 h-12 text-caramel mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs uppercase tracking-widest text-antique-gold font-bold block mb-1">Ваш персональный талисман</span>
+                            <h3 id="resultTitle" data-noedit class="font-serif text-3xl font-bold text-headline-brown mb-2">Медальон «Көк Бөрі»</h3>
+                            <p id="resultDesc" data-noedit class="text-sm text-chocolate-deep/80 max-w-lg mx-auto mb-6">
+                                Вам покровительствует дух степного волка. Он придаст несокрушимую уверенность в делах и защитит ваш статус.
+                            </p>
+                            <div class="flex items-center justify-center gap-4">
+                                <a href="#collection" onclick="resetQuiz()" class="px-6 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">Перейти к покупке</a>
+                                <button onclick="resetQuiz()" class="px-6 py-3 bg-beige-soft border border-sand-light text-headline-brown rounded text-xs font-semibold uppercase tracking-wider hover:bg-sand-light/30 transition">Пройти заново</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: Craftsmanship & Atelier -->
+        <section id="craftsmanship" data-g="craft" data-gl="Мастерство" class="py-24 bg-ivory-main">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                    <!-- Craft Story Text -->
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold mb-3">
+                            <span>Ювелирное ателье</span>
+                            <span class="w-8 h-[1px] bg-antique-gold"></span>
+                        </div>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-medium text-headline-brown leading-tight mb-6">
+                            Искусство зергеров: <br><span class="italic font-normal text-caramel">руки, хранящие память веков</span>
+                        </h2>
+                        <p class="text-sm sm:text-base text-chocolate-deep/80 leading-relaxed mb-6">
+                            Создание одного медальона TUMAR занимает до 38 часов кропотливого труда. Мы не используем бездушное массовое литье: каждый барельеф доводится вручную штихелем, повторяя старинную технологию казахской чеканки.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-lg bg-beige-soft/60 border border-sand-light/50">
+                                <div class="w-8 h-8 rounded-full bg-caramel text-ivory-main flex items-center justify-center text-xs font-serif font-bold shrink-0">1</div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-headline-brown">Скульптурная восковая модель</h4>
+                                    <p class="text-xs text-chocolate-deep/70">Создание миниатюрного барельефа с точностью до 0.05 мм на основе старинных музейных артефактов.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-lg bg-beige-soft/60 border border-sand-light/50">
+                                <div class="w-8 h-8 rounded-full bg-caramel text-ivory-main flex items-center justify-center text-xs font-serif font-bold shrink-0">2</div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-headline-brown">Отливка в золоте высшей пробы</h4>
+                                    <p class="text-xs text-chocolate-deep/70">Использование благородного золота с идеальной плотностью и природным теплым сиянием.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-lg bg-beige-soft/60 border border-sand-light/50">
+                                <div class="w-8 h-8 rounded-full bg-caramel text-ivory-main flex items-center justify-center text-xs font-serif font-bold shrink-0">3</div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-headline-brown">Ручная гравировка и батирование</h4>
+                                    <p class="text-xs text-chocolate-deep/70">Создание игры света и тени, благодаря которой орнамент оживает под лучами солнца.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Editorial Split Imagery Card (Clean Light Aesthetic) -->
+                    <div class="relative">
+                        <div class="rounded-2xl overflow-hidden border-2 border-sand-light/80 shadow-luxury bg-cream-card p-6">
+
+                            <!-- Master Craftsman Atelier Vector Illustration -->
+                            <div class="relative h-96 w-full rounded-xl overflow-hidden bg-gradient-to-tr from-beige-soft via-sand-light/30 to-ivory-main flex items-center justify-center border border-sand-light/50">
+                                <svg class="w-64 h-64 opacity-80" viewBox="0 0 200 200" fill="none">
+                                    <!-- Anvil and Jeweler Tools Vector -->
+                                    <path d="M50 140 L150 140 L140 160 L60 160 Z" fill="#765238"/>
+                                    <path d="M70 120 L130 120 L120 140 L80 140 Z" fill="#8D735E"/>
+                                    <!-- Magnifier and Golden Medallion Sparkle -->
+                                    <circle cx="100" cy="80" r="45" stroke="#B89A65" stroke-width="4" fill="none"/>
+                                    <path d="M132 112 L160 140" stroke="#765238" stroke-width="8" stroke-linecap="round"/>
+                                    <circle cx="100" cy="80" r="30" fill="#EFE3D2" stroke="#A77B52" stroke-width="1.5"/>
+                                    <polygon points="100,60 115,90 85,90" fill="#B89A65"/>
+                                    <circle cx="100" cy="80" r="4" fill="#FDF7E7"/>
+                                </svg>
+
+                                <div class="absolute bottom-4 left-4 right-4 bg-ivory-main/95 backdrop-blur-md p-4 rounded-lg border border-sand-light text-center">
+                                    <p class="font-serif italic text-sm text-headline-brown font-medium">«В каждом ударе штихеля живет молитва о защите того, кто будет носить этот знак»</p>
+                                    <span class="text-[10px] uppercase tracking-widest text-antique-gold font-bold mt-1 block">Главный зергер бренда &bull; Мурат Асанов</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: Testimonials & Heritage Stories -->
+        <section id="stories" data-g="reviews" data-gl="Отзывы" class="py-20 bg-beige-soft/50 border-t border-sand-light/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Слово владельцев</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-medium text-headline-brown mt-2">
+                        Истории тех, кто носит TUMAR
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <!-- Review 1 -->
+                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-antique-gold mb-3">
+                                <span>★★★★★</span>
+                            </div>
+                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
+                                «Заказал медальон "Көк Бөрі" сыну на совершеннолетие. Вещь невероятной энергетики и высочайшего качества чеканки. Это не просто украшение, это семейная реликвия, которую он передаст своим детям».
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
+                            <span class="font-bold text-headline-brown">Ерлан С.</span>
+                            <span class="text-chocolate-deep/60">Алматы &bull; Золото 750°</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-antique-gold mb-3">
+                                <span>★★★★★</span>
+                            </div>
+                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
+                                «Талисман "Ұмай Ана" превзошел все ожидания. Очень теплый, нежный оттенок золота и натуральная бирюза. Ношу каждый день не снимая, чувствую невероятное спокойствие и связь с предками».
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
+                            <span class="font-bold text-headline-brown">Айгерим М.</span>
+                            <span class="text-chocolate-deep/60">Астана &bull; Розовое золото</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-antique-gold mb-3">
+                                <span>★★★★★</span>
+                            </div>
+                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
+                                «Удивила премиальная подача: кожаный футляр ручной работы, сертификат с индивидуальным номером и описание сакрального смысла. Доставка в Шымкент заняла всего сутки. Рахмет!»
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
+                            <span class="font-bold text-headline-brown">Бауыржан К.</span>
+                            <span class="text-chocolate-deep/60">Шымкент &bull; Алтын Тұмар</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Newsletter / Ancestral Club -->
+        <section data-g="club" data-gl="Клуб / подписка" class="py-16 bg-cream-card border-b border-sand-light/50">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Закрытый клуб ценителей</span>
+                <h3 class="font-serif text-3xl font-medium text-headline-brown mt-2 mb-3">
+                    Прикоснитесь к закрытым коллекциям
+                </h3>
+                <p class="text-xs sm:text-sm text-chocolate-deep/75 max-w-lg mx-auto mb-8">
+                    Получайте уведомления о лимитированных тиражах с сакральной символикой и приглашения на закрытые показы в Алматы и Астане.
+                </p>
+                <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+                    <input type="email" name="email" required maxlength="200" placeholder="Введите ваш e-mail" class="w-full px-4 py-3 rounded-md bg-ivory-main border border-sand-light/80 text-xs text-chocolate-deep focus:outline-none focus:border-caramel">
+                    <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded-md text-xs font-semibold uppercase tracking-wider transition whitespace-nowrap">
+                        Вступить в клуб
+                    </button>
+                </form>
+                <p id="subNotice" class="text-[11px] text-antique-gold mt-3 hidden">Благодарим за доверие. Вам направлено приветственное послание.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER: Warm Ivory and Kazakh Ornament Borders -->
+    <footer data-g="footer" data-gl="Подвал сайта" class="bg-beige-soft border-t border-sand-light/60 pt-16 pb-12 text-chocolate-deep">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="font-serif text-2xl font-bold tracking-[0.2em] text-headline-brown">TUMAR</span>
+                    </div>
+                    <p class="text-xs text-chocolate-deep/75 leading-relaxed">
+                        Ювелирный дом казахского национального наследия. Создаем вечные обереги из чистого золота по заветам предков.
+                    </p>
+                    <div class="text-xs text-headline-brown font-serif italic">
+                        «Ер қанаты — тұлпар, ер қорғаны — тұмар»
+                    </div>
+                </div>
+
+                <!-- Boutiques -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold text-headline-brown mb-4">Флагманские бутики</h4>
+                    <ul class="space-y-3 text-xs text-chocolate-deep/80">
+                        <li>
+                            <strong class="text-headline-brown block">Алматы:</strong>
+                            пр. Достык, 162 (VIP Boutique)
+                        </li>
+                        <li>
+                            <strong class="text-headline-brown block">Астана:</strong>
+                            ул. Достык, 16 (Talan Gallery)
+                        </li>
+                        <li class="pt-1 text-antique-gold font-medium">Ежедневно: 10:00 — 21:00</li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold text-headline-brown mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-xs text-chocolate-deep/80">
+                        <li><a href="#collection" class="hover:text-caramel transition">Золотые медальоны</a></li>
+                        <li><a href="#symbols" class="hover:text-caramel transition">Казахские символы и тотемы</a></li>
+                        <li><a href="#craftsmanship" class="hover:text-caramel transition">Философия зергеров</a></li>
+                        <li><a href="#finder" class="hover:text-caramel transition">Подобрать свой оберег</a></li>
+                        <li><a href="#" onclick="event.preventDefault(); showCustomOrderModal()" class="hover:text-caramel transition">Индивидуальный заказ с тамгой рода</a></li>
+                    </ul>
+                </div>
+
+                <!-- Concierge / Contacts -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold text-headline-brown mb-4">Консьерж-служба</h4>
+                    <p class="text-xs text-chocolate-deep/80 mb-3">Персональный подбор и консультация историка-этнографа:</p>
+                    <a href="tel:+77010000000" class="block font-serif text-lg font-bold text-headline-brown hover:text-caramel transition">+7 (701) 000-00-00</a>
+                    <a href="mailto:concierge@tumar-heritage.kz" class="block text-xs text-caramel hover:underline mt-1">concierge@tumar-heritage.kz</a>
+
+                    <div class="flex items-center gap-3 mt-4">
+                        <span class="text-xs px-2 py-1 rounded bg-sand-light/30 border border-sand-light text-headline-brown">Kaspi Pay</span>
+                        <span class="text-xs px-2 py-1 rounded bg-sand-light/30 border border-sand-light text-headline-brown">Visa / Master</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Ornament -->
+            <div class="pt-8 border-t border-sand-light/40 flex flex-col sm:flex-row items-center justify-between text-xs text-chocolate-deep/60">
+                <p>&copy; 2026 TUMAR Heritage Atelier. Все права защищены. Сделано в Казахстане.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-caramel transition">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-caramel transition">Сертификаты подлинности</a>
+                    <a href="#admin" title="Кабинет администратора" aria-label="Кабинет администратора" class="hover:text-caramel transition">🔒</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SLIDE-OVER SHOPPING CART DRAWER -->
+    <div id="cartDrawerBackdrop" onclick="closeCartDrawer()" class="fixed inset-0 z-50 bg-chocolate-deep/40 backdrop-blur-sm hidden transition-opacity"></div>
+    <aside id="cartDrawer" data-g="cart" data-gl="Корзина" class="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] bg-ivory-main border-l border-sand-light shadow-drawer transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-sand-light/50 flex items-center justify-between bg-beige-soft/40">
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-headline-brown" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                <h3 class="font-serif text-xl font-bold text-headline-brown">Корзина сокровищ</h3>
+            </div>
+            <button onclick="closeCartDrawer()" class="p-1 text-headline-brown hover:text-caramel">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cartItemsContainer" class="flex-grow p-6 overflow-y-auto divide-y divide-sand-light/40">
+            <!-- Dynamic Cart Items Rendered Here -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-sand-light/50 bg-beige-soft/30 space-y-4">
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-chocolate-deep/70">Итоговая стоимость:</span>
+                <span id="cartTotalPrice" data-noedit class="font-serif text-2xl font-bold text-headline-brown">0 ₸</span>
+            </div>
+            <p class="text-[11px] text-chocolate-deep/60 text-center">Включает фирменный кожаный футляр и сертификат с родовым благословением</p>
+            <button onclick="proceedToCheckout()" class="w-full py-4 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition shadow-luxury">
+                Оформить заказ
+            </button>
+        </div>
+    </aside>
+
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" data-g="search" data-gl="Поиск" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-start justify-center p-4 pt-20 sm:pt-28">
+        <div class="bg-ivory-main rounded-2xl max-w-lg w-full p-4 sm:p-5 border border-sand-light shadow-2xl">
+            <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-antique-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                <input id="searchInput" type="search" autocomplete="off" placeholder="Поиск по коллекции…" class="flex-grow bg-transparent text-base text-chocolate-deep placeholder:text-chocolate-deep/40 focus:outline-none">
+                <button onclick="closeSearch()" aria-label="Закрыть" class="text-headline-brown hover:text-caramel p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="searchResults" data-noedit class="mt-3 max-h-[60vh] overflow-y-auto divide-y divide-sand-light/40"></div>
+            <p id="searchEmpty" class="hidden mt-4 mb-2 text-center text-sm text-chocolate-deep/60">Ничего не найдено</p>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW MODAL -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-ivory-main rounded-2xl max-w-2xl w-full p-6 sm:p-8 border border-sand-light shadow-2xl relative">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-headline-brown hover:text-caramel">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="quickViewContent" class="mt-2">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SYMBOL DETAIL MODAL -->
+    <div id="symbolModal" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-ivory-main rounded-2xl max-w-lg w-full p-6 sm:p-8 border border-sand-light shadow-2xl relative text-center">
+            <button onclick="closeSymbolModal()" class="absolute top-4 right-4 text-headline-brown hover:text-caramel">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="symbolModalBody">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT ORDER MODAL -->
+    <div id="checkoutModal" data-g="checkout" data-gl="Оформление заказа" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-ivory-main rounded-2xl max-w-md w-full p-6 sm:p-8 border border-sand-light shadow-2xl relative">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-headline-brown hover:text-caramel">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 text-center">Оформление заказа</h3>
+            <p class="text-xs text-chocolate-deep/70 text-center mb-6">Персональный консьерж свяжется с вами в течение 10 минут</p>
+            <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-headline-brown mb-1">Ваше имя</label>
+                    <input type="text" name="name" required maxlength="100" placeholder="Алихан" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-headline-brown mb-1">Номер телефона</label>
+                    <input type="tel" name="phone" required maxlength="40" placeholder="+7 (701) 000-00-00" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-headline-brown mb-1">Город доставки</label>
+                    <select name="city" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                        <option>Алматы (курьерская доставка за 24ч)</option>
+                        <option>Астана (курьерская доставка за 24ч)</option>
+                        <option>Шымкент (доставка СДЭК/Avis)</option>
+                        <option>Другой город Казахстана</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-headline-brown mb-1">Комментарий (необязательно)</label>
+                    <textarea name="comment" rows="2" maxlength="500" placeholder="Гравировка, удобное время звонка…" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none"></textarea>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" id="checkoutSubmit" class="w-full py-3.5 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">
+                        Подтвердить через Kaspi / Карту
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS NOTIFICATION TOAST -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-cream-card border border-antique-gold px-4 py-3 rounded-lg shadow-xl text-xs font-semibold text-headline-brown transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-caramel"></span>
+        <span id="toastMessage" data-noedit>Медальон добавлен в корзину</span>
+    </div>
+
+    <!-- Shared gradients for the built-in medallion artwork -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <radialGradient id="goldGrad1" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FDF7E7"/>
+                <stop offset="45%" stop-color="#D8B575"/>
+                <stop offset="70%" stop-color="#A77B52"/>
+                <stop offset="100%" stop-color="#6F4D2E"/>
+            </radialGradient>
+            <radialGradient id="innerRim1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#E7CD96"/>
+                <stop offset="85%" stop-color="#9A703F"/>
+            </radialGradient>
+            <radialGradient id="roseGoldGrad" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FFF0E6"/>
+                <stop offset="50%" stop-color="#D89A7A"/>
+                <stop offset="85%" stop-color="#A66848"/>
+                <stop offset="100%" stop-color="#6F3F2A"/>
+            </radialGradient>
+        </defs>
+    </svg>
+
+    <!-- Button labels and pop-up messages (editable in the admin panel) -->
+    <div class="hidden" data-g="messages" data-gl="Кнопки товаров и сообщения">
+        <span data-m="quick">Быстрый просмотр</span>
+        <span data-m="add">В корзину</span>
+        <span data-m="weight">Вес:</span>
+        <span data-m="close">Закрыть</span>
+        <span data-m="added">добавлен в корзину</span>
+        <span data-m="cart_empty_title">Ваша корзина пуста</span>
+        <span data-m="cart_empty_text">Выберите свой сакральный Тұмар из коллекции</span>
+        <span data-m="need_items">Пожалуйста, добавьте медальон в корзину</span>
+        <span data-m="sending">Отправляем…</span>
+        <span data-m="order_ok">Рахмет! Ваш заказ принят. Консьерж уже набирает вас.</span>
+        <span data-m="order_fail">Не удалось отправить заказ. Позвоните нам: +7 (701) 000-00-00</span>
+        <span data-m="sub_fail">Не удалось подписаться, попробуйте позже</span>
+        <span data-m="custom">Служба индивидуальных заказов: +7 (701) 000-00-00</span>
+        <span data-m="symbol_ok">Понятно</span>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="admin" class="fixed inset-0 z-[60] bg-ivory-main hidden overflow-y-auto" role="dialog" aria-label="Кабинет администратора">
+        <div class="sticky top-0 z-10 bg-beige-soft/95 backdrop-blur border-b border-sand-light">
+            <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <div class="font-serif text-xl font-bold tracking-[0.2em] text-headline-brown">TUMAR</div>
+                    <div class="text-[10px] uppercase tracking-widest text-antique-gold -mt-1">Кабинет администратора</div>
+                </div>
+                <button id="admClose" class="px-4 py-2 rounded border border-sand-light bg-ivory-main text-xs font-semibold uppercase tracking-wider text-headline-brown hover:border-caramel">На сайт ✕</button>
+            </div>
+            <nav id="admTabs" class="max-w-5xl mx-auto px-4 flex gap-1 overflow-x-auto hidden">
+                <button data-tab="orders" class="adm-tab">Заказы <span id="admNewCount" class="hidden ml-1 px-1.5 rounded-full bg-caramel text-ivory-main text-[10px]"></span></button>
+                <button data-tab="products" class="adm-tab">Товары</button>
+                <button data-tab="texts" class="adm-tab">Тексты</button>
+                <button data-tab="subs" class="adm-tab">Подписчики</button>
+                <button data-tab="settings" class="adm-tab">Настройки</button>
+            </nav>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 py-6">
+            <!-- Login -->
+            <form id="admLogin" class="hidden max-w-xs mx-auto mt-16 text-center">
+                <div class="text-4xl mb-3">🔒</div>
+                <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Вход для администратора</h2>
+                <input id="admPin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN-код" class="w-full px-4 py-3 rounded border border-sand-light bg-cream-card text-center text-lg tracking-[0.4em] focus:outline-none focus:border-caramel">
+                <button class="w-full mt-3 py-3 rounded bg-caramel hover:bg-caramel-hover text-ivory-main text-xs font-semibold uppercase tracking-wider">Войти</button>
+                <p id="admLoginErr" class="text-xs text-red-700 mt-3"></p>
+            </form>
+
+            <div id="admPanel" class="hidden">
+                <!-- Orders -->
+                <section data-pane="orders">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Заказы</h2>
+                        <div class="flex items-center gap-2">
+                            <select id="ordFilter" class="px-3 py-2 rounded border border-sand-light bg-cream-card text-xs">
+                                <option value="">Все заказы</option>
+                                <option value="new">Новые</option>
+                                <option value="work">В работе</option>
+                                <option value="done">Выполненные</option>
+                                <option value="cancel">Отменённые</option>
+                            </select>
+                            <button id="ordRefresh" class="adm-btn-light">Обновить</button>
+                        </div>
+                    </div>
+                    <div id="ordList" class="space-y-3"></div>
+                </section>
+
+                <!-- Products -->
+                <section data-pane="products" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Товары</h2>
+                        <button id="prodAdd" class="adm-btn">+ Добавить товар</button>
+                    </div>
+                    <div id="prodList" class="space-y-3"></div>
+                </section>
+
+                <!-- Texts -->
+                <section data-pane="texts" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Тексты сайта</h2>
+                        <input id="txtSearch" type="search" placeholder="Найти текст…" class="px-3 py-2 rounded border border-sand-light bg-cream-card text-xs w-full sm:w-64">
+                    </div>
+                    <div id="txtLang" class="flex gap-1 mb-3">
+                        <button type="button" data-tl="ru" class="adm-lang">Русский</button>
+                        <button type="button" data-tl="kz" class="adm-lang">Қазақша</button>
+                        <button type="button" data-tl="en" class="adm-lang">English</button>
+                    </div>
+                    <p class="text-xs text-chocolate-deep/60 mb-4">Выберите язык, измените любой текст и нажмите «Сохранить». Кнопка ↺ возвращает исходный текст (или готовый перевод).</p>
+                    <div id="txtGroups" class="space-y-3 pb-24"></div>
+                    <div class="fixed bottom-0 inset-x-0 bg-beige-soft/95 border-t border-sand-light py-3">
+                        <div class="max-w-5xl mx-auto px-4 flex items-center justify-end gap-3">
+                            <span id="txtDirty" class="text-xs text-caramel hidden">Есть несохранённые изменения</span>
+                            <button id="txtSave" class="adm-btn">Сохранить тексты</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Subscribers -->
+                <section data-pane="subs" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Подписчики клуба</h2>
+                        <button id="subsCopy" class="adm-btn-light">Скопировать все e-mail</button>
+                    </div>
+                    <div id="subsList" class="space-y-2"></div>
+                </section>
+
+                <!-- Settings -->
+                <section data-pane="settings" class="hidden max-w-sm">
+                    <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Настройки</h2>
+                    <div id="dbStatus" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card text-xs text-chocolate-deep/80">Проверяем базу данных…</div>
+                    <form id="pinForm" class="p-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
+                        <label class="block text-xs font-semibold text-headline-brown">Новый PIN-код (4–12 цифр)</label>
+                        <input id="pinNew" type="password" inputmode="numeric" class="w-full px-3 py-2.5 rounded border border-sand-light bg-ivory-main text-sm focus:outline-none focus:border-caramel">
+                        <button class="adm-btn w-full">Сменить PIN</button>
+                    </form>
+                    <button id="admLogout" class="adm-btn-light w-full mt-4">Выйти из кабинета</button>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT EDITOR -->
+    <div id="prodEditor" class="fixed inset-0 z-[70] bg-chocolate-deep/50 backdrop-blur-sm hidden items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <form id="prodForm" class="bg-ivory-main rounded-2xl max-w-2xl w-full p-5 sm:p-7 border border-sand-light shadow-2xl relative my-4">
+            <button type="button" data-close class="absolute top-4 right-4 text-headline-brown hover:text-caramel text-xl">✕</button>
+            <h3 id="prodFormTitle" class="font-serif text-2xl font-bold text-headline-brown mb-3">Товар</h3>
+            <div id="prodLangTabs" class="flex flex-wrap items-center gap-1 mb-1">
+                <button type="button" data-pl="ru" class="adm-lang">Русский</button>
+                <button type="button" data-pl="kz" class="adm-lang">Қазақша</button>
+                <button type="button" data-pl="en" class="adm-lang">English</button>
+            </div>
+            <p class="text-[11px] text-chocolate-deep/60 mb-4">Название, тип, металл, вес, описание и значок заполняются для каждого языка. Пустое поле — на сайте покажется русский вариант.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-5">
+                <div>
+                    <div id="prodPreview" class="w-44 h-44 mx-auto rounded-lg bg-beige-soft border border-sand-light flex items-center justify-center p-2"></div>
+                    <label class="block text-[11px] font-semibold text-headline-brown mt-3 mb-1">Рисунок</label>
+                    <select name="design" class="adm-input">
+                        <option value="wolf">Волк (Көк Бөрі)</option>
+                        <option value="umai">Ұмай Ана</option>
+                        <option value="tumar">Треугольный тұмар</option>
+                        <option value="baiterek">Бәйтерек</option>
+                        <option value="eagle">Крылья (Қос Қанат)</option>
+                        <option value="arkar">Рога (Арқар)</option>
+                    </select>
+                    <label class="block text-[11px] font-semibold text-headline-brown mt-2 mb-1">Надпись на рисунке</label>
+                    <input name="engraving" maxlength="60" class="adm-input">
+                    <label class="adm-btn-light w-full mt-3 cursor-pointer text-center block">📷 Загрузить фото<input id="prodPhoto" type="file" accept="image/*" class="hidden"></label>
+                    <button type="button" id="prodPhotoDel" class="w-full mt-2 text-[11px] text-red-700 hidden">Убрать фото (показать рисунок)</button>
+                </div>
+                <div class="space-y-3">
+                    <div><label class="adm-label">Название *</label><input name="name" required maxlength="200" class="adm-input"></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Цена, ₸ *</label><input name="price" type="number" min="0" step="1000" required class="adm-input"></div>
+                        <div><label class="adm-label">Вес</label><input name="weight" maxlength="50" placeholder="18.4 г" class="adm-input"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Тип</label><input name="type" maxlength="100" placeholder="Мужской оберег" class="adm-input"></div>
+                        <div><label class="adm-label">Металл</label><input name="metal" maxlength="100" placeholder="Желтое золото 750°" class="adm-input"></div>
+                    </div>
+                    <div><label class="adm-label">Описание</label><textarea name="desc" rows="3" maxlength="2000" class="adm-input"></textarea></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Значок</label><input name="badge" maxlength="50" placeholder="Новинка" class="adm-input"></div>
+                        <div><label class="adm-label">Цвет значка</label>
+                            <select name="badgeStyle" class="adm-input">
+                                <option value="gold">Золотой</option>
+                                <option value="sand">Песочный</option>
+                                <option value="brown">Коричневый</option>
+                                <option value="light">Светлый</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div><label class="adm-label">Номер тиража</label><input name="edition" maxlength="50" placeholder="№ 001 / 100" class="adm-input"></div>
+                    <div>
+                        <span class="adm-label">Показывать в фильтрах</span>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                            <label><input type="checkbox" name="cats" value="men"> Мужские</label>
+                            <label><input type="checkbox" name="cats" value="women"> Женские</label>
+                            <label><input type="checkbox" name="cats" value="750"> Золото 750</label>
+                            <label><input type="checkbox" name="cats" value="steppe"> Лимитированная</label>
+                        </div>
+                    </div>
+                    <label class="flex items-center gap-2 text-xs"><input type="checkbox" name="hidden"> Скрыть с сайта (товар останется в кабинете)</label>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" data-close class="adm-btn-light">Отмена</button>
+                <button id="prodSave" class="adm-btn">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+    <style>
+        .adm-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #765238; border-bottom: 2px solid transparent; white-space: nowrap; }
+        .adm-tab.active { color: #A77B52; border-color: #A77B52; }
+        .adm-btn { padding: 10px 18px; border-radius: 4px; background: #A77B52; color: #F7F1E7; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+        .adm-btn:hover { background: #936942; }
+        .adm-btn:disabled { opacity: .6; }
+        .adm-btn-light { padding: 9px 16px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 12px; font-weight: 600; }
+        .adm-btn-light:hover { border-color: #A77B52; }
+        .adm-lang { padding: 7px 14px; border-radius: 999px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 12px; font-weight: 600; }
+        .adm-lang.active { background: #A77B52; border-color: #A77B52; color: #F7F1E7; }
+        .adm-label { display: block; font-size: 11px; font-weight: 600; color: #765238; margin-bottom: 4px; }
+        .adm-input { width: 100%; padding: 8px 10px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; font-size: 13px; color: #493021; }
+        .adm-input:focus { outline: none; border-color: #A77B52; }
+        .adm-icon { width: 32px; height: 32px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 14px; }
+        .adm-icon:hover:not(:disabled) { border-color: #A77B52; }
+        .adm-icon:disabled { opacity: .35; }
+        #admin { background: #F7F1E7; }
+        #admin > div:first-child, #admin [data-pane="texts"] > .fixed { background: rgba(239, 227, 210, .97); }
+        #prodForm { background: #F7F1E7; }
+    </style>
+
+    <script>
+        const API = '/api/tumar/';
+        const BADGE = {
+            gold: 'bg-antique-gold/90 text-ivory-main',
+            sand: 'bg-sand-light text-chocolate-deep',
+            brown: 'bg-headline-brown text-ivory-main',
+            light: 'bg-beige-soft text-headline-brown border border-sand-light'
+        };
+        const STATUS = { new: 'Новый', work: 'В работе', done: 'Выполнен', cancel: 'Отменён' };
+
+        const state = { products: [], texts: {}, db: false, admin: false, filter: 'all', orders: [], subs: [] };
+        let cart = [];
+
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+        const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const norm = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+        const msg = (key) => norm($(`[data-m="${key}"]`)?.textContent);
+
+        // ---------- Language (KZ / RU / EN) ----------
+        // Russian is the source language of the page. Kazakh and English come
+        // from /tumar-files/i18n.js (keyed by the Russian text), and the admin
+        // panel can override any text in any language.
+        const LANGS = ['kz', 'ru', 'en'];
+        const HTML_LANG = { kz: 'kk', ru: 'ru', en: 'en' };
+        const LOCALE = { kz: 'kk-KZ', ru: 'ru-RU', en: 'en-US' };
+        const DICT = window.TUMAR_I18N || {};
+        let lang = pickLang();
+
+        function pickLang() {
+            const fromUrl = new URLSearchParams(location.search).get('lang');
+            if (LANGS.includes(fromUrl)) return fromUrl;
+            try {
+                const saved = localStorage.getItem('tumar_lang');
+                if (LANGS.includes(saved)) return saved;
+            } catch {}
+            for (const l of (navigator.languages || [navigator.language || '']).map((x) => String(x).toLowerCase())) {
+                if (l.startsWith('kk')) return 'kz';
+                if (l.startsWith('ru')) return 'ru';
+                if (l.startsWith('en')) return 'en';
+            }
+            return 'ru';
+        }
+
+        // A fixed Russian string in the current language.
+        const t = (ru) => (lang === 'ru' ? ru : DICT[norm(ru)]?.[lang] ?? ru);
+        // A product field in the current language, falling back to Russian.
+        const tr = (p, field) => (lang !== 'ru' && p[`${field}_${lang}`]) || p[field] || '';
+
+        function formatKZT(amount) {
+            return new Intl.NumberFormat(LOCALE[lang]).format(amount) + ' ₸';
+        }
+
+        async function api(path, { method = 'GET', body } = {}) {
+            const init = { method, headers: {} };
+            if (body !== undefined) {
+                init.headers['content-type'] = 'application/json';
+                init.body = JSON.stringify(body);
+            }
+            const res = await fetch(API + path, init);
+            let data = {};
+            try { data = await res.json(); } catch {}
+            if (!res.ok) {
+                const err = new Error(data.error || 'Ошибка ' + res.status);
+                err.status = res.status;
+                throw err;
+            }
+            return data;
+        }
+
+        // ---------- Toast ----------
+        let toastTimer = null;
+        function showToast(text) {
+            const toast = $('#toastNotification');
+            $('#toastMessage').innerText = text;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+
+        // ---------- Built-in medallion artwork ----------
+        function designSvg(design, engraving) {
+            const t = esc(engraving || '');
+            const txt = (y, fill) => `<text x="100" y="${y}" font-family="'Cormorant Garamond', serif" font-size="9" fill="${fill}" text-anchor="middle" letter-spacing="2">${t}</text>`;
+            const art = {
+                wolf: `<circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="none" stroke="#FAF6F0" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="100" cy="100" r="76" fill="url(#innerRim1)"/>
+                    <circle cx="100" cy="100" r="62" fill="#583A21"/>
+                    <path d="M100 48 L103 60 L115 62 L105 70 L108 82 L100 75 L92 82 L95 70 L85 62 L97 60 Z" fill="#D8B575"/>
+                    <path d="M78 126 L86 98 L100 84 L114 98 L122 126 L100 138 Z" fill="url(#goldGrad1)" stroke="#FDF7E7" stroke-width="1.2"/>
+                    <circle cx="92" cy="104" r="2.5" fill="#493021"/><circle cx="108" cy="104" r="2.5" fill="#493021"/>
+                    <circle cx="100" cy="120" r="2" fill="#8D735E"/>${txt(156, '#D8B575')}`,
+                umai: `<circle cx="100" cy="100" r="90" fill="url(#roseGoldGrad)" stroke="#B89A65" stroke-width="1.8"/>
+                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="74" fill="#EFE3D2" stroke="#B89A65" stroke-width="1"/>
+                    <path d="M100 50 C70 80 50 100 50 120 C50 135 65 145 80 140 C95 135 100 120 100 120 C100 120 105 135 120 140 C135 145 150 135 150 120 C150 100 130 80 100 50 Z" fill="url(#roseGoldGrad)"/>
+                    <circle cx="100" cy="95" r="7" fill="#FDF7E7" stroke="#B89A65" stroke-width="1.5"/>
+                    <circle cx="100" cy="95" r="4.5" fill="#3B8B88"/>${txt(165, '#765238')}`,
+                tumar: `<polygon points="100,20 185,165 15,165" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2.5"/>
+                    <polygon points="100,38 168,155 32,155" fill="#FAF6F0"/>
+                    <polygon points="100,52 154,146 46,146" fill="#EFE3D2" stroke="#765238" stroke-width="1"/>
+                    <circle cx="100" cy="112" r="22" fill="#583A21" stroke="#B89A65" stroke-width="2"/>
+                    <line x1="85" y1="112" x2="115" y2="112" stroke="#D8B575" stroke-width="2"/>
+                    <line x1="100" y1="97" x2="100" y2="127" stroke="#D8B575" stroke-width="2"/>
+                    <circle cx="100" cy="112" r="6" fill="#B89A65"/>${txt(182, '#765238')}`,
+                baiterek: `<circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="76" fill="#493021"/>
+                    <path d="M100 150 L100 80 M80 120 Q100 100 100 100 M120 120 Q100 100 100 100" stroke="#D8B575" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="100" cy="65" r="16" fill="url(#goldGrad1)" stroke="#FFF0E6" stroke-width="1.5"/>
+                    <circle cx="100" cy="65" r="5" fill="#FAF6F0"/>${txt(172, '#D8B575')}`,
+                eagle: `<circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="74" fill="#EFE3D2"/>
+                    <path d="M40 90 Q 75 70 100 115 Q 125 70 160 90 Q 130 135 100 148 Q 70 135 40 90 Z" fill="#765238"/>
+                    <path d="M55 96 Q 78 80 100 118 Q 122 80 145 96 Q 122 130 100 140 Q 78 130 55 96 Z" fill="url(#goldGrad1)"/>
+                    <circle cx="100" cy="80" r="3" fill="#B89A65"/>${txt(168, '#765238')}`,
+                arkar: `<circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="76" fill="#765238"/>
+                    <path d="M100 80 C80 50 40 70 50 100 C60 125 90 120 100 135 C110 120 140 125 150 100 C160 70 120 50 100 80 Z" fill="url(#goldGrad1)" stroke="#FAF6F0" stroke-width="1.2"/>
+                    <circle cx="100" cy="105" r="5" fill="#493021"/>${txt(165, '#FAF6F0')}`
+            };
+            return `<svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">${art[design] || art.tumar}</svg>`;
+        }
+
+        function productArt(p) {
+            if (p.image) {
+                return `<img src="${API}image/${esc(p.image)}" alt="${esc(tr(p, 'name'))}" loading="lazy" class="w-full h-full object-contain rounded-lg medallion-svg">`;
+            }
+            return designSvg(p.design, p.engraving);
+        }
+
+        // ---------- Catalog ----------
+        const visibleProducts = () => state.products.filter((p) => !p.hidden);
+        const findProduct = (id) => visibleProducts().find((p) => p.id === id);
+
+        function productCard(p) {
+            return `
+            <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-id="${esc(p.id)}">
+                <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
+                    ${p.badge ? `<span class="absolute top-4 left-4 ${BADGE[p.badgeStyle] || BADGE.gold} text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">${esc(tr(p, 'badge'))}</span>` : ''}
+                    ${p.edition ? `<span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">${esc(p.edition)}</span>` : ''}
+                    <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">${productArt(p)}</div>
+                    <button data-act="quick" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm sm:opacity-0 group-hover:opacity-100 transition-opacity">${esc(msg('quick'))}</button>
+                </div>
+                <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 text-xs text-antique-gold font-medium mb-1">
+                            <span>${esc(tr(p, 'type'))}</span>
+                            <span class="text-right">${esc(tr(p, 'metal'))}</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">${esc(tr(p, 'name'))}</h3>
+                        <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">${esc(tr(p, 'desc'))}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
+                            <span class="text-xs text-chocolate-deep/60">${tr(p, 'weight') ? esc(msg('weight') + ' ~' + tr(p, 'weight')) : ''}</span>
+                            <span class="font-serif text-2xl font-bold text-headline-brown">${formatKZT(p.price)}</span>
+                        </div>
+                        <button data-act="add" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">${esc(msg('add'))}</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderProducts() {
+            const list = visibleProducts().filter((p) => state.filter === 'all' || (p.cats || []).includes(state.filter));
+            $('#productsContainer').innerHTML = list.map(productCard).join('');
+            $('#productsEmpty').classList.toggle('hidden', list.length > 0);
+        }
+
+        function filterProducts(cat, btn) {
+            $$('.filter-tab').forEach((b) => {
+                b.classList.remove('bg-caramel', 'text-ivory-main');
+                b.classList.add('bg-beige-soft', 'text-headline-brown');
+            });
+            btn.classList.add('bg-caramel', 'text-ivory-main');
+            btn.classList.remove('bg-beige-soft', 'text-headline-brown');
+            state.filter = cat;
+            renderProducts();
+        }
+
+        $('#productsContainer').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-act]');
+            if (!btn) return;
+            const id = btn.closest('[data-id]').dataset.id;
+            if (btn.dataset.act === 'add') addToCart(id);
+            if (btn.dataset.act === 'quick') quickView(id);
+        });
+
+        // ---------- Cart ----------
+        function saveCart() {
+            try { localStorage.setItem('tumar_cart', JSON.stringify(cart.map(({ id, quantity }) => ({ id, quantity })))); } catch {}
+        }
+
+        function restoreCart() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('tumar_cart') || '[]');
+                cart = saved.filter((i) => findProduct(i.id)).map((i) => ({ id: i.id, quantity: Math.max(1, i.quantity | 0) }));
+            } catch { cart = []; }
+        }
+
+        function addToCart(id) {
+            const p = findProduct(id);
+            if (!p) return;
+            const existing = cart.find((item) => item.id === id);
+            if (existing) existing.quantity += 1;
+            else cart.push({ id, quantity: 1 });
+            updateCartUI();
+            showToast(`${tr(p, 'name')} — ${msg('added')}`);
+            openCartDrawer();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find((i) => i.id === id);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) cart = cart.filter((i) => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            cart = cart.filter((i) => findProduct(i.id));
+            saveCart();
+            const lines = cart.map((i) => ({ ...findProduct(i.id), quantity: i.quantity }));
+            const container = $('#cartItemsContainer');
+            $('#cartCountBadge').innerText = lines.reduce((s, i) => s + i.quantity, 0);
+            $('#cartTotalPrice').innerText = formatKZT(lines.reduce((s, i) => s + i.price * i.quantity, 0));
+
+            if (!lines.length) {
+                container.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center text-chocolate-deep/60">
+                        <svg class="w-12 h-12 text-sand-light mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                        <p class="font-serif text-lg text-headline-brown">${esc(msg('cart_empty_title'))}</p>
+                        <p class="text-xs mt-1">${esc(msg('cart_empty_text'))}</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = lines.map((item) => `
+                <div class="py-4 flex items-center justify-between gap-4" data-id="${esc(item.id)}">
+                    <div class="flex-grow">
+                        <h4 class="font-serif font-bold text-headline-brown text-base">${esc(tr(item, 'name'))}</h4>
+                        <span class="text-[11px] text-antique-gold">${esc(tr(item, 'metal'))}</span>
+                        <div class="text-xs font-semibold text-caramel mt-1">${formatKZT(item.price)}</div>
+                    </div>
+                    <div class="flex items-center border border-sand-light rounded bg-cream-card">
+                        <button data-qty="-1" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">-</button>
+                        <span class="px-2 text-xs font-semibold">${item.quantity}</span>
+                        <button data-qty="1" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">+</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        $('#cartItemsContainer').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-qty]');
+            if (btn) changeQty(btn.closest('[data-id]').dataset.id, Number(btn.dataset.qty));
+        });
+
+        function openCartDrawer() {
+            $('#cartDrawerBackdrop').classList.remove('hidden');
+            $('#cartDrawer').classList.remove('translate-x-full');
+        }
+
+        function closeCartDrawer() {
+            $('#cartDrawerBackdrop').classList.add('hidden');
+            $('#cartDrawer').classList.add('translate-x-full');
+        }
+
+        // ---------- Modals ----------
+        function openModal(id) { const m = $(id); m.classList.remove('hidden'); m.classList.add('flex'); }
+        function closeModal(id) { const m = $(id); m.classList.add('hidden'); m.classList.remove('flex'); }
+
+        function quickView(id) {
+            const p = findProduct(id);
+            if (!p) return;
+            $('#quickViewContent').innerHTML = `
+                <div class="text-center" data-id="${esc(p.id)}">
+                    <div class="w-40 h-40 mx-auto mb-4">${productArt(p)}</div>
+                    <span class="text-xs uppercase tracking-widest text-antique-gold font-bold">${esc(tr(p, 'metal'))}${p.weight ? ' &bull; ' + esc(tr(p, 'weight')) : ''}</span>
+                    <h3 class="font-serif text-3xl font-bold text-headline-brown mt-1 mb-3">${esc(tr(p, 'name'))}</h3>
+                    <p class="text-sm text-chocolate-deep/80 leading-relaxed max-w-md mx-auto mb-6">${esc(tr(p, 'desc'))}</p>
+                    <div class="font-serif text-3xl font-bold text-headline-brown mb-6">${formatKZT(p.price)}</div>
+                    <div class="flex items-center justify-center gap-4">
+                        <button data-qv="add" class="px-8 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">${esc(msg('add'))}</button>
+                        <button data-qv="close" class="px-6 py-3 border border-sand-light text-headline-brown rounded text-xs uppercase font-semibold">${esc(msg('close'))}</button>
+                    </div>
+                </div>`;
+            openModal('#quickViewModal');
+        }
+        $('#quickViewContent').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-qv]');
+            if (!btn) return;
+            if (btn.dataset.qv === 'add') addToCart(btn.closest('[data-id]').dataset.id);
+            closeQuickView();
+        });
+        function closeQuickView() { closeModal('#quickViewModal'); }
+
+        function showSymbolDetail(card) {
+            const full = $('[data-sym-full]', card);
+            $('#symbolModalBody').innerHTML = `
+                <span class="text-xs uppercase tracking-widest text-antique-gold font-bold block mb-1">${esc(norm($('[data-sym-sub]', full).textContent))}</span>
+                <h3 class="font-serif text-3xl font-bold text-headline-brown mb-4">${esc(norm($('[data-sym-title]', full).textContent))}</h3>
+                <p class="text-sm text-chocolate-deep/80 leading-relaxed mb-6">${esc(norm($('[data-sym-desc]', full).textContent))}</p>
+                <button onclick="closeSymbolModal()" class="px-6 py-2.5 bg-caramel text-ivory-main rounded text-xs uppercase font-semibold">${esc(msg('symbol_ok'))}</button>`;
+            openModal('#symbolModal');
+        }
+        function closeSymbolModal() { closeModal('#symbolModal'); }
+
+        // ---------- Quiz ----------
+        let quizAnswers = {};
+
+        function selectQuizAnswer(step, val) {
+            quizAnswers['step' + step] = val;
+            $('#quizStep' + step).classList.add('hidden');
+            $('#quizStep' + (step + 1)).classList.remove('hidden');
+        }
+
+        function calculateQuizResult(gold) {
+            quizAnswers.gold = gold;
+            $('#quizStep3').classList.add('hidden');
+            showQuizResult();
+        }
+
+        function showQuizResult() {
+            const box = $(`#quizTexts [data-quiz="${quizAnswers.step1}"]`) || $('#quizTexts [data-quiz="power"]');
+            $('#resultTitle').innerText = norm($('[data-q-title]', box).textContent);
+            $('#resultDesc').innerText = norm($('[data-q-desc]', box).textContent);
+            $('#quizResult').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            quizAnswers = {};
+            $('#quizResult').classList.add('hidden');
+            $('#quizStep2').classList.add('hidden');
+            $('#quizStep3').classList.add('hidden');
+            $('#quizStep1').classList.remove('hidden');
+        }
+
+        // ---------- Mobile menu ----------
+        function toggleMobileMenu() { $('#mobileDrawer').classList.toggle('hidden'); }
+        $('#mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+        // ---------- Checkout & club ----------
+        function proceedToCheckout() {
+            if (!cart.length) {
+                showToast(msg('need_items'));
+                return;
+            }
+            closeCartDrawer();
+            openModal('#checkoutModal');
+        }
+        function closeCheckoutModal() { closeModal('#checkoutModal'); }
+
+        async function handleCheckoutSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = $('#checkoutSubmit');
+            const label = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = msg('sending');
+            try {
+                await api('orders', {
+                    method: 'POST',
+                    body: {
+                        name: form.name.value,
+                        phone: form.phone.value,
+                        city: form.city.value,
+                        comment: form.comment.value,
+                        lang,
+                        items: cart.map((i) => ({ id: i.id, qty: i.quantity }))
+                    }
+                });
+                closeCheckoutModal();
+                form.reset();
+                cart = [];
+                updateCartUI();
+                showToast(msg('order_ok'));
+            } catch (err) {
+                showToast(msg('order_fail'));
+            } finally {
+                btn.disabled = false;
+                btn.innerText = label;
+            }
+        }
+
+        async function handleSubscribe(e) {
+            e.preventDefault();
+            try {
+                await api('subscribe', { method: 'POST', body: { email: e.target.email.value } });
+                e.target.reset();
+                $('#subNotice').classList.remove('hidden');
+            } catch {
+                showToast(msg('sub_fail'));
+            }
+        }
+
+        // ---------- Search ----------
+        function toggleSearchModal() {
+            $('#searchInput').value = '';
+            runSearch();
+            openModal('#searchModal');
+            setTimeout(() => $('#searchInput').focus(), 50);
+        }
+        function closeSearch() { closeModal('#searchModal'); }
+
+        function runSearch() {
+            const q = norm($('#searchInput').value).toLowerCase();
+            const fields = ['name', 'type', 'metal', 'desc', 'badge'];
+            const haystack = (p) => fields.flatMap((f) => [p[f], p[f + '_kz'], p[f + '_en']]).join(' ').toLowerCase();
+            const list = visibleProducts().filter((p) => !q || haystack(p).includes(q));
+            $('#searchResults').innerHTML = list.map((p) => `
+                <button data-id="${esc(p.id)}" class="w-full flex items-center gap-3 py-3 px-2 text-left rounded hover:bg-beige-soft/60 transition">
+                    <span class="w-12 h-12 shrink-0">${productArt(p)}</span>
+                    <span class="flex-grow min-w-0">
+                        <span class="block font-serif text-lg font-bold text-headline-brown truncate">${esc(tr(p, 'name'))}</span>
+                        <span class="block text-xs text-antique-gold truncate">${esc(tr(p, 'metal'))}</span>
+                    </span>
+                    <span class="font-serif font-bold text-headline-brown whitespace-nowrap">${formatKZT(p.price)}</span>
+                </button>`).join('');
+            $('#searchEmpty').classList.toggle('hidden', list.length > 0);
+        }
+        $('#searchInput').addEventListener('input', runSearch);
+        $('#searchResults').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-id]');
+            if (!btn) return;
+            closeSearch();
+            quickView(btn.dataset.id);
+        });
+
+        // Click outside a dialog or press Esc to close it.
+        ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal'].forEach((id) => {
+            $(id).addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(id); });
+        });
+        $('#mobileDrawer').addEventListener('click', (e) => { if (e.target === e.currentTarget) toggleMobileMenu(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal', '#prodEditor'].forEach(closeModal);
+            closeCartDrawer();
+            $('#mobileDrawer').classList.add('hidden');
+        });
+        function showCustomOrderModal() { showToast(msg('custom')); }
+
+        // ---------- Editable texts ----------
+        // Every visible piece of text inside a [data-g] block gets a key such
+        // as "hero_3". A saved override remembers the original text it
+        // replaced and only applies while that original is still in the page,
+        // so editing the HTML later can never put a text in the wrong place.
+        const TEXT_SKIP = 'script,style,svg,[data-noedit]';
+        const TAGS = { H1: 'Заголовок', H2: 'Заголовок', H3: 'Заголовок', H4: 'Подзаголовок', P: 'Текст', A: 'Ссылка', BUTTON: 'Кнопка', OPTION: 'Вариант в списке', LABEL: 'Подпись поля', LI: 'Пункт', STRONG: 'Текст' };
+        let textEntries = [];
+
+        function collectTexts() {
+            const out = [];
+            $$('[data-g]').forEach((group) => {
+                let i = 0;
+                const walker = document.createTreeWalker(group, NodeFilter.SHOW_TEXT, {
+                    acceptNode: (n) => !/[\p{L}\p{N}]/u.test(n.nodeValue) || n.parentElement.closest(TEXT_SKIP)
+                        ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+                });
+                let node;
+                while ((node = walker.nextNode())) {
+                    out.push({ key: `${group.dataset.g}_${i++}`, group, node, def: norm(node.nodeValue), label: labelFor(node.parentElement) });
+                }
+                let j = 0;
+                $$('[placeholder]', group).forEach((el) => {
+                    if (el.closest(TEXT_SKIP)) return;
+                    out.push({ key: `${group.dataset.g}_ph${j++}`, group, el, def: norm(el.placeholder), label: 'Подсказка в поле' });
+                });
+            });
+            return out;
+        }
+
+        function labelFor(el) {
+            if (el.closest('[data-sym-sub]')) return 'Окно символа: подзаголовок';
+            if (el.closest('[data-sym-title]')) return 'Окно символа: заголовок';
+            if (el.closest('[data-sym-desc]')) return 'Окно символа: описание';
+            if (el.closest('[data-q-title]')) return 'Результат квиза: название';
+            if (el.closest('[data-q-desc]')) return 'Результат квиза: описание';
+            if (el.closest('[data-m]')) return 'Сообщение';
+            const tagged = el.closest('h1,h2,h3,h4,p,a,button,option,label,li');
+            return TAGS[tagged?.tagName] || 'Текст';
+        }
+
+        function setEntry(entry, value) {
+            if (entry.el) { entry.el.placeholder = value; return; }
+            const raw = entry.node.nodeValue;
+            const lead = raw.match(/^\s*/)[0];
+            const trail = raw.match(/\s*$/)[0];
+            entry.node.nodeValue = lead + value + trail;
+        }
+
+        // Built-in text of an entry in a language: the Russian original or its
+        // translation from i18n.js.
+        function defaultFor(entry, l = lang) {
+            return l === 'ru' ? entry.def : DICT[entry.def]?.[l] ?? entry.def;
+        }
+
+        // What the page shows: the admin's edit for that language if there is
+        // one, otherwise the built-in text.
+        function valueFor(entry, l = lang) {
+            const o = state.texts[entry.key];
+            if (o && o.d === entry.def) {
+                const v = o[l] ?? (l === 'ru' ? o.v : undefined);
+                if (typeof v === 'string' && v.trim()) return v;
+            }
+            return defaultFor(entry, l);
+        }
+
+        const META = { title: document.title, desc: $('meta[name="description"]').content };
+
+        function applyTexts() {
+            for (const entry of textEntries) setEntry(entry, valueFor(entry));
+            document.documentElement.lang = HTML_LANG[lang];
+            document.title = t(META.title);
+            $('meta[name="description"]').content = t(META.desc);
+            $$('[aria-label]').forEach((el) => {
+                if (el.closest('#admin, #prodEditor')) return;
+                el.dataset.ariaRu ??= el.getAttribute('aria-label');
+                el.setAttribute('aria-label', t(el.dataset.ariaRu));
+            });
+            $$('.lang-switch [data-lang]').forEach((b) => {
+                const on = b.dataset.lang === lang;
+                b.classList.toggle('font-bold', on);
+                b.classList.toggle('text-caramel', on);
+                b.classList.toggle('border-caramel', on);
+                b.setAttribute('aria-pressed', String(on));
+            });
+        }
+
+        function setLang(l) {
+            if (!LANGS.includes(l) || l === lang) return;
+            lang = l;
+            try { localStorage.setItem('tumar_lang', l); } catch {}
+            const url = new URL(location.href);
+            if (url.searchParams.has('lang')) {
+                url.searchParams.set('lang', l);
+                history.replaceState(null, '', url);
+            }
+            closeModal('#quickViewModal');
+            closeModal('#symbolModal');
+            applyTexts();
+            renderProducts();
+            updateCartUI();
+            if (!$('#quizResult').classList.contains('hidden')) showQuizResult();
+            if (!$('#searchModal').classList.contains('hidden')) runSearch();
+        }
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.lang-switch [data-lang]');
+            if (btn) setLang(btn.dataset.lang);
+        });
+
+        // ---------- Boot ----------
+        async function loadContent() {
+            try {
+                const res = await fetch(API + 'content', { cache: 'no-store' });
+                if (res.ok) return await res.json();
+            } catch {}
+            try {
+                const res = await fetch('/tumar-files/content.json', { cache: 'no-cache' });
+                if (res.ok) return { ...(await res.json()), texts: {}, db: false };
+            } catch {}
+            return { products: [], texts: {}, db: false };
+        }
+
+        async function boot() {
+            textEntries = collectTexts();
+            applyTexts();
+            const data = await loadContent();
+            state.products = data.products || [];
+            state.texts = data.texts || {};
+            state.db = !!data.db;
+            applyTexts();
+            renderProducts();
+            restoreCart();
+            updateCartUI();
+        }
+        updateCartUI();
+        boot();
+
+        // =====================================================================
+        // ADMIN PANEL
+        // =====================================================================
+        const admin = $('#admin');
+
+        function openAdmin() {
+            admin.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            api('me').then((r) => {
+                state.admin = !!r.admin;
+                state.noDb = !!r.noDb;
+                showAdminView();
+            }).catch(() => showAdminView());
+        }
+
+        function closeAdmin() {
+            admin.classList.add('hidden');
+            document.body.style.overflow = '';
+            if (location.hash === '#admin') history.replaceState(null, '', location.pathname);
+            if (/\/admin\/?$/.test(location.pathname)) history.replaceState(null, '', location.pathname.replace(/\/admin\/?$/, '') || '/');
+        }
+
+        function showAdminView() {
+            $('#admLogin').classList.toggle('hidden', state.admin);
+            $('#admPanel').classList.toggle('hidden', !state.admin);
+            $('#admTabs').classList.toggle('hidden', !state.admin);
+            $('#admLoginErr').textContent = state.noDb
+                ? 'База данных не подключена: Vercel → проект → Storage → Postgres → Connect, затем Redeploy.'
+                : '';
+            if (state.admin) showTab(currentTab);
+            else setTimeout(() => $('#admPin').focus(), 50);
+        }
+
+        function handleAuthError(err) {
+            if (err.status === 403) {
+                state.admin = false;
+                showAdminView();
+                showToast('Сессия истекла — войдите ещё раз');
+                return true;
+            }
+            showToast(err.message);
+            return false;
+        }
+
+        $('#admClose').addEventListener('click', closeAdmin);
+        if (location.hash === '#admin' || /\/admin\/?$/.test(location.pathname)) openAdmin();
+        window.addEventListener('hashchange', () => { if (location.hash === '#admin') openAdmin(); });
+
+        $('#admLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            $('#admLoginErr').textContent = '';
+            try {
+                await api('login', { method: 'POST', body: { pin: $('#admPin').value } });
+                $('#admPin').value = '';
+                state.admin = true;
+                showAdminView();
+            } catch (err) {
+                $('#admLoginErr').textContent = err.message;
+            }
+        });
+
+        $('#admLogout').addEventListener('click', async () => {
+            try { await api('logout', { method: 'POST' }); } catch {}
+            state.admin = false;
+            showAdminView();
+        });
+
+        $('#pinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await api('pin', { method: 'POST', body: { pin: $('#pinNew').value } });
+                $('#pinNew').value = '';
+                showToast('PIN-код изменён');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // ---------- Tabs ----------
+        let currentTab = 'orders';
+        function showTab(tab) {
+            currentTab = tab;
+            $$('#admTabs [data-tab]').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+            $$('#admPanel [data-pane]').forEach((p) => p.classList.toggle('hidden', p.dataset.pane !== tab));
+            if (tab === 'orders') loadOrders();
+            if (tab === 'products') renderAdminProducts();
+            if (tab === 'texts') renderTextEditor();
+            if (tab === 'subs') loadSubs();
+            if (tab === 'settings') loadStatus();
+        }
+        $('#admTabs').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-tab]');
+            if (b) showTab(b.dataset.tab);
+        });
+
+        // ---------- Orders ----------
+        async function loadOrders() {
+            try {
+                state.orders = await api('orders');
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        }
+
+        function renderOrders() {
+            const n = state.orders.filter((o) => o.status === 'new').length;
+            $('#admNewCount').textContent = n;
+            $('#admNewCount').classList.toggle('hidden', !n);
+            const f = $('#ordFilter').value;
+            const list = state.orders.filter((o) => !f || o.status === f);
+            $('#ordList').innerHTML = list.length ? list.map((o) => {
+                const digits = (o.phone || '').replace(/\D/g, '');
+                return `
+                <div class="p-4 rounded-lg border ${o.status === 'new' ? 'border-caramel bg-cream-card' : 'border-sand-light bg-ivory-main'}" data-id="${esc(o.id)}">
+                    <div class="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                            <div class="font-semibold text-headline-brown">${esc(o.name)} <span class="ml-1 align-middle text-[10px] px-1.5 py-0.5 rounded border border-sand-light text-chocolate-deep/70" title="Язык сайта при заказе">${esc((o.lang || 'ru').toUpperCase())}</span></div>
+                            <div class="text-xs text-chocolate-deep/70 mt-0.5">
+                                <a href="tel:${esc(o.phone)}" class="text-caramel hover:underline">${esc(o.phone)}</a>
+                                ${digits ? ` · <a href="https://wa.me/${digits}" target="_blank" rel="noopener" class="text-caramel hover:underline">WhatsApp</a>` : ''}
+                                ${o.city ? ' · ' + esc(o.city) : ''}
+                            </div>
+                            <div class="text-[11px] text-chocolate-deep/50 mt-0.5">${new Date(o.createdAt).toLocaleString('ru-RU')}</div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select data-status class="px-2 py-1.5 rounded border border-sand-light bg-ivory-main text-xs">
+                                ${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === o.status ? 'selected' : ''}>${v}</option>`).join('')}
+                            </select>
+                            <button data-del class="adm-icon" title="Удалить заказ">🗑</button>
+                        </div>
+                    </div>
+                    <ul class="mt-3 text-sm text-chocolate-deep space-y-1">
+                        ${o.items.map((i) => `<li class="flex justify-between gap-3"><span>${esc(i.name)} <span class="text-chocolate-deep/50 text-xs">${esc(i.metal)}</span> × ${i.qty}</span><span class="whitespace-nowrap">${formatKZT(i.price * i.qty)}</span></li>`).join('')}
+                    </ul>
+                    ${o.comment ? `<p class="mt-2 text-xs italic text-chocolate-deep/70">«${esc(o.comment)}»</p>` : ''}
+                    <div class="mt-2 pt-2 border-t border-sand-light/50 text-right font-serif text-xl font-bold text-headline-brown">${formatKZT(o.total)}</div>
+                </div>`;
+            }).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Заказов пока нет</p>';
+        }
+
+        $('#ordFilter').addEventListener('change', renderOrders);
+        $('#ordRefresh').addEventListener('click', loadOrders);
+        $('#ordList').addEventListener('change', async (e) => {
+            if (!e.target.matches('[data-status]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            try {
+                await api('order/' + encodeURIComponent(id), { method: 'PATCH', body: { status: e.target.value } });
+                state.orders.find((o) => o.id === id).status = e.target.value;
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        });
+        $('#ordList').addEventListener('click', async (e) => {
+            if (!e.target.closest('[data-del]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            if (!confirm('Удалить этот заказ навсегда?')) return;
+            try {
+                await api('order/' + encodeURIComponent(id), { method: 'DELETE' });
+                state.orders = state.orders.filter((o) => o.id !== id);
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // ---------- Products ----------
+        // Languages where a product still shows Russian text.
+        function missingLangs(p) {
+            return ['kz', 'en'].filter((l) => PFIELDS.some((f) => p[f] && !p[`${f}_${l}`])).map((l) => l.toUpperCase());
+        }
+
+        function renderAdminProducts() {
+            const ps = state.products;
+            $('#prodList').innerHTML = ps.length ? ps.map((p, i) => `
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-sand-light bg-cream-card ${p.hidden ? 'opacity-60' : ''}" data-id="${esc(p.id)}">
+                    <div class="w-14 h-14 shrink-0">${productArt(p)}</div>
+                    <div class="flex-grow min-w-0">
+                        <div class="font-semibold text-headline-brown truncate">${esc(p.name)}${p.hidden ? ' <span class="text-[10px] uppercase text-chocolate-deep/60">(скрыт)</span>' : ''}</div>
+                        ${missingLangs(p).length ? `<div class="text-[10px] text-caramel">Нет перевода: ${missingLangs(p).join(', ')}</div>` : ''}
+                        <div class="text-xs text-chocolate-deep/70">${formatKZT(p.price)}${p.metal ? ' · ' + esc(p.metal) : ''}</div>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button data-p="up" class="adm-icon" title="Выше" ${i === 0 ? 'disabled' : ''}>↑</button>
+                        <button data-p="down" class="adm-icon" title="Ниже" ${i === ps.length - 1 ? 'disabled' : ''}>↓</button>
+                        <button data-p="edit" class="adm-icon" title="Изменить">✎</button>
+                        <button data-p="del" class="adm-icon" title="Удалить">🗑</button>
+                    </div>
+                </div>`).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Товаров нет — добавьте первый</p>';
+        }
+
+        function afterProductsChange() {
+            renderAdminProducts();
+            renderProducts();
+            updateCartUI();
+        }
+
+        $('#prodList').addEventListener('click', async (e) => {
+            const btn = e.target.closest('[data-p]');
+            if (!btn) return;
+            const id = btn.closest('[data-id]').dataset.id;
+            const idx = state.products.findIndex((p) => p.id === id);
+            const act = btn.dataset.p;
+            try {
+                if (act === 'edit') return openProductEditor(state.products[idx]);
+                if (act === 'del') {
+                    if (!confirm(`Удалить «${state.products[idx].name}»?`)) return;
+                    await api('product/' + encodeURIComponent(id), { method: 'DELETE' });
+                    state.products.splice(idx, 1);
+                } else {
+                    const to = act === 'up' ? idx - 1 : idx + 1;
+                    const [p] = state.products.splice(idx, 1);
+                    state.products.splice(to, 0, p);
+                    await api('reorder', { method: 'POST', body: { ids: state.products.map((x) => x.id) } });
+                }
+                afterProductsChange();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // Product editor
+        const pform = $('#prodForm');
+        const PFIELDS = ['name', 'type', 'metal', 'weight', 'desc', 'badge'];
+        const PH = Object.fromEntries(PFIELDS.map((f) => [f, pform.elements[f].placeholder]));
+        const pkey = (field, l) => (l === 'ru' ? field : `${field}_${l}`);
+        let editing = null; // product being edited, or null for a new one
+        let draftImage = null;
+        let prodLang = 'ru';
+        let prodDraft = {}; // translated fields of every language
+
+        function stashProdLang() {
+            PFIELDS.forEach((f) => { prodDraft[pkey(f, prodLang)] = pform.elements[f].value.trim(); });
+        }
+
+        function showProdLang(l) {
+            stashProdLang();
+            prodLang = l;
+            PFIELDS.forEach((f) => {
+                pform.elements[f].value = prodDraft[pkey(f, l)] || '';
+                pform.elements[f].placeholder = l === 'ru' ? PH[f] : prodDraft[f] || PH[f];
+            });
+            pform.elements.name.required = l === 'ru';
+            $$('#prodLangTabs [data-pl]').forEach((b) => b.classList.toggle('active', b.dataset.pl === l));
+        }
+        $('#prodLangTabs').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-pl]');
+            if (b) showProdLang(b.dataset.pl);
+        });
+
+        function openProductEditor(p) {
+            editing = p || null;
+            pform.reset();
+            const d = p || { design: 'tumar', badgeStyle: 'gold', cats: [] };
+            for (const name of ['price', 'badgeStyle', 'edition', 'design', 'engraving']) {
+                if (d[name] !== undefined) pform.elements[name].value = d[name];
+            }
+            prodDraft = {};
+            for (const f of PFIELDS) for (const l of LANGS) prodDraft[pkey(f, l)] = d[pkey(f, l)] || '';
+            prodLang = 'ru';
+            PFIELDS.forEach((f) => { pform.elements[f].value = prodDraft[f]; });
+            showProdLang('ru');
+            $$('input[name="cats"]', pform).forEach((c) => { c.checked = (d.cats || []).includes(c.value); });
+            pform.elements.hidden.checked = !!d.hidden;
+            draftImage = d.image || null;
+            $('#prodFormTitle').textContent = p ? 'Изменить товар' : 'Новый товар';
+            updatePreview();
+            openModal('#prodEditor');
+        }
+
+        function readProductForm() {
+            stashProdLang();
+            const f = pform.elements;
+            return {
+                ...prodDraft,
+                price: Number(f.price.value), badgeStyle: f.badgeStyle.value,
+                edition: f.edition.value, design: f.design.value, engraving: f.engraving.value,
+                cats: $$('input[name="cats"]:checked', pform).map((c) => c.value),
+                hidden: f.hidden.checked, image: draftImage
+            };
+        }
+
+        function updatePreview() {
+            const d = readProductForm();
+            $('#prodPreview').innerHTML = productArt(d);
+            $('#prodPhotoDel').classList.toggle('hidden', !draftImage);
+        }
+
+        pform.addEventListener('input', (e) => { if (['design', 'engraving'].includes(e.target.name)) updatePreview(); });
+        pform.addEventListener('change', (e) => { if (e.target.name === 'design') updatePreview(); });
+        $$('[data-close]', pform).forEach((b) => b.addEventListener('click', () => closeModal('#prodEditor')));
+        $('#prodAdd').addEventListener('click', () => openProductEditor(null));
+        $('#prodPhotoDel').addEventListener('click', () => { draftImage = null; updatePreview(); });
+
+        // Shrink photos in the browser so uploads stay small and fast.
+        function resizeImage(file, max = 1000) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    const k = Math.min(1, max / Math.max(img.width, img.height));
+                    const c = document.createElement('canvas');
+                    c.width = Math.round(img.width * k);
+                    c.height = Math.round(img.height * k);
+                    const ctx = c.getContext('2d');
+                    ctx.fillStyle = '#F7F1E7';
+                    ctx.fillRect(0, 0, c.width, c.height);
+                    ctx.drawImage(img, 0, 0, c.width, c.height);
+                    URL.revokeObjectURL(img.src);
+                    resolve(c.toDataURL('image/jpeg', 0.86));
+                };
+                img.onerror = () => reject(new Error('Не удалось прочитать картинку'));
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        $('#prodPhoto').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            e.target.value = '';
+            if (!file) return;
+            try {
+                showToast('Загружаем фото…');
+                const dataUrl = await resizeImage(file);
+                const r = await api('images', { method: 'POST', body: { dataUrl } });
+                draftImage = r.id;
+                updatePreview();
+                showToast('Фото загружено');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        pform.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = readProductForm();
+            if (!data.name) {
+                showProdLang('ru');
+                pform.elements.name.focus();
+                showToast('Укажите название на русском');
+                return;
+            }
+            $('#prodSave').disabled = true;
+            try {
+                if (editing) {
+                    const r = await api('product/' + encodeURIComponent(editing.id), { method: 'PATCH', body: data });
+                    state.products[state.products.findIndex((p) => p.id === editing.id)] = r.product;
+                } else {
+                    const r = await api('products', { method: 'POST', body: data });
+                    state.products.push(r.product);
+                }
+                closeModal('#prodEditor');
+                afterProductsChange();
+                showToast('Товар сохранён');
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#prodSave').disabled = false;
+            }
+        });
+
+        // ---------- Text editor ----------
+        const LANG_NAMES = { ru: 'Русский', kz: 'Қазақша', en: 'English' };
+        let editLang = 'ru';
+        let textsDirty = false;
+
+        function setTextsDirty(on) {
+            textsDirty = on;
+            $('#txtDirty').classList.toggle('hidden', !on);
+        }
+
+        function renderTextEditor() {
+            const groups = new Map();
+            textEntries.forEach((entry, i) => {
+                if (!groups.has(entry.group)) groups.set(entry.group, []);
+                groups.get(entry.group).push(i);
+            });
+            $$('#txtLang [data-tl]').forEach((b) => b.classList.toggle('active', b.dataset.tl === editLang));
+            $('#txtGroups').innerHTML = [...groups].map(([group, idxs]) => `
+                <details class="rounded-lg border border-sand-light bg-cream-card" data-group>
+                    <summary class="px-4 py-3 cursor-pointer font-semibold text-headline-brown text-sm">${esc(group.dataset.gl || group.dataset.g)} <span class="text-xs font-normal text-chocolate-deep/50">(${idxs.length})</span></summary>
+                    <div class="px-4 pb-4 space-y-3">
+                        ${idxs.map((i) => {
+                            const entry = textEntries[i];
+                            const val = valueFor(entry, editLang);
+                            const def = defaultFor(entry, editLang);
+                            const field = entry.def.length > 70
+                                ? `<textarea rows="3" data-ti="${i}" class="adm-input">${esc(val)}</textarea>`
+                                : `<input data-ti="${i}" value="${esc(val)}" class="adm-input">`;
+                            const haystack = [entry.def, val, defaultFor(entry, 'kz'), defaultFor(entry, 'en')].join(' ').toLowerCase();
+                            return `<div data-row data-search="${esc(haystack)}">
+                                <div class="flex items-center justify-between gap-2"><span class="adm-label">${esc(entry.label)}</span>
+                                <button type="button" data-reset="${i}" class="text-xs text-caramel ${val === def ? 'invisible' : ''}" title="Вернуть исходный текст">↺ исходный</button></div>
+                                ${field}
+                                ${editLang !== 'ru' ? `<div class="text-[11px] text-chocolate-deep/50 mt-1">RU: ${esc(entry.def)}</div>` : ''}
+                            </div>`;
+                        }).join('')}
+                    </div>
+                </details>`).join('');
+            setTextsDirty(false);
+            filterTexts();
+        }
+
+        function filterTexts() {
+            const q = norm($('#txtSearch').value).toLowerCase();
+            $$('#txtGroups [data-group]').forEach((g) => {
+                let any = false;
+                $$('[data-row]', g).forEach((row) => {
+                    const hit = !q || row.dataset.search.includes(q);
+                    row.classList.toggle('hidden', !hit);
+                    any = any || hit;
+                });
+                g.classList.toggle('hidden', !any);
+                if (q) g.open = any;
+            });
+        }
+
+        $('#txtSearch').addEventListener('input', filterTexts);
+        $('#txtLang').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-tl]');
+            if (!b || b.dataset.tl === editLang) return;
+            if (textsDirty && !confirm('Есть несохранённые изменения. Переключить язык без сохранения?')) return;
+            editLang = b.dataset.tl;
+            renderTextEditor();
+        });
+        $('#txtGroups').addEventListener('input', (e) => {
+            if (!e.target.matches('[data-ti]')) return;
+            const entry = textEntries[e.target.dataset.ti];
+            $(`[data-reset="${e.target.dataset.ti}"]`).classList.toggle('invisible', norm(e.target.value) === defaultFor(entry, editLang));
+            setTextsDirty(true);
+        });
+        $('#txtGroups').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-reset]');
+            if (!btn) return;
+            $(`[data-ti="${btn.dataset.reset}"]`).value = defaultFor(textEntries[btn.dataset.reset], editLang);
+            btn.classList.add('invisible');
+            setTextsDirty(true);
+        });
+
+        $('#txtSave').addEventListener('click', async () => {
+            // Start from what is saved for the other languages and replace only
+            // the language being edited.
+            const texts = JSON.parse(JSON.stringify(state.texts));
+            $$('#txtGroups [data-ti]').forEach((field) => {
+                const entry = textEntries[field.dataset.ti];
+                const v = norm(field.value);
+                const o = texts[entry.key]?.d === entry.def ? texts[entry.key] : { d: entry.def };
+                if (o.v !== undefined) { o.ru ??= o.v; delete o.v; }
+                if (v && v !== defaultFor(entry, editLang)) o[editLang] = v;
+                else delete o[editLang];
+                if (Object.keys(o).length > 1) texts[entry.key] = o;
+                else delete texts[entry.key];
+            });
+            $('#txtSave').disabled = true;
+            try {
+                await api('texts', { method: 'POST', body: { texts } });
+                state.texts = texts;
+                applyTexts();
+                renderProducts();
+                updateCartUI();
+                setTextsDirty(false);
+                showToast(`Тексты сохранены (${LANG_NAMES[editLang]})`);
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#txtSave').disabled = false;
+            }
+        });
+
+        // ---------- Database status ----------
+        async function loadStatus() {
+            try {
+                const st = await api('status');
+                $('#dbStatus').innerHTML = `
+                    <div class="font-semibold text-headline-brown mb-1">База данных: подключена ✓</div>
+                    Товаров: ${st.products} · Заказов: ${st.orders} (новых: ${st.newOrders}) · Подписчиков: ${st.subscribers}`;
+            } catch (err) {
+                if (handleAuthError(err)) return;
+                $('#dbStatus').textContent = 'База данных недоступна: ' + err.message;
+            }
+        }
+
+        // ---------- Subscribers ----------
+        async function loadSubs() {
+            try {
+                state.subs = await api('subscribers');
+                renderSubs();
+            } catch (err) { handleAuthError(err); }
+        }
+
+        function renderSubs() {
+            $('#subsList').innerHTML = state.subs.length ? state.subs.map((s) => `
+                <div class="flex items-center justify-between gap-3 px-4 py-2.5 rounded border border-sand-light bg-cream-card" data-id="${esc(s.id)}">
+                    <div class="min-w-0"><div class="text-sm text-headline-brown truncate">${esc(s.email)}</div>
+                    <div class="text-[11px] text-chocolate-deep/50">${new Date(s.createdAt).toLocaleDateString('ru-RU')}</div></div>
+                    <button data-del class="adm-icon" title="Удалить">🗑</button>
+                </div>`).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Подписчиков пока нет</p>';
+        }
+
+        $('#subsList').addEventListener('click', async (e) => {
+            if (!e.target.closest('[data-del]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            if (!confirm('Удалить подписчика?')) return;
+            try {
+                await api('subscriber/' + encodeURIComponent(id), { method: 'DELETE' });
+                state.subs = state.subs.filter((s) => s.id !== id);
+                renderSubs();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        $('#subsCopy').addEventListener('click', async () => {
+            const text = state.subs.map((s) => s.email).join('\n');
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Скопировано: ' + state.subs.length);
+            } catch {
+                prompt('Скопируйте адреса:', text.replace(/\n/g, ', '));
+            }
+        });
+    </script>
+</body>
+</html>

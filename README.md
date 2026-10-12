@@ -13,3 +13,7 @@ Sakosakosako
 
 Всё хранится в базе Vercel Postgres (Neon, подключена к проекту `sako`), в отдельных таблицах `love_*`. Комплименты по умолчанию — в `public/ayaulym-files/content.json`.
 Код: `public/ayaulym.html`, `app/api/love/[...path]/route.js`, `lib/love.js`.
+
+## TUMAR Heritage
+
+Отдельный проект в папке [`Tumar/`](Tumar/README.md) — свой сайт, своя база данных.
