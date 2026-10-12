@@ -7,6 +7,31 @@
     <meta name="description" content="Ювелирный дом TUMAR: медальоны и тұмары из золота 585 и 750 с казахской сакральной символикой. Ручная чеканка, доставка по Казахстану.">
     <!-- Kazakh / English translations (loaded first so the page never flashes Russian) -->
     <script src="/tumar-files/i18n.js"></script>
+    <script>
+        // Ask for the catalog and the admin's edits right away, in parallel
+        // with the rest of the page, and keep the page hidden until they are
+        // applied so visitors never see the built-in texts flash first.
+        window.TUMAR_CONTENT = fetch('/api/tumar/content', { cache: 'no-store' })
+            .then((r) => (r.ok ? r.json() : null))
+            .catch(() => null);
+        document.documentElement.classList.add('tumar-loading');
+        // Never leave the page hidden if something goes wrong.
+        setTimeout(() => document.documentElement.classList.remove('tumar-loading'), 4000);
+    </script>
+    <style>
+        html.tumar-loading body { visibility: hidden; }
+        html.tumar-loading::after {
+            content: 'TUMAR';
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: #F7F1E7; color: #B89A65;
+            font: 600 28px/1 'Cormorant Garamond', Georgia, serif; letter-spacing: .3em;
+            animation: tumar-pulse 1.2s ease-in-out infinite alternate;
+        }
+        @keyframes tumar-pulse { from { opacity: .35; } to { opacity: 1; } }
+        html:not(.tumar-loading) body { animation: tumar-in .25s ease-out; }
+        @keyframes tumar-in { from { opacity: 0; } to { opacity: 1; } }
+    </style>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
@@ -1705,10 +1730,8 @@
 
         // ---------- Boot ----------
         async function loadContent() {
-            try {
-                const res = await fetch(API + 'content', { cache: 'no-store' });
-                if (res.ok) return await res.json();
-            } catch {}
+            const early = await window.TUMAR_CONTENT;
+            if (early) return early;
             try {
                 const res = await fetch('/tumar-files/content.json', { cache: 'no-cache' });
                 if (res.ok) return { ...(await res.json()), texts: {}, db: false };
@@ -1727,6 +1750,7 @@
             renderProducts();
             restoreCart();
             updateCartUI();
+            document.documentElement.classList.remove('tumar-loading');
         }
         updateCartUI();
         boot();
