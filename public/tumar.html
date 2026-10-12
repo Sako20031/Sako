@@ -82,7 +82,7 @@
 <body class="antialiased min-h-screen flex flex-col selection:bg-sand-light selection:text-chocolate-deep">
 
     <!-- Top Announcement Bar -->
-    <aside aria-label="Announcement" class="bg-beige-soft border-b border-sand-light/50 py-2 px-4 text-xs font-medium text-headline-brown text-center tracking-wider flex items-center justify-center gap-3">
+    <aside aria-label="Announcement" data-g="announce" data-gl="Верхняя полоса" class="bg-beige-soft border-b border-sand-light/50 py-2 px-4 text-xs font-medium text-headline-brown text-center tracking-wider flex items-center justify-center gap-3">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-antique-gold"></span>
         <span class="uppercase tracking-widest text-[11px]">Бесплатная доставка ценных отправлений по Казахстану &bullet; Доставка в Алматы и Астану за 24 часа</span>
         <span class="hidden md:inline text-antique-gold">✦</span>
@@ -91,7 +91,7 @@
     </aside>
 
     <!-- Sticky Navigation -->
-    <header class="sticky top-0 z-40 bg-ivory-main/90 backdrop-blur-md border-b border-sand-light/40 transition-all duration-300 shadow-sm" id="mainHeader">
+    <header data-g="header" data-gl="Шапка и меню" class="sticky top-0 z-40 bg-ivory-main/90 backdrop-blur-md border-b border-sand-light/40 transition-all duration-300 shadow-sm" id="mainHeader">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 
             <!-- Mobile Menu Toggle -->
@@ -151,14 +151,14 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
                     </svg>
-                    <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-caramel text-ivory-main text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center transition-transform">0</span>
+                    <span id="cartCountBadge" data-noedit class="absolute -top-1 -right-1 bg-caramel text-ivory-main text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center transition-transform">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobileDrawer" class="fixed inset-0 z-50 bg-chocolate-deep/40 backdrop-blur-sm hidden transition-opacity">
+    <div id="mobileDrawer" data-g="mobile" data-gl="Мобильное меню" class="fixed inset-0 z-50 bg-chocolate-deep/40 backdrop-blur-sm hidden transition-opacity">
         <div class="fixed inset-y-0 left-0 w-3/4 max-w-sm bg-ivory-main border-r border-sand-light p-6 shadow-drawer flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between pb-5 border-b border-sand-light/50">
@@ -186,7 +186,7 @@
 
     <main class="flex-grow">
         <!-- HERO SECTION: Light Luxury Kazakh Steppe & Sunlit Yurt Atmosphere -->
-        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
+        <section data-g="hero" data-gl="Главный экран" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
             <!-- Simulated Golden Steppe Sunset Background with Soft Natural Aesthetics -->
             <div class="absolute inset-0 pointer-events-none select-none">
                 <!-- Warm sky gradient with subtle sun ray glow -->
@@ -296,7 +296,7 @@
         </div>
 
         <!-- SECTION: Sacred Kazakh Symbols & Meanings -->
-        <section id="symbols" class="py-20 bg-beige-soft/40 border-y border-sand-light/40">
+        <section id="symbols" data-g="symbols" data-gl="Символы и их значения" class="py-20 bg-beige-soft/40 border-y border-sand-light/40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="text-center max-w-3xl mx-auto mb-16">
@@ -312,7 +312,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
 
                     <!-- Symbol Card 1: Тұмар -->
-                    <div onclick="showSymbolDetail('tumar')" class="group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
                             <!-- Triangular Tumar icon -->
                             <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
@@ -325,10 +325,15 @@
                         <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Оберег &bull; Защита</p>
                         <p class="text-xs text-chocolate-deep/70 line-clamp-3">Треугольная форма, отражающая связь земли, неба и человека. Охраняет от дурного глаза.</p>
                         <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Первозданный оберег Великой Степи</span>
+                            <span data-sym-title>Тұмар (Священный треугольник)</span>
+                            <span data-sym-desc>Треугольник вершиной вверх символизирует духовное вознесение и защиту трех миров. Носился ханами и батырами для сохранения жизненной энергии «Құт». Внутрь издревле зашивали щепотку родной степной земли или благословение аксакала.</span>
+                        </div>
                     </div>
 
                     <!-- Symbol Card 2: Бөрі -->
-                    <div onclick="showSymbolDetail('bori')" class="group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
                             <!-- Steppe Wolf Head -->
                             <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
@@ -342,10 +347,15 @@
                         <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Дух свободы &bull; Сила</p>
                         <p class="text-xs text-chocolate-deep/70 line-clamp-3">Тотемный предок тюрок. Олицетворение бесстрашия, преданности семье и непокорности духа.</p>
                         <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Тотемический защитник и дух воли</span>
+                            <span data-sym-title>Көк Бөрі (Небесный Волк)</span>
+                            <span data-sym-desc>Волк в мировоззрении кочевников никогда не был символом жестокости. Это символ беззаветной преданности своей стае, абсолютной независимости и умения побеждать превосходящего врага.</span>
+                        </div>
                     </div>
 
                     <!-- Symbol Card 3: Ұмай Ана -->
-                    <div onclick="showSymbolDetail('umai')" class="group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
                             <!-- Umai Ana Goddess Wings/Cradle -->
                             <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
@@ -357,10 +367,15 @@
                         <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Хранительница очага</p>
                         <p class="text-xs text-chocolate-deep/70 line-clamp-3">Покровительница матерей, младенцев и женского счастья. Дарует мир и гармонию дому.</p>
                         <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Покровительница детей и семейного счастья</span>
+                            <span data-sym-title>Ұмай Ана (Великая Мать)</span>
+                            <span data-sym-desc>Древняя богиня плодородия. Медальон с ее знаком оберегает дом от разногласий, дарует легкие роды и наполняет жилище теплом и светом.</span>
+                        </div>
                     </div>
 
                     <!-- Symbol Card 4: Бәйтерек -->
-                    <div onclick="showSymbolDetail('bayterek')" class="group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
                             <!-- World Tree with golden egg -->
                             <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
@@ -372,10 +387,15 @@
                         <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Древо жизни &bull; Рост</p>
                         <p class="text-xs text-chocolate-deep/70 line-clamp-3">Связующая нить миров: подземного, земного и небесного. Символ крепких родовых корней.</p>
                         <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Ось мироздания и связь поколений</span>
+                            <span data-sym-title>Бәйтерек (Мировое Древо)</span>
+                            <span data-sym-desc>Корни дерева уходят в память предков, ствол символизирует настоящее время и силу живущих, а ветви с золотым яйцом птицы Самрук — будущее и процветание детей.</span>
+                        </div>
                     </div>
 
                     <!-- Symbol Card 5: Қос Қанат -->
-                    <div onclick="showSymbolDetail('kanat')" class="group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
+                    <div onclick="showSymbolDetail(this)" class="symbol-card group cursor-pointer bg-cream-card p-6 rounded-lg border border-sand-light/60 hover:border-antique-gold transition-all duration-300 hover:shadow-luxury hover:-translate-y-1 text-center">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-beige-soft flex items-center justify-center text-antique-gold group-hover:scale-110 transition duration-300">
                             <!-- Eagle Wings -->
                             <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none" stroke="currentColor">
@@ -387,6 +407,11 @@
                         <p class="text-xs uppercase tracking-wider text-antique-gold font-semibold mb-2">Крылья Беркута</p>
                         <p class="text-xs text-chocolate-deep/70 line-clamp-3">Символ широты кругозора, величия духа, полета мыслей и покровительства верховного Тенгри.</p>
                         <span class="inline-block mt-3 text-xs text-caramel font-semibold group-hover:underline">Узнать силу &rarr;</span>
+                        <div class="hidden" data-sym-full data-label="Окно «Узнать силу»">
+                            <span data-sym-sub>Символ полета и высоты духа</span>
+                            <span data-sym-title>Қос Қанат (Крылья Беркута)</span>
+                            <span data-sym-desc>Кочевой орел парит выше облаков. Этот талисман развивает интуицию, ясный ум в принятии судьбоносных решений и дарует покровительство неба.</span>
+                        </div>
                     </div>
 
                 </div>
@@ -394,7 +419,7 @@
         </section>
 
         <!-- SECTION: Catalog & Product Showcase -->
-        <section id="collection" class="py-24 bg-ivory-main">
+        <section id="collection" data-g="collection" data-gl="Каталог: заголовок и фильтры" class="py-24 bg-ivory-main">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -416,322 +441,13 @@
                 </div>
 
                 <!-- Products Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsContainer">
-
-                    <!-- PRODUCT 1 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="men 750">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <!-- Badge -->
-                            <span class="absolute top-4 left-4 bg-antique-gold/90 text-ivory-main text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">Бестселлер</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 042 / 200</span>
-
-                            <!-- Custom Vector Medallion: Gold Wolf -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <defs>
-                                        <radialGradient id="goldGrad1" cx="35%" cy="30%" r="70%">
-                                            <stop offset="0%" stop-color="#FDF7E7"/>
-                                            <stop offset="45%" stop-color="#D8B575"/>
-                                            <stop offset="70%" stop-color="#A77B52"/>
-                                            <stop offset="100%" stop-color="#6F4D2E"/>
-                                        </radialGradient>
-                                        <radialGradient id="innerRim1" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" stop-color="#E7CD96"/>
-                                            <stop offset="85%" stop-color="#9A703F"/>
-                                        </radialGradient>
-                                    </defs>
-                                    <!-- Medallion Outer Bezel -->
-                                    <circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
-                                    <!-- Beaded rim -->
-                                    <circle cx="100" cy="100" r="82" fill="none" stroke="#FAF6F0" stroke-width="1.5" stroke-dasharray="3 3"/>
-                                    <circle cx="100" cy="100" r="76" fill="url(#innerRim1)"/>
-                                    <!-- Inner Kazakh Solar Pattern -->
-                                    <circle cx="100" cy="100" r="62" fill="#583A21"/>
-                                    <!-- Intricate Wolf & Solar Rays -->
-                                    <path d="M100 48 L103 60 L115 62 L105 70 L108 82 L100 75 L92 82 L95 70 L85 62 L97 60 Z" fill="#D8B575"/>
-                                    <!-- Wolf Head Stylized Relief -->
-                                    <path d="M78 126 L86 98 L100 84 L114 98 L122 126 L100 138 Z" fill="url(#goldGrad1)" stroke="#FDF7E7" stroke-width="1.2"/>
-                                    <circle cx="92" cy="104" r="2.5" fill="#493021"/>
-                                    <circle cx="108" cy="104" r="2.5" fill="#493021"/>
-                                    <circle cx="100" cy="120" r="2" fill="#8D735E"/>
-                                    <text x="100" y="156" font-family="'Cormorant Garamond', serif" font-size="9" fill="#D8B575" text-anchor="middle" letter-spacing="2">КӨК БӨРІ &bull; 750</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(1)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Мужской оберег</span>
-                                    <span>Желтое золото 750°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Көк Бөрі»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Символ степного воина и несгибаемой воли. Украшен традиционной чеканкой и вставкой из черного оникса.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~18.4 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">485 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(1, 'Медальон «Көк Бөрі»', 485000, 'Желтое золото 750°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRODUCT 2 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="women steppe">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <span class="absolute top-4 left-4 bg-sand-light text-chocolate-deep text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">Новинка</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 018 / 150</span>
-
-                            <!-- Custom Vector Medallion: Umai Ana -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <defs>
-                                        <radialGradient id="roseGoldGrad" cx="35%" cy="30%" r="70%">
-                                            <stop offset="0%" stop-color="#FFF0E6"/>
-                                            <stop offset="50%" stop-color="#D89A7A"/>
-                                            <stop offset="85%" stop-color="#A66848"/>
-                                            <stop offset="100%" stop-color="#6F3F2A"/>
-                                        </radialGradient>
-                                    </defs>
-                                    <!-- Medallion Rim -->
-                                    <circle cx="100" cy="100" r="90" fill="url(#roseGoldGrad)" stroke="#B89A65" stroke-width="1.8"/>
-                                    <!-- Filigree circular ornament -->
-                                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
-                                    <circle cx="100" cy="100" r="74" fill="#EFE3D2" stroke="#B89A65" stroke-width="1"/>
-                                    <!-- Umai Ana sacred wings and lotus -->
-                                    <path d="M100 50 C70 80 50 100 50 120 C50 135 65 145 80 140 C95 135 100 120 100 120 C100 120 105 135 120 140 C135 145 150 135 150 120 C150 100 130 80 100 50 Z" fill="url(#roseGoldGrad)"/>
-                                    <circle cx="100" cy="95" r="7" fill="#FDF7E7" stroke="#B89A65" stroke-width="1.5"/>
-                                    <!-- Turquoise Central Gem -->
-                                    <circle cx="100" cy="95" r="4.5" fill="#3B8B88"/>
-                                    <text x="100" y="165" font-family="'Cormorant Garamond', serif" font-size="9" fill="#765238" text-anchor="middle" letter-spacing="2">ҰМАЙ АНА &bull; 585</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(2)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Женский талисман</span>
-                                    <span>Розовое золото 585°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Ұмай Ана»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Оберег материнства и семейного покоя с натуральной казахстанской бирюзой месторождения Майкаин.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~12.2 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">340 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(2, 'Медальон «Ұмай Ана»', 340000, 'Розовое золото 585°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRODUCT 3 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="men women steppe">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <span class="absolute top-4 left-4 bg-headline-brown text-ivory-main text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">Шедевр</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 007 / 050</span>
-
-                            <!-- Custom Vector Medallion: Classic Triangular Tumar -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <polygon points="100,20 185,165 15,165" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2.5"/>
-                                    <polygon points="100,38 168,155 32,155" fill="#FAF6F0"/>
-                                    <polygon points="100,52 154,146 46,146" fill="#EFE3D2" stroke="#765238" stroke-width="1"/>
-                                    <!-- Sacred Shanyrak center inside Tumar -->
-                                    <circle cx="100" cy="112" r="22" fill="#583A21" stroke="#B89A65" stroke-width="2"/>
-                                    <line x1="85" y1="112" x2="115" y2="112" stroke="#D8B575" stroke-width="2"/>
-                                    <line x1="100" y1="97" x2="100" y2="127" stroke="#D8B575" stroke-width="2"/>
-                                    <circle cx="100" cy="112" r="6" fill="#B89A65"/>
-                                    <text x="100" y="182" font-family="'Cormorant Garamond', serif" font-size="9" fill="#765238" text-anchor="middle" letter-spacing="2">ТҰМАР БАБА &bull; 750</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(3)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Унисекс оберег</span>
-                                    <span>Белое и желтое золото 750°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Алтын Тұмар»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Классическая форма кочевого тумара с открывающимся отсеком для родового свитка или благословения.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~21.5 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">590 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(3, 'Медальон «Алтын Тұмар»', 590000, 'Белое и желтое золото 750°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRODUCT 4 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="men 750">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <span class="absolute top-4 left-4 bg-antique-gold/90 text-ivory-main text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">Эксклюзив</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 031 / 100</span>
-
-                            <!-- Custom Vector Medallion: Baiterek Tree -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
-                                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
-                                    <circle cx="100" cy="100" r="76" fill="#493021"/>
-                                    <!-- Baiterek Branch Motif -->
-                                    <path d="M100 150 L100 80 M80 120 Q100 100 100 100 M120 120 Q100 100 100 100" stroke="#D8B575" stroke-width="3" stroke-linecap="round"/>
-                                    <!-- Golden Egg of Samruk -->
-                                    <circle cx="100" cy="65" r="16" fill="url(#goldGrad1)" stroke="#FFF0E6" stroke-width="1.5"/>
-                                    <circle cx="100" cy="65" r="5" fill="#FAF6F0"/>
-                                    <text x="100" y="172" font-family="'Cormorant Garamond', serif" font-size="9" fill="#D8B575" text-anchor="middle" letter-spacing="2">БӘЙТЕРЕК МҰРАСЫ</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(4)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Мужской талисман</span>
-                                    <span>Желтое золото 750°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Бәйтерек»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Символ процветания рода и нерушимости семейного древа с золотым яйцом птицы Самрук.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~16.8 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">445 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(4, 'Медальон «Бәйтерек»', 445000, 'Желтое золото 750°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRODUCT 5 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="women">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <span class="absolute top-4 left-4 bg-beige-soft text-headline-brown text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded border border-sand-light">Классика</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 089 / 300</span>
-
-                            <!-- Custom Vector Medallion: Qos Qanat Eagle -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
-                                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
-                                    <circle cx="100" cy="100" r="74" fill="#EFE3D2"/>
-                                    <!-- Steppe Eagle Wings -->
-                                    <path d="M40 90 Q 75 70 100 115 Q 125 70 160 90 Q 130 135 100 148 Q 70 135 40 90 Z" fill="#765238"/>
-                                    <path d="M55 96 Q 78 80 100 118 Q 122 80 145 96 Q 122 130 100 140 Q 78 130 55 96 Z" fill="url(#goldGrad1)"/>
-                                    <circle cx="100" cy="80" r="3" fill="#B89A65"/>
-                                    <text x="100" y="168" font-family="'Cormorant Garamond', serif" font-size="9" fill="#765238" text-anchor="middle" letter-spacing="2">ҚОС ҚАНАТ &bull; 585</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(5)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Женский оберег</span>
-                                    <span>Желтое золото 585°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Қос Қанат»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Крылья степного сокола, несущие вдохновение, чистоту помыслов и защиту от зависти.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~11.0 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">295 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(5, 'Медальон «Қос Қанат»', 295000, 'Желтое золото 585°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRODUCT 6 -->
-                    <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-category="men steppe 750">
-                        <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                            <span class="absolute top-4 left-4 bg-antique-gold/90 text-ivory-main text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">Премиум</span>
-                            <span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">№ 002 / 025</span>
-
-                            <!-- Custom Vector Medallion: Golden Horns Argalis -->
-                            <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">
-                                <svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">
-                                    <circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
-                                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
-                                    <circle cx="100" cy="100" r="76" fill="#765238"/>
-                                    <!-- Double spiral horns (Qoshqar Muyiz) -->
-                                    <path d="M100 80 C80 50 40 70 50 100 C60 125 90 120 100 135 C110 120 140 125 150 100 C160 70 120 50 100 80 Z" fill="url(#goldGrad1)" stroke="#FAF6F0" stroke-width="1.2"/>
-                                    <circle cx="100" cy="105" r="5" fill="#493021"/>
-                                    <text x="100" y="165" font-family="'Cormorant Garamond', serif" font-size="9" fill="#FAF6F0" text-anchor="middle" letter-spacing="2">АРҚАР МҰЙІЗ &bull; 750</text>
-                                </svg>
-                            </div>
-
-                            <button onclick="quickView(6)" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Быстрый просмотр</button>
-                        </div>
-
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between text-xs text-antique-gold font-medium mb-1">
-                                    <span>Мужской оберег</span>
-                                    <span>Желтое золото 750°</span>
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">Медальон «Арқар»</h3>
-                                <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">
-                                    Древнейший знак плодородия, изобилия и незыблемой жизненной энергии казахского рода.
-                                </p>
-                            </div>
-                            <div>
-                                <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                                    <span class="text-xs text-chocolate-deep/60">Вес: ~24.0 г</span>
-                                    <span class="font-serif text-2xl font-bold text-headline-brown">620 000 ₸</span>
-                                </div>
-                                <button onclick="addToCart(6, 'Медальон «Арқар»', 620000, 'Желтое золото 750°')" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">
-                                    В корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsContainer"></div>
+                <p id="productsEmpty" class="hidden text-center text-sm text-chocolate-deep/60 py-16">В этой категории пока нет изделий</p>
             </div>
         </section>
 
         <!-- SECTION: Interactive Medallion Finder Quiz -->
-        <section id="finder" class="py-20 bg-beige-soft border-y border-sand-light/50">
+        <section id="finder" data-g="quiz" data-gl="Подбор тұмара (квиз)" class="py-20 bg-beige-soft border-y border-sand-light/50">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="bg-ivory-main rounded-2xl p-8 sm:p-12 border border-sand-light/80 shadow-luxury">
@@ -804,6 +520,14 @@
                             </div>
                         </div>
 
+                        <!-- Quiz result texts (editable in the admin panel) -->
+                        <div class="hidden" id="quizTexts">
+                            <div data-quiz="power"><span data-q-title>Медальон «Көк Бөрі»</span><span data-q-desc>Вам покровительствует дух степного волка. Он придаст несокрушимую уверенность в делах и защитит ваш статус.</span></div>
+                            <div data-quiz="family"><span data-q-title>Медальон «Ұмай Ана»</span><span data-q-desc>Ваш выбор говорит о глубокой заботе о близких. Этот священный талисман сохранит мир, любовь и здоровье в вашем доме.</span></div>
+                            <div data-quiz="wisdom"><span data-q-title>Медальон «Бәйтерек»</span><span data-q-desc>Вам созвучна мощь родового древа. Этот Тұмар укрепит вашу связь с предками и принесет изобилие вашему шаңыраку.</span></div>
+                            <div data-quiz="freedom"><span data-q-title>Медальон «Қос Қанат»</span><span data-q-desc>Ваш путь — путь орлиного полета. Медальон поможет бесстрашно достигать высот и защитит от дурного глаза.</span></div>
+                        </div>
+
                         <!-- Quiz Result -->
                         <div id="quizResult" class="hidden text-center">
                             <div class="inline-block p-4 rounded-full bg-beige-soft border border-antique-gold mb-4">
@@ -812,8 +536,8 @@
                                 </svg>
                             </div>
                             <span class="text-xs uppercase tracking-widest text-antique-gold font-bold block mb-1">Ваш персональный талисман</span>
-                            <h3 id="resultTitle" class="font-serif text-3xl font-bold text-headline-brown mb-2">Медальон «Көк Бөрі»</h3>
-                            <p id="resultDesc" class="text-sm text-chocolate-deep/80 max-w-lg mx-auto mb-6">
+                            <h3 id="resultTitle" data-noedit class="font-serif text-3xl font-bold text-headline-brown mb-2">Медальон «Көк Бөрі»</h3>
+                            <p id="resultDesc" data-noedit class="text-sm text-chocolate-deep/80 max-w-lg mx-auto mb-6">
                                 Вам покровительствует дух степного волка. Он придаст несокрушимую уверенность в делах и защитит ваш статус.
                             </p>
                             <div class="flex items-center justify-center gap-4">
@@ -828,7 +552,7 @@
         </section>
 
         <!-- SECTION: Craftsmanship & Atelier -->
-        <section id="craftsmanship" class="py-24 bg-ivory-main">
+        <section id="craftsmanship" data-g="craft" data-gl="Мастерство" class="py-24 bg-ivory-main">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -905,7 +629,7 @@
         </section>
 
         <!-- SECTION: Testimonials & Heritage Stories -->
-        <section id="stories" class="py-20 bg-beige-soft/50 border-t border-sand-light/40">
+        <section id="stories" data-g="reviews" data-gl="Отзывы" class="py-20 bg-beige-soft/50 border-t border-sand-light/40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="text-center max-w-2xl mx-auto mb-16">
@@ -971,7 +695,7 @@
         </section>
 
         <!-- Newsletter / Ancestral Club -->
-        <section class="py-16 bg-cream-card border-b border-sand-light/50">
+        <section data-g="club" data-gl="Клуб / подписка" class="py-16 bg-cream-card border-b border-sand-light/50">
             <div class="max-w-4xl mx-auto px-4 text-center">
                 <span class="text-xs uppercase tracking-[0.25em] text-antique-gold font-semibold">Закрытый клуб ценителей</span>
                 <h3 class="font-serif text-3xl font-medium text-headline-brown mt-2 mb-3">
@@ -981,7 +705,7 @@
                     Получайте уведомления о лимитированных тиражах с сакральной символикой и приглашения на закрытые показы в Алматы и Астане.
                 </p>
                 <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
-                    <input type="email" required placeholder="Введите ваш e-mail" class="w-full px-4 py-3 rounded-md bg-ivory-main border border-sand-light/80 text-xs text-chocolate-deep focus:outline-none focus:border-caramel">
+                    <input type="email" name="email" required maxlength="200" placeholder="Введите ваш e-mail" class="w-full px-4 py-3 rounded-md bg-ivory-main border border-sand-light/80 text-xs text-chocolate-deep focus:outline-none focus:border-caramel">
                     <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded-md text-xs font-semibold uppercase tracking-wider transition whitespace-nowrap">
                         Вступить в клуб
                     </button>
@@ -992,7 +716,7 @@
     </main>
 
     <!-- FOOTER: Warm Ivory and Kazakh Ornament Borders -->
-    <footer class="bg-beige-soft border-t border-sand-light/60 pt-16 pb-12 text-chocolate-deep">
+    <footer data-g="footer" data-gl="Подвал сайта" class="bg-beige-soft border-t border-sand-light/60 pt-16 pb-12 text-chocolate-deep">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
@@ -1059,6 +783,7 @@
                 <div class="flex space-x-6 mt-4 sm:mt-0">
                     <a href="#" class="hover:text-caramel transition">Политика конфиденциальности</a>
                     <a href="#" class="hover:text-caramel transition">Сертификаты подлинности</a>
+                    <a href="#admin" title="Кабинет администратора" aria-label="Кабинет администратора" class="hover:text-caramel transition">🔒</a>
                 </div>
             </div>
 
@@ -1067,7 +792,7 @@
 
     <!-- SLIDE-OVER SHOPPING CART DRAWER -->
     <div id="cartDrawerBackdrop" onclick="closeCartDrawer()" class="fixed inset-0 z-50 bg-chocolate-deep/40 backdrop-blur-sm hidden transition-opacity"></div>
-    <aside id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] bg-ivory-main border-l border-sand-light shadow-drawer transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+    <aside id="cartDrawer" data-g="cart" data-gl="Корзина" class="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] bg-ivory-main border-l border-sand-light shadow-drawer transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
 
         <!-- Cart Header -->
         <div class="p-6 border-b border-sand-light/50 flex items-center justify-between bg-beige-soft/40">
@@ -1089,7 +814,7 @@
         <div class="p-6 border-t border-sand-light/50 bg-beige-soft/30 space-y-4">
             <div class="flex items-center justify-between text-sm">
                 <span class="text-chocolate-deep/70">Итоговая стоимость:</span>
-                <span id="cartTotalPrice" class="font-serif text-2xl font-bold text-headline-brown">0 ₸</span>
+                <span id="cartTotalPrice" data-noedit class="font-serif text-2xl font-bold text-headline-brown">0 ₸</span>
             </div>
             <p class="text-[11px] text-chocolate-deep/60 text-center">Включает фирменный кожаный футляр и сертификат с родовым благословением</p>
             <button onclick="proceedToCheckout()" class="w-full py-4 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition shadow-luxury">
@@ -1123,7 +848,7 @@
     </div>
 
     <!-- CHECKOUT ORDER MODAL -->
-    <div id="checkoutModal" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div id="checkoutModal" data-g="checkout" data-gl="Оформление заказа" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-ivory-main rounded-2xl max-w-md w-full p-6 sm:p-8 border border-sand-light shadow-2xl relative">
             <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-headline-brown hover:text-caramel">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -1133,23 +858,27 @@
             <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-headline-brown mb-1">Ваше имя</label>
-                    <input type="text" required placeholder="Алихан" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                    <input type="text" name="name" required maxlength="100" placeholder="Алихан" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-headline-brown mb-1">Номер телефона</label>
-                    <input type="tel" required placeholder="+7 (701) 000-00-00" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                    <input type="tel" name="phone" required maxlength="40" placeholder="+7 (701) 000-00-00" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-headline-brown mb-1">Город доставки</label>
-                    <select class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
+                    <select name="city" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none">
                         <option>Алматы (курьерская доставка за 24ч)</option>
                         <option>Астана (курьерская доставка за 24ч)</option>
                         <option>Шымкент (доставка СДЭК/Avis)</option>
                         <option>Другой город Казахстана</option>
                     </select>
                 </div>
+                <div>
+                    <label class="block text-xs font-semibold text-headline-brown mb-1">Комментарий (необязательно)</label>
+                    <textarea name="comment" rows="2" maxlength="500" placeholder="Гравировка, удобное время звонка…" class="w-full px-3 py-2.5 rounded bg-cream-card border border-sand-light text-xs text-chocolate-deep focus:border-caramel focus:outline-none"></textarea>
+                </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-3.5 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">
+                    <button type="submit" id="checkoutSubmit" class="w-full py-3.5 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">
                         Подтвердить через Kaspi / Карту
                     </button>
                 </div>
@@ -1160,355 +889,1104 @@
     <!-- SUCCESS NOTIFICATION TOAST -->
     <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-cream-card border border-antique-gold px-4 py-3 rounded-lg shadow-xl text-xs font-semibold text-headline-brown transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-caramel"></span>
-        <span id="toastMessage">Медальон добавлен в корзину</span>
+        <span id="toastMessage" data-noedit>Медальон добавлен в корзину</span>
     </div>
 
+    <!-- Shared gradients for the built-in medallion artwork -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <radialGradient id="goldGrad1" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FDF7E7"/>
+                <stop offset="45%" stop-color="#D8B575"/>
+                <stop offset="70%" stop-color="#A77B52"/>
+                <stop offset="100%" stop-color="#6F4D2E"/>
+            </radialGradient>
+            <radialGradient id="innerRim1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#E7CD96"/>
+                <stop offset="85%" stop-color="#9A703F"/>
+            </radialGradient>
+            <radialGradient id="roseGoldGrad" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FFF0E6"/>
+                <stop offset="50%" stop-color="#D89A7A"/>
+                <stop offset="85%" stop-color="#A66848"/>
+                <stop offset="100%" stop-color="#6F3F2A"/>
+            </radialGradient>
+        </defs>
+    </svg>
+
+    <!-- Button labels and pop-up messages (editable in the admin panel) -->
+    <div class="hidden" data-g="messages" data-gl="Кнопки товаров и сообщения">
+        <span data-m="quick">Быстрый просмотр</span>
+        <span data-m="add">В корзину</span>
+        <span data-m="weight">Вес:</span>
+        <span data-m="close">Закрыть</span>
+        <span data-m="added">добавлен в корзину</span>
+        <span data-m="cart_empty_title">Ваша корзина пуста</span>
+        <span data-m="cart_empty_text">Выберите свой сакральный Тұмар из коллекции</span>
+        <span data-m="need_items">Пожалуйста, добавьте медальон в корзину</span>
+        <span data-m="sending">Отправляем…</span>
+        <span data-m="order_ok">Рахмет! Ваш заказ принят. Консьерж уже набирает вас.</span>
+        <span data-m="order_fail">Не удалось отправить заказ. Позвоните нам: +7 (701) 000-00-00</span>
+        <span data-m="sub_fail">Не удалось подписаться, попробуйте позже</span>
+        <span data-m="search">Поиск: введите "Тұмар", "Бөрі", "750"</span>
+        <span data-m="custom">Служба индивидуальных заказов: +7 (701) 000-00-00</span>
+        <span data-m="symbol_ok">Понятно</span>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="admin" class="fixed inset-0 z-[60] bg-ivory-main hidden overflow-y-auto" role="dialog" aria-label="Кабинет администратора">
+        <div class="sticky top-0 z-10 bg-beige-soft/95 backdrop-blur border-b border-sand-light">
+            <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <div class="font-serif text-xl font-bold tracking-[0.2em] text-headline-brown">TUMAR</div>
+                    <div class="text-[10px] uppercase tracking-widest text-antique-gold -mt-1">Кабинет администратора</div>
+                </div>
+                <button id="admClose" class="px-4 py-2 rounded border border-sand-light bg-ivory-main text-xs font-semibold uppercase tracking-wider text-headline-brown hover:border-caramel">На сайт ✕</button>
+            </div>
+            <nav id="admTabs" class="max-w-5xl mx-auto px-4 flex gap-1 overflow-x-auto hidden">
+                <button data-tab="orders" class="adm-tab">Заказы <span id="admNewCount" class="hidden ml-1 px-1.5 rounded-full bg-caramel text-ivory-main text-[10px]"></span></button>
+                <button data-tab="products" class="adm-tab">Товары</button>
+                <button data-tab="texts" class="adm-tab">Тексты</button>
+                <button data-tab="subs" class="adm-tab">Подписчики</button>
+                <button data-tab="settings" class="adm-tab">Настройки</button>
+            </nav>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 py-6">
+            <!-- Login -->
+            <form id="admLogin" class="hidden max-w-xs mx-auto mt-16 text-center">
+                <div class="text-4xl mb-3">🔒</div>
+                <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Вход для администратора</h2>
+                <input id="admPin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN-код" class="w-full px-4 py-3 rounded border border-sand-light bg-cream-card text-center text-lg tracking-[0.4em] focus:outline-none focus:border-caramel">
+                <button class="w-full mt-3 py-3 rounded bg-caramel hover:bg-caramel-hover text-ivory-main text-xs font-semibold uppercase tracking-wider">Войти</button>
+                <p id="admLoginErr" class="text-xs text-red-700 mt-3"></p>
+            </form>
+
+            <div id="admPanel" class="hidden">
+                <!-- Orders -->
+                <section data-pane="orders">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Заказы</h2>
+                        <div class="flex items-center gap-2">
+                            <select id="ordFilter" class="px-3 py-2 rounded border border-sand-light bg-cream-card text-xs">
+                                <option value="">Все заказы</option>
+                                <option value="new">Новые</option>
+                                <option value="work">В работе</option>
+                                <option value="done">Выполненные</option>
+                                <option value="cancel">Отменённые</option>
+                            </select>
+                            <button id="ordRefresh" class="adm-btn-light">Обновить</button>
+                        </div>
+                    </div>
+                    <div id="ordList" class="space-y-3"></div>
+                </section>
+
+                <!-- Products -->
+                <section data-pane="products" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Товары</h2>
+                        <button id="prodAdd" class="adm-btn">+ Добавить товар</button>
+                    </div>
+                    <div id="prodList" class="space-y-3"></div>
+                </section>
+
+                <!-- Texts -->
+                <section data-pane="texts" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Тексты сайта</h2>
+                        <input id="txtSearch" type="search" placeholder="Найти текст…" class="px-3 py-2 rounded border border-sand-light bg-cream-card text-xs w-full sm:w-64">
+                    </div>
+                    <p class="text-xs text-chocolate-deep/60 mb-4">Измените любой текст и нажмите «Сохранить». Кнопка ↺ возвращает исходный текст.</p>
+                    <div id="txtGroups" class="space-y-3 pb-24"></div>
+                    <div class="fixed bottom-0 inset-x-0 bg-beige-soft/95 border-t border-sand-light py-3">
+                        <div class="max-w-5xl mx-auto px-4 flex items-center justify-end gap-3">
+                            <span id="txtDirty" class="text-xs text-caramel hidden">Есть несохранённые изменения</span>
+                            <button id="txtSave" class="adm-btn">Сохранить тексты</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Subscribers -->
+                <section data-pane="subs" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Подписчики клуба</h2>
+                        <button id="subsCopy" class="adm-btn-light">Скопировать все e-mail</button>
+                    </div>
+                    <div id="subsList" class="space-y-2"></div>
+                </section>
+
+                <!-- Settings -->
+                <section data-pane="settings" class="hidden max-w-sm">
+                    <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Настройки</h2>
+                    <form id="pinForm" class="p-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
+                        <label class="block text-xs font-semibold text-headline-brown">Новый PIN-код (4–12 цифр)</label>
+                        <input id="pinNew" type="password" inputmode="numeric" class="w-full px-3 py-2.5 rounded border border-sand-light bg-ivory-main text-sm focus:outline-none focus:border-caramel">
+                        <button class="adm-btn w-full">Сменить PIN</button>
+                    </form>
+                    <button id="admLogout" class="adm-btn-light w-full mt-4">Выйти из кабинета</button>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT EDITOR -->
+    <div id="prodEditor" class="fixed inset-0 z-[70] bg-chocolate-deep/50 backdrop-blur-sm hidden items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <form id="prodForm" class="bg-ivory-main rounded-2xl max-w-2xl w-full p-5 sm:p-7 border border-sand-light shadow-2xl relative my-4">
+            <button type="button" data-close class="absolute top-4 right-4 text-headline-brown hover:text-caramel text-xl">✕</button>
+            <h3 id="prodFormTitle" class="font-serif text-2xl font-bold text-headline-brown mb-4">Товар</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-5">
+                <div>
+                    <div id="prodPreview" class="w-44 h-44 mx-auto rounded-lg bg-beige-soft border border-sand-light flex items-center justify-center p-2"></div>
+                    <label class="block text-[11px] font-semibold text-headline-brown mt-3 mb-1">Рисунок</label>
+                    <select name="design" class="adm-input">
+                        <option value="wolf">Волк (Көк Бөрі)</option>
+                        <option value="umai">Ұмай Ана</option>
+                        <option value="tumar">Треугольный тұмар</option>
+                        <option value="baiterek">Бәйтерек</option>
+                        <option value="eagle">Крылья (Қос Қанат)</option>
+                        <option value="arkar">Рога (Арқар)</option>
+                    </select>
+                    <label class="block text-[11px] font-semibold text-headline-brown mt-2 mb-1">Надпись на рисунке</label>
+                    <input name="engraving" maxlength="60" class="adm-input">
+                    <label class="adm-btn-light w-full mt-3 cursor-pointer text-center block">📷 Загрузить фото<input id="prodPhoto" type="file" accept="image/*" class="hidden"></label>
+                    <button type="button" id="prodPhotoDel" class="w-full mt-2 text-[11px] text-red-700 hidden">Убрать фото (показать рисунок)</button>
+                </div>
+                <div class="space-y-3">
+                    <div><label class="adm-label">Название *</label><input name="name" required maxlength="200" class="adm-input"></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Цена, ₸ *</label><input name="price" type="number" min="0" step="1000" required class="adm-input"></div>
+                        <div><label class="adm-label">Вес</label><input name="weight" maxlength="50" placeholder="18.4 г" class="adm-input"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Тип</label><input name="type" maxlength="100" placeholder="Мужской оберег" class="adm-input"></div>
+                        <div><label class="adm-label">Металл</label><input name="metal" maxlength="100" placeholder="Желтое золото 750°" class="adm-input"></div>
+                    </div>
+                    <div><label class="adm-label">Описание</label><textarea name="desc" rows="3" maxlength="2000" class="adm-input"></textarea></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="adm-label">Значок</label><input name="badge" maxlength="50" placeholder="Новинка" class="adm-input"></div>
+                        <div><label class="adm-label">Цвет значка</label>
+                            <select name="badgeStyle" class="adm-input">
+                                <option value="gold">Золотой</option>
+                                <option value="sand">Песочный</option>
+                                <option value="brown">Коричневый</option>
+                                <option value="light">Светлый</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div><label class="adm-label">Номер тиража</label><input name="edition" maxlength="50" placeholder="№ 001 / 100" class="adm-input"></div>
+                    <div>
+                        <span class="adm-label">Показывать в фильтрах</span>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                            <label><input type="checkbox" name="cats" value="men"> Мужские</label>
+                            <label><input type="checkbox" name="cats" value="women"> Женские</label>
+                            <label><input type="checkbox" name="cats" value="750"> Золото 750</label>
+                            <label><input type="checkbox" name="cats" value="steppe"> Лимитированная</label>
+                        </div>
+                    </div>
+                    <label class="flex items-center gap-2 text-xs"><input type="checkbox" name="hidden"> Скрыть с сайта (товар останется в кабинете)</label>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" data-close class="adm-btn-light">Отмена</button>
+                <button id="prodSave" class="adm-btn">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+    <style>
+        .adm-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #765238; border-bottom: 2px solid transparent; white-space: nowrap; }
+        .adm-tab.active { color: #A77B52; border-color: #A77B52; }
+        .adm-btn { padding: 10px 18px; border-radius: 4px; background: #A77B52; color: #F7F1E7; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+        .adm-btn:hover { background: #936942; }
+        .adm-btn:disabled { opacity: .6; }
+        .adm-btn-light { padding: 9px 16px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 12px; font-weight: 600; }
+        .adm-btn-light:hover { border-color: #A77B52; }
+        .adm-label { display: block; font-size: 11px; font-weight: 600; color: #765238; margin-bottom: 4px; }
+        .adm-input { width: 100%; padding: 8px 10px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; font-size: 13px; color: #493021; }
+        .adm-input:focus { outline: none; border-color: #A77B52; }
+        .adm-icon { width: 32px; height: 32px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 14px; }
+        .adm-icon:hover:not(:disabled) { border-color: #A77B52; }
+        .adm-icon:disabled { opacity: .35; }
+        #admin { background: #F7F1E7; }
+        #admin > div:first-child, #admin [data-pane="texts"] > .fixed { background: rgba(239, 227, 210, .97); }
+        #prodForm { background: #F7F1E7; }
+    </style>
+
     <script>
-        // Database of products
-        const productsData = [
-            {
-                id: 1,
-                name: 'Медальон «Көк Бөрі»',
-                price: 485000,
-                category: 'men',
-                gold: 'Желтое золото 750°',
-                weight: '18.4 г',
-                desc: 'Символ степного воина и несгибаемой воли. Украшен традиционной чеканкой и вставкой из черного оникса.'
-            },
-            {
-                id: 2,
-                name: 'Медальон «Ұмай Ана»',
-                price: 340000,
-                category: 'women',
-                gold: 'Розовое золото 585°',
-                weight: '12.2 г',
-                desc: 'Оберег материнства и семейного покоя с натуральной казахстанской бирюзой месторождения Майкаин.'
-            },
-            {
-                id: 3,
-                name: 'Медальон «Алтын Тұмар»',
-                price: 590000,
-                category: 'steppe',
-                gold: 'Белое и желтое золото 750°',
-                weight: '21.5 г',
-                desc: 'Классическая треугольная форма кочевого тумара с открывающимся отсеком для священного свитка.'
-            },
-            {
-                id: 4,
-                name: 'Медальон «Бәйтерек»',
-                price: 445000,
-                category: 'men',
-                gold: 'Желтое золото 750°',
-                weight: '16.8 г',
-                desc: 'Символ процветания рода и нерушимости семейного древа с золотым яйцом птицы Самрук.'
-            },
-            {
-                id: 5,
-                name: 'Медальон «Қос Қанат»',
-                price: 295000,
-                category: 'women',
-                gold: 'Желтое золото 585°',
-                weight: '11.0 г',
-                desc: 'Крылья степного сокола, несущие вдохновение, чистоту помыслов и защиту от зависти.'
-            },
-            {
-                id: 6,
-                name: 'Медальон «Арқар»',
-                price: 620000,
-                category: 'men',
-                gold: 'Желтое золото 750°',
-                weight: '24.0 г',
-                desc: 'Древнейший знак плодородия, изобилия и незыблемой жизненной энергии казахского рода.'
-            }
-        ];
-
-        // Symbols detailed knowledge base
-        const symbolsData = {
-            tumar: {
-                title: 'Тұмар (Священный треугольник)',
-                subtitle: 'Первозданный оберег Великой Степи',
-                desc: 'Треугольник вершиной вверх символизирует духовное вознесение и защиту трех миров. Носился ханами и батырами для сохранения жизненной энергии «Құт». Внутрь издревле зашивали щепотку родной степной земли или благословение аксакала.'
-            },
-            bori: {
-                title: 'Көк Бөрі (Небесный Волк)',
-                subtitle: 'Тотемический защитник и дух воли',
-                desc: 'Волк в мировоззрении кочевников никогда не был символом жестокости. Это символ беззаветной преданности своей стае, абсолютной независимости и умения побеждать превосходящего врага.'
-            },
-            umai: {
-                title: 'Ұмай Ана (Великая Мать)',
-                subtitle: 'Покровительница детей и семейного счастья',
-                desc: 'Древняя богиня плодородия. Медальон с ее знаком оберегает дом от разногласий, дарует легкие роды и наполняет жилище теплом и светом.'
-            },
-            bayterek: {
-                title: 'Бәйтерек (Мировое Древо)',
-                subtitle: 'Ось мироздания и связь поколений',
-                desc: 'Корни дерева уходят в память предков, ствол символизирует настоящее время и силу живущих, а ветви с золотым яйцом птицы Самрук — будущее и процветание детей.'
-            },
-            kanat: {
-                title: 'Қос Қанат (Крылья Беркута)',
-                subtitle: 'Символ полета и высоты духа',
-                desc: 'Кочевой орел парит выше облаков. Этот талисман развивает интуицию, ясный ум в принятии судьбоносных решений и дарует покровительство неба.'
-            }
+        const API = '/api/tumar/';
+        const BADGE = {
+            gold: 'bg-antique-gold/90 text-ivory-main',
+            sand: 'bg-sand-light text-chocolate-deep',
+            brown: 'bg-headline-brown text-ivory-main',
+            light: 'bg-beige-soft text-headline-brown border border-sand-light'
         };
+        const STATUS = { new: 'Новый', work: 'В работе', done: 'Выполнен', cancel: 'Отменён' };
 
-        // Cart State
+        const state = { products: [], texts: {}, db: false, admin: false, filter: 'all', orders: [], subs: [] };
         let cart = [];
 
-        // Format Currency Helper
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+        const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const norm = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+        const msg = (key) => norm($(`[data-m="${key}"]`)?.textContent);
+
         function formatKZT(amount) {
             return new Intl.NumberFormat('ru-RU').format(amount) + ' ₸';
         }
 
-        // Show Toast Function
+        async function api(path, { method = 'GET', body } = {}) {
+            const init = { method, headers: {} };
+            if (body !== undefined) {
+                init.headers['content-type'] = 'application/json';
+                init.body = JSON.stringify(body);
+            }
+            const res = await fetch(API + path, init);
+            let data = {};
+            try { data = await res.json(); } catch {}
+            if (!res.ok) {
+                const err = new Error(data.error || 'Ошибка ' + res.status);
+                err.status = res.status;
+                throw err;
+            }
+            return data;
+        }
+
+        // ---------- Toast ----------
         let toastTimer = null;
-        function showToast(msg) {
-            const toast = document.getElementById('toastNotification');
-            const toastMsg = document.getElementById('toastMessage');
-            toastMsg.innerText = msg;
+        function showToast(text) {
+            const toast = $('#toastNotification');
+            $('#toastMessage').innerText = text;
             toast.classList.remove('translate-y-20', 'opacity-0');
             clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            toastTimer = setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
         }
 
-        // Add to Cart Logic
-        function addToCart(id, name, price, gold) {
-            const existing = cart.find(item => item.id === id);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ id, name, price, gold, quantity: 1 });
+        // ---------- Built-in medallion artwork ----------
+        function designSvg(design, engraving) {
+            const t = esc(engraving || '');
+            const txt = (y, fill) => `<text x="100" y="${y}" font-family="'Cormorant Garamond', serif" font-size="9" fill="${fill}" text-anchor="middle" letter-spacing="2">${t}</text>`;
+            const art = {
+                wolf: `<circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="none" stroke="#FAF6F0" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="100" cy="100" r="76" fill="url(#innerRim1)"/>
+                    <circle cx="100" cy="100" r="62" fill="#583A21"/>
+                    <path d="M100 48 L103 60 L115 62 L105 70 L108 82 L100 75 L92 82 L95 70 L85 62 L97 60 Z" fill="#D8B575"/>
+                    <path d="M78 126 L86 98 L100 84 L114 98 L122 126 L100 138 Z" fill="url(#goldGrad1)" stroke="#FDF7E7" stroke-width="1.2"/>
+                    <circle cx="92" cy="104" r="2.5" fill="#493021"/><circle cx="108" cy="104" r="2.5" fill="#493021"/>
+                    <circle cx="100" cy="120" r="2" fill="#8D735E"/>${txt(156, '#D8B575')}`,
+                umai: `<circle cx="100" cy="100" r="90" fill="url(#roseGoldGrad)" stroke="#B89A65" stroke-width="1.8"/>
+                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="74" fill="#EFE3D2" stroke="#B89A65" stroke-width="1"/>
+                    <path d="M100 50 C70 80 50 100 50 120 C50 135 65 145 80 140 C95 135 100 120 100 120 C100 120 105 135 120 140 C135 145 150 135 150 120 C150 100 130 80 100 50 Z" fill="url(#roseGoldGrad)"/>
+                    <circle cx="100" cy="95" r="7" fill="#FDF7E7" stroke="#B89A65" stroke-width="1.5"/>
+                    <circle cx="100" cy="95" r="4.5" fill="#3B8B88"/>${txt(165, '#765238')}`,
+                tumar: `<polygon points="100,20 185,165 15,165" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2.5"/>
+                    <polygon points="100,38 168,155 32,155" fill="#FAF6F0"/>
+                    <polygon points="100,52 154,146 46,146" fill="#EFE3D2" stroke="#765238" stroke-width="1"/>
+                    <circle cx="100" cy="112" r="22" fill="#583A21" stroke="#B89A65" stroke-width="2"/>
+                    <line x1="85" y1="112" x2="115" y2="112" stroke="#D8B575" stroke-width="2"/>
+                    <line x1="100" y1="97" x2="100" y2="127" stroke="#D8B575" stroke-width="2"/>
+                    <circle cx="100" cy="112" r="6" fill="#B89A65"/>${txt(182, '#765238')}`,
+                baiterek: `<circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="76" fill="#493021"/>
+                    <path d="M100 150 L100 80 M80 120 Q100 100 100 100 M120 120 Q100 100 100 100" stroke="#D8B575" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="100" cy="65" r="16" fill="url(#goldGrad1)" stroke="#FFF0E6" stroke-width="1.5"/>
+                    <circle cx="100" cy="65" r="5" fill="#FAF6F0"/>${txt(172, '#D8B575')}`,
+                eagle: `<circle cx="100" cy="100" r="90" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="80" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="74" fill="#EFE3D2"/>
+                    <path d="M40 90 Q 75 70 100 115 Q 125 70 160 90 Q 130 135 100 148 Q 70 135 40 90 Z" fill="#765238"/>
+                    <path d="M55 96 Q 78 80 100 118 Q 122 80 145 96 Q 122 130 100 140 Q 78 130 55 96 Z" fill="url(#goldGrad1)"/>
+                    <circle cx="100" cy="80" r="3" fill="#B89A65"/>${txt(168, '#765238')}`,
+                arkar: `<circle cx="100" cy="100" r="92" fill="url(#goldGrad1)" stroke="#B89A65" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="76" fill="#765238"/>
+                    <path d="M100 80 C80 50 40 70 50 100 C60 125 90 120 100 135 C110 120 140 125 150 100 C160 70 120 50 100 80 Z" fill="url(#goldGrad1)" stroke="#FAF6F0" stroke-width="1.2"/>
+                    <circle cx="100" cy="105" r="5" fill="#493021"/>${txt(165, '#FAF6F0')}`
+            };
+            return `<svg class="w-full h-full medallion-svg" viewBox="0 0 200 200">${art[design] || art.tumar}</svg>`;
+        }
+
+        function productArt(p) {
+            if (p.image) {
+                return `<img src="${API}image/${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain rounded-lg medallion-svg">`;
             }
-            updateCartUI();
-            showToast(`«${name}» добавлен в корзину`);
-            openCartDrawer();
+            return designSvg(p.design, p.engraving);
         }
 
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (!item) return;
-            item.quantity += delta;
-            if (item.quantity <= 0) {
-                cart = cart.filter(i => i.id !== id);
-            }
-            updateCartUI();
-        }
+        // ---------- Catalog ----------
+        const visibleProducts = () => state.products.filter((p) => !p.hidden);
+        const findProduct = (id) => visibleProducts().find((p) => p.id === id);
 
-        function updateCartUI() {
-            const badge = document.getElementById('cartCountBadge');
-            const container = document.getElementById('cartItemsContainer');
-            const totalEl = document.getElementById('cartTotalPrice');
-
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            badge.innerText = totalCount;
-            totalEl.innerText = formatKZT(totalPrice);
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="h-64 flex flex-col items-center justify-center text-center text-chocolate-deep/60">
-                        <svg class="w-12 h-12 text-sand-light mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
-                        <p class="font-serif text-lg text-headline-brown">Ваша корзина пуста</p>
-                        <p class="text-xs mt-1">Выберите свой сакральный Тұмар из коллекции</p>
+        function productCard(p) {
+            return `
+            <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-id="${esc(p.id)}">
+                <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
+                    ${p.badge ? `<span class="absolute top-4 left-4 ${BADGE[p.badgeStyle] || BADGE.gold} text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">${esc(p.badge)}</span>` : ''}
+                    ${p.edition ? `<span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">${esc(p.edition)}</span>` : ''}
+                    <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">${productArt(p)}</div>
+                    <button data-act="quick" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm sm:opacity-0 group-hover:opacity-100 transition-opacity">${esc(msg('quick'))}</button>
+                </div>
+                <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 text-xs text-antique-gold font-medium mb-1">
+                            <span>${esc(p.type)}</span>
+                            <span class="text-right">${esc(p.metal)}</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">${esc(p.name)}</h3>
+                        <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">${esc(p.desc)}</p>
                     </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = cart.map(item => `
-                <div class="py-4 flex items-center justify-between gap-4">
-                    <div class="flex-grow">
-                        <h4 class="font-serif font-bold text-headline-brown text-base">${item.name}</h4>
-                        <span class="text-[11px] text-antique-gold">${item.gold}</span>
-                        <div class="text-xs font-semibold text-caramel mt-1">${formatKZT(item.price)}</div>
-                    </div>
-                    <div class="flex items-center border border-sand-light rounded bg-cream-card">
-                        <button onclick="changeQty(${item.id}, -1)" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">-</button>
-                        <span class="px-2 text-xs font-semibold">${item.quantity}</span>
-                        <button onclick="changeQty(${item.id}, 1)" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">+</button>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
+                            <span class="text-xs text-chocolate-deep/60">${p.weight ? esc(msg('weight') + ' ~' + p.weight) : ''}</span>
+                            <span class="font-serif text-2xl font-bold text-headline-brown">${formatKZT(p.price)}</span>
+                        </div>
+                        <button data-act="add" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">${esc(msg('add'))}</button>
                     </div>
                 </div>
-            `).join('');
+            </div>`;
         }
 
-        // Cart Drawer Toggles
-        function openCartDrawer() {
-            document.getElementById('cartDrawerBackdrop').classList.remove('hidden');
-            document.getElementById('cartDrawer').classList.remove('translate-x-full');
+        function renderProducts() {
+            const list = visibleProducts().filter((p) => state.filter === 'all' || (p.cats || []).includes(state.filter));
+            $('#productsContainer').innerHTML = list.map(productCard).join('');
+            $('#productsEmpty').classList.toggle('hidden', list.length > 0);
         }
 
-        function closeCartDrawer() {
-            document.getElementById('cartDrawerBackdrop').classList.add('hidden');
-            document.getElementById('cartDrawer').classList.add('translate-x-full');
-        }
-
-        // Filter Products
         function filterProducts(cat, btn) {
-            document.querySelectorAll('.filter-tab').forEach(b => {
+            $$('.filter-tab').forEach((b) => {
                 b.classList.remove('bg-caramel', 'text-ivory-main');
                 b.classList.add('bg-beige-soft', 'text-headline-brown');
             });
             btn.classList.add('bg-caramel', 'text-ivory-main');
             btn.classList.remove('bg-beige-soft', 'text-headline-brown');
-
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                // Match whole tokens: a substring check would let 'men' match 'women'.
-                const itemCats = card.getAttribute('data-category').split(/\s+/);
-                if (cat === 'all' || itemCats.includes(cat)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
+            state.filter = cat;
+            renderProducts();
         }
 
-        // Quick View Modal
-        function quickView(id) {
-            const p = productsData.find(item => item.id === id);
+        $('#productsContainer').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-act]');
+            if (!btn) return;
+            const id = btn.closest('[data-id]').dataset.id;
+            if (btn.dataset.act === 'add') addToCart(id);
+            if (btn.dataset.act === 'quick') quickView(id);
+        });
+
+        // ---------- Cart ----------
+        function saveCart() {
+            try { localStorage.setItem('tumar_cart', JSON.stringify(cart.map(({ id, quantity }) => ({ id, quantity })))); } catch {}
+        }
+
+        function restoreCart() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('tumar_cart') || '[]');
+                cart = saved.filter((i) => findProduct(i.id)).map((i) => ({ id: i.id, quantity: Math.max(1, i.quantity | 0) }));
+            } catch { cart = []; }
+        }
+
+        function addToCart(id) {
+            const p = findProduct(id);
             if (!p) return;
-            const content = document.getElementById('quickViewContent');
-            content.innerHTML = `
-                <div class="text-center">
-                    <span class="text-xs uppercase tracking-widest text-antique-gold font-bold">${p.gold} &bull; ${p.weight}</span>
-                    <h3 class="font-serif text-3xl font-bold text-headline-brown mt-1 mb-3">${p.name}</h3>
-                    <p class="text-sm text-chocolate-deep/80 leading-relaxed max-w-md mx-auto mb-6">${p.desc}</p>
+            const existing = cart.find((item) => item.id === id);
+            if (existing) existing.quantity += 1;
+            else cart.push({ id, quantity: 1 });
+            updateCartUI();
+            showToast(`«${p.name}» ${msg('added')}`);
+            openCartDrawer();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find((i) => i.id === id);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) cart = cart.filter((i) => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            cart = cart.filter((i) => findProduct(i.id));
+            saveCart();
+            const lines = cart.map((i) => ({ ...findProduct(i.id), quantity: i.quantity }));
+            const container = $('#cartItemsContainer');
+            $('#cartCountBadge').innerText = lines.reduce((s, i) => s + i.quantity, 0);
+            $('#cartTotalPrice').innerText = formatKZT(lines.reduce((s, i) => s + i.price * i.quantity, 0));
+
+            if (!lines.length) {
+                container.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center text-chocolate-deep/60">
+                        <svg class="w-12 h-12 text-sand-light mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm6.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                        <p class="font-serif text-lg text-headline-brown">${esc(msg('cart_empty_title'))}</p>
+                        <p class="text-xs mt-1">${esc(msg('cart_empty_text'))}</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = lines.map((item) => `
+                <div class="py-4 flex items-center justify-between gap-4" data-id="${esc(item.id)}">
+                    <div class="flex-grow">
+                        <h4 class="font-serif font-bold text-headline-brown text-base">${esc(item.name)}</h4>
+                        <span class="text-[11px] text-antique-gold">${esc(item.metal)}</span>
+                        <div class="text-xs font-semibold text-caramel mt-1">${formatKZT(item.price)}</div>
+                    </div>
+                    <div class="flex items-center border border-sand-light rounded bg-cream-card">
+                        <button data-qty="-1" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">-</button>
+                        <span class="px-2 text-xs font-semibold">${item.quantity}</span>
+                        <button data-qty="1" class="px-2.5 py-1 text-headline-brown hover:text-caramel font-bold">+</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        $('#cartItemsContainer').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-qty]');
+            if (btn) changeQty(btn.closest('[data-id]').dataset.id, Number(btn.dataset.qty));
+        });
+
+        function openCartDrawer() {
+            $('#cartDrawerBackdrop').classList.remove('hidden');
+            $('#cartDrawer').classList.remove('translate-x-full');
+        }
+
+        function closeCartDrawer() {
+            $('#cartDrawerBackdrop').classList.add('hidden');
+            $('#cartDrawer').classList.add('translate-x-full');
+        }
+
+        // ---------- Modals ----------
+        function openModal(id) { const m = $(id); m.classList.remove('hidden'); m.classList.add('flex'); }
+        function closeModal(id) { const m = $(id); m.classList.add('hidden'); m.classList.remove('flex'); }
+
+        function quickView(id) {
+            const p = findProduct(id);
+            if (!p) return;
+            $('#quickViewContent').innerHTML = `
+                <div class="text-center" data-id="${esc(p.id)}">
+                    <div class="w-40 h-40 mx-auto mb-4">${productArt(p)}</div>
+                    <span class="text-xs uppercase tracking-widest text-antique-gold font-bold">${esc(p.metal)}${p.weight ? ' &bull; ' + esc(p.weight) : ''}</span>
+                    <h3 class="font-serif text-3xl font-bold text-headline-brown mt-1 mb-3">${esc(p.name)}</h3>
+                    <p class="text-sm text-chocolate-deep/80 leading-relaxed max-w-md mx-auto mb-6">${esc(p.desc)}</p>
                     <div class="font-serif text-3xl font-bold text-headline-brown mb-6">${formatKZT(p.price)}</div>
                     <div class="flex items-center justify-center gap-4">
-                        <button onclick="addToCart(${p.id}, '${p.name}', ${p.price}, '${p.gold}'); closeQuickView();" class="px-8 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">В корзину</button>
-                        <button onclick="closeQuickView()" class="px-6 py-3 border border-sand-light text-headline-brown rounded text-xs uppercase font-semibold">Закрыть</button>
+                        <button data-qv="add" class="px-8 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">${esc(msg('add'))}</button>
+                        <button data-qv="close" class="px-6 py-3 border border-sand-light text-headline-brown rounded text-xs uppercase font-semibold">${esc(msg('close'))}</button>
                     </div>
-                </div>
-            `;
-            const modal = document.getElementById('quickViewModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+                </div>`;
+            openModal('#quickViewModal');
         }
+        $('#quickViewContent').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-qv]');
+            if (!btn) return;
+            if (btn.dataset.qv === 'add') addToCart(btn.closest('[data-id]').dataset.id);
+            closeQuickView();
+        });
+        function closeQuickView() { closeModal('#quickViewModal'); }
 
-        function closeQuickView() {
-            const modal = document.getElementById('quickViewModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        function showSymbolDetail(card) {
+            const full = $('[data-sym-full]', card);
+            $('#symbolModalBody').innerHTML = `
+                <span class="text-xs uppercase tracking-widest text-antique-gold font-bold block mb-1">${esc(norm($('[data-sym-sub]', full).textContent))}</span>
+                <h3 class="font-serif text-3xl font-bold text-headline-brown mb-4">${esc(norm($('[data-sym-title]', full).textContent))}</h3>
+                <p class="text-sm text-chocolate-deep/80 leading-relaxed mb-6">${esc(norm($('[data-sym-desc]', full).textContent))}</p>
+                <button onclick="closeSymbolModal()" class="px-6 py-2.5 bg-caramel text-ivory-main rounded text-xs uppercase font-semibold">${esc(msg('symbol_ok'))}</button>`;
+            openModal('#symbolModal');
         }
+        function closeSymbolModal() { closeModal('#symbolModal'); }
 
-        // Symbol Detail Modal
-        function showSymbolDetail(key) {
-            const s = symbolsData[key];
-            if (!s) return;
-            const body = document.getElementById('symbolModalBody');
-            body.innerHTML = `
-                <span class="text-xs uppercase tracking-widest text-antique-gold font-bold block mb-1">${s.subtitle}</span>
-                <h3 class="font-serif text-3xl font-bold text-headline-brown mb-4">${s.title}</h3>
-                <p class="text-sm text-chocolate-deep/80 leading-relaxed mb-6">${s.desc}</p>
-                <button onclick="closeSymbolModal()" class="px-6 py-2.5 bg-caramel text-ivory-main rounded text-xs uppercase font-semibold">Понятно</button>
-            `;
-            const modal = document.getElementById('symbolModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeSymbolModal() {
-            const modal = document.getElementById('symbolModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Medallion Finder Quiz State
+        // ---------- Quiz ----------
         let quizAnswers = {};
 
         function selectQuizAnswer(step, val) {
             quizAnswers['step' + step] = val;
-            if (step === 1) {
-                document.getElementById('quizStep1').classList.add('hidden');
-                document.getElementById('quizStep2').classList.remove('hidden');
-            } else if (step === 2) {
-                document.getElementById('quizStep2').classList.add('hidden');
-                document.getElementById('quizStep3').classList.remove('hidden');
-            }
+            $('#quizStep' + step).classList.add('hidden');
+            $('#quizStep' + (step + 1)).classList.remove('hidden');
         }
 
         function calculateQuizResult(gold) {
-            quizAnswers['gold'] = gold;
-            document.getElementById('quizStep3').classList.add('hidden');
-            const resultBox = document.getElementById('quizResult');
-            const titleEl = document.getElementById('resultTitle');
-            const descEl = document.getElementById('resultDesc');
-
-            if (quizAnswers.step1 === 'family') {
-                titleEl.innerText = 'Медальон «Ұмай Ана»';
-                descEl.innerText = 'Ваш выбор говорит о глубокой заботе о близких. Этот священный талисман сохранит мир, любовь и здоровье в вашем доме.';
-            } else if (quizAnswers.step1 === 'wisdom') {
-                titleEl.innerText = 'Медальон «Бәйтерек»';
-                descEl.innerText = 'Вам созвучна мощь родового древа. Этот Тұмар укрепит вашу связь с предками и принесет изобилие вашему шаңыраку.';
-            } else if (quizAnswers.step1 === 'freedom') {
-                titleEl.innerText = 'Медальон «Қос Қанат»';
-                descEl.innerText = 'Ваш путь — путь орлиного полета. Медальон поможет бесстрашно достигать высот и защитит от дурного глаза.';
-            } else {
-                titleEl.innerText = 'Медальон «Көк Бөрі»';
-                descEl.innerText = 'Вам покровительствует дух степного волка. Он придаст несокрушимую уверенность в делах и защитит ваш статус.';
-            }
-
-            resultBox.classList.remove('hidden');
+            quizAnswers.gold = gold;
+            $('#quizStep3').classList.add('hidden');
+            const box = $(`#quizTexts [data-quiz="${quizAnswers.step1}"]`) || $('#quizTexts [data-quiz="power"]');
+            $('#resultTitle').innerText = norm($('[data-q-title]', box).textContent);
+            $('#resultDesc').innerText = norm($('[data-q-desc]', box).textContent);
+            $('#quizResult').classList.remove('hidden');
         }
 
         function resetQuiz() {
             quizAnswers = {};
-            document.getElementById('quizResult').classList.add('hidden');
-            document.getElementById('quizStep2').classList.add('hidden');
-            document.getElementById('quizStep3').classList.add('hidden');
-            document.getElementById('quizStep1').classList.remove('hidden');
+            $('#quizResult').classList.add('hidden');
+            $('#quizStep2').classList.add('hidden');
+            $('#quizStep3').classList.add('hidden');
+            $('#quizStep1').classList.remove('hidden');
         }
 
-        // Mobile Menu Drawer
-        function toggleMobileMenu() {
-            const drawer = document.getElementById('mobileDrawer');
-            drawer.classList.toggle('hidden');
-        }
-        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+        // ---------- Mobile menu ----------
+        function toggleMobileMenu() { $('#mobileDrawer').classList.toggle('hidden'); }
+        $('#mobileMenuBtn').addEventListener('click', toggleMobileMenu);
 
-        // Checkout Handlers
+        // ---------- Checkout & club ----------
         function proceedToCheckout() {
-            if (cart.length === 0) {
-                showToast('Пожалуйста, добавьте медальон в корзину');
+            if (!cart.length) {
+                showToast(msg('need_items'));
                 return;
             }
             closeCartDrawer();
-            const modal = document.getElementById('checkoutModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            openModal('#checkoutModal');
         }
+        function closeCheckoutModal() { closeModal('#checkoutModal'); }
 
-        function closeCheckoutModal() {
-            const modal = document.getElementById('checkoutModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function handleCheckoutSubmit(e) {
+        async function handleCheckoutSubmit(e) {
             e.preventDefault();
-            closeCheckoutModal();
-            cart = [];
+            const form = e.target;
+            const btn = $('#checkoutSubmit');
+            const label = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = msg('sending');
+            try {
+                await api('orders', {
+                    method: 'POST',
+                    body: {
+                        name: form.name.value,
+                        phone: form.phone.value,
+                        city: form.city.value,
+                        comment: form.comment.value,
+                        items: cart.map((i) => ({ id: i.id, qty: i.quantity }))
+                    }
+                });
+                closeCheckoutModal();
+                form.reset();
+                cart = [];
+                updateCartUI();
+                showToast(msg('order_ok'));
+            } catch (err) {
+                showToast(err.status === 400 ? err.message : msg('order_fail'));
+            } finally {
+                btn.disabled = false;
+                btn.innerText = label;
+            }
+        }
+
+        async function handleSubscribe(e) {
+            e.preventDefault();
+            try {
+                await api('subscribe', { method: 'POST', body: { email: e.target.email.value } });
+                e.target.reset();
+                $('#subNotice').classList.remove('hidden');
+            } catch {
+                showToast(msg('sub_fail'));
+            }
+        }
+
+        function toggleSearchModal() { showToast(msg('search')); }
+        function showCustomOrderModal() { showToast(msg('custom')); }
+
+        // ---------- Editable texts ----------
+        // Every visible piece of text inside a [data-g] block gets a key such
+        // as "hero_3". A saved override remembers the original text it
+        // replaced and only applies while that original is still in the page,
+        // so editing the HTML later can never put a text in the wrong place.
+        const TEXT_SKIP = 'script,style,svg,[data-noedit]';
+        const TAGS = { H1: 'Заголовок', H2: 'Заголовок', H3: 'Заголовок', H4: 'Подзаголовок', P: 'Текст', A: 'Ссылка', BUTTON: 'Кнопка', OPTION: 'Вариант в списке', LABEL: 'Подпись поля', LI: 'Пункт', STRONG: 'Текст' };
+        let textEntries = [];
+
+        function collectTexts() {
+            const out = [];
+            $$('[data-g]').forEach((group) => {
+                let i = 0;
+                const walker = document.createTreeWalker(group, NodeFilter.SHOW_TEXT, {
+                    acceptNode: (n) => !/[\p{L}\p{N}]/u.test(n.nodeValue) || n.parentElement.closest(TEXT_SKIP)
+                        ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+                });
+                let node;
+                while ((node = walker.nextNode())) {
+                    out.push({ key: `${group.dataset.g}_${i++}`, group, node, def: norm(node.nodeValue), label: labelFor(node.parentElement) });
+                }
+                let j = 0;
+                $$('[placeholder]', group).forEach((el) => {
+                    if (el.closest(TEXT_SKIP)) return;
+                    out.push({ key: `${group.dataset.g}_ph${j++}`, group, el, def: norm(el.placeholder), label: 'Подсказка в поле' });
+                });
+            });
+            return out;
+        }
+
+        function labelFor(el) {
+            if (el.closest('[data-sym-sub]')) return 'Окно символа: подзаголовок';
+            if (el.closest('[data-sym-title]')) return 'Окно символа: заголовок';
+            if (el.closest('[data-sym-desc]')) return 'Окно символа: описание';
+            if (el.closest('[data-q-title]')) return 'Результат квиза: название';
+            if (el.closest('[data-q-desc]')) return 'Результат квиза: описание';
+            if (el.closest('[data-m]')) return 'Сообщение';
+            const tagged = el.closest('h1,h2,h3,h4,p,a,button,option,label,li');
+            return TAGS[tagged?.tagName] || 'Текст';
+        }
+
+        function setEntry(entry, value) {
+            if (entry.el) { entry.el.placeholder = value; return; }
+            const raw = entry.node.nodeValue;
+            const lead = raw.match(/^\s*/)[0];
+            const trail = raw.match(/\s*$/)[0];
+            entry.node.nodeValue = lead + value + trail;
+        }
+
+        function applyTexts(texts) {
+            for (const entry of textEntries) {
+                const o = texts[entry.key];
+                setEntry(entry, o && o.d === entry.def ? o.v : entry.def);
+            }
+        }
+
+        // ---------- Boot ----------
+        async function loadContent() {
+            try {
+                const res = await fetch(API + 'content', { cache: 'no-store' });
+                if (res.ok) return await res.json();
+            } catch {}
+            try {
+                const res = await fetch('/tumar-files/content.json', { cache: 'no-cache' });
+                if (res.ok) return { ...(await res.json()), texts: {}, db: false };
+            } catch {}
+            return { products: [], texts: {}, db: false };
+        }
+
+        async function boot() {
+            textEntries = collectTexts();
+            const data = await loadContent();
+            state.products = data.products || [];
+            state.texts = data.texts || {};
+            state.db = !!data.db;
+            applyTexts(state.texts);
+            renderProducts();
+            restoreCart();
             updateCartUI();
-            showToast('Рахмет! Ваш заказ принят. Консьерж уже набирает вас.');
         }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            document.getElementById('subNotice').classList.remove('hidden');
-        }
-
-        function toggleSearchModal() {
-            showToast('Поиск: введите "Тұмар", "Бөрі", "750"');
-        }
-
-        function showCustomOrderModal() {
-            showToast('Служба индивидуальных заказов: +7 (701) 000-00-00');
-        }
-
-        // Init UI
         updateCartUI();
+        boot();
+
+        // =====================================================================
+        // ADMIN PANEL
+        // =====================================================================
+        const admin = $('#admin');
+
+        function openAdmin() {
+            admin.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            api('me').then((r) => {
+                state.admin = !!r.admin;
+                state.noDb = !!r.noDb;
+                showAdminView();
+            }).catch(() => showAdminView());
+        }
+
+        function closeAdmin() {
+            admin.classList.add('hidden');
+            document.body.style.overflow = '';
+            if (location.hash === '#admin') history.replaceState(null, '', location.pathname);
+            if (/\/admin\/?$/.test(location.pathname)) history.replaceState(null, '', location.pathname.replace(/\/admin\/?$/, ''));
+        }
+
+        function showAdminView() {
+            $('#admLogin').classList.toggle('hidden', state.admin);
+            $('#admPanel').classList.toggle('hidden', !state.admin);
+            $('#admTabs').classList.toggle('hidden', !state.admin);
+            $('#admLoginErr').textContent = state.noDb
+                ? 'База данных не подключена: Vercel → проект → Storage → Postgres → Connect, затем Redeploy.'
+                : '';
+            if (state.admin) showTab(currentTab);
+            else setTimeout(() => $('#admPin').focus(), 50);
+        }
+
+        function handleAuthError(err) {
+            if (err.status === 403) {
+                state.admin = false;
+                showAdminView();
+                showToast('Сессия истекла — войдите ещё раз');
+                return true;
+            }
+            showToast(err.message);
+            return false;
+        }
+
+        $('#admClose').addEventListener('click', closeAdmin);
+        if (location.hash === '#admin' || /\/admin\/?$/.test(location.pathname)) openAdmin();
+        window.addEventListener('hashchange', () => { if (location.hash === '#admin') openAdmin(); });
+
+        $('#admLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            $('#admLoginErr').textContent = '';
+            try {
+                await api('login', { method: 'POST', body: { pin: $('#admPin').value } });
+                $('#admPin').value = '';
+                state.admin = true;
+                showAdminView();
+            } catch (err) {
+                $('#admLoginErr').textContent = err.message;
+            }
+        });
+
+        $('#admLogout').addEventListener('click', async () => {
+            try { await api('logout', { method: 'POST' }); } catch {}
+            state.admin = false;
+            showAdminView();
+        });
+
+        $('#pinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await api('pin', { method: 'POST', body: { pin: $('#pinNew').value } });
+                $('#pinNew').value = '';
+                showToast('PIN-код изменён');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // ---------- Tabs ----------
+        let currentTab = 'orders';
+        function showTab(tab) {
+            currentTab = tab;
+            $$('#admTabs [data-tab]').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+            $$('#admPanel [data-pane]').forEach((p) => p.classList.toggle('hidden', p.dataset.pane !== tab));
+            if (tab === 'orders') loadOrders();
+            if (tab === 'products') renderAdminProducts();
+            if (tab === 'texts') renderTextEditor();
+            if (tab === 'subs') loadSubs();
+        }
+        $('#admTabs').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-tab]');
+            if (b) showTab(b.dataset.tab);
+        });
+
+        // ---------- Orders ----------
+        async function loadOrders() {
+            try {
+                state.orders = await api('orders');
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        }
+
+        function renderOrders() {
+            const n = state.orders.filter((o) => o.status === 'new').length;
+            $('#admNewCount').textContent = n;
+            $('#admNewCount').classList.toggle('hidden', !n);
+            const f = $('#ordFilter').value;
+            const list = state.orders.filter((o) => !f || o.status === f);
+            $('#ordList').innerHTML = list.length ? list.map((o) => {
+                const digits = (o.phone || '').replace(/\D/g, '');
+                return `
+                <div class="p-4 rounded-lg border ${o.status === 'new' ? 'border-caramel bg-cream-card' : 'border-sand-light bg-ivory-main'}" data-id="${esc(o.id)}">
+                    <div class="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                            <div class="font-semibold text-headline-brown">${esc(o.name)}</div>
+                            <div class="text-xs text-chocolate-deep/70 mt-0.5">
+                                <a href="tel:${esc(o.phone)}" class="text-caramel hover:underline">${esc(o.phone)}</a>
+                                ${digits ? ` · <a href="https://wa.me/${digits}" target="_blank" rel="noopener" class="text-caramel hover:underline">WhatsApp</a>` : ''}
+                                ${o.city ? ' · ' + esc(o.city) : ''}
+                            </div>
+                            <div class="text-[11px] text-chocolate-deep/50 mt-0.5">${new Date(o.createdAt).toLocaleString('ru-RU')}</div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select data-status class="px-2 py-1.5 rounded border border-sand-light bg-ivory-main text-xs">
+                                ${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === o.status ? 'selected' : ''}>${v}</option>`).join('')}
+                            </select>
+                            <button data-del class="adm-icon" title="Удалить заказ">🗑</button>
+                        </div>
+                    </div>
+                    <ul class="mt-3 text-sm text-chocolate-deep space-y-1">
+                        ${o.items.map((i) => `<li class="flex justify-between gap-3"><span>${esc(i.name)} <span class="text-chocolate-deep/50 text-xs">${esc(i.metal)}</span> × ${i.qty}</span><span class="whitespace-nowrap">${formatKZT(i.price * i.qty)}</span></li>`).join('')}
+                    </ul>
+                    ${o.comment ? `<p class="mt-2 text-xs italic text-chocolate-deep/70">«${esc(o.comment)}»</p>` : ''}
+                    <div class="mt-2 pt-2 border-t border-sand-light/50 text-right font-serif text-xl font-bold text-headline-brown">${formatKZT(o.total)}</div>
+                </div>`;
+            }).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Заказов пока нет</p>';
+        }
+
+        $('#ordFilter').addEventListener('change', renderOrders);
+        $('#ordRefresh').addEventListener('click', loadOrders);
+        $('#ordList').addEventListener('change', async (e) => {
+            if (!e.target.matches('[data-status]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            try {
+                await api('order/' + encodeURIComponent(id), { method: 'PATCH', body: { status: e.target.value } });
+                state.orders.find((o) => o.id === id).status = e.target.value;
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        });
+        $('#ordList').addEventListener('click', async (e) => {
+            if (!e.target.closest('[data-del]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            if (!confirm('Удалить этот заказ навсегда?')) return;
+            try {
+                await api('order/' + encodeURIComponent(id), { method: 'DELETE' });
+                state.orders = state.orders.filter((o) => o.id !== id);
+                renderOrders();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // ---------- Products ----------
+        function renderAdminProducts() {
+            const ps = state.products;
+            $('#prodList').innerHTML = ps.length ? ps.map((p, i) => `
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-sand-light bg-cream-card ${p.hidden ? 'opacity-60' : ''}" data-id="${esc(p.id)}">
+                    <div class="w-14 h-14 shrink-0">${productArt(p)}</div>
+                    <div class="flex-grow min-w-0">
+                        <div class="font-semibold text-headline-brown truncate">${esc(p.name)}${p.hidden ? ' <span class="text-[10px] uppercase text-chocolate-deep/60">(скрыт)</span>' : ''}</div>
+                        <div class="text-xs text-chocolate-deep/70">${formatKZT(p.price)}${p.metal ? ' · ' + esc(p.metal) : ''}</div>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button data-p="up" class="adm-icon" title="Выше" ${i === 0 ? 'disabled' : ''}>↑</button>
+                        <button data-p="down" class="adm-icon" title="Ниже" ${i === ps.length - 1 ? 'disabled' : ''}>↓</button>
+                        <button data-p="edit" class="adm-icon" title="Изменить">✎</button>
+                        <button data-p="del" class="adm-icon" title="Удалить">🗑</button>
+                    </div>
+                </div>`).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Товаров нет — добавьте первый</p>';
+        }
+
+        function afterProductsChange() {
+            renderAdminProducts();
+            renderProducts();
+            updateCartUI();
+        }
+
+        $('#prodList').addEventListener('click', async (e) => {
+            const btn = e.target.closest('[data-p]');
+            if (!btn) return;
+            const id = btn.closest('[data-id]').dataset.id;
+            const idx = state.products.findIndex((p) => p.id === id);
+            const act = btn.dataset.p;
+            try {
+                if (act === 'edit') return openProductEditor(state.products[idx]);
+                if (act === 'del') {
+                    if (!confirm(`Удалить «${state.products[idx].name}»?`)) return;
+                    await api('product/' + encodeURIComponent(id), { method: 'DELETE' });
+                    state.products.splice(idx, 1);
+                } else {
+                    const to = act === 'up' ? idx - 1 : idx + 1;
+                    const [p] = state.products.splice(idx, 1);
+                    state.products.splice(to, 0, p);
+                    await api('reorder', { method: 'POST', body: { ids: state.products.map((x) => x.id) } });
+                }
+                afterProductsChange();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // Product editor
+        const pform = $('#prodForm');
+        let editing = null; // product being edited, or null for a new one
+        let draftImage = null;
+
+        function openProductEditor(p) {
+            editing = p || null;
+            pform.reset();
+            const d = p || { design: 'tumar', badgeStyle: 'gold', cats: [] };
+            for (const name of ['name', 'price', 'weight', 'type', 'metal', 'desc', 'badge', 'badgeStyle', 'edition', 'design', 'engraving']) {
+                if (d[name] !== undefined) pform.elements[name].value = d[name];
+            }
+            $$('input[name="cats"]', pform).forEach((c) => { c.checked = (d.cats || []).includes(c.value); });
+            pform.elements.hidden.checked = !!d.hidden;
+            draftImage = d.image || null;
+            $('#prodFormTitle').textContent = p ? 'Изменить товар' : 'Новый товар';
+            updatePreview();
+            openModal('#prodEditor');
+        }
+
+        function readProductForm() {
+            const f = pform.elements;
+            return {
+                name: f.name.value, price: Number(f.price.value), weight: f.weight.value, type: f.type.value,
+                metal: f.metal.value, desc: f.desc.value, badge: f.badge.value, badgeStyle: f.badgeStyle.value,
+                edition: f.edition.value, design: f.design.value, engraving: f.engraving.value,
+                cats: $$('input[name="cats"]:checked', pform).map((c) => c.value),
+                hidden: f.hidden.checked, image: draftImage
+            };
+        }
+
+        function updatePreview() {
+            const d = readProductForm();
+            $('#prodPreview').innerHTML = productArt(d);
+            $('#prodPhotoDel').classList.toggle('hidden', !draftImage);
+        }
+
+        pform.addEventListener('input', (e) => { if (['design', 'engraving'].includes(e.target.name)) updatePreview(); });
+        pform.addEventListener('change', (e) => { if (e.target.name === 'design') updatePreview(); });
+        $$('[data-close]', pform).forEach((b) => b.addEventListener('click', () => closeModal('#prodEditor')));
+        $('#prodAdd').addEventListener('click', () => openProductEditor(null));
+        $('#prodPhotoDel').addEventListener('click', () => { draftImage = null; updatePreview(); });
+
+        // Shrink photos in the browser so uploads stay small and fast.
+        function resizeImage(file, max = 1000) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    const k = Math.min(1, max / Math.max(img.width, img.height));
+                    const c = document.createElement('canvas');
+                    c.width = Math.round(img.width * k);
+                    c.height = Math.round(img.height * k);
+                    const ctx = c.getContext('2d');
+                    ctx.fillStyle = '#F7F1E7';
+                    ctx.fillRect(0, 0, c.width, c.height);
+                    ctx.drawImage(img, 0, 0, c.width, c.height);
+                    URL.revokeObjectURL(img.src);
+                    resolve(c.toDataURL('image/jpeg', 0.86));
+                };
+                img.onerror = () => reject(new Error('Не удалось прочитать картинку'));
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        $('#prodPhoto').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            e.target.value = '';
+            if (!file) return;
+            try {
+                showToast('Загружаем фото…');
+                const dataUrl = await resizeImage(file);
+                const r = await api('images', { method: 'POST', body: { dataUrl } });
+                draftImage = r.id;
+                updatePreview();
+                showToast('Фото загружено');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        pform.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = readProductForm();
+            $('#prodSave').disabled = true;
+            try {
+                if (editing) {
+                    const r = await api('product/' + encodeURIComponent(editing.id), { method: 'PATCH', body: data });
+                    state.products[state.products.findIndex((p) => p.id === editing.id)] = r.product;
+                } else {
+                    const r = await api('products', { method: 'POST', body: data });
+                    state.products.push(r.product);
+                }
+                closeModal('#prodEditor');
+                afterProductsChange();
+                showToast('Товар сохранён');
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#prodSave').disabled = false;
+            }
+        });
+
+        // ---------- Text editor ----------
+        function renderTextEditor() {
+            const groups = new Map();
+            textEntries.forEach((entry, i) => {
+                if (!groups.has(entry.group)) groups.set(entry.group, []);
+                groups.get(entry.group).push(i);
+            });
+            const current = (entry) => entry.el ? norm(entry.el.placeholder) : norm(entry.node.nodeValue);
+            $('#txtGroups').innerHTML = [...groups].map(([group, idxs]) => `
+                <details class="rounded-lg border border-sand-light bg-cream-card" data-group>
+                    <summary class="px-4 py-3 cursor-pointer font-semibold text-headline-brown text-sm">${esc(group.dataset.gl || group.dataset.g)} <span class="text-xs font-normal text-chocolate-deep/50">(${idxs.length})</span></summary>
+                    <div class="px-4 pb-4 space-y-3">
+                        ${idxs.map((i) => {
+                            const entry = textEntries[i];
+                            const val = current(entry);
+                            const field = entry.def.length > 70
+                                ? `<textarea rows="3" data-ti="${i}" class="adm-input">${esc(val)}</textarea>`
+                                : `<input data-ti="${i}" value="${esc(val)}" class="adm-input">`;
+                            return `<div data-row data-search="${esc((entry.def + ' ' + val).toLowerCase())}">
+                                <div class="flex items-center justify-between"><span class="adm-label">${esc(entry.label)}</span>
+                                <button type="button" data-reset="${i}" class="text-xs text-caramel ${val === entry.def ? 'invisible' : ''}" title="Вернуть исходный текст">↺ исходный</button></div>
+                                ${field}
+                            </div>`;
+                        }).join('')}
+                    </div>
+                </details>`).join('');
+            $('#txtDirty').classList.add('hidden');
+            filterTexts();
+        }
+
+        function filterTexts() {
+            const q = norm($('#txtSearch').value).toLowerCase();
+            $$('#txtGroups [data-group]').forEach((g) => {
+                let any = false;
+                $$('[data-row]', g).forEach((row) => {
+                    const hit = !q || row.dataset.search.includes(q);
+                    row.classList.toggle('hidden', !hit);
+                    any = any || hit;
+                });
+                g.classList.toggle('hidden', !any);
+                if (q) g.open = any;
+            });
+        }
+
+        $('#txtSearch').addEventListener('input', filterTexts);
+        $('#txtGroups').addEventListener('input', (e) => {
+            if (!e.target.matches('[data-ti]')) return;
+            const entry = textEntries[e.target.dataset.ti];
+            $(`[data-reset="${e.target.dataset.ti}"]`).classList.toggle('invisible', norm(e.target.value) === entry.def);
+            $('#txtDirty').classList.remove('hidden');
+        });
+        $('#txtGroups').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-reset]');
+            if (!btn) return;
+            const field = $(`[data-ti="${btn.dataset.reset}"]`);
+            field.value = textEntries[btn.dataset.reset].def;
+            btn.classList.add('invisible');
+            $('#txtDirty').classList.remove('hidden');
+        });
+
+        $('#txtSave').addEventListener('click', async () => {
+            const texts = {};
+            $$('#txtGroups [data-ti]').forEach((field) => {
+                const entry = textEntries[field.dataset.ti];
+                const v = norm(field.value);
+                if (v !== entry.def) texts[entry.key] = { d: entry.def, v };
+            });
+            $('#txtSave').disabled = true;
+            try {
+                await api('texts', { method: 'POST', body: { texts } });
+                state.texts = texts;
+                applyTexts(texts);
+                renderProducts();
+                updateCartUI();
+                $('#txtDirty').classList.add('hidden');
+                showToast('Тексты сохранены');
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#txtSave').disabled = false;
+            }
+        });
+
+        // ---------- Subscribers ----------
+        async function loadSubs() {
+            try {
+                state.subs = await api('subscribers');
+                renderSubs();
+            } catch (err) { handleAuthError(err); }
+        }
+
+        function renderSubs() {
+            $('#subsList').innerHTML = state.subs.length ? state.subs.map((s) => `
+                <div class="flex items-center justify-between gap-3 px-4 py-2.5 rounded border border-sand-light bg-cream-card" data-id="${esc(s.id)}">
+                    <div class="min-w-0"><div class="text-sm text-headline-brown truncate">${esc(s.email)}</div>
+                    <div class="text-[11px] text-chocolate-deep/50">${new Date(s.createdAt).toLocaleDateString('ru-RU')}</div></div>
+                    <button data-del class="adm-icon" title="Удалить">🗑</button>
+                </div>`).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Подписчиков пока нет</p>';
+        }
+
+        $('#subsList').addEventListener('click', async (e) => {
+            if (!e.target.closest('[data-del]')) return;
+            const id = e.target.closest('[data-id]').dataset.id;
+            if (!confirm('Удалить подписчика?')) return;
+            try {
+                await api('subscriber/' + encodeURIComponent(id), { method: 'DELETE' });
+                state.subs = state.subs.filter((s) => s.id !== id);
+                renderSubs();
+            } catch (err) { handleAuthError(err); }
+        });
+
+        $('#subsCopy').addEventListener('click', async () => {
+            const text = state.subs.map((s) => s.email).join('\n');
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Скопировано: ' + state.subs.length);
+            } catch {
+                prompt('Скопируйте адреса:', text.replace(/\n/g, ', '));
+            }
+        });
     </script>
 </body>
 </html>
