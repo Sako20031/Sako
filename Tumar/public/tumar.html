@@ -105,6 +105,53 @@
         .medallion-svg {
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* ---------- Living steppe scene ---------- */
+        .steppe-scene { color: #765238; }
+        .cloud {
+            position: absolute; left: 0; height: 46px; border-radius: 999px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,.75), rgba(255,255,255,0) 70%);
+            filter: blur(6px); opacity: .7;
+            animation: cloud-drift linear infinite;
+        }
+        @keyframes cloud-drift { from { transform: translateX(-30vw); } to { transform: translateX(110vw); } }
+        .eagle {
+            position: absolute; top: 9%; left: 0; width: 46px; fill: #765238; opacity: .35;
+            animation: eagle-glide 38s linear infinite, eagle-bank 6s ease-in-out infinite alternate;
+        }
+        @keyframes eagle-glide { from { transform: translate(-10vw, 0); } to { transform: translate(110vw, -40px); } }
+        @keyframes eagle-bank { from { margin-top: 0; } to { margin-top: 28px; } }
+        .yurt-smoke circle { fill: #D2B797; opacity: 0; animation: smoke 4.5s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+        .yurt-smoke circle:nth-child(2) { animation-delay: 1.5s; }
+        .yurt-smoke circle:nth-child(3) { animation-delay: 3s; }
+        @keyframes smoke {
+            0% { opacity: 0; transform: translate(0, 0) scale(.6); }
+            20% { opacity: .55; }
+            100% { opacity: 0; transform: translate(6px, -16px) scale(2.2); }
+        }
+        .herd { position: absolute; inset: 0; }
+        .horse {
+            position: absolute; left: 0; bottom: var(--y); width: calc(92px * var(--s)); height: calc(64px * var(--s));
+            animation: gallop-across var(--dur) linear var(--delay) infinite;
+        }
+        .horse svg { fill: #765238; }
+        @keyframes gallop-across { from { transform: translateX(-12vw); } to { transform: translateX(108vw); } }
+        .horse-bob { animation: horse-bob var(--gait) ease-in-out infinite alternate; }
+        @keyframes horse-bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+        .horse-leg { transform-box: fill-box; transform-origin: 50% 0; animation: leg-swing var(--gait) ease-in-out infinite alternate; }
+        .leg-b2 { animation-delay: calc(var(--gait) * -.35); }
+        .leg-f1 { animation-direction: alternate-reverse; }
+        .leg-f2 { animation-direction: alternate-reverse; animation-delay: calc(var(--gait) * -.35); }
+        @keyframes leg-swing { from { transform: rotate(32deg); } to { transform: rotate(-38deg); } }
+        .horse-tail { transform-box: fill-box; transform-origin: 100% 15%; animation: tail-wave calc(var(--gait) * 1.6) ease-in-out infinite alternate; }
+        @keyframes tail-wave { from { transform: rotate(-8deg); } to { transform: rotate(10deg); } }
+        .horse-mane { transform-box: fill-box; transform-origin: 100% 100%; animation: mane-flow var(--gait) ease-in-out infinite alternate; }
+        @keyframes mane-flow { from { transform: skewX(0); } to { transform: skewX(-14deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .steppe-scene *, .steppe-scene { animation: none !important; }
+            .horse { transform: translateX(calc(var(--s) * 30vw)); }
+            .cloud { transform: translateX(20vw); }
+            .eagle { display: none; }
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col selection:bg-sand-light selection:text-chocolate-deep">
@@ -229,28 +276,122 @@
                 <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-r from-[#D2B797]/40 via-[#B89A65]/25 to-transparent rounded-full blur-3xl opacity-70"></div>
 
                 <!-- Steppe Hills & Gentle Horizon SVG Silhouette (Warm Earth & Golden Hour) -->
-                <svg class="absolute bottom-0 w-full h-[320px] text-sand-light/35" preserveAspectRatio="none" viewBox="0 0 1440 320" fill="currentColor">
+                <svg class="absolute bottom-0 w-full h-[320px]" preserveAspectRatio="none" viewBox="0 0 1440 320" fill="rgba(210, 183, 151, .35)">
                     <path d="M0,192L48,181.3C96,171,192,149,288,160C384,171,480,213,576,208C672,203,768,149,864,138.7C960,128,1056,160,1152,181.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
 
-                <!-- Distant Yurt & Steppe Horses Graphic Silhouettes in soft caramel tone -->
-                <div class="absolute bottom-16 right-10 md:right-28 opacity-40">
-                    <svg class="w-48 h-28" viewBox="0 0 200 120" fill="none">
-                        <!-- Yurt dome and base -->
-                        <path d="M40 90 Q 75 45 110 90 Z" fill="#A77B52"/>
-                        <path d="M75 45 L 75 35" stroke="#765238" stroke-width="2"/>
-                        <circle cx="75" cy="35" r="4" fill="#B89A65"/>
-                        <path d="M36 90 L 114 90 L 114 105 L 36 105 Z" fill="#8D735E"/>
-                        <path d="M68 90 L 68 105 L 82 105 L 82 90 Z" fill="#493021"/>
-                        <!-- Gentle horse silhouettes grazing -->
-                        <path d="M140 96 C140 90 145 84 150 82 C152 76 156 70 162 70 C165 72 165 75 163 78 C160 82 158 86 158 92 L159 105 L156 105 L153 96 L148 105 L145 105 Z" fill="#765238"/>
-                        <path d="M170 98 C170 92 174 88 178 86 C180 81 183 76 188 76 C190 78 190 80 189 82 C186 85 185 89 185 94 L186 105 L183 105 L181 98 L177 105 L174 105 Z" fill="#765238"/>
-                    </svg>
+                <!-- Living steppe: drifting clouds, a soaring eagle, yurts with smoke and a galloping herd.
+                     Pure SVG + CSS (transforms only), stops for visitors who prefer reduced motion. -->
+                <div id="steppeScene" class="steppe-scene absolute inset-0 overflow-hidden" aria-hidden="true">
+                    <div class="cloud" style="top:12%; width:260px; animation-duration:95s; animation-delay:-20s"></div>
+                    <div class="cloud" style="top:24%; width:180px; animation-duration:120s; animation-delay:-70s"></div>
+                    <div class="cloud hidden sm:block" style="top:6%; width:220px; animation-duration:140s; animation-delay:-110s"></div>
+
+                    <svg class="eagle" viewBox="0 0 60 20" aria-hidden="true"><path d="M0 12 Q 15 0 30 10 Q 45 0 60 12 Q 45 6 30 14 Q 15 6 0 12 Z"/></svg>
+
+                    <div class="absolute bottom-[86px] left-[6%] w-28 sm:w-36 opacity-50"><svg viewBox="0 0 120 90" class="w-full h-auto" aria-hidden="true">
+                        <g class="yurt-smoke"><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/></g>
+                        <path d="M14 58 Q 60 14 106 58 Z" fill="#A77B52"/>
+                        <path d="M22 50 Q 60 22 98 50" fill="none" stroke="#D2B797" stroke-width="1.2" stroke-dasharray="3 3"/>
+                        <rect x="56" y="18" width="8" height="5" rx="1" fill="#765238"/>
+                        <path d="M10 58 L110 58 L110 82 L10 82 Z" fill="#8D735E"/>
+                        <path d="M10 64 L110 64" stroke="#D2B797" stroke-width="1.5" stroke-dasharray="6 4"/>
+                        <path d="M50 58 L50 82 L70 82 L70 58 Z" fill="#493021"/>
+                    </svg></div>
+                    <div class="absolute bottom-[110px] left-[22%] w-16 sm:w-20 opacity-40 hidden sm:block"><svg viewBox="0 0 120 90" class="w-full h-auto" aria-hidden="true">
+                        <g class="yurt-smoke"><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/></g>
+                        <path d="M14 58 Q 60 14 106 58 Z" fill="#A77B52"/>
+                        <path d="M22 50 Q 60 22 98 50" fill="none" stroke="#D2B797" stroke-width="1.2" stroke-dasharray="3 3"/>
+                        <rect x="56" y="18" width="8" height="5" rx="1" fill="#765238"/>
+                        <path d="M10 58 L110 58 L110 82 L10 82 Z" fill="#8D735E"/>
+                        <path d="M10 64 L110 64" stroke="#D2B797" stroke-width="1.5" stroke-dasharray="6 4"/>
+                        <path d="M50 58 L50 82 L70 82 L70 58 Z" fill="#493021"/>
+                    </svg></div>
+                    <div class="absolute bottom-[78px] right-[8%] w-32 sm:w-44 opacity-50"><svg viewBox="0 0 120 90" class="w-full h-auto" aria-hidden="true">
+                        <g class="yurt-smoke"><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/><circle cx="60" cy="14" r="3"/></g>
+                        <path d="M14 58 Q 60 14 106 58 Z" fill="#A77B52"/>
+                        <path d="M22 50 Q 60 22 98 50" fill="none" stroke="#D2B797" stroke-width="1.2" stroke-dasharray="3 3"/>
+                        <rect x="56" y="18" width="8" height="5" rx="1" fill="#765238"/>
+                        <path d="M10 58 L110 58 L110 82 L10 82 Z" fill="#8D735E"/>
+                        <path d="M10 64 L110 64" stroke="#D2B797" stroke-width="1.5" stroke-dasharray="6 4"/>
+                        <path d="M50 58 L50 82 L70 82 L70 58 Z" fill="#493021"/>
+                    </svg></div>
+
+                    <div class="herd">
+                        <div class="horse" style="--y:34px; --s:1.15; --dur:19s; --delay:-2s; --gait:.52s; opacity:.42"><svg viewBox="0 0 100 70" class="w-full h-full overflow-visible" aria-hidden="true">
+                            <g class="horse-bob">
+                                <path class="horse-tail" d="M25 29 C16 27 9 31 4 41 C11 37 18 36 25 35 Z"/>
+                                <g transform="translate(31 39)"><path class="horse-leg leg-b1" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(35 39)"><path class="horse-leg leg-b2" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(62 39)"><path class="horse-leg leg-f1" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <g transform="translate(66 39)"><path class="horse-leg leg-f2" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <path d="M24 30 C26 22 40 20 52 21 C60 21 66 22 70 26 C73 30 72 38 68 42 C60 46 40 46 30 44 C24 42 22 36 24 30 Z"/>
+                                <path d="M63 26 C67 18 72 10 78 6 C82 4 86 5 90 9 C93 12 94 15 92 18 C89 19 86 17 83 16 C80 21 76 29 70 35 Z"/>
+                                <path d="M79 7 L81 0 L84 6 Z"/>
+                                <path class="horse-mane" d="M65 23 C68 15 72 9 77 5 C73 12 70 19 69 27 Z"/>
+                            </g>
+                        </svg></div>
+                        <div class="horse" style="--y:52px; --s:.95; --dur:21s; --delay:-5s; --gait:.5s; opacity:.38"><svg viewBox="0 0 100 70" class="w-full h-full overflow-visible" aria-hidden="true">
+                            <g class="horse-bob">
+                                <path class="horse-tail" d="M25 29 C16 27 9 31 4 41 C11 37 18 36 25 35 Z"/>
+                                <g transform="translate(31 39)"><path class="horse-leg leg-b1" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(35 39)"><path class="horse-leg leg-b2" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(62 39)"><path class="horse-leg leg-f1" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <g transform="translate(66 39)"><path class="horse-leg leg-f2" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <path d="M24 30 C26 22 40 20 52 21 C60 21 66 22 70 26 C73 30 72 38 68 42 C60 46 40 46 30 44 C24 42 22 36 24 30 Z"/>
+                                <path d="M63 26 C67 18 72 10 78 6 C82 4 86 5 90 9 C93 12 94 15 92 18 C89 19 86 17 83 16 C80 21 76 29 70 35 Z"/>
+                                <path d="M79 7 L81 0 L84 6 Z"/>
+                                <path class="horse-mane" d="M65 23 C68 15 72 9 77 5 C73 12 70 19 69 27 Z"/>
+                            </g>
+                        </svg></div>
+                        <div class="horse" style="--y:26px; --s:1.25; --dur:18s; --delay:-9s; --gait:.55s; opacity:.45"><svg viewBox="0 0 100 70" class="w-full h-full overflow-visible" aria-hidden="true">
+                            <g class="horse-bob">
+                                <path class="horse-tail" d="M25 29 C16 27 9 31 4 41 C11 37 18 36 25 35 Z"/>
+                                <g transform="translate(31 39)"><path class="horse-leg leg-b1" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(35 39)"><path class="horse-leg leg-b2" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(62 39)"><path class="horse-leg leg-f1" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <g transform="translate(66 39)"><path class="horse-leg leg-f2" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <path d="M24 30 C26 22 40 20 52 21 C60 21 66 22 70 26 C73 30 72 38 68 42 C60 46 40 46 30 44 C24 42 22 36 24 30 Z"/>
+                                <path d="M63 26 C67 18 72 10 78 6 C82 4 86 5 90 9 C93 12 94 15 92 18 C89 19 86 17 83 16 C80 21 76 29 70 35 Z"/>
+                                <path d="M79 7 L81 0 L84 6 Z"/>
+                                <path class="horse-mane" d="M65 23 C68 15 72 9 77 5 C73 12 70 19 69 27 Z"/>
+                            </g>
+                        </svg></div>
+                        <div class="horse hidden sm:block" style="--y:62px; --s:.8; --dur:24s; --delay:-14s; --gait:.48s; opacity:.3"><svg viewBox="0 0 100 70" class="w-full h-full overflow-visible" aria-hidden="true">
+                            <g class="horse-bob">
+                                <path class="horse-tail" d="M25 29 C16 27 9 31 4 41 C11 37 18 36 25 35 Z"/>
+                                <g transform="translate(31 39)"><path class="horse-leg leg-b1" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(35 39)"><path class="horse-leg leg-b2" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(62 39)"><path class="horse-leg leg-f1" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <g transform="translate(66 39)"><path class="horse-leg leg-f2" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <path d="M24 30 C26 22 40 20 52 21 C60 21 66 22 70 26 C73 30 72 38 68 42 C60 46 40 46 30 44 C24 42 22 36 24 30 Z"/>
+                                <path d="M63 26 C67 18 72 10 78 6 C82 4 86 5 90 9 C93 12 94 15 92 18 C89 19 86 17 83 16 C80 21 76 29 70 35 Z"/>
+                                <path d="M79 7 L81 0 L84 6 Z"/>
+                                <path class="horse-mane" d="M65 23 C68 15 72 9 77 5 C73 12 70 19 69 27 Z"/>
+                            </g>
+                        </svg></div>
+                        <div class="horse hidden sm:block" style="--y:44px; --s:1; --dur:20s; --delay:-16s; --gait:.53s; opacity:.38"><svg viewBox="0 0 100 70" class="w-full h-full overflow-visible" aria-hidden="true">
+                            <g class="horse-bob">
+                                <path class="horse-tail" d="M25 29 C16 27 9 31 4 41 C11 37 18 36 25 35 Z"/>
+                                <g transform="translate(31 39)"><path class="horse-leg leg-b1" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(35 39)"><path class="horse-leg leg-b2" d="M-2.5 0 L2.5 0 L1.6 21 L3.4 24 L-1.4 24 L-1.6 21 Z"/></g>
+                                <g transform="translate(62 39)"><path class="horse-leg leg-f1" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <g transform="translate(66 39)"><path class="horse-leg leg-f2" d="M-2.3 0 L2.3 0 L1.5 21 L3.2 24 L-1.3 24 L-1.5 21 Z"/></g>
+                                <path d="M24 30 C26 22 40 20 52 21 C60 21 66 22 70 26 C73 30 72 38 68 42 C60 46 40 46 30 44 C24 42 22 36 24 30 Z"/>
+                                <path d="M63 26 C67 18 72 10 78 6 C82 4 86 5 90 9 C93 12 94 15 92 18 C89 19 86 17 83 16 C80 21 76 29 70 35 Z"/>
+                                <path d="M79 7 L81 0 L84 6 Z"/>
+                                <path class="horse-mane" d="M65 23 C68 15 72 9 77 5 C73 12 70 19 69 27 Z"/>
+                            </g>
+                        </svg></div>
+                    </div>
                 </div>
+
+                <!-- Optional background video chosen in the admin panel -->
+                <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
             </div>
 
             <!-- Content Area with refined typography -->
-            <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center flex flex-col items-center">
+            <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-40 sm:pb-44 text-center flex flex-col items-center">
 
                 <!-- Cultural Tag Badge -->
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-beige-soft/90 border border-antique-gold/40 text-xs tracking-[0.2em] uppercase font-medium text-headline-brown mb-8 shadow-sm">
@@ -1068,9 +1209,27 @@
                 </section>
 
                 <!-- Settings -->
-                <section data-pane="settings" class="hidden max-w-sm">
+                <section data-pane="settings" class="hidden max-w-md">
                     <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Настройки</h2>
                     <div id="dbStatus" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card text-xs text-chocolate-deep/80">Проверяем базу данных…</div>
+                    <div id="heroForm" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
+                        <div class="font-semibold text-headline-brown text-sm">Фон главного экрана</div>
+                        <label class="flex items-start gap-2 text-xs"><input type="checkbox" id="heroScene" class="mt-0.5"> Анимированная степь: скачущие лошади, юрты с дымком, облака, беркут</label>
+                        <div>
+                            <span class="adm-label">Своё видео на фоне (MP4, до 3 МБ)</span>
+                            <div id="heroVideoInfo" class="text-xs text-chocolate-deep/70 mb-2">Видео не выбрано</div>
+                            <div class="flex flex-wrap gap-2">
+                                <label class="adm-btn-light cursor-pointer">🎬 Загрузить видео<input id="heroVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime" class="hidden"></label>
+                                <button type="button" id="heroVideoDel" class="adm-btn-light hidden">Убрать видео</button>
+                            </div>
+                            <input id="heroVideoUrl" type="url" placeholder="или ссылка: https://…/video.mp4" class="adm-input mt-2">
+                        </div>
+                        <div>
+                            <span class="adm-label">Прозрачность видео: <b id="heroOpacityVal">35%</b></span>
+                            <input id="heroOpacity" type="range" min="5" max="100" step="5" value="35" class="w-full">
+                        </div>
+                        <button type="button" id="heroSave" class="adm-btn w-full">Сохранить фон</button>
+                    </div>
                     <form id="pinForm" class="p-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
                         <label class="block text-xs font-semibold text-headline-brown">Новый PIN-код (4–12 цифр)</label>
                         <input id="pinNew" type="password" inputmode="numeric" class="w-full px-3 py-2.5 rounded border border-sand-light bg-ivory-main text-sm focus:outline-none focus:border-caramel">
@@ -1728,6 +1887,29 @@
             if (btn) setLang(btn.dataset.lang);
         });
 
+        // ---------- Hero background ----------
+        const heroSrc = (v) => (/^img[a-z0-9]+$/.test(v || '') ? API + 'image/' + v : v || '');
+
+        function applyHero(h = {}) {
+            $('#steppeScene').classList.toggle('hidden', h.scene === false);
+            const video = $('#heroVideo');
+            const src = heroSrc(h.video);
+            if (src) {
+                if (video.dataset.src !== src) {
+                    video.dataset.src = src;
+                    video.src = src;
+                }
+                video.style.opacity = h.opacity ?? 0.35;
+                video.classList.remove('hidden');
+                if (!matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(() => {});
+            } else if (video.dataset.src) {
+                video.dataset.src = '';
+                video.removeAttribute('src');
+                video.load();
+                video.classList.add('hidden');
+            }
+        }
+
         // ---------- Boot ----------
         async function loadContent() {
             const early = await window.TUMAR_CONTENT;
@@ -1745,7 +1927,9 @@
             const data = await loadContent();
             state.products = data.products || [];
             state.texts = data.texts || {};
+            state.hero = data.hero || {};
             state.db = !!data.db;
+            applyHero(state.hero);
             applyTexts();
             renderProducts();
             restoreCart();
@@ -1841,7 +2025,7 @@
             if (tab === 'products') renderAdminProducts();
             if (tab === 'texts') renderTextEditor();
             if (tab === 'subs') loadSubs();
-            if (tab === 'settings') loadStatus();
+            if (tab === 'settings') { loadStatus(); fillHeroForm(); }
         }
         $('#admTabs').addEventListener('click', (e) => {
             const b = e.target.closest('[data-tab]');
@@ -2208,6 +2392,83 @@
                 handleAuthError(err);
             } finally {
                 $('#txtSave').disabled = false;
+            }
+        });
+
+        // ---------- Hero background (admin) ----------
+        let heroDraftVideo = null;
+
+        function fillHeroForm() {
+            const h = state.hero || {};
+            $('#heroScene').checked = h.scene !== false;
+            heroDraftVideo = /^img[a-z0-9]+$/.test(h.video || '') ? h.video : null;
+            $('#heroVideoUrl').value = heroDraftVideo ? '' : h.video || '';
+            $('#heroOpacity').value = Math.round((h.opacity ?? 0.35) * 100);
+            updateHeroForm();
+        }
+
+        function updateHeroForm() {
+            const url = $('#heroVideoUrl').value.trim();
+            $('#heroVideoInfo').textContent = heroDraftVideo ? 'Загружено своё видео ✓' : url ? 'Видео по ссылке' : 'Видео не выбрано';
+            $('#heroVideoDel').classList.toggle('hidden', !heroDraftVideo && !url);
+            $('#heroOpacityVal').textContent = $('#heroOpacity').value + '%';
+        }
+
+        $('#heroOpacity').addEventListener('input', () => {
+            updateHeroForm();
+            $('#heroVideo').style.opacity = $('#heroOpacity').value / 100;
+        });
+        $('#heroVideoUrl').addEventListener('input', () => {
+            if ($('#heroVideoUrl').value.trim()) heroDraftVideo = null;
+            updateHeroForm();
+        });
+        $('#heroVideoDel').addEventListener('click', () => {
+            heroDraftVideo = null;
+            $('#heroVideoUrl').value = '';
+            updateHeroForm();
+        });
+
+        $('#heroVideoFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            e.target.value = '';
+            if (!file) return;
+            if (file.size > 3 * 1024 * 1024) {
+                showToast('Видео больше 3 МБ — сожмите его или дайте ссылку');
+                return;
+            }
+            try {
+                showToast('Загружаем видео…');
+                const dataUrl = await new Promise((resolve, reject) => {
+                    const r = new FileReader();
+                    r.onload = () => resolve(r.result);
+                    r.onerror = () => reject(new Error('Не удалось прочитать файл'));
+                    r.readAsDataURL(file);
+                });
+                const res = await api('videos', { method: 'POST', body: { dataUrl } });
+                heroDraftVideo = res.id;
+                $('#heroVideoUrl').value = '';
+                updateHeroForm();
+                showToast('Видео загружено — нажмите «Сохранить фон»');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        $('#heroSave').addEventListener('click', async () => {
+            const body = {
+                scene: $('#heroScene').checked,
+                video: heroDraftVideo || $('#heroVideoUrl').value.trim() || null,
+                opacity: $('#heroOpacity').value / 100
+            };
+            $('#heroSave').disabled = true;
+            try {
+                const r = await api('hero', { method: 'POST', body });
+                state.hero = r.hero;
+                applyHero(state.hero);
+                fillHeroForm();
+                showToast('Фон сохранён — закройте кабинет, чтобы посмотреть');
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#heroSave').disabled = false;
             }
         });
 

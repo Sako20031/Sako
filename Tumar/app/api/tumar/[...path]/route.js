@@ -12,13 +12,14 @@ import {
 
 // One small router for everything the /tumar page needs:
 //   GET    me | content | image/:id | orders | subscribers | status
-//   POST   login | logout | pin | texts | products | reorder | images | orders | subscribe
+//   POST   login | logout | pin | texts | hero | products | reorder | images | videos | orders | subscribe
 //   PATCH  product/:id | order/:id
 //   DELETE product/:id | order/:id | subscriber/:id
 
 export const dynamic = 'force-dynamic';
 
 const MAX_IMAGE_B64 = 1_600_000; // ~1.2 MB image
+const MAX_VIDEO_B64 = 4_100_000; // ~3 MB video (Vercel body limit is 4.5 MB)
 const MAX_TEXTS = 200_000;
 const CATS = ['men', 'women', '750', 'steppe'];
 const DESIGNS = ['wolf', 'umai', 'tumar', 'baiterek', 'eagle', 'arkar'];
@@ -96,6 +97,18 @@ async function loadTexts() {
   }
 }
 
+// Background of the hero section: animated steppe scene and/or a video.
+async function loadHero() {
+  const { rows } = await sql`SELECT value FROM tumar_settings WHERE key = 'hero'`;
+  try {
+    return rows[0] ? JSON.parse(rows[0].value) : {};
+  } catch {
+    return {};
+  }
+}
+
+const isMediaId = (v) => /^img[a-z0-9]+$/.test(v || '');
+
 async function dropImage(id) {
   if (id) await sql`DELETE FROM tumar_images WHERE id = ${id}`;
 }
@@ -104,7 +117,7 @@ export async function GET(req, { params }) {
   const [what, id] = params.path;
   if (!hasDb()) {
     if (what === 'me') return json({ admin: false, noDb: true });
-    if (what === 'content') return json({ products: defaults.products, texts: {}, db: false });
+    if (what === 'content') return json({ products: defaults.products, texts: {}, hero: {}, db: false });
     return notFound();
   }
   await ensureTumarDb();
@@ -112,22 +125,36 @@ export async function GET(req, { params }) {
   if (what === 'me') return json({ admin: await isTumarAdmin() });
 
   if (what === 'content') {
-    const [products, texts] = await Promise.all([loadProducts(), loadTexts()]);
-    return json({ products, texts, db: true });
+    const [products, texts, hero] = await Promise.all([loadProducts(), loadTexts(), loadHero()]);
+    return json({ products, texts, hero, db: true });
   }
 
   if (what === 'image' && id) {
     const { rows } = await sql`SELECT mime, data FROM tumar_images WHERE id = ${id}`;
     if (!rows[0]) return notFound();
     const buf = Buffer.from(rows[0].data, 'base64');
-    return new Response(buf, {
-      headers: {
-        'content-type': rows[0].mime,
-        'content-length': String(buf.length),
-        // ids are never reused, so the bytes behind a URL never change
-        'cache-control': 'public, max-age=31536000, immutable',
-      },
-    });
+    const headers = {
+      'content-type': rows[0].mime,
+      'accept-ranges': 'bytes',
+      // ids are never reused, so the bytes behind a URL never change
+      'cache-control': 'public, max-age=31536000, immutable',
+    };
+    // Safari only plays <video> from servers that answer byte-range requests.
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.get('range') || '');
+    if (range && (range[1] || range[2])) {
+      let start = range[1] ? Number(range[1]) : buf.length - Number(range[2]);
+      let end = range[1] && range[2] ? Number(range[2]) : buf.length - 1;
+      start = Math.max(0, start);
+      end = Math.min(end, buf.length - 1);
+      if (start > end) {
+        return new Response(null, { status: 416, headers: { 'content-range': `bytes */${buf.length}` } });
+      }
+      return new Response(buf.subarray(start, end + 1), {
+        status: 206,
+        headers: { ...headers, 'content-range': `bytes ${start}-${end}/${buf.length}`, 'content-length': String(end - start + 1) },
+      });
+    }
+    return new Response(buf, { headers: { ...headers, 'content-length': String(buf.length) } });
   }
 
   if (!(await isTumarAdmin())) return forbidden();
@@ -258,6 +285,28 @@ export async function POST(req, { params }) {
     await sql`INSERT INTO tumar_settings (key, value) VALUES ('texts', ${value})
       ON CONFLICT (key) DO UPDATE SET value = ${value}`;
     return json({ ok: true });
+  }
+
+  if (what === 'hero') {
+    const old = await loadHero();
+    let video = String(body.video || '').trim().slice(0, 500);
+    if (video && !isMediaId(video) && !/^https:\/\/\S+$/.test(video)) return bad('Ссылка на видео должна начинаться с https://');
+    const opacity = Math.min(1, Math.max(0.05, Number(body.opacity) || 0.35));
+    const hero = { scene: body.scene !== false, video: video || null, opacity };
+    const value = JSON.stringify(hero);
+    await sql`INSERT INTO tumar_settings (key, value) VALUES ('hero', ${value})
+      ON CONFLICT (key) DO UPDATE SET value = ${value}`;
+    if (isMediaId(old.video) && old.video !== hero.video) await dropImage(old.video);
+    return json({ ok: true, hero });
+  }
+
+  if (what === 'videos') {
+    const parsed = parseDataUrl(body.dataUrl);
+    if (!parsed || !/^video\/(mp4|webm|quicktime)$/.test(parsed.mime)) return bad('Нужно видео MP4 или WebM');
+    if (parsed.data.length > MAX_VIDEO_B64) return bad('Видео слишком большое (максимум ~3 МБ)');
+    const id = newId('img');
+    await sql`INSERT INTO tumar_images (id, mime, data) VALUES (${id}, ${parsed.mime}, ${parsed.data})`;
+    return json({ ok: true, id });
   }
 
   if (what === 'products') {
