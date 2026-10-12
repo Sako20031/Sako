@@ -26,3 +26,19 @@ Sakosakosako
 Также `.claude/skills/karpathy-guidelines/` — правила для кода в духе Андрея Карпаты
 (думать перед кодом, простота, точечные изменения, проверяемые цели) из
 [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT, коммит `2c60614`).
+
+## screenshot-to-code (инструмент для сайтов)
+
+`tools/screenshot-to-code` — git-подмодуль на [abi/screenshot-to-code](https://github.com/abi/screenshot-to-code)
+(MIT, коммит `a813977`): превращает скриншот, макет Figma или запись экрана в код
+(HTML/React/Vue + Tailwind). Это отдельное приложение, в сайт не встраивается.
+
+```bash
+git submodule update --init tools/screenshot-to-code
+cd tools/screenshot-to-code/backend
+echo "ANTHROPIC_API_KEY=ваш-ключ" > .env      # или OPENAI_API_KEY / GEMINI_API_KEY
+poetry install && poetry run playwright install chromium
+poetry run uvicorn main:app --reload --port 7001
+# во втором терминале:
+cd ../frontend && yarn && yarn dev            # открыть http://localhost:5173
+```
