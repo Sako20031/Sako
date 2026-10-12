@@ -22,3 +22,7 @@ Sakosakosako
 `review-animations`, `improve-animations`, `animation-performance`, `apple-design`,
 `mobile-native`, `break-ui`, `prototype`, `pick-ui-library`, `ask-sonner` и другие.
 Обновить: `npx skills@latest add emilkowalski/skills` или скопировать папку `skills/` заново.
+
+Также `.claude/skills/karpathy-guidelines/` — правила для кода в духе Андрея Карпаты
+(думать перед кодом, простота, точечные изменения, проверяемые цели) из
+[multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT, коммит `2c60614`).
