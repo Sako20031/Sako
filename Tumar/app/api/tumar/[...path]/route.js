@@ -11,7 +11,7 @@ import {
 } from '../../../../lib/tumar';
 
 // One small router for everything the /tumar page needs:
-//   GET    me | content | image/:id | orders | subscribers
+//   GET    me | content | image/:id | orders | subscribers | status
 //   POST   login | logout | pin | texts | products | reorder | images | orders | subscribe
 //   PATCH  product/:id | order/:id
 //   DELETE product/:id | order/:id | subscriber/:id
@@ -24,6 +24,9 @@ const CATS = ['men', 'women', '750', 'steppe'];
 const DESIGNS = ['wolf', 'umai', 'tumar', 'baiterek', 'eagle', 'arkar'];
 const BADGE_STYLES = ['gold', 'sand', 'brown', 'light'];
 const STATUSES = ['new', 'work', 'done', 'cancel'];
+const LANGS = ['kz', 'ru', 'en'];
+// Customer-facing product fields that also exist as name_kz, name_en, …
+const TRANSLATED = { name: 200, type: 100, metal: 100, weight: 50, desc: 2000, badge: 50 };
 const FAIL_WINDOW_MS = 15 * 60 * 1000;
 const MAX_FAILS = 8;
 
@@ -53,7 +56,15 @@ function clientIp(req) {
 
 function cleanProduct(b) {
   const price = Math.round(Number(b.price));
+  const translations = {};
+  for (const [field, max] of Object.entries(TRANSLATED)) {
+    for (const lang of ['kz', 'en']) {
+      const v = str(b[`${field}_${lang}`], max);
+      if (v) translations[`${field}_${lang}`] = v;
+    }
+  }
   return {
+    ...translations,
     name: str(b.name, 200),
     type: str(b.type, 100),
     metal: str(b.metal, 100),
@@ -133,9 +144,26 @@ export async function GET(req, { params }) {
         items: JSON.parse(r.items || '[]'),
         total: Number(r.total),
         status: r.status,
+        lang: r.lang || 'ru',
         createdAt: Number(r.created_at),
       }))
     );
+  }
+
+  if (what === 'status') {
+    const [p, o, n, s] = await Promise.all([
+      sql`SELECT count(*)::int AS n FROM tumar_products`,
+      sql`SELECT count(*)::int AS n FROM tumar_orders`,
+      sql`SELECT count(*)::int AS n FROM tumar_orders WHERE status = 'new'`,
+      sql`SELECT count(*)::int AS n FROM tumar_subscribers`,
+    ]);
+    return json({
+      db: true,
+      products: p.rows[0].n,
+      orders: o.rows[0].n,
+      newOrders: n.rows[0].n,
+      subscribers: s.rows[0].n,
+    });
   }
 
   if (what === 'subscribers') {
@@ -184,9 +212,10 @@ export async function POST(req, { params }) {
     if (!items.length) return bad('Корзина пуста');
     const total = items.reduce((s, i) => s + i.price * i.qty, 0);
     const id = newId('o');
-    await sql`INSERT INTO tumar_orders (id, name, phone, city, comment, items, total, status, created_at)
+    const lang = LANGS.includes(body.lang) ? body.lang : 'ru';
+    await sql`INSERT INTO tumar_orders (id, name, phone, city, comment, items, total, status, lang, created_at)
       VALUES (${id}, ${name}, ${phone}, ${str(body.city, 100)}, ${str(body.comment, 500)},
-              ${JSON.stringify(items)}, ${total}, 'new', ${Date.now()})`;
+              ${JSON.stringify(items)}, ${total}, 'new', ${lang}, ${Date.now()})`;
     return json({ ok: true, id, total });
   }
 
@@ -214,10 +243,15 @@ export async function POST(req, { params }) {
 
   if (what === 'texts') {
     const texts = {};
-    // Each override remembers the original text it replaces: { d, v }.
+    // Each override remembers the original Russian text it replaces (d) and
+    // holds the edited version per language: { d, ru?, kz?, en? }.
     for (const [k, o] of Object.entries(body.texts || {})) {
       if (!/^[a-z0-9_]{1,60}$/.test(k) || !o || typeof o !== 'object') continue;
-      texts[k] = { d: String(o.d ?? '').slice(0, 5000), v: String(o.v ?? '').slice(0, 5000) };
+      const entry = { d: String(o.d ?? '').slice(0, 5000) };
+      for (const lang of LANGS) {
+        if (typeof o[lang] === 'string') entry[lang] = o[lang].slice(0, 5000);
+      }
+      if (Object.keys(entry).length > 1) texts[k] = entry;
     }
     const value = JSON.stringify(texts);
     if (value.length > MAX_TEXTS) return bad('Слишком много текста');

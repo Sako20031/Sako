@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TUMAR Heritage | Ювелирные Медальоны Великой Степи</title>
+    <meta name="description" content="Ювелирный дом TUMAR: медальоны и тұмары из золота 585 и 750 с казахской сакральной символикой. Ручная чеканка, доставка по Казахстану.">
+    <!-- Kazakh / English translations (loaded first so the page never flashes Russian) -->
+    <script src="/tumar-files/i18n.js"></script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
@@ -131,12 +134,12 @@
             <!-- Right Controls: Language & Cart -->
             <div class="flex items-center space-x-5 text-chocolate-deep">
                 <!-- Lang Switcher -->
-                <div class="hidden sm:flex items-center gap-1.5 text-xs font-medium text-headline-brown bg-beige-soft px-2.5 py-1 rounded-full border border-sand-light/60">
-                    <button class="font-bold text-caramel">KZ</button>
-                    <span class="text-sand-light">|</span>
-                    <button class="hover:text-caramel transition font-medium">RU</button>
-                    <span class="text-sand-light">|</span>
-                    <button class="hover:text-caramel transition">EN</button>
+                <div data-noedit role="group" aria-label="Язык" class="lang-switch hidden sm:flex items-center gap-1.5 text-xs font-medium text-headline-brown bg-beige-soft px-2.5 py-1 rounded-full border border-sand-light/60">
+                    <button data-lang="kz" lang="kk" class="hover:text-caramel transition">KZ</button>
+                    <span class="text-sand-light" aria-hidden="true">|</span>
+                    <button data-lang="ru" lang="ru" class="hover:text-caramel transition">RU</button>
+                    <span class="text-sand-light" aria-hidden="true">|</span>
+                    <button data-lang="en" lang="en" class="hover:text-caramel transition">EN</button>
                 </div>
 
                 <!-- Search trigger -->
@@ -165,7 +168,7 @@
                     <div class="flex items-center gap-2">
                         <span class="font-serif tracking-[0.2em] text-xl font-bold text-headline-brown">TUMAR</span>
                     </div>
-                    <button onclick="toggleMobileMenu()" class="text-headline-brown p-1 hover:text-caramel">
+                    <button onclick="toggleMobileMenu()" aria-label="Закрыть меню" class="text-headline-brown p-1 hover:text-caramel">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
@@ -178,6 +181,11 @@
                 </nav>
             </div>
             <div class="pt-6 border-t border-sand-light/40">
+                <div data-noedit role="group" aria-label="Язык" class="lang-switch flex items-center gap-2 mb-5 text-sm font-medium text-headline-brown">
+                    <button data-lang="kz" lang="kk" class="px-3 py-1.5 rounded-full border border-sand-light/60">KZ</button>
+                    <button data-lang="ru" lang="ru" class="px-3 py-1.5 rounded-full border border-sand-light/60">RU</button>
+                    <button data-lang="en" lang="en" class="px-3 py-1.5 rounded-full border border-sand-light/60">EN</button>
+                </div>
                 <p class="text-xs text-headline-brown font-serif italic mb-2">«Тұмар — қорған, күш пен тектілік»</p>
                 <p class="text-xs text-chocolate-deep/70">Алматы: пр. Достык, 162<br>Астана: ул. Достык, 16</p>
             </div>
@@ -823,6 +831,21 @@
         </div>
     </aside>
 
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" data-g="search" data-gl="Поиск" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-start justify-center p-4 pt-20 sm:pt-28">
+        <div class="bg-ivory-main rounded-2xl max-w-lg w-full p-4 sm:p-5 border border-sand-light shadow-2xl">
+            <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-antique-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                <input id="searchInput" type="search" autocomplete="off" placeholder="Поиск по коллекции…" class="flex-grow bg-transparent text-base text-chocolate-deep placeholder:text-chocolate-deep/40 focus:outline-none">
+                <button onclick="closeSearch()" aria-label="Закрыть" class="text-headline-brown hover:text-caramel p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="searchResults" data-noedit class="mt-3 max-h-[60vh] overflow-y-auto divide-y divide-sand-light/40"></div>
+            <p id="searchEmpty" class="hidden mt-4 mb-2 text-center text-sm text-chocolate-deep/60">Ничего не найдено</p>
+        </div>
+    </div>
+
     <!-- QUICK VIEW MODAL -->
     <div id="quickViewModal" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-ivory-main rounded-2xl max-w-2xl w-full p-6 sm:p-8 border border-sand-light shadow-2xl relative">
@@ -928,7 +951,6 @@
         <span data-m="order_ok">Рахмет! Ваш заказ принят. Консьерж уже набирает вас.</span>
         <span data-m="order_fail">Не удалось отправить заказ. Позвоните нам: +7 (701) 000-00-00</span>
         <span data-m="sub_fail">Не удалось подписаться, попробуйте позже</span>
-        <span data-m="search">Поиск: введите "Тұмар", "Бөрі", "750"</span>
         <span data-m="custom">Служба индивидуальных заказов: +7 (701) 000-00-00</span>
         <span data-m="symbol_ok">Понятно</span>
     </div>
@@ -996,7 +1018,12 @@
                         <h2 class="font-serif text-2xl font-bold text-headline-brown">Тексты сайта</h2>
                         <input id="txtSearch" type="search" placeholder="Найти текст…" class="px-3 py-2 rounded border border-sand-light bg-cream-card text-xs w-full sm:w-64">
                     </div>
-                    <p class="text-xs text-chocolate-deep/60 mb-4">Измените любой текст и нажмите «Сохранить». Кнопка ↺ возвращает исходный текст.</p>
+                    <div id="txtLang" class="flex gap-1 mb-3">
+                        <button type="button" data-tl="ru" class="adm-lang">Русский</button>
+                        <button type="button" data-tl="kz" class="adm-lang">Қазақша</button>
+                        <button type="button" data-tl="en" class="adm-lang">English</button>
+                    </div>
+                    <p class="text-xs text-chocolate-deep/60 mb-4">Выберите язык, измените любой текст и нажмите «Сохранить». Кнопка ↺ возвращает исходный текст (или готовый перевод).</p>
                     <div id="txtGroups" class="space-y-3 pb-24"></div>
                     <div class="fixed bottom-0 inset-x-0 bg-beige-soft/95 border-t border-sand-light py-3">
                         <div class="max-w-5xl mx-auto px-4 flex items-center justify-end gap-3">
@@ -1018,6 +1045,7 @@
                 <!-- Settings -->
                 <section data-pane="settings" class="hidden max-w-sm">
                     <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Настройки</h2>
+                    <div id="dbStatus" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card text-xs text-chocolate-deep/80">Проверяем базу данных…</div>
                     <form id="pinForm" class="p-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
                         <label class="block text-xs font-semibold text-headline-brown">Новый PIN-код (4–12 цифр)</label>
                         <input id="pinNew" type="password" inputmode="numeric" class="w-full px-3 py-2.5 rounded border border-sand-light bg-ivory-main text-sm focus:outline-none focus:border-caramel">
@@ -1033,7 +1061,13 @@
     <div id="prodEditor" class="fixed inset-0 z-[70] bg-chocolate-deep/50 backdrop-blur-sm hidden items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto">
         <form id="prodForm" class="bg-ivory-main rounded-2xl max-w-2xl w-full p-5 sm:p-7 border border-sand-light shadow-2xl relative my-4">
             <button type="button" data-close class="absolute top-4 right-4 text-headline-brown hover:text-caramel text-xl">✕</button>
-            <h3 id="prodFormTitle" class="font-serif text-2xl font-bold text-headline-brown mb-4">Товар</h3>
+            <h3 id="prodFormTitle" class="font-serif text-2xl font-bold text-headline-brown mb-3">Товар</h3>
+            <div id="prodLangTabs" class="flex flex-wrap items-center gap-1 mb-1">
+                <button type="button" data-pl="ru" class="adm-lang">Русский</button>
+                <button type="button" data-pl="kz" class="adm-lang">Қазақша</button>
+                <button type="button" data-pl="en" class="adm-lang">English</button>
+            </div>
+            <p class="text-[11px] text-chocolate-deep/60 mb-4">Название, тип, металл, вес, описание и значок заполняются для каждого языка. Пустое поле — на сайте покажется русский вариант.</p>
             <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-5">
                 <div>
                     <div id="prodPreview" class="w-44 h-44 mx-auto rounded-lg bg-beige-soft border border-sand-light flex items-center justify-center p-2"></div>
@@ -1101,6 +1135,8 @@
         .adm-btn:disabled { opacity: .6; }
         .adm-btn-light { padding: 9px 16px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 12px; font-weight: 600; }
         .adm-btn-light:hover { border-color: #A77B52; }
+        .adm-lang { padding: 7px 14px; border-radius: 999px; border: 1px solid #D2B797; background: #FAF6F0; color: #765238; font-size: 12px; font-weight: 600; }
+        .adm-lang.active { background: #A77B52; border-color: #A77B52; color: #F7F1E7; }
         .adm-label { display: block; font-size: 11px; font-weight: 600; color: #765238; margin-bottom: 4px; }
         .adm-input { width: 100%; padding: 8px 10px; border-radius: 4px; border: 1px solid #D2B797; background: #FAF6F0; font-size: 13px; color: #493021; }
         .adm-input:focus { outline: none; border-color: #A77B52; }
@@ -1131,8 +1167,38 @@
         const norm = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
         const msg = (key) => norm($(`[data-m="${key}"]`)?.textContent);
 
+        // ---------- Language (KZ / RU / EN) ----------
+        // Russian is the source language of the page. Kazakh and English come
+        // from /tumar-files/i18n.js (keyed by the Russian text), and the admin
+        // panel can override any text in any language.
+        const LANGS = ['kz', 'ru', 'en'];
+        const HTML_LANG = { kz: 'kk', ru: 'ru', en: 'en' };
+        const LOCALE = { kz: 'kk-KZ', ru: 'ru-RU', en: 'en-US' };
+        const DICT = window.TUMAR_I18N || {};
+        let lang = pickLang();
+
+        function pickLang() {
+            const fromUrl = new URLSearchParams(location.search).get('lang');
+            if (LANGS.includes(fromUrl)) return fromUrl;
+            try {
+                const saved = localStorage.getItem('tumar_lang');
+                if (LANGS.includes(saved)) return saved;
+            } catch {}
+            for (const l of (navigator.languages || [navigator.language || '']).map((x) => String(x).toLowerCase())) {
+                if (l.startsWith('kk')) return 'kz';
+                if (l.startsWith('ru')) return 'ru';
+                if (l.startsWith('en')) return 'en';
+            }
+            return 'ru';
+        }
+
+        // A fixed Russian string in the current language.
+        const t = (ru) => (lang === 'ru' ? ru : DICT[norm(ru)]?.[lang] ?? ru);
+        // A product field in the current language, falling back to Russian.
+        const tr = (p, field) => (lang !== 'ru' && p[`${field}_${lang}`]) || p[field] || '';
+
         function formatKZT(amount) {
-            return new Intl.NumberFormat('ru-RU').format(amount) + ' ₸';
+            return new Intl.NumberFormat(LOCALE[lang]).format(amount) + ' ₸';
         }
 
         async function api(path, { method = 'GET', body } = {}) {
@@ -1211,7 +1277,7 @@
 
         function productArt(p) {
             if (p.image) {
-                return `<img src="${API}image/${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain rounded-lg medallion-svg">`;
+                return `<img src="${API}image/${esc(p.image)}" alt="${esc(tr(p, 'name'))}" loading="lazy" class="w-full h-full object-contain rounded-lg medallion-svg">`;
             }
             return designSvg(p.design, p.engraving);
         }
@@ -1224,7 +1290,7 @@
             return `
             <div class="product-card group bg-cream-card rounded-lg border border-sand-light/60 overflow-hidden shadow-luxury hover:shadow-luxury-hover transition-all duration-500 flex flex-col" data-id="${esc(p.id)}">
                 <div class="relative bg-gradient-to-b from-beige-soft/60 to-ivory-main p-8 flex items-center justify-center min-h-[320px] medallion-rotate">
-                    ${p.badge ? `<span class="absolute top-4 left-4 ${BADGE[p.badgeStyle] || BADGE.gold} text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">${esc(p.badge)}</span>` : ''}
+                    ${p.badge ? `<span class="absolute top-4 left-4 ${BADGE[p.badgeStyle] || BADGE.gold} text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">${esc(tr(p, 'badge'))}</span>` : ''}
                     ${p.edition ? `<span class="absolute top-4 right-4 text-xs font-serif italic text-headline-brown">${esc(p.edition)}</span>` : ''}
                     <div class="w-56 h-56 relative flex items-center justify-center drop-shadow-xl">${productArt(p)}</div>
                     <button data-act="quick" class="absolute bottom-4 bg-ivory-main/90 hover:bg-ivory-main text-headline-brown border border-sand-light text-xs font-semibold py-2 px-4 rounded-md shadow-sm sm:opacity-0 group-hover:opacity-100 transition-opacity">${esc(msg('quick'))}</button>
@@ -1232,15 +1298,15 @@
                 <div class="p-6 flex-grow flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between gap-3 text-xs text-antique-gold font-medium mb-1">
-                            <span>${esc(p.type)}</span>
-                            <span class="text-right">${esc(p.metal)}</span>
+                            <span>${esc(tr(p, 'type'))}</span>
+                            <span class="text-right">${esc(tr(p, 'metal'))}</span>
                         </div>
-                        <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">${esc(p.name)}</h3>
-                        <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">${esc(p.desc)}</p>
+                        <h3 class="font-serif text-2xl font-bold text-headline-brown mb-2 group-hover:text-caramel transition">${esc(tr(p, 'name'))}</h3>
+                        <p class="text-xs text-chocolate-deep/75 mb-4 leading-relaxed">${esc(tr(p, 'desc'))}</p>
                     </div>
                     <div>
                         <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-sand-light/40">
-                            <span class="text-xs text-chocolate-deep/60">${p.weight ? esc(msg('weight') + ' ~' + p.weight) : ''}</span>
+                            <span class="text-xs text-chocolate-deep/60">${tr(p, 'weight') ? esc(msg('weight') + ' ~' + tr(p, 'weight')) : ''}</span>
                             <span class="font-serif text-2xl font-bold text-headline-brown">${formatKZT(p.price)}</span>
                         </div>
                         <button data-act="add" class="w-full py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded text-xs font-semibold uppercase tracking-wider transition">${esc(msg('add'))}</button>
@@ -1293,7 +1359,7 @@
             if (existing) existing.quantity += 1;
             else cart.push({ id, quantity: 1 });
             updateCartUI();
-            showToast(`«${p.name}» ${msg('added')}`);
+            showToast(`${tr(p, 'name')} — ${msg('added')}`);
             openCartDrawer();
         }
 
@@ -1326,8 +1392,8 @@
             container.innerHTML = lines.map((item) => `
                 <div class="py-4 flex items-center justify-between gap-4" data-id="${esc(item.id)}">
                     <div class="flex-grow">
-                        <h4 class="font-serif font-bold text-headline-brown text-base">${esc(item.name)}</h4>
-                        <span class="text-[11px] text-antique-gold">${esc(item.metal)}</span>
+                        <h4 class="font-serif font-bold text-headline-brown text-base">${esc(tr(item, 'name'))}</h4>
+                        <span class="text-[11px] text-antique-gold">${esc(tr(item, 'metal'))}</span>
                         <div class="text-xs font-semibold text-caramel mt-1">${formatKZT(item.price)}</div>
                     </div>
                     <div class="flex items-center border border-sand-light rounded bg-cream-card">
@@ -1363,9 +1429,9 @@
             $('#quickViewContent').innerHTML = `
                 <div class="text-center" data-id="${esc(p.id)}">
                     <div class="w-40 h-40 mx-auto mb-4">${productArt(p)}</div>
-                    <span class="text-xs uppercase tracking-widest text-antique-gold font-bold">${esc(p.metal)}${p.weight ? ' &bull; ' + esc(p.weight) : ''}</span>
-                    <h3 class="font-serif text-3xl font-bold text-headline-brown mt-1 mb-3">${esc(p.name)}</h3>
-                    <p class="text-sm text-chocolate-deep/80 leading-relaxed max-w-md mx-auto mb-6">${esc(p.desc)}</p>
+                    <span class="text-xs uppercase tracking-widest text-antique-gold font-bold">${esc(tr(p, 'metal'))}${p.weight ? ' &bull; ' + esc(tr(p, 'weight')) : ''}</span>
+                    <h3 class="font-serif text-3xl font-bold text-headline-brown mt-1 mb-3">${esc(tr(p, 'name'))}</h3>
+                    <p class="text-sm text-chocolate-deep/80 leading-relaxed max-w-md mx-auto mb-6">${esc(tr(p, 'desc'))}</p>
                     <div class="font-serif text-3xl font-bold text-headline-brown mb-6">${formatKZT(p.price)}</div>
                     <div class="flex items-center justify-center gap-4">
                         <button data-qv="add" class="px-8 py-3 bg-caramel hover:bg-caramel-hover text-ivory-main rounded font-semibold text-xs uppercase tracking-wider transition">${esc(msg('add'))}</button>
@@ -1405,6 +1471,10 @@
         function calculateQuizResult(gold) {
             quizAnswers.gold = gold;
             $('#quizStep3').classList.add('hidden');
+            showQuizResult();
+        }
+
+        function showQuizResult() {
             const box = $(`#quizTexts [data-quiz="${quizAnswers.step1}"]`) || $('#quizTexts [data-quiz="power"]');
             $('#resultTitle').innerText = norm($('[data-q-title]', box).textContent);
             $('#resultDesc').innerText = norm($('[data-q-desc]', box).textContent);
@@ -1449,6 +1519,7 @@
                         phone: form.phone.value,
                         city: form.city.value,
                         comment: form.comment.value,
+                        lang,
                         items: cart.map((i) => ({ id: i.id, qty: i.quantity }))
                     }
                 });
@@ -1458,7 +1529,7 @@
                 updateCartUI();
                 showToast(msg('order_ok'));
             } catch (err) {
-                showToast(err.status === 400 ? err.message : msg('order_fail'));
+                showToast(msg('order_fail'));
             } finally {
                 btn.disabled = false;
                 btn.innerText = label;
@@ -1476,7 +1547,50 @@
             }
         }
 
-        function toggleSearchModal() { showToast(msg('search')); }
+        // ---------- Search ----------
+        function toggleSearchModal() {
+            $('#searchInput').value = '';
+            runSearch();
+            openModal('#searchModal');
+            setTimeout(() => $('#searchInput').focus(), 50);
+        }
+        function closeSearch() { closeModal('#searchModal'); }
+
+        function runSearch() {
+            const q = norm($('#searchInput').value).toLowerCase();
+            const fields = ['name', 'type', 'metal', 'desc', 'badge'];
+            const haystack = (p) => fields.flatMap((f) => [p[f], p[f + '_kz'], p[f + '_en']]).join(' ').toLowerCase();
+            const list = visibleProducts().filter((p) => !q || haystack(p).includes(q));
+            $('#searchResults').innerHTML = list.map((p) => `
+                <button data-id="${esc(p.id)}" class="w-full flex items-center gap-3 py-3 px-2 text-left rounded hover:bg-beige-soft/60 transition">
+                    <span class="w-12 h-12 shrink-0">${productArt(p)}</span>
+                    <span class="flex-grow min-w-0">
+                        <span class="block font-serif text-lg font-bold text-headline-brown truncate">${esc(tr(p, 'name'))}</span>
+                        <span class="block text-xs text-antique-gold truncate">${esc(tr(p, 'metal'))}</span>
+                    </span>
+                    <span class="font-serif font-bold text-headline-brown whitespace-nowrap">${formatKZT(p.price)}</span>
+                </button>`).join('');
+            $('#searchEmpty').classList.toggle('hidden', list.length > 0);
+        }
+        $('#searchInput').addEventListener('input', runSearch);
+        $('#searchResults').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-id]');
+            if (!btn) return;
+            closeSearch();
+            quickView(btn.dataset.id);
+        });
+
+        // Click outside a dialog or press Esc to close it.
+        ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal'].forEach((id) => {
+            $(id).addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(id); });
+        });
+        $('#mobileDrawer').addEventListener('click', (e) => { if (e.target === e.currentTarget) toggleMobileMenu(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal', '#prodEditor'].forEach(closeModal);
+            closeCartDrawer();
+            $('#mobileDrawer').classList.add('hidden');
+        });
         function showCustomOrderModal() { showToast(msg('custom')); }
 
         // ---------- Editable texts ----------
@@ -1528,12 +1642,66 @@
             entry.node.nodeValue = lead + value + trail;
         }
 
-        function applyTexts(texts) {
-            for (const entry of textEntries) {
-                const o = texts[entry.key];
-                setEntry(entry, o && o.d === entry.def ? o.v : entry.def);
-            }
+        // Built-in text of an entry in a language: the Russian original or its
+        // translation from i18n.js.
+        function defaultFor(entry, l = lang) {
+            return l === 'ru' ? entry.def : DICT[entry.def]?.[l] ?? entry.def;
         }
+
+        // What the page shows: the admin's edit for that language if there is
+        // one, otherwise the built-in text.
+        function valueFor(entry, l = lang) {
+            const o = state.texts[entry.key];
+            if (o && o.d === entry.def) {
+                const v = o[l] ?? (l === 'ru' ? o.v : undefined);
+                if (typeof v === 'string' && v.trim()) return v;
+            }
+            return defaultFor(entry, l);
+        }
+
+        const META = { title: document.title, desc: $('meta[name="description"]').content };
+
+        function applyTexts() {
+            for (const entry of textEntries) setEntry(entry, valueFor(entry));
+            document.documentElement.lang = HTML_LANG[lang];
+            document.title = t(META.title);
+            $('meta[name="description"]').content = t(META.desc);
+            $$('[aria-label]').forEach((el) => {
+                if (el.closest('#admin, #prodEditor')) return;
+                el.dataset.ariaRu ??= el.getAttribute('aria-label');
+                el.setAttribute('aria-label', t(el.dataset.ariaRu));
+            });
+            $$('.lang-switch [data-lang]').forEach((b) => {
+                const on = b.dataset.lang === lang;
+                b.classList.toggle('font-bold', on);
+                b.classList.toggle('text-caramel', on);
+                b.classList.toggle('border-caramel', on);
+                b.setAttribute('aria-pressed', String(on));
+            });
+        }
+
+        function setLang(l) {
+            if (!LANGS.includes(l) || l === lang) return;
+            lang = l;
+            try { localStorage.setItem('tumar_lang', l); } catch {}
+            const url = new URL(location.href);
+            if (url.searchParams.has('lang')) {
+                url.searchParams.set('lang', l);
+                history.replaceState(null, '', url);
+            }
+            closeModal('#quickViewModal');
+            closeModal('#symbolModal');
+            applyTexts();
+            renderProducts();
+            updateCartUI();
+            if (!$('#quizResult').classList.contains('hidden')) showQuizResult();
+            if (!$('#searchModal').classList.contains('hidden')) runSearch();
+        }
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.lang-switch [data-lang]');
+            if (btn) setLang(btn.dataset.lang);
+        });
 
         // ---------- Boot ----------
         async function loadContent() {
@@ -1550,11 +1718,12 @@
 
         async function boot() {
             textEntries = collectTexts();
+            applyTexts();
             const data = await loadContent();
             state.products = data.products || [];
             state.texts = data.texts || {};
             state.db = !!data.db;
-            applyTexts(state.texts);
+            applyTexts();
             renderProducts();
             restoreCart();
             updateCartUI();
@@ -1581,7 +1750,7 @@
             admin.classList.add('hidden');
             document.body.style.overflow = '';
             if (location.hash === '#admin') history.replaceState(null, '', location.pathname);
-            if (/\/admin\/?$/.test(location.pathname)) history.replaceState(null, '', location.pathname.replace(/\/admin\/?$/, ''));
+            if (/\/admin\/?$/.test(location.pathname)) history.replaceState(null, '', location.pathname.replace(/\/admin\/?$/, '') || '/');
         }
 
         function showAdminView() {
@@ -1648,6 +1817,7 @@
             if (tab === 'products') renderAdminProducts();
             if (tab === 'texts') renderTextEditor();
             if (tab === 'subs') loadSubs();
+            if (tab === 'settings') loadStatus();
         }
         $('#admTabs').addEventListener('click', (e) => {
             const b = e.target.closest('[data-tab]');
@@ -1674,7 +1844,7 @@
                 <div class="p-4 rounded-lg border ${o.status === 'new' ? 'border-caramel bg-cream-card' : 'border-sand-light bg-ivory-main'}" data-id="${esc(o.id)}">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                         <div>
-                            <div class="font-semibold text-headline-brown">${esc(o.name)}</div>
+                            <div class="font-semibold text-headline-brown">${esc(o.name)} <span class="ml-1 align-middle text-[10px] px-1.5 py-0.5 rounded border border-sand-light text-chocolate-deep/70" title="Язык сайта при заказе">${esc((o.lang || 'ru').toUpperCase())}</span></div>
                             <div class="text-xs text-chocolate-deep/70 mt-0.5">
                                 <a href="tel:${esc(o.phone)}" class="text-caramel hover:underline">${esc(o.phone)}</a>
                                 ${digits ? ` · <a href="https://wa.me/${digits}" target="_blank" rel="noopener" class="text-caramel hover:underline">WhatsApp</a>` : ''}
@@ -1721,6 +1891,11 @@
         });
 
         // ---------- Products ----------
+        // Languages where a product still shows Russian text.
+        function missingLangs(p) {
+            return ['kz', 'en'].filter((l) => PFIELDS.some((f) => p[f] && !p[`${f}_${l}`])).map((l) => l.toUpperCase());
+        }
+
         function renderAdminProducts() {
             const ps = state.products;
             $('#prodList').innerHTML = ps.length ? ps.map((p, i) => `
@@ -1728,6 +1903,7 @@
                     <div class="w-14 h-14 shrink-0">${productArt(p)}</div>
                     <div class="flex-grow min-w-0">
                         <div class="font-semibold text-headline-brown truncate">${esc(p.name)}${p.hidden ? ' <span class="text-[10px] uppercase text-chocolate-deep/60">(скрыт)</span>' : ''}</div>
+                        ${missingLangs(p).length ? `<div class="text-[10px] text-caramel">Нет перевода: ${missingLangs(p).join(', ')}</div>` : ''}
                         <div class="text-xs text-chocolate-deep/70">${formatKZT(p.price)}${p.metal ? ' · ' + esc(p.metal) : ''}</div>
                     </div>
                     <div class="flex items-center gap-1 shrink-0">
@@ -1769,16 +1945,45 @@
 
         // Product editor
         const pform = $('#prodForm');
+        const PFIELDS = ['name', 'type', 'metal', 'weight', 'desc', 'badge'];
+        const PH = Object.fromEntries(PFIELDS.map((f) => [f, pform.elements[f].placeholder]));
+        const pkey = (field, l) => (l === 'ru' ? field : `${field}_${l}`);
         let editing = null; // product being edited, or null for a new one
         let draftImage = null;
+        let prodLang = 'ru';
+        let prodDraft = {}; // translated fields of every language
+
+        function stashProdLang() {
+            PFIELDS.forEach((f) => { prodDraft[pkey(f, prodLang)] = pform.elements[f].value.trim(); });
+        }
+
+        function showProdLang(l) {
+            stashProdLang();
+            prodLang = l;
+            PFIELDS.forEach((f) => {
+                pform.elements[f].value = prodDraft[pkey(f, l)] || '';
+                pform.elements[f].placeholder = l === 'ru' ? PH[f] : prodDraft[f] || PH[f];
+            });
+            pform.elements.name.required = l === 'ru';
+            $$('#prodLangTabs [data-pl]').forEach((b) => b.classList.toggle('active', b.dataset.pl === l));
+        }
+        $('#prodLangTabs').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-pl]');
+            if (b) showProdLang(b.dataset.pl);
+        });
 
         function openProductEditor(p) {
             editing = p || null;
             pform.reset();
             const d = p || { design: 'tumar', badgeStyle: 'gold', cats: [] };
-            for (const name of ['name', 'price', 'weight', 'type', 'metal', 'desc', 'badge', 'badgeStyle', 'edition', 'design', 'engraving']) {
+            for (const name of ['price', 'badgeStyle', 'edition', 'design', 'engraving']) {
                 if (d[name] !== undefined) pform.elements[name].value = d[name];
             }
+            prodDraft = {};
+            for (const f of PFIELDS) for (const l of LANGS) prodDraft[pkey(f, l)] = d[pkey(f, l)] || '';
+            prodLang = 'ru';
+            PFIELDS.forEach((f) => { pform.elements[f].value = prodDraft[f]; });
+            showProdLang('ru');
             $$('input[name="cats"]', pform).forEach((c) => { c.checked = (d.cats || []).includes(c.value); });
             pform.elements.hidden.checked = !!d.hidden;
             draftImage = d.image || null;
@@ -1788,10 +1993,11 @@
         }
 
         function readProductForm() {
+            stashProdLang();
             const f = pform.elements;
             return {
-                name: f.name.value, price: Number(f.price.value), weight: f.weight.value, type: f.type.value,
-                metal: f.metal.value, desc: f.desc.value, badge: f.badge.value, badgeStyle: f.badgeStyle.value,
+                ...prodDraft,
+                price: Number(f.price.value), badgeStyle: f.badgeStyle.value,
                 edition: f.edition.value, design: f.design.value, engraving: f.engraving.value,
                 cats: $$('input[name="cats"]:checked', pform).map((c) => c.value),
                 hidden: f.hidden.checked, image: draftImage
@@ -1848,6 +2054,12 @@
         pform.addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = readProductForm();
+            if (!data.name) {
+                showProdLang('ru');
+                pform.elements.name.focus();
+                showToast('Укажите название на русском');
+                return;
+            }
             $('#prodSave').disabled = true;
             try {
                 if (editing) {
@@ -1868,32 +2080,44 @@
         });
 
         // ---------- Text editor ----------
+        const LANG_NAMES = { ru: 'Русский', kz: 'Қазақша', en: 'English' };
+        let editLang = 'ru';
+        let textsDirty = false;
+
+        function setTextsDirty(on) {
+            textsDirty = on;
+            $('#txtDirty').classList.toggle('hidden', !on);
+        }
+
         function renderTextEditor() {
             const groups = new Map();
             textEntries.forEach((entry, i) => {
                 if (!groups.has(entry.group)) groups.set(entry.group, []);
                 groups.get(entry.group).push(i);
             });
-            const current = (entry) => entry.el ? norm(entry.el.placeholder) : norm(entry.node.nodeValue);
+            $$('#txtLang [data-tl]').forEach((b) => b.classList.toggle('active', b.dataset.tl === editLang));
             $('#txtGroups').innerHTML = [...groups].map(([group, idxs]) => `
                 <details class="rounded-lg border border-sand-light bg-cream-card" data-group>
                     <summary class="px-4 py-3 cursor-pointer font-semibold text-headline-brown text-sm">${esc(group.dataset.gl || group.dataset.g)} <span class="text-xs font-normal text-chocolate-deep/50">(${idxs.length})</span></summary>
                     <div class="px-4 pb-4 space-y-3">
                         ${idxs.map((i) => {
                             const entry = textEntries[i];
-                            const val = current(entry);
+                            const val = valueFor(entry, editLang);
+                            const def = defaultFor(entry, editLang);
                             const field = entry.def.length > 70
                                 ? `<textarea rows="3" data-ti="${i}" class="adm-input">${esc(val)}</textarea>`
                                 : `<input data-ti="${i}" value="${esc(val)}" class="adm-input">`;
-                            return `<div data-row data-search="${esc((entry.def + ' ' + val).toLowerCase())}">
-                                <div class="flex items-center justify-between"><span class="adm-label">${esc(entry.label)}</span>
-                                <button type="button" data-reset="${i}" class="text-xs text-caramel ${val === entry.def ? 'invisible' : ''}" title="Вернуть исходный текст">↺ исходный</button></div>
+                            const haystack = [entry.def, val, defaultFor(entry, 'kz'), defaultFor(entry, 'en')].join(' ').toLowerCase();
+                            return `<div data-row data-search="${esc(haystack)}">
+                                <div class="flex items-center justify-between gap-2"><span class="adm-label">${esc(entry.label)}</span>
+                                <button type="button" data-reset="${i}" class="text-xs text-caramel ${val === def ? 'invisible' : ''}" title="Вернуть исходный текст">↺ исходный</button></div>
                                 ${field}
+                                ${editLang !== 'ru' ? `<div class="text-[11px] text-chocolate-deep/50 mt-1">RU: ${esc(entry.def)}</div>` : ''}
                             </div>`;
                         }).join('')}
                     </div>
                 </details>`).join('');
-            $('#txtDirty').classList.add('hidden');
+            setTextsDirty(false);
             filterTexts();
         }
 
@@ -1912,43 +2136,69 @@
         }
 
         $('#txtSearch').addEventListener('input', filterTexts);
+        $('#txtLang').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-tl]');
+            if (!b || b.dataset.tl === editLang) return;
+            if (textsDirty && !confirm('Есть несохранённые изменения. Переключить язык без сохранения?')) return;
+            editLang = b.dataset.tl;
+            renderTextEditor();
+        });
         $('#txtGroups').addEventListener('input', (e) => {
             if (!e.target.matches('[data-ti]')) return;
             const entry = textEntries[e.target.dataset.ti];
-            $(`[data-reset="${e.target.dataset.ti}"]`).classList.toggle('invisible', norm(e.target.value) === entry.def);
-            $('#txtDirty').classList.remove('hidden');
+            $(`[data-reset="${e.target.dataset.ti}"]`).classList.toggle('invisible', norm(e.target.value) === defaultFor(entry, editLang));
+            setTextsDirty(true);
         });
         $('#txtGroups').addEventListener('click', (e) => {
             const btn = e.target.closest('[data-reset]');
             if (!btn) return;
-            const field = $(`[data-ti="${btn.dataset.reset}"]`);
-            field.value = textEntries[btn.dataset.reset].def;
+            $(`[data-ti="${btn.dataset.reset}"]`).value = defaultFor(textEntries[btn.dataset.reset], editLang);
             btn.classList.add('invisible');
-            $('#txtDirty').classList.remove('hidden');
+            setTextsDirty(true);
         });
 
         $('#txtSave').addEventListener('click', async () => {
-            const texts = {};
+            // Start from what is saved for the other languages and replace only
+            // the language being edited.
+            const texts = JSON.parse(JSON.stringify(state.texts));
             $$('#txtGroups [data-ti]').forEach((field) => {
                 const entry = textEntries[field.dataset.ti];
                 const v = norm(field.value);
-                if (v !== entry.def) texts[entry.key] = { d: entry.def, v };
+                const o = texts[entry.key]?.d === entry.def ? texts[entry.key] : { d: entry.def };
+                if (o.v !== undefined) { o.ru ??= o.v; delete o.v; }
+                if (v && v !== defaultFor(entry, editLang)) o[editLang] = v;
+                else delete o[editLang];
+                if (Object.keys(o).length > 1) texts[entry.key] = o;
+                else delete texts[entry.key];
             });
             $('#txtSave').disabled = true;
             try {
                 await api('texts', { method: 'POST', body: { texts } });
                 state.texts = texts;
-                applyTexts(texts);
+                applyTexts();
                 renderProducts();
                 updateCartUI();
-                $('#txtDirty').classList.add('hidden');
-                showToast('Тексты сохранены');
+                setTextsDirty(false);
+                showToast(`Тексты сохранены (${LANG_NAMES[editLang]})`);
             } catch (err) {
                 handleAuthError(err);
             } finally {
                 $('#txtSave').disabled = false;
             }
         });
+
+        // ---------- Database status ----------
+        async function loadStatus() {
+            try {
+                const st = await api('status');
+                $('#dbStatus').innerHTML = `
+                    <div class="font-semibold text-headline-brown mb-1">База данных: подключена ✓</div>
+                    Товаров: ${st.products} · Заказов: ${st.orders} (новых: ${st.newOrders}) · Подписчиков: ${st.subscribers}`;
+            } catch (err) {
+                if (handleAuthError(err)) return;
+                $('#dbStatus').textContent = 'База данных недоступна: ' + err.message;
+            }
+        }
 
         // ---------- Subscribers ----------
         async function loadSubs() {

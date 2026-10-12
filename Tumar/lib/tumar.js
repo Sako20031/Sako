@@ -43,6 +43,7 @@ async function init() {
     status TEXT,
     created_at BIGINT
   )`;
+  await sql`ALTER TABLE tumar_orders ADD COLUMN IF NOT EXISTS lang TEXT`;
   await sql`CREATE TABLE IF NOT EXISTS tumar_subscribers (
     id TEXT PRIMARY KEY,
     email TEXT UNIQUE,
