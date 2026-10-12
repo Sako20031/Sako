@@ -13,3 +13,12 @@ Sakosakosako
 
 Всё хранится в базе Vercel Postgres (Neon, подключена к проекту `sako`), в отдельных таблицах `love_*`. Комплименты по умолчанию — в `public/ayaulym-files/content.json`.
 Код: `public/ayaulym.html`, `app/api/love/[...path]/route.js`, `lib/love.js`.
+
+## Скилы для дизайна и анимаций (Claude Code)
+
+В `.claude/skills/` лежат скилы из [emilkowalski/skills](https://github.com/emilkowalski/skills)
+(MIT, см. `.claude/skills/LICENSE-emilkowalski`, коммит `2d22863`). Claude Code
+подхватывает их автоматически в этом репозитории: `emil-design-eng`, `animate`,
+`review-animations`, `improve-animations`, `animation-performance`, `apple-design`,
+`mobile-native`, `break-ui`, `prototype`, `pick-ui-library`, `ask-sonner` и другие.
+Обновить: `npx skills@latest add emilkowalski/skills` или скопировать папку `skills/` заново.
