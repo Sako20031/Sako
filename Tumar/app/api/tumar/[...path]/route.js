@@ -97,17 +97,20 @@ async function loadTexts() {
   }
 }
 
-// Background of the hero section: animated steppe scene and/or a video.
+// Background of the hero section: a video and/or the animated steppe scene.
+// Until the admin saves their own choice, the bundled yurt video is shown.
 async function loadHero() {
   const { rows } = await sql`SELECT value FROM tumar_settings WHERE key = 'hero'`;
   try {
-    return rows[0] ? JSON.parse(rows[0].value) : {};
+    return rows[0] ? JSON.parse(rows[0].value) : defaults.hero;
   } catch {
-    return {};
+    return defaults.hero;
   }
 }
 
 const isMediaId = (v) => /^img[a-z0-9]+$/.test(v || '');
+// Videos shipped with the site in public/tumar-files.
+const isBundledVideo = (v) => /^\/tumar-files\/[\w.-]+\.(mp4|webm)$/.test(v || '');
 
 async function dropImage(id) {
   if (id) await sql`DELETE FROM tumar_images WHERE id = ${id}`;
@@ -117,7 +120,7 @@ export async function GET(req, { params }) {
   const [what, id] = params.path;
   if (!hasDb()) {
     if (what === 'me') return json({ admin: false, noDb: true });
-    if (what === 'content') return json({ products: defaults.products, texts: {}, hero: {}, db: false });
+    if (what === 'content') return json({ products: defaults.products, texts: {}, hero: defaults.hero, db: false });
     return notFound();
   }
   await ensureTumarDb();
@@ -290,9 +293,11 @@ export async function POST(req, { params }) {
   if (what === 'hero') {
     const old = await loadHero();
     let video = String(body.video || '').trim().slice(0, 500);
-    if (video && !isMediaId(video) && !/^https:\/\/\S+$/.test(video)) return bad('Ссылка на видео должна начинаться с https://');
-    const opacity = Math.min(1, Math.max(0.05, Number(body.opacity) || 0.35));
-    const hero = { scene: body.scene !== false, video: video || null, opacity };
+    if (video && !isMediaId(video) && !isBundledVideo(video) && !/^https:\/\/\S+$/.test(video)) {
+      return bad('Ссылка на видео должна начинаться с https://');
+    }
+    const opacity = Math.min(1, Math.max(0.05, Number(body.opacity) || 1));
+    const hero = { scene: body.scene !== false, video: video || null, opacity, dark: Boolean(body.dark) };
     const value = JSON.stringify(hero);
     await sql`INSERT INTO tumar_settings (key, value) VALUES ('hero', ${value})
       ON CONFLICT (key) DO UPDATE SET value = ${value}`;

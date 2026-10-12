@@ -1,4 +1,10 @@
 {
+  "hero": {
+    "video": "/tumar-files/hero.mp4",
+    "opacity": 1,
+    "dark": true,
+    "scene": false
+  },
   "products": [
     {
       "id": "kok-bori",
