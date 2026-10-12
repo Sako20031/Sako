@@ -105,6 +105,15 @@
         .medallion-svg {
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* ---------- Hero over a bright video: white text, darkened picture ---------- */
+        #heroVideo { object-position: 50% 62%; }
+        #heroShade { background: linear-gradient(180deg, rgba(28, 18, 11, .55) 0%, rgba(28, 18, 11, .32) 38%, rgba(28, 18, 11, .38) 70%, rgba(28, 18, 11, .62) 100%); }
+        .hero-dark h1, .hero-dark h1 * { color: #FFFFFF !important; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+        .hero-dark h1 .italic { color: #F1D9A6 !important; }
+        .hero-dark p { color: rgba(255, 255, 255, .92) !important; text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+        .hero-dark .hero-pillars { border-color: rgba(255, 255, 255, .35) !important; }
+        .hero-dark .hero-pillars h4 { color: #FFFFFF !important; }
+        .hero-dark .hero-pillars span { color: #F1D9A6 !important; }
         /* ---------- Living steppe scene ---------- */
         .steppe-scene { color: #765238; }
         .cloud {
@@ -266,7 +275,7 @@
 
     <main class="flex-grow">
         <!-- HERO SECTION: Light Luxury Kazakh Steppe & Sunlit Yurt Atmosphere -->
-        <section data-g="hero" data-gl="Главный экран" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
+        <section id="hero" data-g="hero" data-gl="Главный экран" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
             <!-- Simulated Golden Steppe Sunset Background with Soft Natural Aesthetics -->
             <div class="absolute inset-0 pointer-events-none select-none">
                 <!-- Warm sky gradient with subtle sun ray glow -->
@@ -387,7 +396,9 @@
                 </div>
 
                 <!-- Optional background video chosen in the admin panel -->
-                <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+                <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+                <!-- Darkens a bright video so the white hero text stays readable -->
+                <div id="heroShade" class="absolute inset-0 hidden"></div>
             </div>
 
             <!-- Content Area with refined typography -->
@@ -425,7 +436,7 @@
                 </div>
 
                 <!-- Trust Pillars -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mt-16 pt-10 border-t border-sand-light/50 w-full max-w-4xl text-left">
+                <div class="hero-pillars grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mt-16 pt-10 border-t border-sand-light/50 w-full max-w-4xl text-left">
                     <div class="flex items-start gap-3">
                         <span class="text-antique-gold text-xl font-serif">I.</span>
                         <div>
@@ -1214,19 +1225,21 @@
                     <div id="dbStatus" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card text-xs text-chocolate-deep/80">Проверяем базу данных…</div>
                     <div id="heroForm" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
                         <div class="font-semibold text-headline-brown text-sm">Фон главного экрана</div>
-                        <label class="flex items-start gap-2 text-xs"><input type="checkbox" id="heroScene" class="mt-0.5"> Анимированная степь: скачущие лошади, юрты с дымком, облака, беркут</label>
+                        <label class="flex items-start gap-2 text-xs"><input type="checkbox" id="heroScene" class="mt-0.5"> Нарисованная степь: скачущие лошади, юрты с дымком, облака, беркут</label>
+                        <label class="flex items-start gap-2 text-xs"><input type="checkbox" id="heroDark" class="mt-0.5"> Яркое видео с затемнением и белым текстом (если выключить — видео полупрозрачное на светлом фоне)</label>
                         <div>
-                            <span class="adm-label">Своё видео на фоне (MP4, до 3 МБ)</span>
+                            <span class="adm-label">Видео на фоне (MP4, до 3 МБ)</span>
                             <div id="heroVideoInfo" class="text-xs text-chocolate-deep/70 mb-2">Видео не выбрано</div>
                             <div class="flex flex-wrap gap-2">
                                 <label class="adm-btn-light cursor-pointer">🎬 Загрузить видео<input id="heroVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime" class="hidden"></label>
-                                <button type="button" id="heroVideoDel" class="adm-btn-light hidden">Убрать видео</button>
+                                <button type="button" id="heroVideoDel" class="adm-btn-light hidden">🗑 Удалить видео</button>
+                                <button type="button" id="heroVideoDefault" class="adm-btn-light hidden">↺ Вернуть стандартное видео</button>
                             </div>
                             <input id="heroVideoUrl" type="url" placeholder="или ссылка: https://…/video.mp4" class="adm-input mt-2">
                         </div>
                         <div>
-                            <span class="adm-label">Прозрачность видео: <b id="heroOpacityVal">35%</b></span>
-                            <input id="heroOpacity" type="range" min="5" max="100" step="5" value="35" class="w-full">
+                            <span class="adm-label">Яркость видео: <b id="heroOpacityVal">100%</b></span>
+                            <input id="heroOpacity" type="range" min="5" max="100" step="5" value="100" class="w-full">
                         </div>
                         <button type="button" id="heroSave" class="adm-btn w-full">Сохранить фон</button>
                     </div>
@@ -1890,21 +1903,42 @@
         // ---------- Hero background ----------
         const heroSrc = (v) => (/^img[a-z0-9]+$/.test(v || '') ? API + 'image/' + v : v || '');
 
+        const DEFAULT_HERO_VIDEO = '/tumar-files/hero.mp4';
+
         function applyHero(h = {}) {
             $('#steppeScene').classList.toggle('hidden', h.scene === false);
             const video = $('#heroVideo');
             const src = heroSrc(h.video);
+            const dark = Boolean(src && h.dark);
+            $('#hero').classList.toggle('hero-dark', dark);
+            $('#heroShade').classList.toggle('hidden', !dark);
             if (src) {
                 if (video.dataset.src !== src) {
                     video.dataset.src = src;
-                    video.src = src;
+                    video.removeAttribute('src');
+                    video.innerHTML = '';
+                    // The bundled video also comes as WebM and has a poster frame.
+                    const sources = src === DEFAULT_HERO_VIDEO
+                        ? [[src, 'video/mp4'], ['/tumar-files/hero.webm', 'video/webm']]
+                        : [[src, '']];
+                    for (const [url, type] of sources) {
+                        const el = document.createElement('source');
+                        el.src = url;
+                        if (type) el.type = type;
+                        video.appendChild(el);
+                    }
+                    if (src === DEFAULT_HERO_VIDEO) video.poster = '/tumar-files/hero-poster.jpg';
+                    else video.removeAttribute('poster');
+                    video.load();
                 }
-                video.style.opacity = h.opacity ?? 0.35;
+                video.style.opacity = h.opacity ?? 1;
                 video.classList.remove('hidden');
                 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(() => {});
             } else if (video.dataset.src) {
                 video.dataset.src = '';
+                video.innerHTML = '';
                 video.removeAttribute('src');
+                video.removeAttribute('poster');
                 video.load();
                 video.classList.add('hidden');
             }
@@ -2398,21 +2432,35 @@
         // ---------- Hero background (admin) ----------
         let heroDraftVideo = null;
 
+        // An uploaded file (img… id) or the bundled video; links live in the URL field.
+        const isStoredVideo = (v) => /^img[a-z0-9]+$/.test(v || '') || v === DEFAULT_HERO_VIDEO;
+
         function fillHeroForm() {
             const h = state.hero || {};
             $('#heroScene').checked = h.scene !== false;
-            heroDraftVideo = /^img[a-z0-9]+$/.test(h.video || '') ? h.video : null;
+            $('#heroDark').checked = Boolean(h.dark);
+            heroDraftVideo = isStoredVideo(h.video) ? h.video : null;
             $('#heroVideoUrl').value = heroDraftVideo ? '' : h.video || '';
-            $('#heroOpacity').value = Math.round((h.opacity ?? 0.35) * 100);
+            $('#heroOpacity').value = Math.round((h.opacity ?? 1) * 100);
             updateHeroForm();
         }
 
         function updateHeroForm() {
             const url = $('#heroVideoUrl').value.trim();
-            $('#heroVideoInfo').textContent = heroDraftVideo ? 'Загружено своё видео ✓' : url ? 'Видео по ссылке' : 'Видео не выбрано';
+            $('#heroVideoInfo').textContent = heroDraftVideo === DEFAULT_HERO_VIDEO ? 'Стандартное видео: юрты и лошади ✓'
+                : heroDraftVideo ? 'Загружено своё видео ✓' : url ? 'Видео по ссылке' : 'Видео не выбрано';
             $('#heroVideoDel').classList.toggle('hidden', !heroDraftVideo && !url);
+            $('#heroVideoDefault').classList.toggle('hidden', heroDraftVideo === DEFAULT_HERO_VIDEO);
             $('#heroOpacityVal').textContent = $('#heroOpacity').value + '%';
         }
+
+        $('#heroVideoDefault').addEventListener('click', () => {
+            heroDraftVideo = DEFAULT_HERO_VIDEO;
+            $('#heroVideoUrl').value = '';
+            $('#heroDark').checked = true;
+            $('#heroOpacity').value = 100;
+            updateHeroForm();
+        });
 
         $('#heroOpacity').addEventListener('input', () => {
             updateHeroForm();
@@ -2448,6 +2496,7 @@
                 heroDraftVideo = res.id;
                 $('#heroVideoUrl').value = '';
                 updateHeroForm();
+                $('#heroScene').checked = false;
                 showToast('Видео загружено — нажмите «Сохранить фон»');
             } catch (err) { handleAuthError(err); }
         });
@@ -2455,6 +2504,7 @@
         $('#heroSave').addEventListener('click', async () => {
             const body = {
                 scene: $('#heroScene').checked,
+                dark: $('#heroDark').checked,
                 video: heroDraftVideo || $('#heroVideoUrl').value.trim() || null,
                 opacity: $('#heroOpacity').value / 100
             };
