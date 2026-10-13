@@ -7,11 +7,15 @@
     <meta name="description" content="Ювелирный дом TUMAR: медальоны и тұмары из золота 585 и 750 с казахской сакральной символикой. Ручная чеканка, доставка по Казахстану.">
     <!-- Kazakh / English translations (loaded first so the page never flashes Russian) -->
     <script src="/tumar-files/i18n.js"></script>
+    <link rel="preload" as="image" href="/tumar-files/hero-poster.jpg" fetchpriority="high">
     <script>
         // Ask for the catalog and the admin's edits right away, in parallel
         // with the rest of the page, and keep the page hidden until they are
         // applied so visitors never see the built-in texts flash first.
-        window.TUMAR_CONTENT = fetch('/api/tumar/content', { cache: 'no-store' })
+        // After the admin saves something, their browser skips the CDN copy.
+        let tumarV = '';
+        try { tumarV = localStorage.getItem('tumar_v') || ''; } catch {}
+        window.TUMAR_CONTENT = fetch('/api/tumar/content' + (tumarV ? '?v=' + tumarV : ''))
             .then((r) => (r.ok ? r.json() : null))
             .catch(() => null);
         document.documentElement.classList.add('tumar-loading');
@@ -106,7 +110,7 @@
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         /* ---------- Hero over a bright video: white text, darkened picture ---------- */
-        #heroVideo { object-position: 50% 62%; }
+        #heroVideo { object-position: 50% 62%; transition: opacity .8s ease; }
         #heroShade { background: linear-gradient(180deg, rgba(28, 18, 11, .55) 0%, rgba(28, 18, 11, .32) 38%, rgba(28, 18, 11, .38) 70%, rgba(28, 18, 11, .62) 100%); }
         .hero-dark h1, .hero-dark h1 * { color: #FFFFFF !important; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
         .hero-dark h1 .italic { color: #F1D9A6 !important; }
@@ -275,7 +279,7 @@
 
     <main class="flex-grow">
         <!-- HERO SECTION: Light Luxury Kazakh Steppe & Sunlit Yurt Atmosphere -->
-        <section id="hero" data-g="hero" data-gl="Главный экран" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
+        <section id="hero" data-g="hero" data-gl="Главный экран" class="hero-dark relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-ivory-main">
             <!-- Simulated Golden Steppe Sunset Background with Soft Natural Aesthetics -->
             <div class="absolute inset-0 pointer-events-none select-none">
                 <!-- Warm sky gradient with subtle sun ray glow -->
@@ -396,9 +400,14 @@
                 </div>
 
                 <!-- Optional background video chosen in the admin panel -->
-                <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+                <!-- The standard video is in the markup so it starts loading with the page;
+                     its first frame shows at once and the video fades in when it plays. -->
+                <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover" data-src="/tumar-files/hero.mp4" poster="/tumar-files/hero-poster.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true">
+                    <source src="/tumar-files/hero.mp4" type="video/mp4">
+                    <source src="/tumar-files/hero.webm" type="video/webm">
+                </video>
                 <!-- Darkens a bright video so the white hero text stays readable -->
-                <div id="heroShade" class="absolute inset-0 hidden"></div>
+                <div id="heroShade" class="absolute inset-0"></div>
             </div>
 
             <!-- Content Area with refined typography -->
@@ -1422,6 +1431,9 @@
                 init.body = JSON.stringify(body);
             }
             const res = await fetch(API + path, init);
+            if (method !== 'GET' && res.ok && path !== 'orders' && path !== 'subscribe') {
+                try { localStorage.setItem('tumar_v', String(Date.now())); } catch {}
+            }
             let data = {};
             try { data = await res.json(); } catch {}
             if (!res.ok) {
@@ -2007,7 +2019,8 @@
                 }
                 video.style.opacity = h.opacity ?? 1;
                 video.classList.remove('hidden');
-                if (!matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(() => {});
+                if (matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
+                else video.play().catch(() => {});
             } else if (video.dataset.src) {
                 video.dataset.src = '';
                 video.innerHTML = '';
