@@ -1,9 +1,10 @@
-"""Soundtrack for public/tumar-motion.html (12 s): a solo dombra, synthesised.
+"""Soundtrack for public/tumar-motion.html (12 s): dombra, synthesised.
 
-Each of the two strings (tuned D3 and G3, as on a Kazakh dombra) is a
-waveguide that rings for the whole piece; strokes (down and up, the
-qagys technique) excite it, frets change its length. The sound then goes
-through the resonances of the wooden body and a small room.
+Two dombras play in unison (left and right, a hair apart in time and
+tuning) for a fuller, warmer sound. Each dombra has two strings tuned D3
+and G3; each string is a waveguide that rings for the whole piece, strokes
+excite it with the soft of the finger, frets change its length. Then the
+wooden body, a gentle top roll-off and a warm hall.
 
     python3 scripts/motion-sound.py out.wav
 """
@@ -15,7 +16,6 @@ import numpy as np
 SR = 48000
 DUR = 12.0
 N = int(SR * DUR)
-rng = np.random.default_rng(11)
 
 NAMES = {'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
 
@@ -30,9 +30,9 @@ def hz(name):
 events = []
 
 
-def stroke(t, low, high, amp, kind='d'):
+def stroke(t, low, high, amp, kind='d', roll=None):
     """Strike both strings; a down stroke reaches the D string first."""
-    gap = 0.009 if kind == 'd' else 0.007
+    gap = roll or (0.016 if kind == 'd' else 0.012)
     first, second = ((0, low), (1, high)) if kind == 'd' else ((1, high), (0, low))
     events.append((t, first[0], first[1], amp, kind))
     events.append((t + gap, second[0], second[1], amp * (0.9 if kind == 'd' else 0.8), kind))
@@ -42,94 +42,88 @@ def pick(t, string, note, amp):
     events.append((t, string, note, amp, 'p'))
 
 
-# 0.2 s - the medallion appears: two slow open strokes, left to ring
-stroke(0.20, 'D3', 'G3', 0.8)
-stroke(0.95, 'D3', 'A3', 0.65)
+# 0.2 s - the medallion appears: slow, rolled open chords, left to ring
+stroke(0.20, 'D3', 'A3', 0.85, roll=0.05)
+stroke(1.05, 'D3', 'G3', 0.6, roll=0.05)
 
-# 1.6 s - twelve horns: a quick run on the upper string over the open D
-run = ['A3', 'Bb3', 'C4', 'D4', 'C4', 'Bb3', 'A3', 'G3', 'A3', 'C4', 'D4', 'A3']
-pick(1.58, 0, 'D3', 0.45)
-for i, n in enumerate(run):
-    pick(1.6 + i * 0.09, 1, n, 0.42 + 0.15 * (i % 2 == 0))
+# 1.6 s - the horns: an unhurried rising line over the open D
+pick(1.6, 0, 'D3', 0.5)
+for i, n in enumerate(['A3', 'D4', 'F4', 'E4', 'D4', 'A3']):
+    pick(1.6 + i * 0.2, 1, n, 0.55)
 
-# 2.9 s - TUMAR: the galloping kuy rhythm (long, short, short)
-beat = 60 / 132
+# 2.9 s - TUMAR: a calm galloping kuy rhythm (long, short, short)
+beat = 60 / 108
 bars = [('D3', 'A3'), ('D3', 'A3'), ('D3', 'Bb3'), ('D3', 'A3'),
-        ('F3', 'C4'), ('F3', 'A3'), ('D3', 'A3'), ('E3', 'C4'),
-        ('D3', 'Bb3'), ('D3', 'A3'), ('D3', 'G3')]
+        ('F3', 'C4'), ('E3', 'A3'), ('D3', 'A3'), ('D3', 'G3'), ('D3', 'A3')]
 t = 2.9
 for b, (low, high) in enumerate(bars):
-    accent = 1.0 if b % 4 == 0 else 0.85
-    stroke(t, low, high, 0.95 * accent, 'd')
-    stroke(t + beat * 0.5, low, high, 0.5, 'u')
-    stroke(t + beat * 0.75, low, high, 0.7, 'd')
+    if t > 7.6:
+        break
+    accent = 1.0 if b % 4 == 0 else 0.82
+    stroke(t, low, high, 0.9 * accent, 'd')
+    stroke(t + beat * 0.5, low, high, 0.38, 'u')
+    stroke(t + beat * 0.75, low, high, 0.55, 'd')
     t += beat
 
-# 5.5 s - the tagline: the melody climbs on the upper string
-for dt, n in [(0.0, 'D4'), (0.23, 'C4'), (0.45, 'D4')]:
-    pick(5.5 + dt, 1, n, 0.75)
+# 5.5 s - the tagline: a singing phrase on the upper string
+for dt, n in [(0.0, 'D4'), (0.3, 'F4'), (0.6, 'E4')]:
+    pick(5.5 + dt, 1, n, 0.6)
 
-# 7.9 s - the light opens: tremolo that speeds up and grows
-tt, gap, k = 7.9, 0.11, 0
-while tt < 8.95:
-    stroke(tt, 'D3', 'A3', 0.35 + 0.5 * (tt - 7.9), 'du'[k % 2])
-    tt += gap
-    gap = max(0.05, gap * 0.9)
-    k += 1
+# 8.0 s - the light opens: two broad rolled chords
+stroke(8.0, 'D3', 'A3', 0.7, roll=0.07)
+stroke(8.5, 'E3', 'Bb3', 0.75, roll=0.07)
 
-# 9.0 s - the logo lands: a strong open chord, then the letters
-stroke(9.0, 'D3', 'G3', 1.0, 'd')
-for i, n in enumerate(['A3', 'C4', 'D4', 'G4', 'A4']):
-    pick(9.0 + 0.32 + i * 0.07, 1, n, 0.28)
+# 9.0 s - the logo lands: a full open chord, then the letters
+stroke(9.0, 'D3', 'G3', 1.0, roll=0.03)
+for i, n in enumerate(['A3', 'D4', 'F4', 'A4']):
+    pick(9.0 + 0.4 + i * 0.16, 1, n, 0.3)
 
 events.sort()
 
-# Natural harmonics (flageolets) at the end: pure, bell-like tones
-harmonics = [(9.8, hz('D4'), 0.20), (10.25, hz('G4'), 0.18), (10.7, hz('D5'), 0.12)]
+# Natural harmonics (flageolets) at the end: soft, bell-like
+harmonics = [(10.1, hz('D4'), 0.14), (10.6, hz('A4'), 0.11)]
 
 
 # ---------- strings ----------
-def excitation(amp, kind, period):
-    """The fingernail / finger hitting the string."""
-    n = max(8, int(period))
+def excitation(amp, kind, period, rng):
+    """The soft of the finger meeting the string (no hard nail)."""
+    n = max(8, int(period * 1.3))
     burst = rng.uniform(-1, 1, n)
-    smooth = {'d': 2, 'u': 1, 'p': 3}[kind]   # up strokes are brighter (nail)
-    for _ in range(smooth):
+    for _ in range({'d': 5, 'u': 4, 'p': 6}[kind]):
         burst = 0.5 * (burst + np.roll(burst, 1))
-    # Plucking point about 1/8 of the string from the bridge: comb filter
-    k = max(1, n // 8)
-    burst = burst - np.concatenate([np.zeros(k), burst[:-k]])
-    burst *= np.hanning(n) ** 0.3
+    # Plucked about a fifth of the way from the bridge: rounder tone
+    k = max(1, n // 5)
+    burst = burst - 0.7 * np.concatenate([np.zeros(k), burst[:-k]])
+    burst *= np.hanning(n) ** 0.5
     return burst * amp
 
 
-def string_track(index, open_note):
+def string_track(index, open_note, detune, rng):
     out = np.zeros(N)
     buf = np.zeros(4096)
     w = 0
-    f = hz(open_note)
+    f = hz(open_note) * detune
     delay = SR / f - 0.5
     gain = 0.0
-    bright = 0.5
     damp_until = -1
     pending = [(int(t * SR), note, amp, kind) for (t, s, note, amp, kind) in events if s == index]
     pending.append((N + 1, None, 0, None))
     p = 0
     inject = None
     inj_pos = 0
+    bright = 0.5
     for n in range(N):
         if n >= pending[p][0]:
             _, note, amp, kind = pending[p]
             p += 1
-            f_new = hz(note)
+            f_new = hz(note) * detune
             if abs(f_new - f) > 0.5:
-                damp_until = n + 40          # the finger moves: the old note stops
+                damp_until = n + 60          # the finger moves: the old note stops
             f = f_new
             delay = SR / f - 0.5
-            t60 = 1.9 * (146.8 / f) ** 0.35  # gut strings: higher notes die sooner
+            t60 = 2.8 * (146.8 / f) ** 0.3   # long, warm sustain
             gain = 10 ** (-3 / (t60 * f))
-            bright = 0.42 if kind == 'u' else 0.35
-            inject = excitation(amp, kind, SR / f)
+            inject = excitation(amp, kind, SR / f, rng)
             inj_pos = 0
         di = int(delay)
         frac = delay - di
@@ -140,7 +134,7 @@ def string_track(index, open_note):
         s1 = r1 + frac * (r2 - r1)
         y = gain * ((1 - bright) * s0 + bright * s1)
         if n < damp_until:
-            y *= 0.9
+            y *= 0.93
         if inject is not None:
             y += inject[inj_pos]
             inj_pos += 1
@@ -152,62 +146,86 @@ def string_track(index, open_note):
     return out
 
 
-strings = string_track(0, 'D3') + string_track(1, 'G3')
-
-# The nail also taps the soundboard: a short bright click on every stroke
-for (t0, _s, _n, amp, kind) in events:
-    n = int(0.006 * SR)
-    click = rng.normal(0, 1, n)
-    click = click - np.concatenate([[0], click[:-1]])
-    click *= np.exp(-np.arange(n) / (0.0012 * SR)) * amp * (0.05 if kind == 'p' else 0.09)
-    i = int(t0 * SR)
-    strings[i:i + n] += click[: N - i]
-
-for t0, f0, a in harmonics:
-    n = int(2.0 * SR)
-    tt = np.arange(n) / SR
-    tone = (np.sin(2 * np.pi * f0 * tt) + 0.25 * np.sin(2 * np.pi * 2 * f0 * tt) * np.exp(-tt * 3)) * np.exp(-tt * 1.6)
-    tone *= np.minimum(1, tt / 0.004)
-    i = int(t0 * SR)
-    strings[i:i + n] += a * tone[: N - i]
+def dombra(detune, seed):
+    rng = np.random.default_rng(seed)
+    return string_track(0, 'D3', detune, rng) + string_track(1, 'G3', detune, rng)
 
 
-# ---------- wooden body and room ----------
-def body_ir(seed):
-    r = np.random.default_rng(seed)
-    n = int(0.12 * SR)
-    t = np.arange(n) / SR
-    ir = np.zeros(n)
-    ir[0] = 1.0
-    # Air and wood modes of a dombra's pear-shaped body
-    for f, a, d in [(190, .9, 40), (285, .7, 45), (420, .45, 60), (560, .35, 70),
-                    (980, .25, 90), (1500, .15, 120), (2600, .08, 160)]:
-        f *= 1 + r.uniform(-0.03, 0.03)
-        ir += a * np.sin(2 * np.pi * f * t) * np.exp(-t * d) * 0.006
-    return ir
+def shift(x, sec):
+    k = int(sec * SR)
+    return np.concatenate([np.zeros(k), x[: len(x) - k]])
 
 
+# Two players: one a few cents sharp and a few milliseconds late
+cents = 2 ** (5 / 1200)
+player_l = dombra(1.0, 11)
+player_r = shift(dombra(cents, 23), 0.011)
+
+
+def add_harmonics(x):
+    for t0, f0, a in harmonics:
+        n = int(2.5 * SR)
+        tt = np.arange(n) / SR
+        tone = (np.sin(2 * np.pi * f0 * tt) + 0.2 * np.sin(2 * np.pi * 2 * f0 * tt) * np.exp(-tt * 3)) * np.exp(-tt * 1.2)
+        tone *= np.minimum(1, tt / 0.01)
+        i = int(t0 * SR)
+        x[i:i + n] += a * tone[: N - i]
+    return x
+
+
+player_l = add_harmonics(player_l)
+player_r = add_harmonics(player_r)
+
+
+# ---------- wooden body, tone, hall ----------
 def convolve(x, h):
     size = 1 << int(np.ceil(np.log2(len(x) + len(h))))
     return np.fft.irfft(np.fft.rfft(x, size) * np.fft.rfft(h, size), size)[: len(x)]
 
 
-left = convolve(strings, body_ir(1))
-right = convolve(np.concatenate([np.zeros(14), strings[:-14]]), body_ir(2))
+def body_ir(seed):
+    r = np.random.default_rng(seed)
+    n = int(0.15 * SR)
+    t = np.arange(n) / SR
+    ir = np.zeros(n)
+    ir[0] = 1.0
+    # Air and wood modes of a dombra's pear-shaped body: warm low-mids
+    for f, a, d in [(160, 1.0, 30), (240, .8, 35), (330, .6, 45), (470, .4, 60),
+                    (850, .18, 90), (1400, .08, 130)]:
+        f *= 1 + r.uniform(-0.03, 0.03)
+        ir += a * np.sin(2 * np.pi * f * t) * np.exp(-t * d) * 0.006
+    return ir
 
-room_n = int(1.1 * SR)
-room_t = np.arange(room_n) / SR
+
+def tone(x, cutoff=4200.0):
+    """Gentle top roll-off: takes the edge and the 'twang' off."""
+    size = 1 << int(np.ceil(np.log2(len(x))))
+    X = np.fft.rfft(x, size)
+    f = np.fft.rfftfreq(size, 1 / SR)
+    X *= 1 / np.sqrt(1 + (f / cutoff) ** 4)
+    return np.fft.irfft(X, size)[: len(x)]
+
+
+rng = np.random.default_rng(5)
+left = tone(convolve(player_l + 0.35 * player_r, body_ir(1)))
+right = tone(convolve(player_r + 0.35 * player_l, body_ir(2)))
+
+# Warm hall: a longer, darker tail
+hall_n = int(2.4 * SR)
+hall_t = np.arange(hall_n) / SR
+dry = [left.copy(), right.copy()]
 for k, ch in enumerate((left, right)):
-    ir = rng.normal(0, 1, room_n) * np.exp(-room_t * 5.5)
-    ir = np.convolve(ir, np.ones(8) / 8, mode='same')   # soften the tail
-    ir[: int(0.012 * SR)] = 0
-    wet = convolve(ch, ir)
-    ch += 0.035 * wet / np.max(np.abs(wet)) * np.max(np.abs(ch))
+    ir = rng.normal(0, 1, hall_n) * np.exp(-hall_t * 2.6)
+    ir = tone(ir, 2500.0)
+    ir[: int(0.025 * SR)] = 0
+    wet = convolve(dry[k], ir)
+    ch += 0.22 * wet / np.max(np.abs(wet)) * np.max(np.abs(dry[k]))
 
 out = np.stack([left, right])
 out -= out.mean(axis=1, keepdims=True)
 fade = np.ones(N)
-fade[-int(1.0 * SR):] = np.linspace(1, 0, int(1.0 * SR)) ** 2
+fade[: int(0.03 * SR)] = np.linspace(0, 1, int(0.03 * SR))
+fade[-int(1.2 * SR):] = np.linspace(1, 0, int(1.2 * SR)) ** 2
 out *= fade
 out *= 10 ** (-1 / 20) / np.max(np.abs(out))
 
