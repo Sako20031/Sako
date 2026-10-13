@@ -5,6 +5,52 @@
     "dark": true,
     "scene": false
   },
+  "contacts": {
+    "phone": "+7 (701) 000-00-00",
+    "whatsapp": "",
+    "email": "concierge@tumar-heritage.kz"
+  },
+  "reviews": [
+    {
+      "id": "r1",
+      "stars": 5,
+      "name": "Ерлан С.",
+      "meta": "Алматы • Золото 750°",
+      "text": "Заказал медальон \"Көк Бөрі\" сыну на совершеннолетие. Вещь невероятной энергетики и высочайшего качества чеканки. Это не просто украшение, это семейная реликвия, которую он передаст своим детям.",
+      "name_kz": "Ерлан С.",
+      "meta_kz": "Алматы • 750° алтын",
+      "text_kz": "Ұлым кәмелетке толғанда оған \"Көк Бөрі\" медальонына тапсырыс бердім. Қуаты ерекше, соғылуы өте жоғары сапалы бұйым. Бұл жай әшекей емес — ол өз балаларына мұра етіп қалдыратын отбасылық жәдігер.",
+      "name_en": "Yerlan S.",
+      "meta_en": "Almaty • 750 gold",
+      "text_en": "I ordered the \"Kök Böri\" medallion for my son's coming of age. A piece of incredible energy and the finest chasing. It's not just jewellery — it's a family heirloom he will pass on to his own children."
+    },
+    {
+      "id": "r2",
+      "stars": 5,
+      "name": "Айгерим М.",
+      "meta": "Астана • Розовое золото",
+      "text": "Талисман \"Ұмай Ана\" превзошел все ожидания. Очень теплый, нежный оттенок золота и натуральная бирюза. Ношу каждый день не снимая, чувствую невероятное спокойствие и связь с предками.",
+      "name_kz": "Әйгерім М.",
+      "meta_kz": "Астана • Қызғылт алтын",
+      "text_kz": "\"Ұмай Ана\" тұмары барлық күткенімнен асып түсті. Алтынның өте жылы, нәзік реңі және табиғи көгілдір. Күнде шешпей тағамын, ерекше тыныштық пен ата-бабаммен байланысты сезінемін.",
+      "name_en": "Aigerim M.",
+      "meta_en": "Astana • Rose gold",
+      "text_en": "The \"Umai Ana\" talisman exceeded all my expectations. Such a warm, delicate shade of gold and natural turquoise. I wear it every day without taking it off and feel an incredible calm and connection with my ancestors."
+    },
+    {
+      "id": "r3",
+      "stars": 5,
+      "name": "Бауыржан К.",
+      "meta": "Шымкент • Алтын Тұмар",
+      "text": "Удивила премиальная подача: кожаный футляр ручной работы, сертификат с индивидуальным номером и описание сакрального смысла. Доставка в Шымкент заняла всего сутки. Рахмет!",
+      "name_kz": "Бауыржан К.",
+      "meta_kz": "Шымкент • Алтын Тұмар",
+      "text_kz": "Премиум ұсыныс таң қалдырды: қолдан тігілген былғары қорап, жеке нөмірі бар сертификат және киелі мағынасының сипаттамасы. Шымкентке жеткізу бір-ақ тәулік алды. Рахмет!",
+      "name_en": "Baurzhan K.",
+      "meta_en": "Shymkent • Altyn Tumar",
+      "text_en": "I was impressed by the premium presentation: a handmade leather case, a certificate with an individual number and a description of the sacred meaning. Delivery to Shymkent took just one day. Rakhmet!"
+    }
+  ],
   "products": [
     {
       "id": "kok-bori",

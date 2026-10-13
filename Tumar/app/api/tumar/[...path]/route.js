@@ -12,7 +12,7 @@ import {
 
 // One small router for everything the /tumar page needs:
 //   GET    me | content | image/:id | orders | subscribers | status
-//   POST   login | logout | pin | texts | hero | products | reorder | images | videos | orders | subscribe
+//   POST   login | logout | pin | texts | hero | contacts | reviews | products | reorder | images | videos | orders | subscribe
 //   PATCH  product/:id | order/:id
 //   DELETE product/:id | order/:id | subscriber/:id
 
@@ -109,6 +109,55 @@ async function loadHero() {
 }
 
 const isMediaId = (v) => /^img[a-z0-9]+$/.test(v || '');
+
+async function loadSetting(key) {
+  const { rows } = await sql`SELECT value FROM tumar_settings WHERE key = ${key}`;
+  if (!rows[0]) return undefined;
+  try {
+    return JSON.parse(rows[0].value);
+  } catch {
+    return undefined;
+  }
+}
+
+async function saveSetting(key, data) {
+  const value = JSON.stringify(data);
+  await sql`INSERT INTO tumar_settings (key, value) VALUES (${key}, ${value})
+    ON CONFLICT (key) DO UPDATE SET value = ${value}`;
+}
+
+// Phone, WhatsApp and e-mail shown on the site. Before the admin saves them
+// in Settings, a phone or e-mail already typed over the template's sample
+// on the Texts tab is picked up, so it does not have to be entered twice.
+function contactsFrom(saved, texts) {
+  if (saved) return saved;
+  const c = { ...defaults.contacts };
+  for (const o of Object.values(texts || {})) {
+    const v = o?.ru || o?.v || o?.kz || o?.en;
+    if (!v) continue;
+    if (o.d === defaults.contacts.phone) c.phone = v;
+    if (o.d === defaults.contacts.email) c.email = v;
+  }
+  return c;
+}
+
+function cleanReviews(list) {
+  const out = [];
+  for (const r of (Array.isArray(list) ? list : []).slice(0, 50)) {
+    const review = {
+      id: /^[a-z0-9]{1,30}$/i.test(r?.id || '') ? r.id : newId('r'),
+      stars: Math.min(5, Math.max(1, Math.round(Number(r?.stars) || 5))),
+    };
+    for (const [field, max] of [['name', 100], ['meta', 120], ['text', 1500]]) {
+      for (const suffix of ['', '_kz', '_en']) {
+        const v = str(r?.[field + suffix], max);
+        if (v) review[field + suffix] = v;
+      }
+    }
+    if (review.text && review.name) out.push(review);
+  }
+  return out;
+}
 // Videos shipped with the site in public/tumar-files.
 const isBundledVideo = (v) => /^\/tumar-files\/[\w.-]+\.(mp4|webm)$/.test(v || '');
 
@@ -120,7 +169,10 @@ export async function GET(req, { params }) {
   const [what, id] = params.path;
   if (!hasDb()) {
     if (what === 'me') return json({ admin: false, noDb: true });
-    if (what === 'content') return json({ products: defaults.products, texts: {}, hero: defaults.hero, db: false });
+    if (what === 'content') {
+      const { products, hero, reviews, contacts } = defaults;
+      return json({ products, texts: {}, hero, reviews, contacts, db: false });
+    }
     return notFound();
   }
   await ensureTumarDb();
@@ -128,8 +180,17 @@ export async function GET(req, { params }) {
   if (what === 'me') return json({ admin: await isTumarAdmin() });
 
   if (what === 'content') {
-    const [products, texts, hero] = await Promise.all([loadProducts(), loadTexts(), loadHero()]);
-    return json({ products, texts, hero, db: true });
+    const [products, texts, hero, reviews, contacts] = await Promise.all([
+      loadProducts(), loadTexts(), loadHero(), loadSetting('reviews'), loadSetting('contacts'),
+    ]);
+    return json({
+      products,
+      texts,
+      hero,
+      reviews: reviews ?? defaults.reviews,
+      contacts: contactsFrom(contacts, texts),
+      db: true,
+    });
   }
 
   if (what === 'image' && id) {
@@ -303,6 +364,25 @@ export async function POST(req, { params }) {
       ON CONFLICT (key) DO UPDATE SET value = ${value}`;
     if (isMediaId(old.video) && old.video !== hero.video) await dropImage(old.video);
     return json({ ok: true, hero });
+  }
+
+  if (what === 'contacts') {
+    const contacts = {
+      phone: str(body.phone, 40),
+      whatsapp: str(body.whatsapp, 40),
+      email: str(body.email, 120),
+    };
+    if (contacts.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacts.email)) return bad('Неверный e-mail');
+    if (contacts.phone && contacts.phone.replace(/\D/g, '').length < 10) return bad('Проверьте номер телефона');
+    if (contacts.whatsapp && contacts.whatsapp.replace(/\D/g, '').length < 10) return bad('Проверьте номер WhatsApp');
+    await saveSetting('contacts', contacts);
+    return json({ ok: true, contacts });
+  }
+
+  if (what === 'reviews') {
+    const reviews = cleanReviews(body.reviews);
+    await saveSetting('reviews', reviews);
+    return json({ ok: true, reviews });
   }
 
   if (what === 'videos') {

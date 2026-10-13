@@ -824,57 +824,8 @@
                     </h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                    <!-- Review 1 -->
-                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex text-antique-gold mb-3">
-                                <span>★★★★★</span>
-                            </div>
-                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
-                                «Заказал медальон "Көк Бөрі" сыну на совершеннолетие. Вещь невероятной энергетики и высочайшего качества чеканки. Это не просто украшение, это семейная реликвия, которую он передаст своим детям».
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
-                            <span class="font-bold text-headline-brown">Ерлан С.</span>
-                            <span class="text-chocolate-deep/60">Алматы &bull; Золото 750°</span>
-                        </div>
-                    </div>
-
-                    <!-- Review 2 -->
-                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex text-antique-gold mb-3">
-                                <span>★★★★★</span>
-                            </div>
-                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
-                                «Талисман "Ұмай Ана" превзошел все ожидания. Очень теплый, нежный оттенок золота и натуральная бирюза. Ношу каждый день не снимая, чувствую невероятное спокойствие и связь с предками».
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
-                            <span class="font-bold text-headline-brown">Айгерим М.</span>
-                            <span class="text-chocolate-deep/60">Астана &bull; Розовое золото</span>
-                        </div>
-                    </div>
-
-                    <!-- Review 3 -->
-                    <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex text-antique-gold mb-3">
-                                <span>★★★★★</span>
-                            </div>
-                            <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">
-                                «Удивила премиальная подача: кожаный футляр ручной работы, сертификат с индивидуальным номером и описание сакрального смысла. Доставка в Шымкент заняла всего сутки. Рахмет!»
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between text-xs">
-                            <span class="font-bold text-headline-brown">Бауыржан К.</span>
-                            <span class="text-chocolate-deep/60">Шымкент &bull; Алтын Тұмар</span>
-                        </div>
-                    </div>
-
-                </div>
+                <!-- Filled from the database; edited on the admin "Отзывы" tab -->
+                <div id="reviewsGrid" data-noedit class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
 
             </div>
         </section>
@@ -951,8 +902,8 @@
                 <div>
                     <h4 class="text-xs uppercase tracking-widest font-bold text-headline-brown mb-4">Консьерж-служба</h4>
                     <p class="text-xs text-chocolate-deep/80 mb-3">Персональный подбор и консультация историка-этнографа:</p>
-                    <a href="tel:+77010000000" class="block font-serif text-lg font-bold text-headline-brown hover:text-caramel transition">+7 (701) 000-00-00</a>
-                    <a href="mailto:concierge@tumar-heritage.kz" class="block text-xs text-caramel hover:underline mt-1">concierge@tumar-heritage.kz</a>
+                    <a id="footerPhone" data-noedit href="tel:+77010000000" class="block font-serif text-lg font-bold text-headline-brown hover:text-caramel transition">+7 (701) 000-00-00</a>
+                    <a id="footerEmail" data-noedit href="mailto:concierge@tumar-heritage.kz" class="block text-xs text-caramel hover:underline mt-1">concierge@tumar-heritage.kz</a>
 
                     <div class="flex items-center gap-3 mt-4">
                         <span class="text-xs px-2 py-1 rounded bg-sand-light/30 border border-sand-light text-headline-brown">Kaspi Pay</span>
@@ -1007,6 +958,23 @@
             </button>
         </div>
     </aside>
+
+    <!-- CONTACT SHEET: call or WhatsApp -->
+    <div id="contactSheet" data-g="contact" data-gl="Окно «Позвонить / WhatsApp»" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-end sm:items-center justify-center p-3 sm:p-4">
+        <div class="bg-ivory-main rounded-2xl max-w-sm w-full p-5 border border-sand-light shadow-2xl text-center" style="background:#F7F1E7">
+            <p class="text-xs uppercase tracking-widest text-antique-gold font-bold">Свяжитесь с нами</p>
+            <div id="contactPhone" data-noedit class="font-serif text-2xl font-bold text-headline-brown mt-1 mb-4"></div>
+            <a id="contactCall" href="#" class="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-sm font-semibold mb-2" style="background:#A77B52;color:#fff">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+                <span>Позвонить</span>
+            </a>
+            <a id="contactWa" href="#" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-sm font-semibold mb-2" style="background:#25D366;color:#fff">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.23-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+                <span>Написать в WhatsApp</span>
+            </a>
+            <button onclick="closeModal('#contactSheet')" class="w-full py-3 text-sm font-semibold text-headline-brown">Отмена</button>
+        </div>
+    </div>
 
     <!-- SEARCH MODAL -->
     <div id="searchModal" data-g="search" data-gl="Поиск" class="fixed inset-0 z-50 bg-chocolate-deep/50 backdrop-blur-sm hidden items-start justify-center p-4 pt-20 sm:pt-28">
@@ -1126,9 +1094,9 @@
         <span data-m="need_items">Пожалуйста, добавьте медальон в корзину</span>
         <span data-m="sending">Отправляем…</span>
         <span data-m="order_ok">Рахмет! Ваш заказ принят. Консьерж уже набирает вас.</span>
-        <span data-m="order_fail">Не удалось отправить заказ. Позвоните нам: +7 (701) 000-00-00</span>
+        <span data-m="order_fail">Не удалось отправить заказ. Позвоните нам: {phone}</span>
         <span data-m="sub_fail">Не удалось подписаться, попробуйте позже</span>
-        <span data-m="custom">Служба индивидуальных заказов: +7 (701) 000-00-00</span>
+        <span data-m="wa_text">Здравствуйте! Пишу с сайта TUMAR.</span>
         <span data-m="symbol_ok">Понятно</span>
     </div>
 
@@ -1146,6 +1114,7 @@
                 <button data-tab="orders" class="adm-tab">Заказы <span id="admNewCount" class="hidden ml-1 px-1.5 rounded-full bg-caramel text-ivory-main text-[10px]"></span></button>
                 <button data-tab="products" class="adm-tab">Товары</button>
                 <button data-tab="texts" class="adm-tab">Тексты</button>
+                <button data-tab="reviews" class="adm-tab">Отзывы</button>
                 <button data-tab="subs" class="adm-tab">Подписчики</button>
                 <button data-tab="settings" class="adm-tab">Настройки</button>
             </nav>
@@ -1210,6 +1179,16 @@
                     </div>
                 </section>
 
+                <!-- Reviews -->
+                <section data-pane="reviews" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+                        <h2 class="font-serif text-2xl font-bold text-headline-brown">Отзывы</h2>
+                        <button id="revAdd" class="adm-btn">+ Добавить отзыв</button>
+                    </div>
+                    <p class="text-xs text-chocolate-deep/60 mb-4">Отзывы показываются на сайте в этом порядке. Если удалить все — блок «Отзывы» на сайте скроется.</p>
+                    <div id="revList" class="space-y-3"></div>
+                </section>
+
                 <!-- Subscribers -->
                 <section data-pane="subs" class="hidden">
                     <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
@@ -1223,6 +1202,14 @@
                 <section data-pane="settings" class="hidden max-w-md">
                     <h2 class="font-serif text-2xl font-bold text-headline-brown mb-4">Настройки</h2>
                     <div id="dbStatus" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card text-xs text-chocolate-deep/80">Проверяем базу данных…</div>
+                    <form id="contactsForm" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
+                        <div class="font-semibold text-headline-brown text-sm">Контакты на сайте</div>
+                        <p class="text-[11px] text-chocolate-deep/60">При нажатии на номер посетитель выбирает: позвонить или написать в WhatsApp.</p>
+                        <div><label class="adm-label">Телефон (для звонков)</label><input name="phone" type="tel" maxlength="40" placeholder="8 (777) 000-00-00" class="adm-input"></div>
+                        <div><label class="adm-label">WhatsApp (если номер другой — иначе оставьте пустым)</label><input name="whatsapp" type="tel" maxlength="40" class="adm-input"></div>
+                        <div><label class="adm-label">E-mail</label><input name="email" type="email" maxlength="120" class="adm-input"></div>
+                        <button class="adm-btn w-full">Сохранить контакты</button>
+                    </form>
                     <div id="heroForm" class="p-4 mb-4 rounded-lg border border-sand-light bg-cream-card space-y-3">
                         <div class="font-semibold text-headline-brown text-sm">Фон главного экрана</div>
                         <label class="flex items-start gap-2 text-xs"><input type="checkbox" id="heroScene" class="mt-0.5"> Нарисованная степь: скачущие лошади, юрты с дымком, облака, беркут</label>
@@ -1324,6 +1311,36 @@
         </form>
     </div>
 
+    <!-- REVIEW EDITOR -->
+    <div id="revEditor" class="fixed inset-0 z-[70] bg-chocolate-deep/50 backdrop-blur-sm hidden items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <form id="revForm" class="rounded-2xl max-w-lg w-full p-5 sm:p-7 border border-sand-light shadow-2xl relative my-4" style="background:#F7F1E7">
+            <button type="button" data-close class="absolute top-4 right-4 text-headline-brown hover:text-caramel text-xl">✕</button>
+            <h3 id="revFormTitle" class="font-serif text-2xl font-bold text-headline-brown mb-3">Отзыв</h3>
+            <div id="revLangTabs" class="flex flex-wrap gap-1 mb-1">
+                <button type="button" data-rl="ru" class="adm-lang">Русский</button>
+                <button type="button" data-rl="kz" class="adm-lang">Қазақша</button>
+                <button type="button" data-rl="en" class="adm-lang">English</button>
+            </div>
+            <p class="text-[11px] text-chocolate-deep/60 mb-4">Заполните на русском; казахский и английский — по желанию (если пусто, покажется русский).</p>
+            <div class="space-y-3">
+                <div><label class="adm-label">Текст отзыва *</label><textarea name="text" rows="5" maxlength="1500" class="adm-input" placeholder="Кавычки ставить не нужно — сайт добавит их сам"></textarea></div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="adm-label">Имя *</label><input name="name" maxlength="100" placeholder="Ерлан С." class="adm-input"></div>
+                    <div><label class="adm-label">Город • изделие</label><input name="meta" maxlength="120" placeholder="Алматы • Золото 750°" class="adm-input"></div>
+                </div>
+                <div><label class="adm-label">Оценка</label>
+                    <select name="stars" class="adm-input">
+                        <option value="5">★★★★★ 5</option><option value="4">★★★★ 4</option><option value="3">★★★ 3</option><option value="2">★★ 2</option><option value="1">★ 1</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" data-close class="adm-btn-light">Отмена</button>
+                <button id="revSave" class="adm-btn">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
     <style>
         .adm-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #765238; border-bottom: 2px solid transparent; white-space: nowrap; }
         .adm-tab.active { color: #A77B52; border-color: #A77B52; }
@@ -1362,7 +1379,7 @@
         const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
         const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const norm = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
-        const msg = (key) => norm($(`[data-m="${key}"]`)?.textContent);
+        const msg = (key) => norm($(`[data-m="${key}"]`)?.textContent).replace('{phone}', state.contacts?.phone || '');
 
         // ---------- Language (KZ / RU / EN) ----------
         // Russian is the source language of the page. Kazakh and English come
@@ -1778,17 +1795,73 @@
         });
 
         // Click outside a dialog or press Esc to close it.
-        ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal'].forEach((id) => {
+        ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal', '#contactSheet'].forEach((id) => {
             $(id).addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(id); });
         });
         $('#mobileDrawer').addEventListener('click', (e) => { if (e.target === e.currentTarget) toggleMobileMenu(); });
         document.addEventListener('keydown', (e) => {
             if (e.key !== 'Escape') return;
-            ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal', '#prodEditor'].forEach(closeModal);
+            ['#quickViewModal', '#symbolModal', '#checkoutModal', '#searchModal', '#contactSheet', '#prodEditor', '#revEditor'].forEach(closeModal);
             closeCartDrawer();
             $('#mobileDrawer').classList.add('hidden');
         });
-        function showCustomOrderModal() { showToast(msg('custom')); }
+        function showCustomOrderModal() { openContactSheet(); }
+
+        // ---------- Contacts: call or WhatsApp ----------
+        // "8 777 …" and "+7 777 …" both become 7777…, the form tel: and wa.me want.
+        function phoneDigits(p) {
+            let d = String(p || '').replace(/\D/g, '');
+            if (d.length === 11 && d[0] === '8') d = '7' + d.slice(1);
+            if (d.length === 10) d = '7' + d;
+            return d;
+        }
+
+        function applyContacts() {
+            const c = state.contacts || {};
+            const phone = $('#footerPhone');
+            phone.textContent = c.phone || c.whatsapp || '';
+            phone.href = 'tel:+' + phoneDigits(c.phone || c.whatsapp);
+            phone.classList.toggle('hidden', !c.phone && !c.whatsapp);
+            const mail = $('#footerEmail');
+            mail.textContent = c.email || '';
+            mail.href = 'mailto:' + (c.email || '');
+            mail.classList.toggle('hidden', !c.email);
+        }
+
+        function openContactSheet() {
+            const c = state.contacts || {};
+            if (!c.phone && !c.whatsapp) return;
+            $('#contactPhone').textContent = c.phone || c.whatsapp;
+            $('#contactCall').href = 'tel:+' + phoneDigits(c.phone || c.whatsapp);
+            $('#contactCall').classList.toggle('hidden', !c.phone);
+            $('#contactWa').href = `https://wa.me/${phoneDigits(c.whatsapp || c.phone)}?text=${encodeURIComponent(msg('wa_text'))}`;
+            openModal('#contactSheet');
+        }
+
+        $('#footerPhone').addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactSheet();
+        });
+        $('#contactSheet').addEventListener('click', (e) => {
+            if (e.target.closest('#contactCall, #contactWa')) closeModal('#contactSheet');
+        });
+
+        // ---------- Reviews ----------
+        function renderReviews() {
+            const list = state.reviews || [];
+            $('#stories').classList.toggle('hidden', !list.length);
+            $('#reviewsGrid').innerHTML = list.map((r) => `
+                <div class="bg-cream-card p-8 rounded-xl border border-sand-light/60 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-antique-gold mb-3" role="img" aria-label="${r.stars} / 5">${'★'.repeat(r.stars)}<span style="opacity:.25">${'★'.repeat(5 - r.stars)}</span></div>
+                        <p class="font-serif italic text-base text-headline-brown mb-4 leading-relaxed">«${esc(tr(r, 'text'))}»</p>
+                    </div>
+                    <div class="pt-4 border-t border-sand-light/30 flex items-center justify-between gap-3 text-xs">
+                        <span class="font-bold text-headline-brown">${esc(tr(r, 'name'))}</span>
+                        <span class="text-chocolate-deep/60 text-right">${esc(tr(r, 'meta'))}</span>
+                    </div>
+                </div>`).join('');
+        }
 
         // ---------- Editable texts ----------
         // Every visible piece of text inside a [data-g] block gets a key such
@@ -1826,7 +1899,7 @@
             if (el.closest('[data-sym-desc]')) return 'Окно символа: описание';
             if (el.closest('[data-q-title]')) return 'Результат квиза: название';
             if (el.closest('[data-q-desc]')) return 'Результат квиза: описание';
-            if (el.closest('[data-m]')) return 'Сообщение';
+            if (el.closest('[data-m]')) return /\{phone\}/.test(el.textContent) ? 'Сообщение ({phone} — телефон из Настроек)' : 'Сообщение';
             const tagged = el.closest('h1,h2,h3,h4,p,a,button,option,label,li');
             return TAGS[tagged?.tagName] || 'Текст';
         }
@@ -1890,6 +1963,7 @@
             closeModal('#symbolModal');
             applyTexts();
             renderProducts();
+            renderReviews();
             updateCartUI();
             if (!$('#quizResult').classList.contains('hidden')) showQuizResult();
             if (!$('#searchModal').classList.contains('hidden')) runSearch();
@@ -1962,6 +2036,10 @@
             state.products = data.products || [];
             state.texts = data.texts || {};
             state.hero = data.hero || {};
+            state.reviews = data.reviews || [];
+            state.contacts = data.contacts || {};
+            applyContacts();
+            renderReviews();
             state.db = !!data.db;
             applyHero(state.hero);
             applyTexts();
@@ -2059,7 +2137,8 @@
             if (tab === 'products') renderAdminProducts();
             if (tab === 'texts') renderTextEditor();
             if (tab === 'subs') loadSubs();
-            if (tab === 'settings') { loadStatus(); fillHeroForm(); }
+            if (tab === 'settings') { loadStatus(); fillHeroForm(); fillContactsForm(); }
+            if (tab === 'reviews') renderAdminReviews();
         }
         $('#admTabs').addEventListener('click', (e) => {
             const b = e.target.closest('[data-tab]');
@@ -2081,7 +2160,7 @@
             const f = $('#ordFilter').value;
             const list = state.orders.filter((o) => !f || o.status === f);
             $('#ordList').innerHTML = list.length ? list.map((o) => {
-                const digits = (o.phone || '').replace(/\D/g, '');
+                const digits = phoneDigits(o.phone);
                 return `
                 <div class="p-4 rounded-lg border ${o.status === 'new' ? 'border-caramel bg-cream-card' : 'border-sand-light bg-ivory-main'}" data-id="${esc(o.id)}">
                     <div class="flex flex-wrap items-start justify-between gap-3">
@@ -2519,6 +2598,136 @@
                 handleAuthError(err);
             } finally {
                 $('#heroSave').disabled = false;
+            }
+        });
+
+        // ---------- Contacts (admin) ----------
+        const cform = $('#contactsForm');
+        function fillContactsForm() {
+            const c = state.contacts || {};
+            for (const k of ['phone', 'whatsapp', 'email']) cform.elements[k].value = c[k] || '';
+        }
+        cform.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const body = Object.fromEntries(['phone', 'whatsapp', 'email'].map((k) => [k, cform.elements[k].value.trim()]));
+            try {
+                const r = await api('contacts', { method: 'POST', body });
+                state.contacts = r.contacts;
+                applyContacts();
+                showToast('Контакты сохранены');
+            } catch (err) { handleAuthError(err); }
+        });
+
+        // ---------- Reviews (admin) ----------
+        const rform = $('#revForm');
+        const RFIELDS = ['text', 'name', 'meta'];
+        let revEditing = null;
+        let revLang = 'ru';
+        let revDraft = {};
+
+        function renderAdminReviews() {
+            const list = state.reviews || [];
+            $('#revList').innerHTML = list.length ? list.map((r, i) => {
+                const missing = ['kz', 'en'].filter((l) => !r['text_' + l]).map((l) => l.toUpperCase());
+                return `
+                <div class="flex items-start gap-3 p-3 rounded-lg border border-sand-light bg-cream-card" data-i="${i}">
+                    <div class="flex-grow min-w-0">
+                        <div class="text-antique-gold text-sm">${'★'.repeat(r.stars)}<span style="opacity:.25">${'★'.repeat(5 - r.stars)}</span></div>
+                        <div class="font-semibold text-headline-brown text-sm">${esc(r.name)} <span class="font-normal text-xs text-chocolate-deep/60">${esc(r.meta || '')}</span></div>
+                        <div class="text-xs text-chocolate-deep/80 mt-1" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(r.text)}</div>
+                        ${missing.length ? `<div class="text-[10px] text-caramel mt-1">Нет перевода: ${missing.join(', ')}</div>` : ''}
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button data-r="up" class="adm-icon" title="Выше" ${i === 0 ? 'disabled' : ''}>↑</button>
+                        <button data-r="down" class="adm-icon" title="Ниже" ${i === list.length - 1 ? 'disabled' : ''}>↓</button>
+                        <button data-r="edit" class="adm-icon" title="Изменить">✎</button>
+                        <button data-r="del" class="adm-icon" title="Удалить">🗑</button>
+                    </div>
+                </div>`;
+            }).join('') : '<p class="text-sm text-chocolate-deep/60 py-10 text-center">Отзывов нет — блок отзывов на сайте скрыт</p>';
+        }
+
+        async function saveReviews(list) {
+            const r = await api('reviews', { method: 'POST', body: { reviews: list } });
+            state.reviews = r.reviews;
+            renderAdminReviews();
+            renderReviews();
+        }
+
+        $('#revList').addEventListener('click', async (e) => {
+            const btn = e.target.closest('[data-r]');
+            if (!btn) return;
+            const i = Number(btn.closest('[data-i]').dataset.i);
+            const list = [...(state.reviews || [])];
+            try {
+                if (btn.dataset.r === 'edit') return openReviewEditor(i);
+                if (btn.dataset.r === 'del') {
+                    if (!confirm(`Удалить отзыв «${list[i].name}»?`)) return;
+                    list.splice(i, 1);
+                } else {
+                    const to = btn.dataset.r === 'up' ? i - 1 : i + 1;
+                    const [r] = list.splice(i, 1);
+                    list.splice(to, 0, r);
+                }
+                await saveReviews(list);
+            } catch (err) { handleAuthError(err); }
+        });
+
+        function stashRevLang() {
+            RFIELDS.forEach((f) => { revDraft[pkey(f, revLang)] = rform.elements[f].value.trim(); });
+        }
+        function showRevLang(l) {
+            stashRevLang();
+            revLang = l;
+            RFIELDS.forEach((f) => {
+                rform.elements[f].value = revDraft[pkey(f, l)] || '';
+                rform.elements[f].placeholder = l === 'ru' ? rform.elements[f].dataset.ph : revDraft[f] || '';
+            });
+            $$('#revLangTabs [data-rl]').forEach((b) => b.classList.toggle('active', b.dataset.rl === l));
+        }
+        RFIELDS.forEach((f) => { rform.elements[f].dataset.ph = rform.elements[f].placeholder; });
+        $('#revLangTabs').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-rl]');
+            if (b) showRevLang(b.dataset.rl);
+        });
+
+        function openReviewEditor(i) {
+            revEditing = Number.isInteger(i) ? i : null;
+            const r = revEditing === null ? { stars: 5 } : state.reviews[revEditing];
+            rform.reset();
+            revDraft = {};
+            for (const f of RFIELDS) for (const l of LANGS) revDraft[pkey(f, l)] = r[pkey(f, l)] || '';
+            revLang = 'ru';
+            RFIELDS.forEach((f) => { rform.elements[f].value = revDraft[f]; });
+            showRevLang('ru');
+            rform.elements.stars.value = r.stars || 5;
+            $('#revFormTitle').textContent = revEditing === null ? 'Новый отзыв' : 'Изменить отзыв';
+            openModal('#revEditor');
+        }
+        $('#revAdd').addEventListener('click', () => openReviewEditor(null));
+        $$('[data-close]', rform).forEach((b) => b.addEventListener('click', () => closeModal('#revEditor')));
+
+        rform.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            stashRevLang();
+            if (!revDraft.text || !revDraft.name) {
+                showRevLang('ru');
+                showToast('Заполните текст и имя на русском');
+                return;
+            }
+            const list = [...(state.reviews || [])];
+            const review = { ...(revEditing === null ? {} : list[revEditing]), ...revDraft, stars: Number(rform.elements.stars.value) };
+            if (revEditing === null) list.push(review);
+            else list[revEditing] = review;
+            $('#revSave').disabled = true;
+            try {
+                await saveReviews(list);
+                closeModal('#revEditor');
+                showToast('Отзыв сохранён');
+            } catch (err) {
+                handleAuthError(err);
+            } finally {
+                $('#revSave').disabled = false;
             }
         });
 
