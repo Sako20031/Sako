@@ -183,7 +183,7 @@ export async function GET(req, { params }) {
     const [products, texts, hero, reviews, contacts] = await Promise.all([
       loadProducts(), loadTexts(), loadHero(), loadSetting('reviews'), loadSetting('contacts'),
     ]);
-    return json({
+    const res = json({
       products,
       texts,
       hero,
@@ -191,6 +191,12 @@ export async function GET(req, { params }) {
       contacts: contactsFrom(contacts, texts),
       db: true,
     });
+    // Served from Vercel's CDN: visitors get it instantly instead of waiting
+    // for the database, and the CDN refreshes it in the background. The same
+    // for everyone (no cookies involved); the admin's browser asks with ?v=…
+    // after a save, so the admin always sees their edits immediately.
+    res.headers.set('cache-control', 'public, max-age=0, s-maxage=10, stale-while-revalidate=31536000');
+    return res;
   }
 
   if (what === 'image' && id) {
