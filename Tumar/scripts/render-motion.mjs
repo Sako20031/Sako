@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { existsSync } from 'node:fs';
 
 const [format = 'story', lang = 'ru', fps = '30'] = process.argv.slice(2);
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -18,7 +19,10 @@ const { W, H, DURATION } = await page.evaluate(() => window.TUMAR_MOTION);
 await page.setViewportSize({ width: W, height: H });
 await page.evaluate(() => document.fonts.ready);
 
-const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', fps, '-i', '-',
+// The soundtrack (scripts/motion-sound.py) goes in when it is there.
+const sound = path.join(root, 'public/tumar-files/tumar-motion-sound.mp3');
+const audio = existsSync(sound) ? ['-i', sound, '-c:a', 'aac', '-b:a', '192k', '-shortest'] : [];
+const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', fps, '-i', '-', ...audio,
     '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-preset', 'slow', '-movflags', '+faststart', out],
     { stdio: ['pipe', 'inherit', 'inherit'] });
 

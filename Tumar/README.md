@@ -51,17 +51,22 @@
 12-секундный ролик: золотой медальон рисуется линиями (кольцо из зерни, 12 орнаментов
 «қошқар мүйіз», шаңырақ-солнце из логотипа), блик по золоту, появляется TUMAR /
 Heritage Atelier, слоган «Сила предков — в благородном золоте степи», затем раскрывается
-светлый фон и финальная карточка с логотипом.
+светлый фон и финальная карточка с логотипом и надписью «Ручные изделия в национальном стиле»
+(по-казахски «Ұлттық нақыштағы қолдан жасалған бұйымдар»).
+Звук: домбра (галоп кюя), кобыз, бубен и колокольчики, синхронно с анимацией.
 
-- Посмотреть в браузере: `/tumar-motion.html` (крутится по кругу, кнопка ↺ Replay).
+- Посмотреть в браузере: `/tumar-motion.html` (крутится по кругу, кнопки ↺ Replay и 🔊 Звук).
   Параметры: `?format=story|wide|square` (1080×1920 / 1920×1080 / 1080×1080), `?lang=kz|en`.
-- Готовые MP4 (30 fps, H.264): `public/tumar-files/tumar-motion-story.mp4` (Reels / Stories / TikTok),
-  `tumar-motion-wide.mp4` (YouTube, сайт), `tumar-motion-square.mp4` (лента Instagram).
+- Готовые MP4 со звуком (30 fps, H.264 + AAC) в `public/tumar-files/`:
+  `tumar-motion-story.mp4` (Reels / Stories / TikTok), `tumar-motion-wide.mp4` (YouTube, сайт),
+  `tumar-motion-square.mp4` (лента Instagram); казахские версии — с `-kz` в конце имени.
 - Пересобрать MP4 (нужны ffmpeg и Chromium):
 
   ```bash
   cd Tumar
   npm i --no-save playwright
+  python3 scripts/motion-sound.py sound.wav   # звук (нужен numpy), затем:
+  ffmpeg -i sound.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/tumar-files/tumar-motion-sound.mp3
   node scripts/render-motion.mjs story kz   # формат, язык, [fps]
   ```
 

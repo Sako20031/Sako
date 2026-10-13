@@ -31,13 +31,14 @@
     html, body { margin: 0; height: 100%; background: var(--night); overflow: hidden; }
     body { display: flex; align-items: center; justify-content: center; }
     #stage { display: block; }
-    #replay {
+    #replay, #soundBtn {
         position: fixed; right: 16px; bottom: 16px;
         font: 500 12px/1 'Plus Jakarta Sans', sans-serif; letter-spacing: .2em; text-transform: uppercase;
         color: var(--gold-light); background: rgba(28, 18, 11, .6);
         border: 1px solid rgba(184, 154, 101, .5); border-radius: 999px; padding: 10px 16px; cursor: pointer;
     }
-    .render #replay { display: none; }
+    #soundBtn { right: 140px; }
+    .render #replay, .render #soundBtn { display: none; }
 </style>
 </head>
 <body>
@@ -116,6 +117,8 @@
     </g>
 </svg>
 <button id="replay" type="button">↺ Replay</button>
+<button id="soundBtn" type="button">🔇 Звук</button>
+<audio id="sound" src="/tumar-files/tumar-motion-sound.mp3" preload="auto" loop></audio>
 
 <script>
 (() => {
@@ -123,9 +126,9 @@
     const FORMATS = { story: [1080, 1920], wide: [1920, 1080], square: [1080, 1080] };
     const [W, H] = FORMATS[params.get('format')] || FORMATS.story;
     const TEXTS = {
-        ru: { sub: 'HERITAGE ATELIER', tag1: 'Сила предков', tag2: 'в благородном золоте степи', facts: 'Золото 585 · 750  —  Ручная чеканка' },
-        kz: { sub: 'HERITAGE ATELIER', tag1: 'Ата-баба күші', tag2: 'даланың асыл алтынында', facts: '585 · 750 алтын  —  Қолмен соғу' },
-        en: { sub: 'HERITAGE ATELIER', tag1: 'Ancestral strength', tag2: 'in the noble gold of the steppe', facts: '585 · 750 gold  —  Hand chasing' },
+        ru: { sub: 'HERITAGE ATELIER', tag1: 'Сила предков', tag2: 'в благородном золоте степи', facts: 'Ручные изделия в национальном стиле' },
+        kz: { sub: 'HERITAGE ATELIER', tag1: 'Ата-баба күші', tag2: 'даланың асыл алтынында', facts: 'Ұлттық нақыштағы қолдан жасалған бұйымдар' },
+        en: { sub: 'HERITAGE ATELIER', tag1: 'Ancestral strength', tag2: 'in the noble gold of the steppe', facts: 'Handmade pieces in the national style' },
     };
     const T = TEXTS[params.get('lang')] || TEXTS.ru;
     const DURATION = 12;
@@ -332,13 +335,21 @@
         document.fonts.ready.then(() => { measure(); renderAt(0); });
     } else {
         fit(); addEventListener('resize', fit);
-        let start = null;
+        // With sound on, the music is the clock so picture and sound stay in sync.
+        const audio = $('sound');
+        let start = null, soundOn = false;
         const loop = (now) => {
             if (start === null) start = now;
-            renderAt(((now - start) / 1000) % DURATION);
+            renderAt(soundOn ? audio.currentTime % DURATION : ((now - start) / 1000) % DURATION);
             requestAnimationFrame(loop);
         };
-        $('replay').onclick = () => { start = null; };
+        $('replay').onclick = () => { start = null; audio.currentTime = 0; };
+        $('soundBtn').onclick = () => {
+            soundOn = !soundOn;
+            $('soundBtn').textContent = soundOn ? '🔊 Звук' : '🔇 Звук';
+            if (soundOn) { audio.currentTime = 0; audio.play().catch(() => { soundOn = false; }); }
+            else { audio.pause(); start = null; }
+        };
         document.fonts.ready.then(() => { measure(); requestAnimationFrame(loop); });
     }
 })();
