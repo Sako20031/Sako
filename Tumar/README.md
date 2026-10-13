@@ -53,7 +53,7 @@
 Heritage Atelier, слоган «Сила предков — в благородном золоте степи», затем раскрывается
 светлый фон и финальная карточка с логотипом и надписью «Ручные изделия в национальном стиле»
 (по-казахски «Ұлттық нақыштағы қолдан жасалған бұйымдар»).
-Звук: домбра (галоп кюя), кобыз, бубен и колокольчики, синхронно с анимацией.
+Звук: соло на домбре (струны ре–соль, удары вниз-вверх в ритме кюя, флажолеты в конце), синхронно с анимацией.
 
 - Посмотреть в браузере: `/tumar-motion.html` (крутится по кругу, кнопки ↺ Replay и 🔊 Звук).
   Параметры: `?format=story|wide|square` (1080×1920 / 1920×1080 / 1080×1080), `?lang=kz|en`.
@@ -66,7 +66,7 @@ Heritage Atelier, слоган «Сила предков — в благород
   cd Tumar
   npm i --no-save playwright
   python3 scripts/motion-sound.py sound.wav   # звук (нужен numpy), затем:
-  ffmpeg -i sound.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/tumar-files/tumar-motion-sound.mp3
+  ffmpeg -i sound.wav -af loudnorm=I=-16:TP=-3 -b:a 192k public/tumar-files/tumar-motion-sound.mp3
   node scripts/render-motion.mjs story kz   # формат, язык, [fps]
   ```
 
