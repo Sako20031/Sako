@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TUMAR Motion</title>
+<meta name="description" content="Брендовая моушн-анимация TUMAR Heritage Atelier.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    /*
+     * TUMAR brand motion, 12 seconds.
+     *   /tumar-motion.html                 plays in a loop, fits the window
+     *   ?format=story | wide | square      1080x1920 / 1920x1080 / 1080x1080
+     *   ?lang=kz | en                      Kazakh / English texts
+     *   ?render=1                          no autoplay; window.renderAt(seconds)
+     *                                      draws one frame (used to export MP4)
+     */
+    :root {
+        --ivory: #F7F1E7;
+        --beige: #EFE3D2;
+        --sand: #D2B797;
+        --caramel: #A77B52;
+        --brown: #765238;
+        --gold: #B89A65;
+        --gold-light: #F1D9A6;
+        --choco: #493021;
+        --night: #1C120B;
+    }
+    html, body { margin: 0; height: 100%; background: var(--night); overflow: hidden; }
+    body { display: flex; align-items: center; justify-content: center; }
+    #stage { display: block; }
+    #replay {
+        position: fixed; right: 16px; bottom: 16px;
+        font: 500 12px/1 'Plus Jakarta Sans', sans-serif; letter-spacing: .2em; text-transform: uppercase;
+        color: var(--gold-light); background: rgba(28, 18, 11, .6);
+        border: 1px solid rgba(184, 154, 101, .5); border-radius: 999px; padding: 10px 16px; cursor: pointer;
+    }
+    .render #replay { display: none; }
+</style>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="bgNight" cx="50%" cy="45%" r="75%">
+            <stop offset="0" stop-color="#4A3020"/>
+            <stop offset=".55" stop-color="#2A1A10"/>
+            <stop offset="1" stop-color="#140C07"/>
+        </radialGradient>
+        <radialGradient id="bgIvory" cx="50%" cy="42%" r="80%">
+            <stop offset="0" stop-color="#FAF6F0"/>
+            <stop offset=".7" stop-color="#F7F1E7"/>
+            <stop offset="1" stop-color="#EBDDC8"/>
+        </radialGradient>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F1D9A6"/>
+            <stop offset=".45" stop-color="#C9A86C"/>
+            <stop offset=".7" stop-color="#A77B52"/>
+            <stop offset="1" stop-color="#E5C88F"/>
+        </linearGradient>
+        <radialGradient id="glow">
+            <stop offset="0" stop-color="#F1D9A6" stop-opacity=".55"/>
+            <stop offset=".4" stop-color="#B89A65" stop-opacity=".18"/>
+            <stop offset="1" stop-color="#B89A65" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#fff" stop-opacity=".75"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="discClip"><circle r="300"/></clipPath>
+        <clipPath id="wipeClip"><circle id="wipeCircle" r="0"/></clipPath>
+        <!-- Qoshqar muyiz (ram's horn), same motif as the site's divider -->
+        <path id="horn" pathLength="1" d="M20,5 C25,5 29,8 29,13 C29,18 25,20 22,20 C19,20 18,18 18,16 C18,14 20,13 21,13 C21.5,13 22,13.2 22,13.6 C22,14 21.6,14.5 21,14.5 C20.5,14.5 20,14.2 20,13.8 C20,11.5 23,8 26.5,8 C29,8 31,10.5 31,13.5 C31,18 26,22 20,27 C14,22 9,18 9,13.5 C9,10.5 11,8 13.5,8 C17,8 20,11.5 20,13.8 C20,14.2 19.5,14.5 19,14.5 C18.4,14.5 18,14 18,13.6 C18,13.2 18.5,13 19,13 C20,13 22,14 22,16 C22,18 21,20 18,20 C15,20 11,18 11,13 C11,8 15,5 20,5 Z"/>
+    </defs>
+
+    <rect id="bg" fill="url(#bgNight)"/>
+    <g id="dust"></g>
+
+    <!-- Ivory world revealed by a growing circle at the end -->
+    <g clip-path="url(#wipeClip)">
+        <rect id="bgLight" fill="url(#bgIvory)"/>
+    </g>
+
+    <g id="medallion">
+        <circle id="halo" r="560" fill="url(#glow)"/>
+        <g id="disc">
+            <circle r="300" fill="#2E1D12" id="discFill"/>
+            <circle class="draw" r="296" fill="none" stroke="url(#gold)" stroke-width="5" pathLength="1"/>
+            <circle class="draw" r="276" fill="none" stroke="url(#gold)" stroke-width="1.5" pathLength="1"/>
+            <g id="beads"></g>
+            <g id="hornRing"></g>
+            <circle class="draw" r="150" fill="none" stroke="url(#gold)" stroke-width="2" pathLength="1"/>
+            <!-- Shanyrak sun from the logo, scaled up -->
+            <g id="sun" transform="translate(-100 -100) scale(5)">
+                <circle class="draw" cx="20" cy="20" r="14" fill="none" stroke="url(#gold)" stroke-width=".9" stroke-dasharray="2 2" id="sunDash"/>
+                <circle class="draw" cx="20" cy="20" r="8" fill="none" stroke="url(#gold)" stroke-width=".8" pathLength="1"/>
+                <circle id="sunCore" cx="20" cy="20" r="3" fill="url(#gold)"/>
+                <path class="draw" pathLength="1" d="M20 6V11M20 29V34M6 20H11M29 20H34" stroke="url(#gold)" stroke-width="1" stroke-linecap="round" fill="none"/>
+                <path class="draw" pathLength="1" d="M10 10L14 14M26 26L30 30M10 30L14 26M26 14L30 10" stroke="url(#gold)" stroke-width=".8" stroke-linecap="round" fill="none"/>
+            </g>
+            <g clip-path="url(#discClip)">
+                <rect id="sweepBar" x="-140" y="-420" width="280" height="840" fill="url(#sweep)" transform="rotate(25)"/>
+            </g>
+        </g>
+    </g>
+
+    <g id="texts" text-anchor="middle">
+        <g id="word" font-family="'Cormorant Garamond', Georgia, serif" font-weight="600"></g>
+        <text id="sub" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500"></text>
+        <g id="line"><rect id="lineL" height="1.5"/><rect id="lineR" height="1.5"/></g>
+        <text id="tag1" font-family="'Cormorant Garamond', Georgia, serif" font-weight="500"></text>
+        <text id="tag2" font-family="'Cormorant Garamond', Georgia, serif" font-style="italic" font-weight="400"></text>
+        <text id="facts" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500"></text>
+    </g>
+</svg>
+<button id="replay" type="button">↺ Replay</button>
+
+<script>
+(() => {
+    const params = new URLSearchParams(location.search);
+    const FORMATS = { story: [1080, 1920], wide: [1920, 1080], square: [1080, 1080] };
+    const [W, H] = FORMATS[params.get('format')] || FORMATS.story;
+    const TEXTS = {
+        ru: { sub: 'HERITAGE ATELIER', tag1: 'Сила предков', tag2: 'в благородном золоте степи', facts: 'Золото 585 · 750  —  Ручная чеканка' },
+        kz: { sub: 'HERITAGE ATELIER', tag1: 'Ата-баба күші', tag2: 'даланың асыл алтынында', facts: '585 · 750 алтын  —  Қолмен соғу' },
+        en: { sub: 'HERITAGE ATELIER', tag1: 'Ancestral strength', tag2: 'in the noble gold of the steppe', facts: '585 · 750 gold  —  Hand chasing' },
+    };
+    const T = TEXTS[params.get('lang')] || TEXTS.ru;
+    const DURATION = 12;
+    const NS = 'http://www.w3.org/2000/svg';
+    const $ = (id) => document.getElementById(id);
+    const svg = $('stage');
+    const wide = W > H;
+
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    for (const id of ['bg', 'bgLight']) { $(id).setAttribute('width', W); $(id).setAttribute('height', H); }
+
+    // ---------- easing & helpers ----------
+    const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+    const prog = (t, start, dur) => clamp((t - start) / dur);
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+    const easeInOut = (x) => (x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    const easeBack = (x) => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+    const lerp = (a, b, x) => a + (b - a) * x;
+    let seed = 7;
+    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+    // ---------- layout ----------
+    const cx = W / 2;
+    const L = wide
+        ? { medY: 380, medS: .62, wordY: 770, subY: 830, tag1Y: 760, tag2Y: 845,
+            endMedY: 290, endMedS: .3, endWordY: 570, endSubY: 625, endLineY: 665, endFactsY: 725,
+            word: 150, sub: 22, tag1: 84, tag2: 66, facts: 22 }
+        : { medY: H * .4, medS: 1.25, wordY: H * .68, subY: H * .68 + 70, tag1Y: H * .73, tag2Y: H * .73 + 90,
+            endMedY: H * .36, endMedS: .62, endWordY: H * .36 + 340, endSubY: H * .36 + 400, endLineY: H * .36 + 450, endFactsY: H * .36 + 520,
+            word: 210, sub: 28, tag1: 96, tag2: 74, facts: 28 };
+    if (H === W) Object.assign(L, { medY: H * .42, medS: .95, wordY: H * .78, subY: H * .78 + 60, tag1Y: H * .8, tag2Y: H * .8 + 75,
+        endMedY: H * .29, endMedS: .46, endWordY: H * .29 + 300, endSubY: H * .29 + 350, endLineY: H * .29 + 390, endFactsY: H * .29 + 450,
+        word: 170, sub: 24, tag1: 80, tag2: 62, facts: 24 });
+
+    // ---------- build: bead ring, horn ring, dust ----------
+    const beads = [];
+    for (let i = 0; i < 48; i++) {
+        const a = (i / 48) * Math.PI * 2;
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', Math.cos(a) * 262); c.setAttribute('cy', Math.sin(a) * 262);
+        c.setAttribute('r', i % 2 ? 3 : 5); c.setAttribute('fill', 'url(#gold)');
+        $('beads').appendChild(c); beads.push(c);
+    }
+    const horns = [];
+    for (let i = 0; i < 12; i++) {
+        const g = document.createElementNS(NS, 'g');
+        const u = document.createElementNS(NS, 'use');
+        u.setAttribute('href', '#horn'); u.setAttribute('fill', 'none'); u.setAttribute('stroke', 'url(#gold)');
+        u.setAttribute('stroke-width', '.9'); u.setAttribute('stroke-dasharray', '1 1'); u.setAttribute('stroke-linejoin', 'round');
+        u.setAttribute('transform', 'translate(-20 -16)');
+        g.appendChild(u); $('hornRing').appendChild(g); horns.push({ g, u });
+    }
+    const dust = [];
+    for (let i = 0; i < 90; i++) {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('fill', '#F1D9A6');
+        $('dust').appendChild(c);
+        dust.push({ el: c, x: rnd() * W, y: rnd() * H, r: .8 + rnd() * 2.6, sp: 12 + rnd() * 40, ph: rnd() * 6.28, sw: 10 + rnd() * 30 });
+    }
+    const draws = [...document.querySelectorAll('.draw')];
+    draws.forEach((el) => { if (el.id !== 'sunDash') el.setAttribute('stroke-dasharray', '1 1'); });
+
+    // TUMAR as separate letters so they can rise one by one
+    const word = $('word');
+    const letters = [...'TUMAR'].map((ch) => {
+        const s = document.createElementNS(NS, 'text'); s.textContent = ch; word.appendChild(s); return s;
+    });
+    let widths = null;
+    const measure = () => {
+        letters.forEach((s) => s.setAttribute('font-size', L.word));
+        widths = letters.map((s) => s.getComputedTextLength());
+    };
+    $('sub').textContent = T.sub; $('tag1').textContent = T.tag1; $('tag2').textContent = T.tag2; $('facts').textContent = T.facts;
+
+    // ---------- one frame ----------
+    function renderAt(t) {
+        // Dust: drifts up, twinkles, fades in at the start
+        const dustA = prog(t, 0, 1.5);
+        for (const d of dust) {
+            const y = ((d.y - d.sp * t) % H + H) % H;
+            const x = d.x + Math.sin(t * .6 + d.ph) * d.sw;
+            d.el.setAttribute('cx', x); d.el.setAttribute('cy', y); d.el.setAttribute('r', d.r);
+            d.el.setAttribute('opacity', dustA * (.25 + .55 * (.5 + .5 * Math.sin(t * 2.2 + d.ph * 3))));
+        }
+
+        // Ivory reveal from the medallion (8.2s → 9.4s)
+        const wipe = easeInOut(prog(t, 8.2, 1.2));
+        const wc = $('wipeCircle');
+        wc.setAttribute('cx', cx); wc.setAttribute('cy', lerp(L.medY, L.endMedY, wipe));
+        wc.setAttribute('r', wipe * Math.hypot(W, H));
+        $('dust').setAttribute('opacity', 1 - wipe);
+
+        // Medallion: appears, draws itself, rotates, then moves up as the logo
+        const appear = easeOut(prog(t, .2, 1.4));
+        const move = easeInOut(prog(t, 8.0, 1.5));
+        const settle = 1 + .015 * Math.sin(t * 1.4) * (1 - move);
+        const s = lerp(L.medS * lerp(.82, 1, appear), L.endMedS, move) * settle;
+        const my = lerp(L.medY, L.endMedY, move);
+        $('medallion').setAttribute('transform', `translate(${cx} ${my}) scale(${s})`);
+        $('medallion').setAttribute('opacity', appear);
+        $('halo').setAttribute('opacity', (.6 + .4 * Math.sin(t * 1.8)) * (1 - .7 * move));
+        $('discFill').setAttribute('fill', move > 0 ? mix('#2E1D12', '#493021', move) : '#2E1D12');
+
+        draws.forEach((el, i) => {
+            const p = easeInOut(prog(t, .4 + i * .22, 1.6));
+            if (el.id === 'sunDash') el.setAttribute('opacity', p);
+            else if (p < 1) { el.setAttribute('stroke-dasharray', '1 1'); el.setAttribute('stroke-dashoffset', 1 - p); }
+            else el.removeAttribute('stroke-dasharray');
+        });
+        beads.forEach((b, i) => {
+            const p = easeBack(prog(t, 1.2 + i * .018, .5));
+            b.setAttribute('opacity', clamp(p)); b.setAttribute('transform', `scale(${p})`);
+            b.setAttribute('transform-origin', `${b.getAttribute('cx')} ${b.getAttribute('cy')}`);
+        });
+        const ringRot = t * 6;
+        horns.forEach(({ g, u }, i) => {
+            const p = easeOut(prog(t, 1.6 + i * .09, .6));
+            const d = easeInOut(prog(t, 1.6 + i * .09, 1.4));
+            const a = (i / 12) * 360 + ringRot;
+            g.setAttribute('transform', `rotate(${a}) translate(0 -213) rotate(180) scale(${2.6 * lerp(.7, 1, p)})`);
+            g.setAttribute('opacity', p);
+            if (d < 1) { u.setAttribute('stroke-dasharray', '1 1'); u.setAttribute('stroke-dashoffset', 1 - d); }
+            else u.removeAttribute('stroke-dasharray');
+        });
+        const core = easeBack(prog(t, 2.4, .8));
+        $('sunCore').setAttribute('r', 3 * core);
+        $('sun').setAttribute('transform', `rotate(${-t * 10}) translate(-100 -100) scale(5)`);
+
+        // Light sweep across the gold: twice
+        const sw = (st) => lerp(-520, 520, easeInOut(prog(t, st, 1.1)));
+        const sweepX = t < 6 ? sw(3.1) : sw(9.6);
+        $('sweepBar').setAttribute('x', sweepX - 140);
+
+        // ---------- text ----------
+        const word = $('word'), sub = $('sub');
+        const wordIn = prog(t, 2.9, 1.4);
+        const wordOut = easeInOut(prog(t, 5.0, .6));
+        const endIn = prog(t, 9.0, 1.2);
+        const dark = wipe < .5;
+        const atEnd = t >= 8.6;
+        const wy = atEnd ? L.endWordY : L.wordY;
+        const spacing = atEnd ? lerp(.6, .28, easeOut(endIn)) : lerp(.55, .3, easeOut(wordIn));
+        if (!widths) measure();
+        const gap = spacing * L.word;
+        const total = widths.reduce((a, b) => a + b, 0) + gap * (letters.length - 1);
+        let lx = cx - total / 2;
+        word.setAttribute('fill', atEnd ? '#765238' : 'url(#gold)');
+        letters.forEach((sp, i) => {
+            sp.setAttribute('font-size', L.word);
+            sp.setAttribute('x', lx + widths[i] / 2); lx += widths[i] + gap;
+            const p = atEnd ? easeOut(prog(t, 9.0 + i * .07, .8)) : easeOut(prog(t, 2.9 + i * .1, .9));
+            const out = atEnd ? 0 : wordOut;
+            sp.setAttribute('y', wy + (1 - p) * 40 - out * 20);
+            sp.setAttribute('opacity', p * (1 - out));
+        });
+        const subP = atEnd ? easeOut(prog(t, 9.5, .9)) : easeOut(prog(t, 3.6, 1)) * (1 - wordOut);
+        sub.setAttribute('x', cx + .45 * L.sub / 2); sub.setAttribute('y', atEnd ? L.endSubY : L.subY);
+        sub.setAttribute('font-size', L.sub); sub.setAttribute('letter-spacing', .45 * L.sub);
+        sub.setAttribute('fill', atEnd ? '#B89A65' : '#D2B797'); sub.setAttribute('opacity', subP);
+
+        // Tagline (5.5s → 8.2s)
+        const tIn1 = easeOut(prog(t, 5.5, 1)), tIn2 = easeOut(prog(t, 5.9, 1.1));
+        const tOut = easeInOut(prog(t, 7.7, .6));
+        const tag1 = $('tag1'), tag2 = $('tag2');
+        tag1.setAttribute('x', cx); tag1.setAttribute('y', L.tag1Y + (1 - tIn1) * 30); tag1.setAttribute('font-size', L.tag1);
+        tag1.setAttribute('fill', '#FFFFFF'); tag1.setAttribute('opacity', tIn1 * (1 - tOut));
+        tag2.setAttribute('x', cx); tag2.setAttribute('y', L.tag2Y + (1 - tIn2) * 30); tag2.setAttribute('font-size', L.tag2);
+        tag2.setAttribute('fill', '#F1D9A6'); tag2.setAttribute('opacity', tIn2 * (1 - tOut));
+
+        // End card: gold line + facts
+        const lineP = easeInOut(prog(t, 9.8, .9));
+        const half = (wide ? 160 : 200) * lineP;
+        for (const [id, x] of [['lineL', cx - 30 - half], ['lineR', cx + 30]]) {
+            const r = $(id); r.setAttribute('x', x); r.setAttribute('y', L.endLineY); r.setAttribute('width', half);
+            r.setAttribute('fill', '#B89A65'); r.setAttribute('opacity', lineP);
+        }
+        const facts = $('facts');
+        const fP = easeOut(prog(t, 10.2, .9));
+        facts.setAttribute('x', cx + .2 * L.facts / 2); facts.setAttribute('y', L.endFactsY + (1 - fP) * 16);
+        facts.setAttribute('font-size', L.facts); facts.setAttribute('letter-spacing', .2 * L.facts);
+        facts.setAttribute('fill', '#765238'); facts.setAttribute('opacity', fP);
+
+        // Fade to the loop start in the last half second (only when looping)
+        if (!renderMode) svg.style.opacity = 1 - easeInOut(prog(t, DURATION - .4, .4));
+    }
+
+    function mix(a, b, x) {
+        const pa = a.match(/\w\w/g).map((h) => parseInt(h, 16)), pb = b.match(/\w\w/g).map((h) => parseInt(h, 16));
+        return '#' + pa.map((v, i) => Math.round(lerp(v, pb[i], x)).toString(16).padStart(2, '0')).join('');
+    }
+
+    // ---------- fit to window ----------
+    function fit() {
+        const k = Math.min(innerWidth / W, innerHeight / H);
+        svg.setAttribute('width', W * k); svg.setAttribute('height', H * k);
+    }
+
+    const renderMode = params.has('render');
+    window.TUMAR_MOTION = { W, H, DURATION };
+    window.renderAt = renderAt;
+    if (renderMode) {
+        document.body.classList.add('render');
+        svg.setAttribute('width', W); svg.setAttribute('height', H);
+        document.fonts.ready.then(() => { measure(); renderAt(0); });
+    } else {
+        fit(); addEventListener('resize', fit);
+        let start = null;
+        const loop = (now) => {
+            if (start === null) start = now;
+            renderAt(((now - start) / 1000) % DURATION);
+            requestAnimationFrame(loop);
+        };
+        $('replay').onclick = () => { start = null; };
+        document.fonts.ready.then(() => { measure(); requestAnimationFrame(loop); });
+    }
+})();
+</script>
+</body>
+</html>

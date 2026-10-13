@@ -46,6 +46,25 @@
   яркое видео с белым текстом или полупрозрачное, нарисованная анимированная степь;
   состояние базы, смена PIN, выход.
 
+## Моушн-анимация бренда
+
+12-секундный ролик: золотой медальон рисуется линиями (кольцо из зерни, 12 орнаментов
+«қошқар мүйіз», шаңырақ-солнце из логотипа), блик по золоту, появляется TUMAR /
+Heritage Atelier, слоган «Сила предков — в благородном золоте степи», затем раскрывается
+светлый фон и финальная карточка с логотипом.
+
+- Посмотреть в браузере: `/tumar-motion.html` (крутится по кругу, кнопка ↺ Replay).
+  Параметры: `?format=story|wide|square` (1080×1920 / 1920×1080 / 1080×1080), `?lang=kz|en`.
+- Готовые MP4 (30 fps, H.264): `public/tumar-files/tumar-motion-story.mp4` (Reels / Stories / TikTok),
+  `tumar-motion-wide.mp4` (YouTube, сайт), `tumar-motion-square.mp4` (лента Instagram).
+- Пересобрать MP4 (нужны ffmpeg и Chromium):
+
+  ```bash
+  cd Tumar
+  npm i --no-save playwright
+  node scripts/render-motion.mjs story kz   # формат, язык, [fps]
+  ```
+
 ## Локальная разработка
 
 ```bash
@@ -60,6 +79,7 @@ POSTGRES_URL=postgres://… npm run dev   # без базы сайт работ�
 |---|---|
 | `public/tumar.html` | Страница сайта и кабинет администратора |
 | `public/tumar-files/i18n.js` | Переводы KZ / EN |
+| `public/tumar-motion.html` | Моушн-анимация бренда (и `scripts/render-motion.mjs` — экспорт в MP4) |
 | `public/tumar-files/content.json` | Каталог по умолчанию (с переводами) |
 | `app/api/tumar/[...path]/route.js` | API: каталог, заказы, тексты, вход |
 | `lib/tumar.js` | Подключение к базе, создание таблиц, сессии |
