@@ -17,3 +17,7 @@ Sakosakosako
 ## TUMAR Heritage
 
 Отдельный проект в папке [`Tumar/`](Tumar/README.md) — свой сайт, своя база данных.
+
+## TULPAR — автосалон
+
+3D-сайт автосалона в папке [`Tulpar/`](Tulpar/README.md) (Vite + Three.js), отдельный проект.

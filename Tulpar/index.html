@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TULPAR — автосалон премиальных автомобилей</title>
+  <meta name="description" content="TULPAR — автосалон премиальных автомобилей. Подбор, trade-in, кредит и лизинг, сервис и страхование. Запишитесь на тест-драйв." />
+  <meta name="theme-color" content="#08090b" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TULPAR — автосалон премиальных автомобилей" />
+  <meta property="og:description" content="Крылья, которым не нужно небо. Подбор, trade-in, кредит и сервис в одном месте." />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Cpath fill='%23C9A45C' d='M2 30C14 26 26 16 46 2 38 14 28 22 14 28Z'/%3E%3Cpath fill='%23C9A45C' d='M8 31C18 29 26 25 36 18 30 25 22 29 14 31Z'/%3E%3C/svg%3E" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "TULPAR",
+    "description": "Автосалон премиальных автомобилей: подбор, trade-in, кредит, сервис.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Алматы", "addressCountry": "KZ" },
+    "openingHours": "Mo-Su 09:00-21:00"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти к содержимому</a>
+
+  <!-- Preloader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__mark">
+      <svg viewBox="0 0 48 32" class="mark"><use href="#wing" /></svg>
+    </div>
+    <div class="loader__word"><span>T</span><span>U</span><span>L</span><span>P</span><span>A</span><span>R</span></div>
+    <div class="loader__count"><span class="js-count">0</span></div>
+    <div class="loader__bar"><i class="js-bar"></i></div>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="wing" viewBox="0 0 48 32">
+      <path d="M2 30C14 26 26 16 46 2 38 14 28 22 14 28Z" />
+      <path d="M8 31C18 29 26 25 36 18 30 25 22 29 14 31Z" />
+      <path d="M15 32C21 31.5 25 30.2 29 27.8 25 30.8 21 32 15 32Z" />
+    </symbol>
+  </svg>
+
+  <!-- WebGL stage -->
+  <div class="stage" aria-hidden="true">
+    <canvas class="stage__canvas"></canvas>
+    <div class="stage__fallback"></div>
+    <div class="stage__vignette"></div>
+  </div>
+
+  <header class="header">
+    <a class="logo" href="#top" aria-label="TULPAR — на главную">
+      <svg viewBox="0 0 48 32" class="mark"><use href="#wing" /></svg>
+      <span>TULPAR</span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#showroom">Шоурум</a>
+      <a href="#collection">Модели</a>
+      <a href="#services">Сервисы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn--sm btn--gold header__cta" href="#test-drive"><span>Тест-драйв</span></a>
+    <button class="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Мобильная навигация">
+      <a href="#showroom">Шоурум</a>
+      <a href="#collection">Модели</a>
+      <a href="#services">Сервисы</a>
+      <a href="#test-drive">Тест-драйв</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <!-- 1. HERO -->
+    <section class="hero" id="top" data-cam="hero">
+      <div class="hero__meta">
+        <span class="eyebrow">Автосалон · Алматы</span>
+        <span class="eyebrow hero__coords">43°15′N&nbsp;&nbsp;76°57′E</span>
+      </div>
+      <div class="hero__content">
+        <h1 class="hero__title">
+          <span class="line"><span>Крылья,</span></span>
+          <span class="line"><span>которым не нужно</span></span>
+          <span class="line"><span><em>небо.</em></span></span>
+        </h1>
+        <p class="hero__lead reveal">Премиальные автомобили с характером. Подбор, trade-in, кредит и сервис в одном месте.</p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--gold" href="#collection"><span>Выбрать автомобиль</span></a>
+          <a class="btn btn--ghost" href="#test-drive"><span>Тест-драйв</span></a>
+        </div>
+      </div>
+      <div class="hero__word" aria-hidden="true">TULPAR</div>
+      <div class="scroll-hint" aria-hidden="true"><i></i><span>Листайте</span></div>
+    </section>
+
+    <!-- 2. MANIFESTO -->
+    <section class="manifesto" data-cam="manifesto" aria-labelledby="manifesto-title">
+      <div class="manifesto__sticky">
+        <span class="eyebrow" id="manifesto-title">01 — Легенда</span>
+        <p class="manifesto__text js-split">В степных легендах Тулпар — крылатый конь, который несёт героя быстрее ветра. Мы подбираем автомобили с тем же характером: силу, которой доверяешь, и свободу, которую чувствуешь с первого километра.</p>
+      </div>
+    </section>
+
+    <!-- 3. NUMBERS -->
+    <section class="numbers" data-cam="numbers" aria-label="TULPAR в цифрах">
+      <div class="numbers__grid">
+        <div class="stat reveal"><b data-count="12">0</b><span>лет на рынке премиальных автомобилей</span></div>
+        <div class="stat reveal"><b data-count="4800" data-format="space">0</b><span>автомобилей передано владельцам</span></div>
+        <div class="stat reveal"><b data-count="30" data-suffix=" мин">0</b><span>на предварительное одобрение кредита</span></div>
+        <div class="stat reveal"><b data-count="150">0</b><span>точек проверки каждого автомобиля с пробегом</span></div>
+      </div>
+    </section>
+
+    <!-- 4. SHOWROOM -->
+    <section class="showroom" id="showroom" data-cam="showroom" aria-labelledby="showroom-title">
+      <div class="showroom__panel">
+        <span class="eyebrow">02 — Шоурум</span>
+        <h2 class="h2" id="showroom-title"><span class="line"><span>Выберите</span></span><span class="line"><span>свой цвет</span></span></h2>
+        <p class="muted reveal">Перетащите автомобиль, чтобы осмотреть его со всех сторон. Эмаль меняется так же, как при заказе у нас: под ваш вкус и без ожидания.</p>
+        <div class="swatches reveal" role="radiogroup" aria-label="Цвет кузова">
+          <button class="swatch is-active" role="radio" aria-checked="true" data-color="#0d0e10" data-name="Обсидиан" style="--c:#16171a"><i></i><span>Обсидиан</span></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#8a6a32" data-name="Степное золото" style="--c:#b8904a"><i></i><span>Степное золото</span></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#b9bec4" data-name="Ледник" style="--c:#d6dadf"><i></i><span>Ледник</span></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#5a0d12" data-name="Гранат" style="--c:#7d1820"><i></i><span>Гранат</span></button>
+        </div>
+        <dl class="specs reveal">
+          <div><dt>0–100 км/ч</dt><dd>3,9 с</dd></div>
+          <div><dt>Мощность</dt><dd>580 л.с.</dd></div>
+          <div><dt>Запас хода</dt><dd>720 км</dd></div>
+        </dl>
+        <p class="drag-hint reveal" aria-hidden="true"><i></i>Потяните, чтобы повернуть</p>
+      </div>
+      <div class="showroom__drag" aria-hidden="true"></div>
+    </section>
+
+    <!-- 5. COLLECTION -->
+    <section class="collection" id="collection" data-cam="collection" aria-labelledby="collection-title">
+      <div class="section-head">
+        <span class="eyebrow">03 — Коллекция</span>
+        <h2 class="h2" id="collection-title"><span class="line"><span>Четыре характера.</span></span><span class="line"><span>Один стандарт.</span></span></h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <svg class="card__art" viewBox="0 0 240 90" aria-hidden="true"><path d="M10 66 L13 54 Q19 47 40 45 L70 43 Q92 27 120 25 L150 26 Q171 29 189 43 L222 47 Q232 49 232 59 L231 66"/><circle cx="62" cy="66" r="12"/><circle cx="192" cy="66" r="12"/><path class="ground" d="M0 79 H240"/></svg>
+          <span class="card__num">01</span>
+          <h3>Бизнес-седаны</h3>
+          <p>Тишина в салоне, массаж кресел, водитель — по желанию.</p>
+          <span class="card__price">от 28 млн ₸</span>
+          <a class="card__link" href="#test-drive" aria-label="Записаться на тест-драйв: бизнес-седаны"></a>
+        </article>
+        <article class="card reveal">
+          <svg class="card__art" viewBox="0 0 240 90" aria-hidden="true"><path d="M10 66 L12 45 Q14 37 30 37 L60 35 L78 18 Q82 15 90 15 L170 15 Q178 15 186 22 L206 36 Q228 38 232 48 L232 66"/><circle cx="64" cy="66" r="14"/><circle cx="186" cy="66" r="14"/><path class="ground" d="M0 81 H240"/></svg>
+          <span class="card__num">02</span>
+          <h3>Внедорожники</h3>
+          <p>Для гор, трассы и города. Полный привод, пневмоподвеска.</p>
+          <span class="card__price">от 34 млн ₸</span>
+          <a class="card__link" href="#test-drive" aria-label="Записаться на тест-драйв: внедорожники"></a>
+        </article>
+        <article class="card reveal">
+          <svg class="card__art" viewBox="0 0 240 90" aria-hidden="true"><path d="M8 66 L10 57 Q14 51 40 49 L80 47 Q110 29 140 29 Q166 31 186 45 L224 51 Q234 53 234 61 L232 66"/><circle cx="60" cy="66" r="12"/><circle cx="194" cy="66" r="12"/><path class="ground" d="M0 79 H240"/></svg>
+          <span class="card__num">03</span>
+          <h3>Спорткары</h3>
+          <p>Купе и кабриолеты для тех, кто считает секунды до сотни.</p>
+          <span class="card__price">от 52 млн ₸</span>
+          <a class="card__link" href="#test-drive" aria-label="Записаться на тест-драйв: спорткары"></a>
+        </article>
+        <article class="card reveal">
+          <svg class="card__art" viewBox="0 0 240 90" aria-hidden="true"><path d="M10 66 L12 55 Q18 47 50 45 Q84 25 124 23 Q164 23 200 43 L224 49 Q232 53 232 61 L231 66"/><circle cx="62" cy="66" r="12"/><circle cx="192" cy="66" r="12"/><path class="ground" d="M0 79 H240"/></svg>
+          <span class="card__num">04</span>
+          <h3>Электро</h3>
+          <p>Тихая мощь. Домашняя зарядка и установка — в подарок.</p>
+          <span class="card__price">от 22 млн ₸</span>
+          <a class="card__link" href="#test-drive" aria-label="Записаться на тест-драйв: электромобили"></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. SERVICES -->
+    <section class="services" id="services" data-cam="services" aria-labelledby="services-title">
+      <div class="services__pin">
+        <div class="section-head services__head">
+          <span class="eyebrow">04 — Сервисы</span>
+          <h2 class="h2" id="services-title"><span class="line"><span>Всё, кроме</span></span><span class="line"><span>ожидания</span></span></h2>
+        </div>
+        <div class="services__track">
+          <article class="service"><span class="service__n">01</span><h3>Trade-in</h3><p>Оценим ваш автомобиль за 40 минут и зачтём его стоимость в новый. Без торга на площадке.</p></article>
+          <article class="service"><span class="service__n">02</span><h3>Кредит и лизинг</h3><p>Предварительное одобрение за 30 минут, партнёрские ставки 8 банков, лизинг для компаний.</p></article>
+          <article class="service"><span class="service__n">03</span><h3>Сервис</h3><p>Официальный регламент, оригинальные запчасти, подменный автомобиль на время ремонта.</p></article>
+          <article class="service"><span class="service__n">04</span><h3>Страхование</h3><p>КАСКО и ОГПО прямо в салоне. Урегулирование убытков берём на себя.</p></article>
+          <article class="service"><span class="service__n">05</span><h3>Подбор под заказ</h3><p>Нет нужной комплектации? Найдём и привезём из Европы, ОАЭ или Кореи с полной проверкой.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PROCESS -->
+    <section class="process" data-cam="process" aria-labelledby="process-title">
+      <div class="section-head">
+        <span class="eyebrow">05 — Как это работает</span>
+        <h2 class="h2" id="process-title"><span class="line"><span>От заявки</span></span><span class="line"><span>до ключей</span></span></h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span>01</span><h3>Заявка</h3><p>Оставляете контакт — личный менеджер перезванивает за 10 минут.</p></li>
+        <li class="step reveal"><span>02</span><h3>Тест-драйв</h3><p>В салоне или у вашего дома. Сравните несколько автомобилей за одну встречу.</p></li>
+        <li class="step reveal"><span>03</span><h3>Сделка</h3><p>Кредит, trade-in и страховка оформляются параллельно, в одном окне.</p></li>
+        <li class="step reveal"><span>04</span><h3>Ключи</h3><p>Выдача в отдельном зале. Автомобиль подготовлен, бак полон.</p></li>
+      </ol>
+    </section>
+
+    <!-- 8. TEST DRIVE -->
+    <section class="cta" id="test-drive" data-cam="cta" aria-labelledby="cta-title">
+      <div class="cta__panel">
+        <span class="eyebrow">06 — Тест-драйв</span>
+        <h2 class="h2" id="cta-title"><span class="line"><span>Почувствуйте</span></span><span class="line"><span><em>сами.</em></span></span></h2>
+        <form class="form reveal" novalidate>
+          <label class="field"><span>Имя</span><input name="name" autocomplete="name" required placeholder="Как к вам обращаться" /></label>
+          <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+7 ___ ___ __ __" /></label>
+          <label class="field"><span>Класс автомобиля</span>
+            <select name="model">
+              <option>Бизнес-седан</option><option>Внедорожник</option><option>Спорткар</option><option>Электро</option><option>Пока не знаю</option>
+            </select>
+          </label>
+          <label class="field"><span>Удобная дата</span><input name="date" type="date" /></label>
+          <button class="btn btn--gold btn--wide" type="submit"><span>Записаться</span></button>
+          <p class="form__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacts" data-cam="footer">
+    <div class="footer__grid">
+      <div>
+        <span class="eyebrow">Салон</span>
+        <p>Алматы, адрес уточняется</p>
+        <p class="muted">Ежедневно 09:00–21:00</p>
+      </div>
+      <div>
+        <span class="eyebrow">Связь</span>
+        <p><a class="js-phone" href="#">+7 700 000 00 00</a></p>
+        <p><a class="js-mail" href="#">hello@tulpar.kz</a></p>
+      </div>
+      <div>
+        <span class="eyebrow">Соцсети</span>
+        <p><a href="#" aria-label="Instagram TULPAR">Instagram</a> · <a href="#" aria-label="WhatsApp TULPAR" class="js-wa">WhatsApp</a></p>
+      </div>
+    </div>
+    <div class="footer__word" aria-hidden="true">TULPAR</div>
+    <div class="footer__bottom"><span>© <span class="js-year"></span> TULPAR</span><a href="#top">Наверх ↑</a></div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
