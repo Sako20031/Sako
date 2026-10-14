@@ -1,6 +1,6 @@
 # TULPAR — сайт автосалона с 3D и кабинетом администратора
 
-- **Сайт** (`/`): светлая студия с 3D-седаном (по мотивам Toyota Camry), каталог
+- **Сайт** (`/`): студийные фото Toyota Camry (4 ракурса меняются при прокрутке), каталог
   автомобилей из базы, карточка авто с галереей, характеристиками и кредитным
   калькулятором, запись на тест-драйв, кнопка WhatsApp.
 - **Кабинет** (`/admin`, ссылка «Вход для администратора» внизу сайта):
@@ -13,13 +13,13 @@
 
 Концепция — [`CONCEPT.md`](CONCEPT.md), аудит — [`AUDIT.md`](AUDIT.md).
 
-## Запуск на Vercel (один раз)
+## Где работает
 
-1. Vercel → Add New → Project → репозиторий `Sako20031/Sako` → **Root Directory: `Tulpar`** → Deploy.
-2. В проекте: Storage → Create Database → **Neon (Postgres)** → регион Frankfurt → Connect to project.
-   Vercel сам добавит `POSTGRES_URL`.
-3. Deployments → ⋯ → **Redeploy**.
-4. Открыть `/admin`, войти с PIN **`0000`** и сразу сменить PIN во вкладке «Настройки».
+- Сайт: **https://tulpar-phi.vercel.app**
+- Кабинет: **https://tulpar-phi.vercel.app/admin** — PIN **`0000`**, сразу смените его во вкладке «Настройки».
+
+Проект Vercel `tulpar` (команда sako111), Root Directory `Tulpar`, база — та же Neon,
+что у проекта `sako` (переменная `POSTGRES_URL`), у TULPAR свои таблицы `tulpar_*`.
 
 Таблицы создаются сами при первом запросе. Каталог заполняется из
 `data/defaults.json` (одна Toyota Camry с вашим фото — номер на фото размыт).
@@ -40,8 +40,7 @@ POSTGRES_URL=postgres://user@localhost:5432/db npm run dev   # без базы �
 |---|---|
 | Страница сайта / кабинета | `index.html`, `admin.html` |
 | Логика сайта / кабинета | `src/main.js`, `src/admin.js`, общие функции — `src/shared.js` |
-| 3D-сцена и камера по секциям | `src/scene.js` (`KEYS`) |
-| 3D-модель седана | `src/car.js` |
+| Студийные фото (ракурсы) | `public/studio/*.jpg`, ракурс секции — `data-view` в `index.html` |
 | Цвета, шрифты | `src/style.css` → `:root` |
 | API (Vercel Function) | `api/tulpar.js` → `server/handler.js` |
 | Каталог и контакты по умолчанию | `data/defaults.json` |
