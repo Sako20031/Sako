@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>TULPAR — автосалон премиальных автомобилей</title>
   <meta name="description" content="TULPAR — автосалон премиальных автомобилей. Автомобили в наличии, подбор, trade-in, кредит и лизинг, сервис. Запишитесь на тест-драйв." />
-  <meta name="theme-color" content="#f3f0ea" />
+  <meta name="theme-color" content="#0d0f12" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="TULPAR — автосалон премиальных автомобилей" />
   <meta property="og:description" content="Крылья, которым не нужно небо. Автомобили в наличии, trade-in, кредит и сервис в одном месте." />
@@ -42,9 +42,11 @@
   </svg>
 
   <div class="stage" aria-hidden="true">
-    <canvas class="stage__canvas"></canvas>
-    <div class="stage__fallback"></div>
-    <div class="stage__vignette"></div>
+    <img class="stage__img is-active" data-view="low" src="/studio/low.jpg" alt="" fetchpriority="high" />
+    <img class="stage__img" data-view="front" src="/studio/front.jpg" alt="" loading="lazy" />
+    <img class="stage__img" data-view="side" src="/studio/side.jpg" alt="" loading="lazy" />
+    <img class="stage__img" data-view="top" src="/studio/top.jpg" alt="" loading="lazy" />
+    <div class="stage__shade"></div>
   </div>
 
   <header class="header">
@@ -76,7 +78,7 @@
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero" id="top" data-cam="hero">
+    <section class="hero dark" id="top" data-view="low">
       <div class="hero__meta">
         <span class="eyebrow">Автосалон · Алматы</span>
         <span class="eyebrow hero__coords">43°15′N&nbsp;&nbsp;76°57′E</span>
@@ -102,7 +104,7 @@
     </section>
 
     <!-- MANIFESTO -->
-    <section class="manifesto" data-cam="manifesto" aria-labelledby="manifesto-title">
+    <section class="manifesto dark" data-view="side" aria-labelledby="manifesto-title">
       <div class="manifesto__sticky">
         <span class="eyebrow" id="manifesto-title">01 — Легенда</span>
         <p class="manifesto__text js-split">В степных легендах Тулпар — крылатый конь, который несёт героя быстрее ветра. Мы подбираем автомобили с тем же характером: силу, которой доверяешь, и свободу, которую чувствуешь с первого километра.</p>
@@ -110,7 +112,7 @@
     </section>
 
     <!-- NUMBERS -->
-    <section class="numbers" data-cam="numbers" aria-label="TULPAR в цифрах">
+    <section class="numbers dark" data-view="front" aria-label="TULPAR в цифрах">
       <div class="numbers__grid">
         <div class="stat reveal"><b data-count="12">0</b><span>лет на рынке премиальных автомобилей</span></div>
         <div class="stat reveal"><b data-count="4800" data-format="space">0</b><span>автомобилей передано владельцам</span></div>
@@ -120,18 +122,16 @@
     </section>
 
     <!-- SHOWROOM -->
-    <section class="showroom" id="showroom" data-cam="showroom" aria-labelledby="showroom-title">
+    <section class="showroom dark" id="showroom" data-view="showroom" aria-labelledby="showroom-title">
       <div class="showroom__panel">
         <span class="eyebrow">02 — Шоурум</span>
         <h2 class="h2" id="showroom-title"><span class="line"><span class="js-feature-name">Toyota Camry</span></span></h2>
-        <p class="muted reveal">Потяните автомобиль, чтобы осмотреть его со всех сторон, и примерьте цвет кузова.</p>
-        <div class="swatches reveal" role="radiogroup" aria-label="Цвет кузова">
-          <button class="swatch is-active" role="radio" aria-checked="true" data-color="#f1f0ec" style="--c:#f4f3ef"><i></i><span>Белый перламутр</span></button>
-          <button class="swatch" role="radio" aria-checked="false" data-color="#141518" style="--c:#1a1b1f"><i></i><span>Чёрный</span></button>
-          <button class="swatch" role="radio" aria-checked="false" data-color="#9ea3a9" style="--c:#b3b7bc"><i></i><span>Серебристый</span></button>
-          <button class="swatch" role="radio" aria-checked="false" data-color="#1b2840" style="--c:#24345a"><i></i><span>Тёмно-синий</span></button>
-          <button class="swatch" role="radio" aria-checked="false" data-color="#6e0d14" style="--c:#8c1620"><i></i><span>Гранат</span></button>
-          <button class="swatch" role="radio" aria-checked="false" data-color="#8f7552" style="--c:#a8895e"><i></i><span>Шампань</span></button>
+        <p class="muted reveal">Осмотрите автомобиль со всех сторон: выберите ракурс или проведите по фото.</p>
+        <div class="views reveal" role="radiogroup" aria-label="Ракурс">
+          <button class="view is-active" role="radio" aria-checked="true" data-view="side">Сбоку</button>
+          <button class="view" role="radio" aria-checked="false" data-view="low">Три четверти</button>
+          <button class="view" role="radio" aria-checked="false" data-view="front">Спереди</button>
+          <button class="view" role="radio" aria-checked="false" data-view="top">Сверху</button>
         </div>
         <dl class="specs reveal js-feature-specs">
           <div><dt>Мощность</dt><dd>181 л.с.</dd></div>
@@ -140,14 +140,14 @@
         </dl>
         <div class="showroom__actions reveal">
           <button class="btn btn--dark js-feature-open" type="button"><span>Подробнее и цена</span></button>
-          <p class="drag-hint" aria-hidden="true"><i></i>Потяните</p>
+          <p class="drag-hint" aria-hidden="true"><i></i>Листайте ракурсы</p>
         </div>
       </div>
       <div class="showroom__drag" aria-hidden="true"></div>
     </section>
 
     <!-- CATALOG -->
-    <section class="catalog" id="cars" data-cam="catalog" aria-labelledby="cars-title">
+    <section class="catalog" id="cars" aria-labelledby="cars-title">
       <div class="catalog__head">
         <div>
           <span class="eyebrow">03 — Автомобили</span>
@@ -167,7 +167,7 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="services" id="services" data-cam="services" aria-labelledby="services-title">
+    <section class="services" id="services" aria-labelledby="services-title">
       <div class="services__pin">
         <div class="section-head services__head">
           <span class="eyebrow">04 — Сервисы</span>
@@ -184,7 +184,7 @@
     </section>
 
     <!-- PROCESS -->
-    <section class="process" data-cam="process" aria-labelledby="process-title">
+    <section class="process" aria-labelledby="process-title">
       <div class="section-head">
         <span class="eyebrow">05 — Как это работает</span>
         <h2 class="h2" id="process-title"><span class="line"><span>От заявки</span></span><span class="line"><span>до ключей</span></span></h2>
@@ -198,7 +198,7 @@
     </section>
 
     <!-- TEST DRIVE -->
-    <section class="cta" id="test-drive" data-cam="cta" aria-labelledby="cta-title">
+    <section class="cta dark" id="test-drive" data-view="front" aria-labelledby="cta-title">
       <div class="cta__panel">
         <span class="eyebrow">06 — Тест-драйв</span>
         <h2 class="h2" id="cta-title"><span class="line"><span>Почувствуйте</span></span><span class="line"><span><em>сами</em></span></span></h2>
@@ -215,7 +215,7 @@
     </section>
   </main>
 
-  <footer class="footer" id="contacts" data-cam="footer">
+  <footer class="footer" id="contacts">
     <div class="footer__grid">
       <div>
         <span class="eyebrow">Салон</span>

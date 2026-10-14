@@ -327,7 +327,65 @@ async function loadData() {
   if (s.status === 'fulfilled') applySettings(s.value.settings);
 }
 
-// ---------- 3D stage + boot ----------
+// ---------- Studio stage: one photo per section ----------
+const stageImgs = $$('.stage__img');
+const viewSections = $$('section[data-view]');
+let showroomView = 'side';
+let currentView = 'low';
+
+function setView(name) {
+  if (name === currentView) return;
+  currentView = name;
+  stageImgs.forEach((img) => img.classList.toggle('is-active', img.dataset.view === name));
+}
+
+function updateStage() {
+  const mid = window.innerHeight * 0.5;
+  for (const el of viewSections) {
+    const r = el.getBoundingClientRect();
+    if (r.top <= mid && r.bottom > mid) {
+      setView(el.dataset.view === 'showroom' ? showroomView : el.dataset.view);
+      return;
+    }
+  }
+}
+window.addEventListener('scroll', updateStage, { passive: true });
+
+// Gentle parallax that follows the cursor
+if (!reducedMotion && !isMobile) {
+  window.addEventListener('pointermove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * -18;
+    const y = (e.clientY / window.innerHeight - 0.5) * -12;
+    document.querySelector('.stage').style.setProperty('--px', `${x.toFixed(1)}px`);
+    document.querySelector('.stage').style.setProperty('--py', `${y.toFixed(1)}px`);
+  }, { passive: true });
+}
+
+// Showroom: pick a view, or swipe across the photo to cycle through them
+const VIEWS = ['side', 'low', 'front', 'top'];
+function pickView(name) {
+  showroomView = name;
+  $$('.view').forEach((b) => {
+    const on = b.dataset.view === name;
+    b.classList.toggle('is-active', on);
+    b.setAttribute('aria-checked', String(on));
+  });
+  updateStage();
+}
+$$('.view').forEach((b) => b.addEventListener('click', () => pickView(b.dataset.view)));
+const drag = $('.showroom__drag');
+let dragX = null;
+drag.addEventListener('pointerdown', (e) => { dragX = e.clientX; });
+window.addEventListener('pointerup', (e) => {
+  if (dragX === null) return;
+  const dx = e.clientX - dragX;
+  dragX = null;
+  if (Math.abs(dx) < 40) return;
+  const i = VIEWS.indexOf(showroomView);
+  pickView(VIEWS[(i + (dx < 0 ? 1 : VIEWS.length - 1)) % VIEWS.length]);
+});
+
+// ---------- Boot ----------
 const loaderCount = $('.js-count');
 const loaderBar = $('.js-bar');
 let progress = 0;
@@ -336,56 +394,29 @@ function setProgress(p) {
   loaderCount.textContent = String(Math.round(progress)).padStart(3, '0');
   loaderBar.style.transform = `scaleX(${progress / 100})`;
 }
-const fake = setInterval(() => setProgress(Math.min(progress + 7, 85)), 90);
-
-function hasWebGL() {
-  try {
-    const c = document.createElement('canvas');
-    return !!(c.getContext('webgl2') || c.getContext('webgl'));
-  } catch { return false; }
-}
+const fake = setInterval(() => setProgress(Math.min(progress + 9, 85)), 80);
 
 async function boot() {
-  const data = loadData();
-  let stage = null;
-  if (hasWebGL()) {
-    try {
-      const { createStage } = await import('./scene.js');
-      stage = createStage($('.stage__canvas'), { reducedMotion, isMobile });
-      stage.bindDrag($('.showroom__drag'));
-      $$('.swatch').forEach((b) => b.addEventListener('click', () => {
-        $$('.swatch').forEach((s) => { s.classList.remove('is-active'); s.setAttribute('aria-checked', 'false'); });
-        b.classList.add('is-active');
-        b.setAttribute('aria-checked', 'true');
-        stage.setPaint(b.dataset.color);
-      }));
-      stage.start();
-    } catch (err) {
-      console.warn('WebGL stage failed, using fallback', err);
-      document.documentElement.classList.add('no-webgl');
-    }
-  } else {
-    document.documentElement.classList.add('no-webgl');
-  }
-
-  await Promise.allSettled([document.fonts?.ready, data]);
+  const first = stageImgs[0];
+  const firstLoaded = first.complete ? Promise.resolve() : new Promise((r) => { first.onload = r; first.onerror = r; });
+  await Promise.race([
+    Promise.allSettled([document.fonts?.ready, loadData(), firstLoaded]),
+    new Promise((r) => setTimeout(r, 4000)),
+  ]);
   clearInterval(fake);
   setProgress(100);
-  await new Promise((r) => setTimeout(r, reducedMotion ? 0 : 400));
+  await new Promise((r) => setTimeout(r, reducedMotion ? 0 : 300));
 
   $('.loader').classList.add('is-done');
   document.body.classList.remove('is-loading');
   lenis?.start();
-  stage?.playIntro(gsap);
   setTimeout(() => {
     $$('.hero .line').forEach((l) => l.classList.add('is-in'));
     armReveals();
     ScrollTrigger.refresh();
-    stage?.measure();
-  }, reducedMotion ? 0 : 350);
-
-  window.addEventListener('load', () => { ScrollTrigger.refresh(); stage?.measure(); });
-  ScrollTrigger.addEventListener('refresh', () => stage?.measure());
+    updateStage();
+  }, reducedMotion ? 0 : 300);
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 }
 
 boot();
