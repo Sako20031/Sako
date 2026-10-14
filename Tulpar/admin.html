@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TULPAR — кабинет администратора</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#f3f0ea" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Cpath fill='%23A8834A' d='M2 30C14 26 26 16 46 2 38 14 28 22 14 28Z'/%3E%3Cpath fill='%23A8834A' d='M8 31C18 29 26 25 36 18 30 25 22 29 14 31Z'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="wing" viewBox="0 0 48 32">
+      <path d="M2 30C14 26 26 16 46 2 38 14 28 22 14 28Z" />
+      <path d="M8 31C18 29 26 25 36 18 30 25 22 29 14 31Z" />
+      <path d="M15 32C21 31.5 25 30.2 29 27.8 25 30.8 21 32 15 32Z" />
+    </symbol>
+  </svg>
+
+  <!-- Login -->
+  <main class="login" hidden>
+    <form class="login__card">
+      <svg viewBox="0 0 48 32" class="mark"><use href="#wing" /></svg>
+      <h1>TULPAR</h1>
+      <p class="muted">Кабинет администратора</p>
+      <label class="field"><span>PIN-код</span><input name="pin" type="password" inputmode="numeric" autocomplete="current-password" required autofocus /></label>
+      <button class="btn btn--dark btn--wide" type="submit">Войти</button>
+      <p class="login__error" role="alert"></p>
+      <a class="muted small" href="/">← На сайт</a>
+    </form>
+  </main>
+
+  <!-- App -->
+  <div class="app" hidden>
+    <header class="top">
+      <a class="logo" href="/"><svg viewBox="0 0 48 32" class="mark"><use href="#wing" /></svg><span>TULPAR</span></a>
+      <nav class="tabs" role="tablist">
+        <button class="tab is-active" role="tab" data-tab="cars" aria-selected="true">Автомобили</button>
+        <button class="tab" role="tab" data-tab="leads" aria-selected="false">Заявки <i class="count js-new-leads" hidden></i></button>
+        <button class="tab" role="tab" data-tab="settings" aria-selected="false">Настройки</button>
+      </nav>
+      <div class="top__right">
+        <a class="link" href="/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+        <button class="link js-logout" type="button">Выйти</button>
+      </div>
+    </header>
+
+    <div class="banner js-pin-banner" hidden>Вы вошли со стандартным PIN <b>0000</b>. Смените его во вкладке «Настройки».</div>
+
+    <!-- Cars -->
+    <section class="panel" data-panel="cars">
+      <div class="panel__head">
+        <div>
+          <h2>Автомобили</h2>
+          <p class="muted js-cars-sum"></p>
+        </div>
+        <button class="btn btn--dark js-add" type="button">+ Добавить автомобиль</button>
+      </div>
+      <div class="list js-cars"></div>
+    </section>
+
+    <!-- Leads -->
+    <section class="panel" data-panel="leads" hidden>
+      <div class="panel__head"><div><h2>Заявки на тест-драйв</h2><p class="muted">Новые заявки с сайта. Позвоните или напишите в WhatsApp прямо отсюда.</p></div></div>
+      <div class="list js-leads"></div>
+    </section>
+
+    <!-- Settings -->
+    <section class="panel" data-panel="settings" hidden>
+      <div class="panel__head"><div><h2>Настройки</h2></div></div>
+      <div class="settings">
+        <form class="card js-settings-form">
+          <h3>Контакты на сайте</h3>
+          <label class="field"><span>Телефон</span><input name="phone" placeholder="+7 700 000 00 00" /></label>
+          <label class="field"><span>WhatsApp (только цифры)</span><input name="whatsapp" inputmode="numeric" placeholder="77000000000" /></label>
+          <label class="field"><span>E-mail</span><input name="email" type="email" /></label>
+          <label class="field"><span>Адрес салона</span><input name="address" /></label>
+          <label class="field"><span>Часы работы</span><input name="hours" /></label>
+          <label class="field"><span>Instagram (ссылка или @имя)</span><input name="instagram" /></label>
+          <button class="btn btn--dark" type="submit">Сохранить контакты</button>
+          <p class="saved" role="status"></p>
+        </form>
+        <form class="card js-pin-form">
+          <h3>PIN-код входа</h3>
+          <p class="muted">От 4 до 12 цифр. После смены все другие устройства выйдут из кабинета.</p>
+          <label class="field"><span>Новый PIN</span><input name="pin" type="password" inputmode="numeric" autocomplete="new-password" /></label>
+          <label class="field"><span>Повторите PIN</span><input name="pin2" type="password" inputmode="numeric" autocomplete="new-password" /></label>
+          <button class="btn btn--dark" type="submit">Сменить PIN</button>
+          <p class="saved" role="status"></p>
+          <hr />
+          <p class="muted small">База данных: <b class="js-db"></b></p>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- Car editor -->
+  <dialog class="editor" aria-labelledby="editor-title">
+    <form class="editor__form" novalidate>
+      <header class="editor__head">
+        <h2 id="editor-title">Новый автомобиль</h2>
+        <button class="icon js-close" type="button" aria-label="Закрыть">×</button>
+      </header>
+      <div class="editor__body">
+        <fieldset>
+          <legend>Фото</legend>
+          <p class="muted small">Первое фото — обложка в каталоге. Можно загрузить до 20 фото, большие уменьшаются автоматически.</p>
+          <div class="photos js-photos"></div>
+          <label class="upload">
+            <input type="file" accept="image/jpeg,image/png,image/webp" multiple class="js-files" />
+            <span>+ Загрузить фото</span>
+          </label>
+          <p class="small js-upload-status" role="status"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Основное</legend>
+          <div class="cols">
+            <label class="field"><span>Марка *</span><input name="brand" required placeholder="Toyota" /></label>
+            <label class="field"><span>Модель *</span><input name="model" required placeholder="Camry" /></label>
+            <label class="field"><span>Комплектация</span><input name="trim" placeholder="Prestige" /></label>
+            <label class="field"><span>Год</span><input name="year" inputmode="numeric" placeholder="2020" /></label>
+            <label class="field"><span>Цена, ₸</span><input name="price" inputmode="numeric" placeholder="15 900 000" /></label>
+            <label class="field"><span>Старая цена, ₸ (для скидки)</span><input name="oldPrice" inputmode="numeric" /></label>
+            <label class="field"><span>Пробег, км (0 — новый)</span><input name="mileage" inputmode="numeric" placeholder="48 000" /></label>
+            <label class="field"><span>Цвет</span><input name="color" placeholder="Белый перламутр" /></label>
+            <label class="field"><span>Тип кузова</span>
+              <select name="category">
+                <option value="sedan">Седан</option><option value="suv">Внедорожник</option><option value="sport">Спорткар</option>
+                <option value="ev">Электро</option><option value="minivan">Минивэн</option>
+              </select>
+            </label>
+            <label class="field"><span>Статус</span>
+              <select name="status"><option value="stock">В наличии</option><option value="order">Под заказ</option><option value="sold">Продан</option></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Характеристики</legend>
+          <div class="cols">
+            <label class="field"><span>Мощность, л.с.</span><input name="power" inputmode="numeric" placeholder="181" /></label>
+            <label class="field"><span>Двигатель</span><input name="engine" placeholder="2.5 л" /></label>
+            <label class="field"><span>Топливо</span><input name="fuel" list="fuels" placeholder="Бензин" /></label>
+            <label class="field"><span>Коробка передач</span><input name="transmission" list="boxes" placeholder="Автомат, 8 ступеней" /></label>
+            <label class="field"><span>Привод</span><input name="drive" list="drives" placeholder="Передний" /></label>
+            <label class="field"><span>Разгон 0–100 км/ч</span><input name="accel" placeholder="8,7 с" /></label>
+            <label class="field"><span>Макс. скорость</span><input name="topSpeed" placeholder="210 км/ч" /></label>
+            <label class="field"><span>Расход</span><input name="consumption" placeholder="7,8 л / 100 км" /></label>
+          </div>
+          <datalist id="fuels"><option>Бензин</option><option>Дизель</option><option>Гибрид</option><option>Электро</option><option>Газ / бензин</option></datalist>
+          <datalist id="boxes"><option>Автомат</option><option>Механика</option><option>Робот</option><option>Вариатор</option></datalist>
+          <datalist id="drives"><option>Передний</option><option>Задний</option><option>Полный</option></datalist>
+          <h4>Свои характеристики</h4>
+          <p class="muted small">Любые строки: «Владельцев — 1», «Объём багажника — 524 л», «Крутящий момент — 231 Н·м».</p>
+          <div class="specs-edit js-specs"></div>
+          <button class="btn btn--line btn--sm js-add-spec" type="button">+ Добавить строку</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Описание и опции</legend>
+          <label class="field"><span>Описание</span><textarea name="description" rows="4" placeholder="История автомобиля, состояние, обслуживание…"></textarea></label>
+          <label class="field"><span>Опции (каждая с новой строки)</span><textarea name="features" rows="5" placeholder="Кожаный салон&#10;Камера 360°&#10;Подогрев руля"></textarea></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Показ на сайте</legend>
+          <label class="check"><input type="checkbox" name="visible" checked /> Показывать в каталоге</label>
+          <label class="check"><input type="checkbox" name="featured" /> Главный автомобиль в шоуруме (характеристики показываются рядом с 3D)</label>
+        </fieldset>
+      </div>
+      <footer class="editor__foot">
+        <p class="editor__error" role="alert"></p>
+        <button class="btn btn--line js-close" type="button">Отмена</button>
+        <button class="btn btn--dark" type="submit">Сохранить</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>
