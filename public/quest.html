@@ -289,13 +289,13 @@ const CONFIG = {
   hospitalPhoto: '/quest-files/hospital.jpg',
   // Дата «больницы» в формате ДДММГГ, например '140226'. null — пока не задана (принимается любая).
   hospitalDate: '140925',              // 14.09.25
-  // «Что я сказал?» — голосовое. null — локация скрыта, пока нет файла.
+  // «Что я сказал?» — голосовое. null — пока без записи: фраза показывается текстом задом наперёд.
   voice: null,                         // например '/quest-files/voice.mp3'
   voiceMode: 'reverse',                // 'reverse' — задом наперёд, 'fast' — ускорено
-  voiceAnswer: 'Ты моя самая любимая', // что сказано на самом деле
-  voiceWrong: ['Ты моя самая красивая', 'Пойдём в Биси?'],
+  voiceAnswer: 'Ты моё самое красивое чудо', // что сказано на самом деле
+  voiceWrong: ['Ты моё самое любимое солнце', 'Ты моя самая красивая звёздочка'],
   // Подсказка, где лежит подарок в реальной жизни (открывается в финале стиралкой)
-  giftHint: null,                      // например 'Загляни под подушку 🛏️'
+  giftHint: 'Вечером подарок будет лежать в твоей сумке 👜',
 };
 
 /* ============================================================ */
@@ -435,7 +435,7 @@ const LEVELS = [
   { id:'voice',    title:'Что я сказал?' },
   { id:'pizza',    title:'Пицца желаний' },
   { id:'final',    title:'Финиш ♡' },
-].filter(l => l.id !== 'voice' || CONFIG.voice);
+];
 const isFinal = i => i === LEVELS.length - 1;
 const locTitle = i => isFinal(i) ? LEVELS[i].title : `Локация ${i - 1} · ${LEVELS[i].title}`;
 let cur = 0;
@@ -788,10 +788,13 @@ const SCENES = {
       <div class="loc">Локация ${cur - 1}</div>
       <h2>Что я сказал?</h2>
       ${buddyBlock(true, true)}
-      <button class="play" id="play" aria-label="Послушать">▶</button>
+      ${CONFIG.voice ? '<button class="play" id="play" aria-label="Послушать">▶</button>'
+        : `<div class="card" id="rev" style="text-align:center;font-size:1.5rem;font-weight:800;letter-spacing:.04em;margin-bottom:14px;color:var(--blush)">«${[...CONFIG.voiceAnswer].reverse().join('')}»</div>`}
       <div class="opts" id="opts">${opts.map(o => `<button class="opt">${o}</button>`).join('')}</div>
     </section>`;
-    say(CONFIG.voiceMode === 'fast'
+    say(!CONFIG.voice
+      ? `${CONFIG.me} хотел сказать тебе кое-что важное, а я перевернул его слова <b>задом наперёд</b> 🙃 Прочитай и угадай!`
+      : CONFIG.voiceMode === 'fast'
       ? `${CONFIG.me} записал тебе голосовое, но я его <b>ускорил</b> 🐿️ Послушай и угадай, что он сказал!`
       : `${CONFIG.me} записал тебе голосовое, а я его прокрутил <b>задом наперёд</b> 🙃 Угадай, что он сказал!`);
     let ctx, buf, normal = false, src;
@@ -817,17 +820,19 @@ const SCENES = {
         src.start();
       } catch(e){ say('Ой, не получилось включить звук 🙈 Попробуй ещё раз'); }
     };
-    $('#play').onclick = play;
+    if (CONFIG.voice) $('#play').onclick = play;
     $('#opts').onclick = e => {
       const o = e.target.closest('.opt'); if (!o || o.classList.contains('no') || normal) return;
       if (o.textContent === CONFIG.voiceAnswer){
         normal = true; o.classList.add('yes'); mood('happy'); confetti(50);
         document.querySelectorAll('.opt').forEach(x => x !== o && x.classList.add('no'));
-        say('Правильно! 💗 Нажми ▶ — теперь послушай <b>по-нормальному</b>').then(() => {
+        if (!CONFIG.voice) $('#rev').textContent = `«${CONFIG.voiceAnswer}» 💗`;
+        say(CONFIG.voice ? 'Правильно! 💗 Нажми ▶ — теперь послушай <b>по-нормальному</b>'
+          : `Правильно! Ты — его <b>самое красивое чудо</b> 💗`).then(() => {
           stage.querySelector('.scene').insertAdjacentHTML('beforeend', `<div class="actions"><button class="btn" id="nx">Дальше 🐾</button></div>`);
           $('#nx').onclick = () => { if (src) try { src.stop(); } catch(e){} next(); };
         });
-      } else { o.classList.add('no'); shake(o); mood('sad'); buzz([30,40,30]); say('Не-а 🙈 Послушай ещё раз!'); }
+      } else { o.classList.add('no'); shake(o); mood('sad'); buzz([30,40,30]); say(CONFIG.voice ? 'Не-а 🙈 Послушай ещё раз!' : 'Не-а 🙈 Прочитай ещё раз, справа налево!'); }
     };
   },
 
