@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Квест для Аяулым</title>
+<meta name="theme-color" content="#14060d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&family=Marck+Script&display=swap">
+<style>
+  :root{
+    --bg:#14060d;
+    --card:rgba(255,236,243,.06);
+    --card-strong:rgba(255,236,243,.1);
+    --line:rgba(255,190,214,.2);
+    --ink:#fff4f7;
+    --muted:#d9aebe;
+    --rose:#ff5f93;
+    --rose-2:#ff9dbd;
+    --blush:#ffd4e2;
+    --gold:#f4c68d;
+    --wine:#7a1238;
+    --ok:#7fe0a8;
+    --bad:#ff7b7b;
+    --radius:22px;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  [hidden]{display:none !important;}
+  html,body{margin:0;height:100%;}
+  body{
+    background:
+      radial-gradient(1100px 700px at 80% -10%, rgba(255,95,147,.22), transparent 60%),
+      radial-gradient(900px 600px at -10% 30%, rgba(244,198,141,.10), transparent 60%),
+      radial-gradient(1000px 800px at 50% 110%, rgba(122,18,56,.5), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    min-height:100dvh;
+  }
+  button{font-family:inherit;cursor:pointer;border:0;color:inherit;}
+  .script{font-family:'Marck Script',cursive;font-weight:400;}
+  .serif{font-family:'Cormorant Garamond',Georgia,serif;}
+
+  /* floating hearts background */
+  #sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .float{position:absolute;bottom:-40px;opacity:0;animation:rise linear infinite;filter:drop-shadow(0 0 8px rgba(255,95,147,.5));}
+  @keyframes rise{
+    0%{transform:translateY(0) rotate(0);opacity:0;}
+    10%{opacity:.55;}
+    90%{opacity:.35;}
+    100%{transform:translateY(-110vh) rotate(40deg);opacity:0;}
+  }
+
+  /* layout */
+  .app{position:relative;z-index:1;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:max(16px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom));}
+  .top{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;}
+  .brand{font-family:'Marck Script',cursive;font-size:1.5rem;color:var(--rose-2);}
+  .map{display:flex;gap:6px;align-items:center;}
+  .map i{width:9px;height:9px;border-radius:50%;background:rgba(255,236,243,.18);transition:.4s;}
+  .map i.done{background:var(--rose);box-shadow:0 0 10px var(--rose);}
+  .map i.now{background:var(--gold);transform:scale(1.35);box-shadow:0 0 12px var(--gold);}
+
+  .stage{width:100%;max-width:560px;flex:1;display:flex;flex-direction:column;}
+  .scene{flex:1;display:flex;flex-direction:column;align-items:center;animation:sceneIn .7s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes sceneIn{from{opacity:0;transform:translateY(18px) scale(.98);}to{opacity:1;transform:none;}}
+
+  .loc{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:800;color:var(--gold);margin:6px 0 2px;text-align:center;}
+  h1,h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;margin:0 0 8px;text-align:center;line-height:1.1;}
+  h1{font-size:clamp(2rem,8vw,2.8rem);}
+  h2{font-size:clamp(1.6rem,6.5vw,2.2rem);}
+  .sub{color:var(--muted);text-align:center;margin:0 0 14px;max-width:440px;}
+
+  /* character + speech bubble */
+  .buddy-row{display:flex;flex-direction:column;align-items:center;margin:8px 0 10px;}
+  .bubble{position:relative;background:var(--card-strong);border:1px solid var(--line);border-radius:20px;
+    padding:14px 18px;max-width:440px;min-height:54px;font-size:1.02rem;text-align:center;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 20px 50px -25px rgba(0,0,0,.8);margin-bottom:14px;}
+  .bubble::after{content:"";position:absolute;left:50%;bottom:-9px;width:16px;height:16px;transform:translateX(-50%) rotate(45deg);
+    background:inherit;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .bubble b{color:var(--rose-2);}
+  .caret{display:inline-block;width:2px;height:1em;background:var(--rose-2);vertical-align:-2px;margin-left:2px;animation:blinkc .8s steps(1) infinite;}
+  @keyframes blinkc{50%{opacity:0;}}
+
+  .buddy{width:130px;height:130px;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%;cursor:pointer;}
+  .buddy.small{width:84px;height:84px;}
+  .buddy.happy{animation:hop .5s ease-in-out 3;}
+  .buddy.sad{animation:wobble .5s ease-in-out 2;}
+  @keyframes bob{0%,100%{transform:translateY(0) scale(1,1);}50%{transform:translateY(-8px) scale(1.02,.98);}}
+  @keyframes hop{0%,100%{transform:translateY(0);}40%{transform:translateY(-26px) scale(.95,1.06);}70%{transform:translateY(0) scale(1.08,.92);}}
+  @keyframes wobble{0%,100%{transform:rotate(0);}25%{transform:rotate(-9deg);}75%{transform:rotate(9deg);}}
+  .buddy .eye{animation:blink 4.2s infinite;transform-box:fill-box;transform-origin:center;}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1);}95%{transform:scaleY(.1);}}
+  .buddy .tail{transform-box:fill-box;transform-origin:0% 100%;animation:tail 1.6s ease-in-out infinite;}
+  @keyframes tail{0%,100%{transform:rotate(-8deg);}50%{transform:rotate(14deg);}}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 30px;border-radius:999px;
+    font-weight:800;font-size:1rem;letter-spacing:.02em;color:#fff;
+    background:linear-gradient(135deg,var(--rose),#e23a77);box-shadow:0 12px 30px -10px rgba(255,95,147,.8),inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .15s, box-shadow .2s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:scale(.96);}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);box-shadow:none;color:var(--blush);}
+  .btn.pulse{animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 30px -10px rgba(255,95,147,.8),0 0 0 0 rgba(255,95,147,.5);}50%{box-shadow:0 12px 30px -10px rgba(255,95,147,.8),0 0 0 14px rgba(255,95,147,0);}}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:auto;padding-top:16px;}
+
+  .card{width:100%;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+
+  .slot,.dg,.roll .v{font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;}
+  .shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+
+  /* level 1: digits */
+  .slots{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0 14px;font-family:'Cormorant Garamond',serif;}
+  .slot{width:42px;height:54px;border-radius:12px;border:1.5px dashed var(--line);display:grid;place-items:center;font-size:2rem;font-weight:700;color:var(--blush);transition:.3s;}
+  .slot.filled{border-style:solid;border-color:var(--rose);background:rgba(255,95,147,.14);box-shadow:0 0 18px rgba(255,95,147,.35);animation:pop .35s;}
+  .slot.next{border-color:var(--gold);}
+  .dot{font-size:2rem;color:var(--rose-2);font-weight:700;}
+  @keyframes pop{0%{transform:scale(.6);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
+  .digits{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;width:100%;}
+  .dg{aspect-ratio:1;border-radius:12px;background:var(--card);border:1px solid rgba(255,190,214,.12);
+    font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--blush);display:grid;place-items:center;
+    transition:background .2s, transform .2s, opacity .3s;animation:drift 3s ease-in-out infinite;}
+  .dg:active{transform:scale(.9);}
+  .dg.used{opacity:.12;pointer-events:none;background:transparent;}
+  .dg.wrong{background:rgba(255,123,123,.25);border-color:var(--bad);}
+  @keyframes drift{0%,100%{translate:0 0;}50%{translate:0 -3px;}}
+
+  /* level 2: cafe */
+  .cafes{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
+  .cafe{padding:18px 10px;border-radius:18px;background:var(--card);border:1px solid var(--line);text-align:center;transition:.25s;}
+  .cafe .e{font-size:2.2rem;display:block;margin-bottom:4px;}
+  .cafe .n{font-weight:800;}
+  .cafe .d{display:block;font-size:.8rem;color:var(--muted);}
+  .cafe:hover{background:var(--card-strong);transform:translateY(-2px);}
+  .cafe.no{opacity:.35;filter:grayscale(1);}
+  .cafe.yes{background:linear-gradient(135deg,rgba(255,95,147,.35),rgba(244,198,141,.25));border-color:var(--rose);box-shadow:0 0 30px rgba(255,95,147,.45);transform:scale(1.04);}
+
+  /* level 3: memory */
+  .mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;perspective:800px;}
+  .mc{aspect-ratio:3/4;position:relative;background:none;padding:0;}
+  .mc .in{position:absolute;inset:0;transition:transform .45s;transform-style:preserve-3d;}
+  .mc.open .in,.mc.got .in{transform:rotateY(180deg);}
+  .mc .f,.mc .b{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .mc .f{background:linear-gradient(135deg,#5a0f2c,#2a0a18);border:1px solid var(--line);font-size:1.3rem;color:var(--rose-2);}
+  .mc .b{background:var(--card-strong);border:1px solid var(--rose);transform:rotateY(180deg);font-size:2rem;}
+  .mc.got .b{background:rgba(127,224,168,.16);border-color:var(--ok);}
+  .stat{color:var(--muted);font-size:.9rem;margin-top:10px;text-align:center;}
+
+  /* level 4: scramble */
+  .word{display:flex;gap:6px;justify-content:center;margin:6px 0 18px;flex-wrap:wrap;}
+  .ws{width:44px;height:54px;border-radius:12px;border:1.5px dashed var(--line);display:grid;place-items:center;font-size:1.6rem;font-weight:800;background:none;color:var(--ink);}
+  .ws.filled{border-style:solid;border-color:var(--rose);background:rgba(255,95,147,.14);}
+  .word.ok .ws{border-color:var(--ok);background:rgba(127,224,168,.18);animation:pop .4s;}
+  .letters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  .lt{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--rose),#b8255c);font-size:1.5rem;font-weight:800;color:#fff;box-shadow:0 8px 18px -8px rgba(255,95,147,.9);transition:.2s;}
+  .lt.gone{opacity:0;transform:scale(.4);pointer-events:none;}
+
+  /* level 5: photo puzzle */
+  .puz{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%;max-width:360px;aspect-ratio:1;border-radius:18px;overflow:hidden;
+    border:1px solid var(--line);background:rgba(0,0,0,.3);}
+  .pt{background-size:300% 300%;padding:0;transition:outline .15s, filter .2s;}
+  .pt.sel{outline:3px solid var(--gold);outline-offset:-3px;filter:brightness(1.2);}
+  .puz.solved{gap:0;box-shadow:0 0 50px rgba(255,95,147,.55);animation:pop .6s;}
+  .polaroid{background:#fff8fa;padding:12px 12px 16px;border-radius:6px;transform:rotate(-2deg);box-shadow:0 30px 60px -20px rgba(0,0,0,.8);max-width:340px;width:100%;}
+  .polaroid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;display:block;}
+  .polaroid p{margin:10px 0 0;font-family:'Marck Script',cursive;color:#7a1238;font-size:1.4rem;text-align:center;}
+
+  /* level 6: lock */
+  .lock{display:flex;align-items:center;justify-content:center;gap:4px;margin:6px 0 10px;}
+  .roll{display:flex;flex-direction:column;align-items:center;}
+  .roll button{background:none;color:var(--rose-2);font-size:1.1rem;padding:6px 10px;}
+  .roll .v{width:42px;height:56px;border-radius:12px;background:linear-gradient(180deg,#2a0a18,#4a0f28 50%,#2a0a18);border:1px solid var(--line);
+    display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;}
+  .lock.ok .v{border-color:var(--ok);color:var(--ok);}
+
+  /* final */
+  .letter{background:linear-gradient(180deg,#fff8fa,#ffe9f0);color:#4a0f28;border-radius:18px;padding:22px 20px;box-shadow:0 30px 70px -25px rgba(0,0,0,.9);
+    font-size:1.05rem;line-height:1.65;transform:rotate(-.6deg);}
+  .letter .script{font-size:1.7rem;color:#c2185b;}
+  .letter p{margin:0 0 10px;}
+  .sign{text-align:right;font-family:'Marck Script',cursive;font-size:1.5rem;color:#c2185b;}
+
+  /* paw transition */
+  #walk{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(circle at 50% 50%, rgba(40,8,22,.88), rgba(20,6,13,.97));}
+  #walk.on{opacity:1;pointer-events:auto;}
+  .paw{position:absolute;width:38px;height:38px;opacity:0;animation:step 1.9s ease-out forwards;}
+  @keyframes step{0%{opacity:0;transform:var(--r) scale(.4);}12%{opacity:1;transform:var(--r) scale(1.1);}22%{transform:var(--r) scale(1);}75%{opacity:.9;}100%{opacity:0;transform:var(--r) scale(1);}}
+  #walk .walker{position:absolute;bottom:14%;left:-120px;width:96px;animation:walkby 2.2s linear forwards;}
+  @keyframes walkby{to{left:calc(100% + 40px);}}
+  #walk .walker svg{animation:waddle .28s ease-in-out infinite alternate;}
+  @keyframes waddle{from{transform:rotate(-6deg) translateY(0);}to{transform:rotate(6deg) translateY(-6px);}}
+  #walk .wtitle{position:absolute;left:0;right:0;top:40%;text-align:center;font-family:'Marck Script',cursive;font-size:2.1rem;color:var(--blush);
+    opacity:0;animation:fadeT 2.1s ease forwards;}
+  @keyframes fadeT{0%{opacity:0;transform:translateY(10px);}25%,75%{opacity:1;transform:none;}100%{opacity:0;}}
+
+  /* confetti */
+  .conf{position:fixed;top:-30px;z-index:60;pointer-events:none;animation:fall linear forwards;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(540deg);}}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:70;background:var(--card-strong);border:1px solid var(--line);
+    padding:10px 16px;border-radius:999px;backdrop-filter:blur(10px);font-weight:700;animation:sceneIn .3s;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<div class="app">
+  <div class="top">
+    <div class="brand">для Аяулым ♡</div>
+    <div class="map" id="map" aria-label="Прогресс квеста"></div>
+  </div>
+  <main class="stage" id="stage"></main>
+</div>
+<div id="walk" aria-hidden="true"></div>
+
+<script>
+/* ============================================================
+   НАСТРОЙКИ КВЕСТА — меняй здесь
+   ============================================================ */
+const CONFIG = {
+  her: 'Аяулым',
+  me: 'Сагинжан',
+  buddyName: 'Мими',
+  firstDate: '251125',                 // 25.11.25 — первая официальная дата
+  cafeAnswer: 'bisi',
+  // Фото: положи файл в public/quest-files/ и укажи путь. Пока файла нет — будет заглушка.
+  photo: '/quest-files/kora.jpg',
+  photoCaption: 'Наше первое фото с Корой 🐾',
+  // Дата «больницы» в формате ДДММГГ, например '140226'. null — пока не задана (принимается любая).
+  hospitalDate: null,
+};
+
+/* ============================================================ */
+const $ = (s, el = document) => el.querySelector(s);
+const stage = $('#stage');
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+};
+
+/* ---------- милый персонаж (SVG) ---------- */
+function buddySVG(){
+  return `
+  <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="bodyG" cx="45%" cy="35%" r="70%">
+        <stop offset="0" stop-color="#ffe7ef"/><stop offset=".65" stop-color="#ffbdd2"/><stop offset="1" stop-color="#f48fb1"/>
+      </radialGradient>
+    </defs>
+    <path class="tail" d="M104 104 q22 -6 20 -30 q-2 -8 -8 -4 q4 18 -14 24z" fill="#f8a5c2"/>
+    <path d="M34 46 L28 14 L56 34 Z" fill="#ffbdd2"/><path d="M38 40 L35 22 L50 34 Z" fill="#ff8fb3"/>
+    <path d="M106 46 L112 14 L84 34 Z" fill="#ffbdd2"/><path d="M102 40 L105 22 L90 34 Z" fill="#ff8fb3"/>
+    <ellipse cx="70" cy="78" rx="46" ry="44" fill="url(#bodyG)"/>
+    <ellipse cx="70" cy="122" rx="30" ry="5" fill="rgba(0,0,0,.25)"/>
+    <ellipse cx="50" cy="118" rx="11" ry="7" fill="#ffd3e1"/><ellipse cx="90" cy="118" rx="11" ry="7" fill="#ffd3e1"/>
+    <g class="eye"><ellipse cx="54" cy="72" rx="8" ry="10" fill="#3a0d1f"/><circle cx="57" cy="68" r="3" fill="#fff"/><circle cx="52" cy="76" r="1.5" fill="#fff"/></g>
+    <g class="eye"><ellipse cx="86" cy="72" rx="8" ry="10" fill="#3a0d1f"/><circle cx="89" cy="68" r="3" fill="#fff"/><circle cx="84" cy="76" r="1.5" fill="#fff"/></g>
+    <ellipse cx="42" cy="88" rx="8" ry="5" fill="#ff7aa5" opacity=".55"/><ellipse cx="98" cy="88" rx="8" ry="5" fill="#ff7aa5" opacity=".55"/>
+    <path d="M66 84 q4 3 8 0" stroke="#3a0d1f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M70 84 v3 M64 89 q6 6 12 0" stroke="#3a0d1f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M70 26 c-3 -6 -12 -3 -8 4 l8 7 l8 -7 c4 -7 -5 -10 -8 -4z" fill="#ff5f93"/>
+  </svg>`;
+}
+const PAW = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="#ff9dbd">
+  <ellipse cx="20" cy="27" rx="9" ry="8"/><ellipse cx="9" cy="16" rx="4" ry="5"/><ellipse cx="16" cy="9" rx="4" ry="5"/>
+  <ellipse cx="24" cy="9" rx="4" ry="5"/><ellipse cx="31" cy="16" rx="4" ry="5"/></g></svg>`;
+
+/* ---------- фон: летающие сердечки ---------- */
+(function sky(){
+  const sky = $('#sky'); const items = ['💗','✨','💕','🤍','🌸'];
+  for (let i = 0; i < 16; i++){
+    const s = document.createElement('span'); s.className = 'float';
+    s.textContent = items[i % items.length];
+    s.style.left = Math.random()*100 + '%';
+    s.style.fontSize = (12 + Math.random()*16) + 'px';
+    s.style.animationDuration = (12 + Math.random()*14) + 's';
+    s.style.animationDelay = (-Math.random()*20) + 's';
+    sky.appendChild(s);
+  }
+})();
+
+/* ---------- утилиты ---------- */
+let typeTimer = null;
+function say(text, el = $('#bubble')){
+  if (!el) return Promise.resolve();
+  clearInterval(typeTimer);
+  return new Promise(res => {
+    let i = 0; const plain = text;
+    el.innerHTML = '<span class="caret"></span>';
+    const finish = () => { clearInterval(typeTimer); el.innerHTML = plain; el.onclick = null; res(); };
+    el.onclick = finish;
+    typeTimer = setInterval(() => {
+      i++;
+      // не разрезаем html-теги посередине
+      while (plain[i-1] === '<'){ const j = plain.indexOf('>', i); i = j + 1; }
+      el.innerHTML = plain.slice(0, i) + '<span class="caret"></span>';
+      if (i >= plain.length) finish();
+    }, 28);
+  });
+}
+function mood(cls){
+  const b = $('.buddy'); if (!b) return;
+  b.classList.remove('happy','sad'); void b.offsetWidth; b.classList.add(cls);
+  setTimeout(() => b.classList.remove(cls), 1600);
+}
+function shake(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+function buzz(p){ try { navigator.vibrate && navigator.vibrate(p); } catch(e){} }
+function shuffle(a){ for (let i = a.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+function confetti(n = 70){
+  const items = ['💖','💗','✨','🌸','💕','⭐','🐾'];
+  for (let i = 0; i < n; i++){
+    const c = document.createElement('div'); c.className = 'conf';
+    c.textContent = items[i % items.length];
+    c.style.left = Math.random()*100 + 'vw';
+    c.style.fontSize = (14 + Math.random()*18) + 'px';
+    c.style.animationDuration = (2.2 + Math.random()*2.5) + 's';
+    c.style.animationDelay = (Math.random()*.6) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5500);
+  }
+}
+function buddyBlock(text, small){
+  return `<div class="buddy-row">
+    <div class="bubble" id="bubble">${text ? '' : ''}</div>
+    <div class="buddy ${small ? 'small' : ''}" id="buddy" title="${CONFIG.buddyName}">${buddySVG()}</div>
+  </div>`;
+}
+
+/* ---------- переход между локациями: лапки ---------- */
+function walkTo(title){
+  return new Promise(res => {
+    const w = $('#walk'); w.innerHTML = '';
+    const W = innerWidth, H = innerHeight, steps = 9;
+    for (let i = 0; i < steps; i++){
+      const p = document.createElement('div'); p.className = 'paw'; p.innerHTML = PAW;
+      const t = i / (steps-1);
+      const x = W*0.08 + t*(W*0.84) + (i % 2 ? 14 : -14);
+      const y = H*0.82 - t*(H*0.62) + (i % 2 ? 10 : -10);
+      const ang = Math.atan2(-H*0.62, W*0.84) * 180/Math.PI + 90;
+      p.style.left = x + 'px'; p.style.top = y + 'px';
+      p.style.setProperty('--r', `rotate(${ang}deg)`);
+      p.style.animationDelay = (i * 0.14) + 's';
+      w.appendChild(p);
+    }
+    const walker = document.createElement('div'); walker.className = 'walker'; walker.innerHTML = buddySVG();
+    w.appendChild(walker);
+    if (title){ const t = document.createElement('div'); t.className = 'wtitle'; t.textContent = title; w.appendChild(t); }
+    w.classList.add('on');
+    setTimeout(res, 1700);
+    setTimeout(() => w.classList.remove('on'), 2300);
+    setTimeout(() => { w.innerHTML = ''; }, 2700);
+  });
+}
+
+/* ---------- сцены ---------- */
+const LEVELS = [
+  { id:'hello',    title:'' },
+  { id:'ready',    title:'' },
+  { id:'digits',   title:'Локация 1 · Начало' },
+  { id:'cafe',     title:'Локация 2 · Наше место' },
+  { id:'memory',   title:'Локация 3 · Тёплые мелочи' },
+  { id:'scramble', title:'Локация 4 · Загадка' },
+  { id:'photo',    title:'Локация 5 · Первое фото' },
+  { id:'hospital', title:'Локация 6 · Вместе' },
+  { id:'final',    title:'Финиш ♡' },
+];
+let cur = 0;
+function renderMap(){
+  $('#map').innerHTML = LEVELS.slice(2).map((l, i) => {
+    const idx = i + 2;
+    return `<i class="${idx < cur ? 'done' : idx === cur ? 'now' : ''}" title="${l.title}"></i>`;
+  }).join('');
+}
+async function go(i, withWalk = true){
+  if (withWalk && LEVELS[i].title) await walkTo(LEVELS[i].title);
+  cur = i; store.set('quest.level', String(i)); renderMap();
+  window.scrollTo({ top:0 });
+  SCENES[LEVELS[i].id]();
+}
+const next = () => go(cur + 1);
+
+const SCENES = {
+  hello(){
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">маленький квест</div>
+      <h1>Привет, <span class="script" style="color:var(--rose-2)">жаным</span> ♡</h1>
+      ${buddyBlock(true)}
+      <div class="actions"><button class="btn pulse" id="go" hidden>Готово ✨</button></div>
+    </section>`;
+    $('#buddy').onclick = () => { mood('happy'); buzz(20); };
+    (async () => {
+      await say(`Привет, <b>${CONFIG.her}</b>! Я — ${CONFIG.buddyName} 🐾`);
+      await new Promise(r => setTimeout(r, 900));
+      await say(`Мой хозяин <b>${CONFIG.me}</b> приготовил для тебя маленький квест-подарок 🎁 Давай пройдём его вместе?`);
+      $('#go').hidden = false;
+    })();
+    $('#go').onclick = () => go(1, false);
+  },
+
+  ready(){
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">перед стартом</div>
+      <h2>Ты точно готова?</h2>
+      ${buddyBlock(true)}
+      <div class="actions" id="acts" hidden>
+        <button class="btn ghost" id="no">Ещё секундочку…</button>
+        <button class="btn pulse" id="yes">Да, готова! 💖</button>
+      </div>
+    </section>`;
+    $('#buddy').onclick = () => mood('happy');
+    say('Давай разогреемся 😊 Вспомним прошлое, наши самые хорошие воспоминания — и пройдёмся по квесту. За мной, лапками!')
+      .then(() => { $('#acts').hidden = false; });
+    $('#no').onclick = () => { mood('sad'); say('Хорошо-хорошо, я подожду… но недолго, мне не терпится! 🥺'); };
+    $('#yes').onclick = () => { mood('happy'); next(); };
+  },
+
+  digits(){
+    const code = CONFIG.firstDate.split('');
+    const slotsHTML = code.map((_, i) => `<div class="slot" data-i="${i}"></div>${i === 1 || i === 3 ? '<span class="dot">.</span>' : ''}`).join('');
+    // поле цифр: гарантируем, что нужные цифры есть, остальные — случайные
+    const cells = []; for (let i = 0; i < 56; i++) cells.push(String(Math.floor(Math.random()*10)));
+    const need = [...code, ...code]; // с запасом
+    shuffle([...Array(56).keys()]).slice(0, need.length).forEach((pos, k) => cells[pos] = need[k]);
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 1</div>
+      <h2>С чего всё началось</h2>
+      ${buddyBlock(true, true)}
+      <div class="slots" id="slots">${slotsHTML}</div>
+      <div class="digits" id="digits">${cells.map((d, i) => `<button class="dg" data-d="${d}" style="font-size:${1.1 + Math.random()*.7}rem;animation-delay:${-Math.random()*3}s">${d}</button>`).join('')}</div>
+      <p class="stat">Нажимай цифры по порядку</p>
+    </section>`;
+    say('Первое — совсем лёгкое 😉 Среди всех этих цифр собери <b>дату</b>, когда мы официально начали встречаться.');
+    let pos = 0;
+    const slots = [...document.querySelectorAll('.slot')];
+    slots[0].classList.add('next');
+    $('#digits').onclick = e => {
+      const b = e.target.closest('.dg'); if (!b || pos >= code.length) return;
+      if (b.dataset.d === code[pos]){
+        b.classList.add('used'); buzz(15);
+        slots[pos].textContent = b.dataset.d; slots[pos].classList.remove('next'); slots[pos].classList.add('filled');
+        pos++;
+        if (pos < code.length) slots[pos].classList.add('next');
+        else {
+          mood('happy'); confetti(40);
+          say('<b>25.11.25</b> — наша первая официальная дата 💞 С этого дня всё и началось!')
+            .then(() => setTimeout(next, 1400));
+        }
+      } else {
+        b.classList.add('wrong'); shake(b); buzz([30,40,30]); mood('sad');
+        setTimeout(() => b.classList.remove('wrong'), 500);
+      }
+    };
+  },
+
+  cafe(){
+    const opts = shuffle([
+      { id:'bisi',  e:'🥟', n:'Биси',          d:'наша точка' },
+      { id:'shash', e:'🍢', n:'Шашлычная',     d:'дымок и мясо' },
+      { id:'coffee',e:'☕', n:'Кофейня',       d:'капучино с сердечком' },
+      { id:'burger',e:'🍔', n:'Бургерная',     d:'вредно, но вкусно' },
+      { id:'pizza', e:'🍕', n:'Пиццерия',      d:'одна на двоих' },
+      { id:'sushi', e:'🍣', n:'Суши-бар',      d:'палочки и соус' },
+    ]);
+    // подсказка «наша точка» не должна выдавать ответ
+    opts.forEach(o => { if (o.id === 'bisi') o.d = 'вкусно и уютно'; });
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 2</div>
+      <h2>Наша любимая кафешка</h2>
+      ${buddyBlock(true, true)}
+      <div class="cafes" id="cafes">${opts.map(o => `<button class="cafe" data-id="${o.id}"><span class="e">${o.e}</span><span class="n">${o.n}</span><span class="d">${o.d}</span></button>`).join('')}</div>
+    </section>`;
+    say('Хм-хм… куда мы ходим чаще всего? Выбери <b>наше место</b> 🍽️');
+    const wrongLines = ['Мы там бывали… но это не наша точка 😏', 'Неа! Подумай ещё 🙈', 'Близко… шучу, не близко 😄', 'Там вкусно, но не то место 🥺'];
+    let w = 0;
+    $('#cafes').onclick = e => {
+      const c = e.target.closest('.cafe'); if (!c || c.classList.contains('no')) return;
+      if (c.dataset.id === CONFIG.cafeAnswer){
+        document.querySelectorAll('.cafe').forEach(x => x !== c && x.classList.add('no'));
+        c.classList.add('yes'); mood('happy'); confetti(40); buzz(30);
+        say('Конечно, <b>Биси</b>! Наша самая «ходячая» точка 🥟💕').then(() => setTimeout(next, 1500));
+      } else {
+        c.classList.add('no'); shake(c); mood('sad'); buzz([30,40,30]);
+        say(wrongLines[w++ % wrongLines.length]);
+      }
+    };
+  },
+
+  memory(){
+    const icons = ['💖','🥟','🌙','🌸','🧸','☕'];
+    const deck = shuffle([...icons, ...icons]);
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 3</div>
+      <h2>Найди пары</h2>
+      ${buddyBlock(true, true)}
+      <div class="mem" id="mem">${deck.map((ic, i) => `<button class="mc" data-ic="${ic}" aria-label="карточка"><div class="in"><div class="f">♡</div><div class="b">${ic}</div></div></button>`).join('')}</div>
+      <p class="stat" id="moves">Ходов: 0</p>
+    </section>`;
+    say('Проверим твою память 🧠 Открой карточки и найди все <b>пары</b> — это наши маленькие тёплые мелочи.');
+    let open = [], lock = false, moves = 0, got = 0;
+    $('#mem').onclick = e => {
+      const c = e.target.closest('.mc');
+      if (!c || lock || c.classList.contains('open') || c.classList.contains('got')) return;
+      c.classList.add('open'); open.push(c); buzz(10);
+      if (open.length < 2) return;
+      moves++; $('#moves').textContent = 'Ходов: ' + moves;
+      const [a, b] = open; open = [];
+      if (a.dataset.ic === b.dataset.ic){
+        a.classList.add('got'); b.classList.add('got'); got++;
+        if (got === icons.length){
+          mood('happy'); confetti(50);
+          say(`Ух ты, всего за <b>${moves}</b> ходов! Память у тебя — как у меня на вкусняшки 😻`).then(() => setTimeout(next, 1400));
+        }
+      } else {
+        lock = true;
+        setTimeout(() => { a.classList.remove('open'); b.classList.remove('open'); lock = false; }, 750);
+      }
+    };
+  },
+
+  scramble(){
+    const answer = CONFIG.her.toUpperCase().split('');
+    let letters; do { letters = shuffle([...answer]); } while (letters.join('') === answer.join(''));
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 4</div>
+      <h2>Собери слово</h2>
+      ${buddyBlock(true, true)}
+      <div class="word" id="word">${answer.map((_, i) => `<button class="ws" data-i="${i}"></button>`).join('')}</div>
+      <div class="letters" id="letters">${letters.map((l, i) => `<button class="lt" data-k="${i}">${l}</button>`).join('')}</div>
+      <p class="stat">Нажми на букву в слове, чтобы вернуть её</p>
+    </section>`;
+    say('Загадка 🔤 Это слово по-казахски значит «нежная, любимая, драгоценная». И так зовут одну очень красивую девушку…');
+    const slots = [...document.querySelectorAll('.ws')];
+    const filled = Array(answer.length).fill(null);
+    const check = () => {
+      if (filled.some(x => x === null)) return;
+      const w = filled.map(k => letters[k]).join('');
+      if (w === answer.join('')){
+        $('#word').classList.add('ok'); mood('happy'); confetti(50);
+        say(`<b>${CONFIG.her}</b> — самое красивое имя на свете 💗`).then(() => setTimeout(next, 1400));
+      } else {
+        shake($('#word')); mood('sad'); buzz([30,40,30]);
+        say('Почти! Но буквы перепутались 🙈');
+      }
+    };
+    $('#letters').onclick = e => {
+      const b = e.target.closest('.lt'); if (!b) return;
+      const i = filled.indexOf(null); if (i < 0) return;
+      filled[i] = +b.dataset.k; b.classList.add('gone');
+      slots[i].textContent = b.textContent; slots[i].classList.add('filled'); buzz(10);
+      check();
+    };
+    $('#word').onclick = e => {
+      const s = e.target.closest('.ws'); if (!s || $('#word').classList.contains('ok')) return;
+      const i = +s.dataset.i; if (filled[i] === null) return;
+      document.querySelector(`.lt[data-k="${filled[i]}"]`).classList.remove('gone');
+      filled[i] = null; s.textContent = ''; s.classList.remove('filled');
+    };
+  },
+
+  photo(){
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 5</div>
+      <h2>Собери фото</h2>
+      ${buddyBlock(true, true)}
+      <div class="puz" id="puz"></div>
+      <p class="stat">Нажми на два кусочка, чтобы поменять их местами</p>
+    </section>`;
+    say('Тут спрятано одно особенное фото 📸 Собери пазл и посмотри, что получится!');
+    loadPhoto(src => {
+      const order = (() => { let o; do { o = shuffle([...Array(9).keys()]); } while (o.every((v, i) => v === i)); return o; })();
+      const puz = $('#puz');
+      const draw = () => {
+        puz.innerHTML = order.map((p, i) => {
+          const x = (p % 3) * 50, y = Math.floor(p / 3) * 50;
+          return `<button class="pt" data-i="${i}" style="background-image:url('${src}');background-position:${x}% ${y}%"></button>`;
+        }).join('');
+      };
+      draw();
+      let sel = null;
+      puz.onclick = e => {
+        const t = e.target.closest('.pt'); if (!t || puz.classList.contains('solved')) return;
+        const i = +t.dataset.i;
+        if (sel === null){ sel = i; t.classList.add('sel'); buzz(10); return; }
+        [order[sel], order[i]] = [order[i], order[sel]]; sel = null; draw(); buzz(10);
+        if (order.every((v, k) => v === k)){
+          puz.classList.add('solved'); mood('happy'); confetti(60);
+          setTimeout(() => {
+            puz.outerHTML = `<div class="polaroid"><img src="${src}" alt="Наше первое совместное фото"><p>${CONFIG.photoCaption}</p></div>`;
+            say('Наше <b>первое совместное фото с Корой</b> 🥹 Помнишь этот день?').then(() => {
+              stage.querySelector('.scene').insertAdjacentHTML('beforeend', `<div class="actions"><button class="btn" id="nx">Дальше 🐾</button></div>`);
+              $('#nx').onclick = next;
+            });
+          }, 900);
+        }
+      };
+    });
+  },
+
+  hospital(){
+    const vals = [0,0,0,0,0,0];
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 6</div>
+      <h2>Тот самый день</h2>
+      ${buddyBlock(true, true)}
+      <div class="lock" id="lock">${vals.map((v, i) => `
+        <div class="roll"><button data-i="${i}" data-d="1" aria-label="больше">▲</button><div class="v" id="v${i}">0</div><button data-i="${i}" data-d="-1" aria-label="меньше">▼</button></div>
+        ${i === 1 || i === 3 ? '<span class="dot">.</span>' : ''}`).join('')}</div>
+      <div class="actions"><button class="btn" id="open">Открыть 🔓</button></div>
+    </section>`;
+    say('Помнишь тот день и больницу? 🏥 Было тревожно, но мы были рядом друг с другом. Введи эту <b>дату</b> — она откроет замочек.');
+    $('#lock').onclick = e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const i = +b.dataset.i; vals[i] = (vals[i] + +b.dataset.d + 10) % 10;
+      $('#v' + i).textContent = vals[i]; buzz(8);
+    };
+    $('#open').onclick = () => {
+      const entered = vals.join('');
+      if (!CONFIG.hospitalDate || entered === CONFIG.hospitalDate){
+        $('#lock').classList.add('ok'); mood('happy'); confetti(40);
+        say('Открыто 💗 Самые трудные дни показывают, как сильно мы дорожим друг другом.').then(() => setTimeout(next, 1600));
+      } else {
+        shake($('#lock')); mood('sad'); buzz([30,40,30]);
+        say('Не та дата… попробуй ещё 🥺 Формат: <b>ДД.ММ.ГГ</b>');
+      }
+    };
+  },
+
+  final(){
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">квест пройден</div>
+      <h1>Ты умница, <span class="script" style="color:var(--rose-2)">жаным</span>!</h1>
+      ${buddyBlock(true)}
+      <div class="letter" id="letter" hidden>
+        <p class="script">Моя ${CONFIG.her},</p>
+        <p>спасибо, что ты прошла этот маленький путь вместе с ${CONFIG.buddyName}. Каждая локация здесь — кусочек нашей истории: первая дата, наши Биси, наше первое фото, и даже трудные дни, через которые мы прошли вместе.</p>
+        <p>Я очень тебя люблю. И это только начало — впереди ещё много наших локаций 💖</p>
+        <div class="sign">твой ${CONFIG.me}</div>
+      </div>
+      <div class="actions"><button class="btn ghost" id="again">Пройти ещё раз ↺</button></div>
+    </section>`;
+    confetti(110); mood('happy');
+    say(`Ура-а-а! Ты прошла все локации 🎉 А вот письмо от <b>${CONFIG.me}а</b>…`)
+      .then(() => { $('#letter').hidden = false; $('#letter').style.animation = 'sceneIn .7s both'; });
+    $('#buddy').onclick = () => { mood('happy'); confetti(25); };
+    $('#again').onclick = () => { store.set('quest.level', '0'); go(0, false); };
+  },
+};
+
+/* ---------- фото: реальное или красивая заглушка ---------- */
+function loadPhoto(cb){
+  const img = new Image();
+  img.onload = () => {
+    // квадратный кроп через canvas, чтобы пазл не растягивал фото
+    try {
+      const s = Math.min(img.naturalWidth, img.naturalHeight), c = document.createElement('canvas');
+      c.width = c.height = Math.min(s, 900);
+      c.getContext('2d').drawImage(img, (img.naturalWidth - s)/2, (img.naturalHeight - s)/2, s, s, 0, 0, c.width, c.height);
+      cb(c.toDataURL('image/jpeg', .9));
+    } catch(e){ cb(CONFIG.photo); }
+  };
+  img.onerror = () => cb(placeholderPhoto());
+  img.src = CONFIG.photo;
+}
+function placeholderPhoto(){
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9dbd"/><stop offset=".5" stop-color="#c2185b"/><stop offset="1" stop-color="#4a0f28"/></linearGradient></defs>
+    <rect width="600" height="600" fill="url(#g)"/>
+    <circle cx="120" cy="110" r="60" fill="#ffd4e2" opacity=".35"/><circle cx="500" cy="480" r="90" fill="#f4c68d" opacity=".25"/>
+    <text x="300" y="250" font-size="150" text-anchor="middle">💑</text>
+    <text x="300" y="400" font-size="110" text-anchor="middle">🐾</text>
+    <text x="300" y="520" font-size="40" fill="#fff" text-anchor="middle" font-family="Georgia,serif" font-style="italic">тут будет наше фото</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+/* ---------- старт ---------- */
+const saved = parseInt(store.get('quest.level') || '0', 10);
+const startAt = Number.isFinite(saved) && saved > 1 && saved < LEVELS.length ? saved : 0;
+if (location.hash === '#restart') store.set('quest.level', '0');
+go(location.hash === '#restart' ? 0 : startAt, false);
+</script>
+</body>
+</html>
