@@ -117,6 +117,11 @@
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 
   .slot,.dg,.roll .v{font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;}
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;margin-top:4px;}
+  .who .btn{padding:22px 10px;font-size:1.25rem;border-radius:20px;flex-direction:column;gap:2px;}
+  .who .btn small{font-size:.75rem;font-weight:600;opacity:.8;}
+  .flip{animation:backflip .9s cubic-bezier(.4,0,.2,1);}
+  @keyframes backflip{0%{transform:translateY(0) rotate(0);}35%{transform:translateY(-70px) rotate(-180deg);}70%{transform:translateY(-20px) rotate(-340deg);}85%{transform:translateY(4px) rotate(-360deg) scale(1.08,.92);}100%{transform:translateY(0) rotate(-360deg);}}
   .shake{animation:shake .4s;}
   @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
 
@@ -376,8 +381,9 @@ const LEVELS = [
   { id:'cafe',     title:'Локация 2 · Наше место' },
   { id:'memory',   title:'Локация 3 · Тёплые мелочи' },
   { id:'scramble', title:'Локация 4 · Загадка' },
-  { id:'photo',    title:'Локация 5 · Первое фото' },
-  { id:'hospital', title:'Локация 6 · Вместе' },
+  { id:'love',     title:'Локация 5 · Признание' },
+  { id:'photo',    title:'Локация 6 · Первое фото' },
+  { id:'hospital', title:'Локация 7 · Вместе' },
   { id:'final',    title:'Финиш ♡' },
 ];
 let cur = 0;
@@ -573,9 +579,49 @@ const SCENES = {
     };
   },
 
-  photo(){
+  love(){
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация 5</div>
+      <h2>Кто первый влюбился?</h2>
+      ${buddyBlock(true)}
+      <div class="who" id="who">
+        <button class="btn" id="me">Я 🙋‍♀️<small>это я, ${CONFIG.her}</small></button>
+        <button class="btn ghost" id="you">Ты 🙋‍♂️<small>${CONFIG.me}</small></button>
+      </div>
+    </section>`;
+    say('Вопрос на засыпку 🤔 Скажи честно: <b>кто у нас первый влюбился?</b>');
+    let step = 0, done = false;
+    const win = text => {
+      if (done) return; done = true;
+      mood('happy'); confetti(60); buzz(30);
+      say(text).then(() => setTimeout(next, 1800));
+    };
+    $('#me').onclick = () => win(`Я так и знал! 😏 Ну ладно-ладно, ${CONFIG.me} тоже влюбился по уши 💞`);
+    $('#you').onclick = () => {
+      const you = $('#you');
+      if (step === 2) return win('Вот и договорились: первая влюбилась ты 😂💗');
+      if (step === 0){
+        step = 1; shake(you); mood('sad'); buzz([20,30,20]);
+        you.innerHTML = 'Ты?.. 🤨<small>точно-точно?</small>';
+        say('Хм… <b>точно?</b> 🤨 Подумай ещё разочек…');
+        return;
+      }
+      // второй тап — кнопка делает сальто назад и передумывает
+      step = 2;
+      const b = $('#buddy');
+      you.classList.add('flip'); b.classList.add('flip');
+      setTimeout(() => {
+        you.className = 'btn';
+        you.innerHTML = 'Я 🙋‍♀️<small>деп 😂</small>';
+      }, 450);
+      setTimeout(() => { you.classList.remove('flip'); b.classList.remove('flip'); }, 950);
+      say('Опа! Кнопка сделала <b>сальто назад</b> и передумала 🤸 Теперь твой ответ — «Я», деп 😂');
+    };
+  },
+
+  photo(){
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация 6</div>
       <h2>Собери фото</h2>
       ${buddyBlock(true, true)}
       <div class="puz" id="puz"></div>
@@ -616,7 +662,7 @@ const SCENES = {
   hospital(){
     const vals = [0,0,0,0,0,0];
     stage.innerHTML = `<section class="scene">
-      <div class="loc">Локация 6</div>
+      <div class="loc">Локация 7</div>
       <h2>Тот самый день</h2>
       ${buddyBlock(true, true)}
       <div class="lock" id="lock">${vals.map((v, i) => `
