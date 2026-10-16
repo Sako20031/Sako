@@ -62,9 +62,9 @@
   .app{position:relative;z-index:1;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
     padding:max(16px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom));}
   .top{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;}
-  .brand{font-family:'Marck Script',cursive;font-size:1.5rem;color:var(--rose-2);}
-  .map{display:flex;gap:6px;align-items:center;}
-  .map i{width:9px;height:9px;border-radius:50%;background:rgba(255,236,243,.18);transition:.4s;}
+  .brand{font-family:'Marck Script',cursive;font-size:1.5rem;color:var(--rose-2);white-space:nowrap;}
+  .map{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+  .map i{width:7px;height:7px;border-radius:50%;background:rgba(255,236,243,.18);transition:.4s;}
   .map i.done{background:var(--rose);box-shadow:0 0 10px var(--rose);}
   .map i.now{background:var(--gold);transform:scale(1.35);box-shadow:0 0 12px var(--gold);}
 
@@ -164,6 +164,22 @@
   .scratch .gift{font-size:1.25rem;font-weight:800;}
   .scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity .6s;}
 
+  /* cipher / days */
+  .code{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:10px;}
+  .code .w{display:flex;gap:4px;padding:8px 10px;border-radius:14px;background:var(--card-strong);border:1px solid var(--line);}
+  .code .n{min-width:30px;text-align:center;font-weight:800;color:var(--gold);font-variant-numeric:lining-nums;}
+  .key{display:grid;grid-template-columns:repeat(11,1fr);gap:3px;width:100%;font-size:.72rem;margin-bottom:12px;}
+  .key span{display:flex;flex-direction:column;align-items:center;padding:3px 0;border-radius:6px;background:var(--card);}
+  .key b{font-size:.9rem;color:var(--blush);}
+  .inp{width:100%;padding:16px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+    font:800 1.3rem 'Manrope',sans-serif;text-align:center;letter-spacing:.06em;outline:none;}
+  .inp:focus{border-color:var(--rose);}
+  .inp.ok{border-color:var(--ok);background:rgba(127,224,168,.14);}
+  /* simon */
+  .simon{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(78vw,300px);margin:0 auto;}
+  .sh{aspect-ratio:1;border-radius:24px;font-size:3rem;background:var(--card);border:2px solid var(--line);opacity:.55;transition:opacity .15s, transform .15s, box-shadow .15s;}
+  .sh.lit{opacity:1;transform:scale(1.06);box-shadow:0 0 40px var(--c);border-color:var(--c);}
+  .simon.wait .sh{pointer-events:none;}
   .shake{animation:shake .4s;}
   @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
 
@@ -195,7 +211,7 @@
 
   /* level 3: memory */
   .mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;perspective:800px;}
-  .mc{aspect-ratio:3/4;position:relative;background:none;padding:0;}
+  .mc{aspect-ratio:4/5;position:relative;background:none;padding:0;}
   .mc .in{position:absolute;inset:0;transition:transform .45s;transform-style:preserve-3d;}
   .mc.open .in,.mc.got .in{transform:rotateY(180deg);}
   .mc .f,.mc .b{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
@@ -214,9 +230,9 @@
   .lt.gone{opacity:0;transform:scale(.4);pointer-events:none;}
 
   /* level 5: photo puzzle */
-  .puz{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%;max-width:360px;aspect-ratio:1;border-radius:18px;overflow:hidden;
+  .puz{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;width:100%;max-width:360px;aspect-ratio:1;border-radius:18px;overflow:hidden;
     border:1px solid var(--line);background:rgba(0,0,0,.3);}
-  .pt{background-size:300% 300%;padding:0;transition:outline .15s, filter .2s;}
+  .pt{background-size:400% 400%;padding:0;transition:outline .15s, filter .2s;}
   .pt.sel{outline:3px solid var(--gold);outline-offset:-3px;filter:brightness(1.2);}
   .puz.solved{gap:0;box-shadow:0 0 50px rgba(255,95,147,.55);animation:pop .6s;}
   .polaroid{background:#fff8fa;padding:12px 12px 16px;border-radius:6px;transform:rotate(-2deg);box-shadow:0 30px 60px -20px rgba(0,0,0,.8);max-width:340px;width:100%;}
@@ -284,7 +300,7 @@ const CONFIG = {
   me: 'Сагынжан',
   buddyName: 'Мими',
   firstDate: '251125',                 // 25.11.25 — первая официальная дата
-  cafeAnswer: 'bisi',
+  cafeAnswer: 'bc',
   // Фото: положи файл в public/quest-files/ и укажи путь. Пока файла нет — будет заглушка.
   photo: '/quest-files/first.jpg',
   photoCaption: '11.09.2025 — наше первое фото ♡',
@@ -297,7 +313,7 @@ const CONFIG = {
   voiceAnswer: 'Ты моё самое красивое чудо', // что сказано на самом деле
   voiceWrong: ['Ты моё самое любимое солнце', 'Ты моя самая красивая звёздочка'],
   // Подсказка, где лежит подарок в реальной жизни (открывается в финале стиралкой)
-  giftHint: 'Вечером подарок будет лежать в твоей сумке 👜',
+  giftHint: 'Вечером в твоей сумке тебя будут ждать сладости 🍫🍬',
 };
 
 /* ============================================================ */
@@ -432,8 +448,11 @@ const LEVELS = [
   { id:'memory',   title:'Тёплые мелочи' },
   { id:'scramble', title:'Загадка' },
   { id:'love',     title:'Признание' },
+  { id:'cipher',   title:'Шифровка' },
   { id:'photo',    title:'Первое фото' },
+  { id:'days',     title:'Считаем дни' },
   { id:'hospital', title:'Вместе' },
+  { id:'simon',    title:'Повтори за мной' },
   { id:'voice',    title:'Что я сказал?' },
   { id:'pizza',    title:'Пицца желаний' },
   { id:'final',    title:'Финиш ♡' },
@@ -494,19 +513,26 @@ const SCENES = {
     const code = CONFIG.firstDate.split('');
     const slotsHTML = code.map((_, i) => `<div class="slot" data-i="${i}"></div>${i === 1 || i === 3 ? '<span class="dot">.</span>' : ''}`).join('');
     // поле цифр: гарантируем, что нужные цифры есть, остальные — случайные
-    const cells = []; for (let i = 0; i < 56; i++) cells.push(String(Math.floor(Math.random()*10)));
+    const N = 63; const cells = []; for (let i = 0; i < N; i++) cells.push(String(Math.floor(Math.random()*10)));
     const need = [...code, ...code]; // с запасом
-    shuffle([...Array(56).keys()]).slice(0, need.length).forEach((pos, k) => cells[pos] = need[k]);
+    shuffle([...Array(N).keys()]).slice(0, need.length).forEach((pos, k) => cells[pos] = need[k]);
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
       <h2>С чего всё началось</h2>
       ${buddyBlock(true, true)}
       <div class="slots" id="slots">${slotsHTML}</div>
       <div class="digits" id="digits">${cells.map((d, i) => `<button class="dg" data-d="${d}" style="font-size:${1.1 + Math.random()*.7}rem;animation-delay:${-Math.random()*3}s">${d}</button>`).join('')}</div>
-      <p class="stat">Нажимай цифры по порядку</p>
+      <p class="stat" id="dstat">Ошибок: 0 / 3 · цифры перемешиваются каждые 5 секунд</p>
     </section>`;
-    say('Первое — совсем лёгкое 😉 Среди всех этих цифр собери <b>дату</b>, когда мы официально начали встречаться.');
-    let pos = 0;
+    say('Разминка 😉 Собери по порядку <b>дату</b>, когда мы официально начали встречаться. Но осторожно: цифры <b>перемешиваются</b>, а 3 ошибки — и всё сначала!');
+    let pos = 0, errs = 0;
+    const mix = setInterval(() => {
+      if (!document.body.contains($('#digits')) || pos >= code.length) return clearInterval(mix);
+      const free = [...document.querySelectorAll('.dg:not(.used)')];
+      const vals = shuffle(free.map(b => b.dataset.d));
+      free.forEach((b, i) => { b.dataset.d = vals[i]; b.textContent = vals[i]; });
+      $('#digits').animate([{ opacity:.35 }, { opacity:1 }], { duration:400 });
+    }, 5000);
     const slots = [...document.querySelectorAll('.slot')];
     slots[0].classList.add('next');
     $('#digits').onclick = e => {
@@ -524,21 +550,28 @@ const SCENES = {
       } else {
         b.classList.add('wrong'); shake(b); buzz([30,40,30]); mood('sad');
         setTimeout(() => b.classList.remove('wrong'), 500);
+        errs++;
+        if (errs >= 3){
+          errs = 0; pos = 0;
+          document.querySelectorAll('.dg.used').forEach(x => x.classList.remove('used'));
+          slots.forEach(sl => { sl.textContent = ''; sl.classList.remove('filled','next'); });
+          slots[0].classList.add('next'); shake($('#slots'));
+          say('Ой-ой, 3 ошибки — начинаем <b>сначала</b> 🙈 Не торопись!');
+        }
+        $('#dstat').textContent = `Ошибок: ${errs} / 3 · цифры перемешиваются каждые 5 секунд`;
       }
     };
   },
 
   cafe(){
     const opts = shuffle([
-      { id:'bisi',  e:'🥟', n:'Биси',          d:'наша точка' },
+      { id:'bc',    e:'🍔', n:'B&C burger',    d:'бургеры и картошка' },
       { id:'shash', e:'🍢', n:'Шашлычная',     d:'дымок и мясо' },
       { id:'coffee',e:'☕', n:'Кофейня',       d:'капучино с сердечком' },
-      { id:'burger',e:'🍔', n:'Бургерная',     d:'вредно, но вкусно' },
+      { id:'doner', e:'🌯', n:'Донерная',      d:'быстро и сытно' },
       { id:'pizza', e:'🍕', n:'Пиццерия',      d:'одна на двоих' },
       { id:'sushi', e:'🍣', n:'Суши-бар',      d:'палочки и соус' },
     ]);
-    // подсказка «наша точка» не должна выдавать ответ
-    opts.forEach(o => { if (o.id === 'bisi') o.d = 'вкусно и уютно'; });
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
       <h2>Наша любимая кафешка</h2>
@@ -553,7 +586,7 @@ const SCENES = {
       if (c.dataset.id === CONFIG.cafeAnswer){
         document.querySelectorAll('.cafe').forEach(x => x !== c && x.classList.add('no'));
         c.classList.add('yes'); mood('happy'); confetti(40); buzz(30);
-        say('Конечно, <b>Биси</b>! Наша самая «ходячая» точка 🥟💕').then(() => setTimeout(next, 1500));
+        say('Конечно, <b>B&C burger</b>! Наша самая «ходячая» точка 🍔💕').then(() => setTimeout(next, 1500));
       } else {
         c.classList.add('no'); shake(c); mood('sad'); buzz([30,40,30]);
         say(wrongLines[w++ % wrongLines.length]);
@@ -562,46 +595,54 @@ const SCENES = {
   },
 
   hearts(){
-    const goal = 10;
+    const goal = 15, limit = 40;
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
       <h2>Поймай сердечки</h2>
       ${buddyBlock(true, true)}
       <div class="bar"><i id="bar"></i></div>
       <div class="field" id="field"></div>
-      <p class="stat" id="score">Поймано: 0 / ${goal}</p>
+      <p class="stat" id="score">Поймано: 0 / ${goal} · ⏱ ${limit} с</p>
     </section>`;
-    say('Лови <b>сердечки</b> 💗 — нужно 10! А вот брокколи 🥦 и тучки 🌧️ не трогай, они забирают сердечко.');
-    const field = $('#field'); let score = 0, over = false;
+    say(`Лови <b>сердечки</b> 💗 — нужно ${goal} за ${limit} секунд! Брокколи 🥦 и тучки 🌧️ не трогай — каждая забирает <b>два</b> сердечка.`);
+    const field = $('#field'); let score = 0, over = false, left = limit;
+    const clock = setInterval(() => {
+      if (over || !document.body.contains(field)) return clearInterval(clock);
+      left--; upd();
+      if (left <= 0){
+        score = 0; left = limit; upd(); shake(field); mood('sad'); buzz([60,60,60]);
+        say('Время вышло ⏰ Давай ещё раз, у тебя получится!');
+      }
+    }, 1000);
     const good = ['💗','💖','💕','💘','❤️'], bad = ['🥦','🌧️','💢'];
-    const upd = () => { $('#bar').style.width = (score / goal * 100) + '%'; $('#score').textContent = `Поймано: ${score} / ${goal}`; };
+    const upd = () => { $('#bar').style.width = (score / goal * 100) + '%'; $('#score').textContent = `Поймано: ${score} / ${goal} · ⏱ ${left} с`; };
     const spawn = () => {
       if (over || !document.body.contains(field)) return clearInterval(timer);
-      const isBad = Math.random() < .28;
+      const isBad = Math.random() < .36;
       const el = document.createElement('button'); el.className = 'fall';
       el.textContent = (isBad ? bad : good)[Math.floor(Math.random() * (isBad ? bad : good).length)];
       el.style.left = (4 + Math.random() * 78) + '%';
-      el.style.animationDuration = (2.6 + Math.random() * 1.8 - Math.min(score, 8) * .08) + 's';
+      el.style.animationDuration = (2.1 + Math.random() * 1.4 - Math.min(score, 12) * .07) + 's';
       el.onpointerdown = e => {
         e.preventDefault(); if (over || el.classList.contains('hit')) return;
         el.classList.add('hit'); setTimeout(() => el.remove(), 260);
-        if (isBad){ score = Math.max(0, score - 1); shake(field); mood('sad'); buzz([30,40,30]); }
+        if (isBad){ score = Math.max(0, score - 2); shake(field); mood('sad'); buzz([30,40,30]); }
         else { score++; buzz(12); }
         upd();
         if (score >= goal){
-          over = true; clearInterval(timer); mood('happy'); confetti(60);
+          over = true; clearInterval(timer); clearInterval(clock); mood('happy'); confetti(60);
           field.querySelectorAll('.fall').forEach(f => f.remove());
-          say('Все 10 сердечек твои — как и моё 💘').then(() => setTimeout(next, 1400));
+          say(`Все ${goal} сердечек твои — как и моё 💘`).then(() => setTimeout(next, 1400));
         }
       };
       el.addEventListener('animationend', () => el.remove());
       field.appendChild(el);
     };
-    const timer = setInterval(spawn, 520);
+    const timer = setInterval(spawn, 430);
   },
 
   memory(){
-    const icons = ['💖','🥟','🌙','🌸','🧸','☕'];
+    const icons = ['💖','🍔','🌙','🌸','🧸','☕','🍬','📸'];
     const deck = shuffle([...icons, ...icons]);
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
@@ -634,7 +675,7 @@ const SCENES = {
 
   scramble(){
     const answer = CONFIG.her.toUpperCase().split('');
-    let letters; do { letters = shuffle([...answer]); } while (letters.join('') === answer.join(''));
+    const letters = shuffle([...answer, 'Н', 'Ж', 'Е']); // 3 лишние буквы — ловушка
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
       <h2>Собери слово</h2>
@@ -643,7 +684,7 @@ const SCENES = {
       <div class="letters" id="letters">${letters.map((l, i) => `<button class="lt" data-k="${i}">${l}</button>`).join('')}</div>
       <p class="stat">Нажми на букву в слове, чтобы вернуть её</p>
     </section>`;
-    say('Загадка 🔤 Это слово по-казахски значит «нежная, любимая, драгоценная». И так зовут одну очень красивую девушку…');
+    say('Загадка 🔤 Это слово по-казахски значит «нежная, любимая, драгоценная». И так зовут одну очень красивую девушку… Осторожно: <b>3 буквы лишние</b>!');
     const slots = [...document.querySelectorAll('.ws')];
     const filled = Array(answer.length).fill(null);
     const check = () => {
@@ -712,6 +753,109 @@ const SCENES = {
     };
   },
 
+  cipher(){
+    const ABC = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+    const phrase = 'Я ТЕБЯ ЛЮБЛЮ';
+    const words = phrase.split(' ').map(w => [...w].map(ch => ABC.indexOf(ch) + 1));
+    const norm = t => t.toUpperCase().replace(/Ё/g, 'Е').replace(/[^А-Я]/g, '');
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация ${cur - 1}</div>
+      <h2>Шифровка</h2>
+      ${buddyBlock(true, true)}
+      <div class="code">${words.map(w => `<div class="w">${w.map(n => `<span class="n">${n}</span>`).join('')}</div>`).join('')}</div>
+      <div class="key" id="key" hidden>${[...ABC].map((ch, i) => `<span><b>${ch}</b>${i + 1}</span>`).join('')}</div>
+      <input class="inp" id="ans" placeholder="Твой ответ…" autocomplete="off" autocapitalize="characters">
+      <div class="actions"><button class="btn ghost" id="hint">Ключ 🔑</button><button class="btn" id="chk">Проверить</button></div>
+    </section>`;
+    say(`Перехвачено секретное послание от ${CONFIG.me}а 🕵️‍♀️ Каждая цифра — это <b>номер буквы в алфавите</b>. Расшифруй!`);
+    let tries = 0;
+    $('#hint').onclick = () => { $('#key').hidden = false; $('#hint').remove(); say('Ладно-ладно, вот ключ 🔑 А=1, Б=2… дальше сама!'); };
+    const check = () => {
+      if (norm($('#ans').value) === norm(phrase)){
+        $('#ans').classList.add('ok'); $('#ans').value = phrase + ' 💗'; $('#ans').disabled = true;
+        $('#chk').parentElement.remove(); mood('happy'); confetti(70); buzz(30);
+        say(`Расшифровано: <b>«${phrase}»</b> 💌 И это не секрет!`).then(() => setTimeout(next, 1800));
+      } else {
+        tries++; shake($('#ans')); mood('sad'); buzz([30,40,30]);
+        say(tries >= 2 && !$('#key').hidden ? 'Не то 🙈 Проверь каждую букву по ключу' : 'Не то 🙈 Попробуй ещё! Подсказка: первое слово — одна буква');
+      }
+    };
+    $('#chk').onclick = check;
+    $('#ans').onkeydown = e => { if (e.key === 'Enter') check(); };
+  },
+
+  days(){
+    const answer = 75; // 11.09.2025 → 25.11.2025
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация ${cur - 1}</div>
+      <h2>Считаем дни</h2>
+      ${buddyBlock(true, true)}
+      <div class="card" style="text-align:center;margin-bottom:12px">
+        📸 <b>11.09.2025</b> — первое совместное фото<br>💞 <b>25.11.2025</b> — первая официальная дата
+      </div>
+      <input class="inp" id="ans" type="number" inputmode="numeric" placeholder="Сколько дней?">
+      <div class="actions"><button class="btn" id="chk">Проверить</button></div>
+    </section>`;
+    say('Задачка для умницы 🧮 Сколько <b>дней</b> прошло от нашего первого фото до первой официальной даты? Можно считать на пальцах 😄');
+    let tries = 0;
+    const check = () => {
+      const v = parseInt($('#ans').value, 10);
+      if (v === answer){
+        $('#ans').classList.add('ok'); $('#ans').disabled = true; $('#chk').parentElement.remove();
+        mood('happy'); confetti(60); buzz(30);
+        say('<b>75 дней</b>! Целых 75 дней ты заставила меня ждать 😏💗').then(() => setTimeout(next, 1800));
+      } else {
+        tries++; shake($('#ans')); mood('sad'); buzz([30,40,30]);
+        if (Math.abs(v - answer) <= 2) say('Очень-очень близко! 🤏 Пересчитай аккуратно');
+        else if (tries >= 2) say('Подсказка 💡 В сентябре 30 дней, в октябре — 31. Считай: 19 + 31 + …');
+        else say(isNaN(v) ? 'Введи число 🙂' : (v > answer ? 'Меньше 👇' : 'Больше 👆'));
+      }
+    };
+    $('#chk').onclick = check;
+    $('#ans').onkeydown = e => { if (e.key === 'Enter') check(); };
+  },
+
+  simon(){
+    const PADS = [['💗','#ff5f93'], ['💛','#f4c68d'], ['💜','#b48cff'], ['🩵','#7fd3ff']];
+    const target = 6;
+    stage.innerHTML = `<section class="scene">
+      <div class="loc">Локация ${cur - 1}</div>
+      <h2>Повтори за мной</h2>
+      ${buddyBlock(true, true)}
+      <div class="simon wait" id="simon">${PADS.map(([e, c], i) => `<button class="sh" data-i="${i}" style="--c:${c}">${e}</button>`).join('')}</div>
+      <p class="stat" id="round">Раунд 1 / ${target}</p>
+      <div class="actions"><button class="btn pulse" id="start">Начать ▶</button></div>
+    </section>`;
+    say(`Я буду зажигать сердечки, а ты повторяй <b>в том же порядке</b> 🧠 Нужно пройти ${target} раундов. Ошибёшься — начнём сначала!`);
+    const pads = [...document.querySelectorAll('.sh')], box = $('#simon');
+    let seq = [], step = 0;
+    const flash = (i, ms = 420) => new Promise(r => { pads[i].classList.add('lit'); buzz(15); setTimeout(() => { pads[i].classList.remove('lit'); setTimeout(r, 160); }, ms); });
+    const show = async () => {
+      box.classList.add('wait'); $('#round').textContent = `Раунд ${seq.length} / ${target}`;
+      await new Promise(r => setTimeout(r, 600));
+      for (const i of seq) await flash(i, Math.max(260, 460 - seq.length * 30));
+      step = 0; box.classList.remove('wait');
+    };
+    const grow = () => { seq.push(Math.floor(Math.random() * 4)); show(); };
+    $('#start').onclick = () => { $('#start').parentElement.remove(); seq = []; grow(); };
+    box.onclick = e => {
+      const b = e.target.closest('.sh'); if (!b || box.classList.contains('wait')) return;
+      const i = +b.dataset.i; flash(i, 200);
+      if (i !== seq[step]){
+        box.classList.add('wait'); shake(box); mood('sad'); buzz([60,60,60]);
+        say('Ой, не то сердечко 🙈 Начинаем сначала!');
+        seq = []; setTimeout(grow, 1200); return;
+      }
+      step++;
+      if (step < seq.length) return;
+      box.classList.add('wait');
+      if (seq.length >= target){
+        mood('happy'); confetti(70);
+        say('Вот это память! 🧠✨ Ты повторила все сердечки').then(() => setTimeout(next, 1600));
+      } else { mood('happy'); setTimeout(grow, 700); }
+    };
+  },
+
   photo(){
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
@@ -722,11 +866,11 @@ const SCENES = {
     </section>`;
     say('Тут спрятано одно особенное фото 📸 Собери пазл и посмотри, что получится!');
     loadPhoto(src => {
-      const order = (() => { let o; do { o = shuffle([...Array(9).keys()]); } while (o.every((v, i) => v === i)); return o; })();
+      const order = (() => { let o; do { o = shuffle([...Array(16).keys()]); } while (o.every((v, i) => v === i)); return o; })();
       const puz = $('#puz');
       const draw = () => {
         puz.innerHTML = order.map((p, i) => {
-          const x = (p % 3) * 50, y = Math.floor(p / 3) * 50;
+          const x = (p % 4) * 100 / 3, y = Math.floor(p / 4) * 100 / 3;
           return `<button class="pt" data-i="${i}" style="background-image:url('${src}');background-position:${x}% ${y}%"></button>`;
         }).join('');
       };
@@ -841,7 +985,7 @@ const SCENES = {
   pizza(){
     const TOPS = [
       ['🤗','Обнимашки'], ['🍫','Шоколадка'], ['🎬','Вечер кино'], ['💆‍♀️','Массаж'],
-      ['🥟','Поход в Биси'], ['🌹','Цветы'], ['🍳','Завтрак от меня'], ['🚗','Покатушки'],
+      ['🍔','Поход в B&C'], ['🌹','Цветы'], ['🍳','Завтрак от меня'], ['🚗','Покатушки'],
     ];
     const max = 4, pick = [];
     const spots = [[66,34],[66,66],[34,66],[34,34]]; // по одному желанию на каждый кусочек
@@ -890,12 +1034,12 @@ const SCENES = {
       ${buddyBlock(true)}
       <div class="letter" id="letter" hidden>
         <p class="script">Моя ${CONFIG.her},</p>
-        <p>спасибо, что ты прошла этот маленький путь вместе с ${CONFIG.buddyName}. Каждая локация здесь — кусочек нашей истории: первая дата, наши Биси, наше первое фото, и даже больница, через которую мы прошли вместе. А купоны из пиццы — не шутка, я всё выполню 😌</p>
+        <p>спасибо, что ты прошла этот маленький путь вместе с ${CONFIG.buddyName}. Каждая локация здесь — кусочек нашей истории: первая дата, наш B&C, наше первое фото, и даже больница, через которую мы прошли вместе. А купоны из пиццы — не шутка, я всё выполню 😌</p>
         <p>Я очень тебя люблю. И это только начало — впереди ещё много наших локаций 💖</p>
         <div class="sign">твой ${CONFIG.me}</div>
       </div>
       <div class="scratch" id="scratch" hidden>
-        <div><div style="font-size:2rem">🎁</div><div class="gift">${CONFIG.giftHint || 'Подарок уже ждёт тебя… спроси у ' + CONFIG.me + 'а 😉'}</div></div>
+        <div><div style="font-size:2rem">🍬</div><div class="gift">${CONFIG.giftHint || 'Сладости уже ждут тебя… спроси у ' + CONFIG.me + 'а 😉'}</div></div>
         <canvas id="scr"></canvas>
       </div>
       <div class="actions"><button class="btn ghost" id="again">Пройти ещё раз ↺</button></div>
