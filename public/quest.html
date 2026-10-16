@@ -143,6 +143,8 @@
   /* pizza */
   .pizza{position:relative;width:min(70vw,260px);aspect-ratio:1;border-radius:50%;margin:0 auto 14px;
     background:radial-gradient(circle,#ffcf6b 0 52%,#f2a93b 53% 60%,#d9822b 61% 66%,#b8682a 67%);box-shadow:0 20px 40px -15px rgba(0,0,0,.8);transition:filter .6s;}
+  .pizza::before,.pizza::after{content:"";position:absolute;left:50%;top:7%;bottom:7%;width:3px;margin-left:-1.5px;background:rgba(140,70,20,.55);border-radius:2px;}
+  .pizza::after{transform:rotate(90deg);}
   .pizza .tp{position:absolute;font-size:2.6rem;transform:translate(-50%,-50%);animation:pop .35s;}
   .pizza.bake{animation:spin 1.6s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 30px rgba(255,160,60,.9));}
   @keyframes spin{to{transform:rotate(360deg);}}
@@ -279,7 +281,7 @@
    ============================================================ */
 const CONFIG = {
   her: 'Аяулым',
-  me: 'Сагинжан',
+  me: 'Сагынжан',
   buddyName: 'Мими',
   firstDate: '251125',                 // 25.11.25 — первая официальная дата
   cafeAnswer: 'bisi',
@@ -842,7 +844,7 @@ const SCENES = {
       ['🥟','Поход в Биси'], ['🌹','Цветы'], ['🍳','Завтрак от меня'], ['🚗','Покатушки'],
     ];
     const max = 4, pick = [];
-    const spots = [[50,28],[72,50],[50,72],[28,50]];
+    const spots = [[66,34],[66,66],[34,66],[34,34]]; // по одному желанию на каждый кусочек
     stage.innerHTML = `<section class="scene">
       <div class="loc">Локация ${cur - 1}</div>
       <h2>Пицца желаний</h2>
