@@ -1,0 +1,16 @@
+{
+  "note": "Cross-implementation cases: backend (pytest) and frontend (vitest) must agree.",
+  "cases": [
+    {"task": "symptoms", "vitals": {}, "flags": [], "level": "indeterminate", "codes": [], "missing": ["resp_rate", "spo2", "heart_rate", "sbp", "consciousness"]},
+    {"task": "skin", "vitals": {}, "flags": ["throat_tongue_swelling"], "level": "critical", "codes": ["throat_tongue_swelling"]},
+    {"task": "ecg", "vitals": {}, "flags": ["throat_tongue_swelling"], "level": "indeterminate", "codes": []},
+    {"task": "wound", "vitals": {}, "flags": ["embedded_object"], "level": "urgent", "codes": ["embedded_object"]},
+    {"task": "symptoms", "vitals": {"spo2": 91, "resp_rate": 24, "heart_rate": 130, "sbp": 91, "consciousness": "A"}, "flags": [], "level": "critical", "codes": ["spo2_low"], "missing": []},
+    {"task": "symptoms", "vitals": {"spo2": 92, "resp_rate": 25}, "flags": [], "level": "critical", "codes": ["rr_high"]},
+    {"task": "symptoms", "vitals": {"glucose_mmol": 3.9}, "flags": [], "level": "urgent", "codes": ["glucose_low"]},
+    {"task": "symptoms", "vitals": {"consciousness": "C"}, "flags": [], "level": "critical", "codes": ["consciousness_reduced"]},
+    {"task": "symptoms", "vitals": {"heart_rate": 0}, "flags": [], "level": "critical", "codes": ["hr_very_low"]},
+    {"task": "symptoms", "vitals": {"heart_rate": null, "sbp": ""}, "flags": ["nonexistent_code"], "level": "indeterminate", "codes": []},
+    {"task": "symptoms", "vitals": {"sbp": 220, "temp_c": 35.0, "gcs": 8}, "flags": ["chest_pain_ongoing"], "level": "critical", "codes": ["chest_pain_ongoing", "sbp_very_high", "temp_low", "gcs_very_low"]}
+  ]
+}

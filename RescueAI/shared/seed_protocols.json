@@ -1,0 +1,103 @@
+{
+  "note": "Bibliographic metadata of real, published documents entered from the developers' knowledge without online verification (the build environment had no access to the publishers' sites). Every entry is status 'unverified', last_verified null, and has no clinical content. No Kazakhstan protocol is seeded: an administrator must import the current official documents and mark them verified. Do not change status to 'current' without checking the document at its source.",
+  "documents": [
+    {
+      "slug": "rcp-news2-2017",
+      "title": "National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS",
+      "issuer": "Royal College of Physicians (London)",
+      "version": "NEWS2",
+      "publication_date": "2017-12-19",
+      "jurisdiction": "UK",
+      "source_url": "https://www.rcp.ac.uk/improving-care/resources/national-early-warning-score-news-2/",
+      "language": "en",
+      "topics": ["triage", "vital_signs"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Source of the single-parameter vital-sign triggers in shared/triage_rules.json. Not a Kazakhstan protocol. URL not verified."
+    },
+    {
+      "slug": "esc-acs-2023",
+      "title": "2023 ESC Guidelines for the management of acute coronary syndromes",
+      "issuer": "European Society of Cardiology",
+      "version": "2023",
+      "publication_date": "2023-08-25",
+      "jurisdiction": "EU",
+      "source_url": "https://www.escardio.org/Guidelines",
+      "language": "en",
+      "topics": ["ecg", "acs"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Eur Heart J 2023;44(38):3720-3826. Check for a newer edition before use."
+    },
+    {
+      "slug": "erc-guidelines-2021",
+      "title": "European Resuscitation Council Guidelines 2021",
+      "issuer": "European Resuscitation Council",
+      "version": "2021",
+      "publication_date": "2021-03-24",
+      "jurisdiction": "EU",
+      "source_url": "https://cprguidelines.eu/",
+      "language": "en",
+      "topics": ["resuscitation", "arrhythmia", "anaphylaxis"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Resuscitation 2021;161. May be superseded by a newer ERC edition; verify."
+    },
+    {
+      "slug": "aha-cpr-ecc-2020",
+      "title": "2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care",
+      "issuer": "American Heart Association",
+      "version": "2020",
+      "publication_date": "2020-10-21",
+      "jurisdiction": "US",
+      "source_url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines",
+      "language": "en",
+      "topics": ["resuscitation", "arrhythmia"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Circulation 2020;142(16 Suppl 2). May be superseded by a newer AHA edition; verify."
+    },
+    {
+      "slug": "wao-anaphylaxis-2020",
+      "title": "World Allergy Organization Anaphylaxis Guidance 2020",
+      "issuer": "World Allergy Organization",
+      "version": "2020",
+      "publication_date": "2020-10-30",
+      "jurisdiction": "international",
+      "source_url": "https://www.worldallergy.org/",
+      "language": "en",
+      "topics": ["anaphylaxis", "skin"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "World Allergy Organ J 2020;13(10):100472. Verify currency."
+    },
+    {
+      "slug": "eaaci-anaphylaxis-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "issuer": "European Academy of Allergy and Clinical Immunology",
+      "version": "2021 update",
+      "publication_date": "2021-09-01",
+      "jurisdiction": "EU",
+      "source_url": "https://www.eaaci.org/",
+      "language": "en",
+      "topics": ["anaphylaxis", "skin"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Allergy 2022;77(2):357-377 (online 2021). Publication day approximate; verify."
+    },
+    {
+      "slug": "acs-atls-10",
+      "title": "Advanced Trauma Life Support (ATLS) Student Course Manual, 10th edition",
+      "issuer": "American College of Surgeons Committee on Trauma",
+      "version": "10th edition",
+      "publication_date": "2018-01-01",
+      "jurisdiction": "US",
+      "source_url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+      "language": "en",
+      "topics": ["trauma", "wound", "burn"],
+      "sections": [],
+      "status": "unverified",
+      "notes": "Publication day approximate. Licensed course material: link only, no content reproduced. Check for a newer edition."
+    }
+  ]
+}

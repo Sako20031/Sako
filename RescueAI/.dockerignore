@@ -1,0 +1,7 @@
+backend/.venv
+backend/*.db
+backend/storage
+frontend/node_modules
+frontend/dist
+frontend/test-results
+**/__pycache__

@@ -17,3 +17,8 @@ Sakosakosako
 ## TUMAR Heritage
 
 Отдельный проект в папке [`Tumar/`](Tumar/README.md) — свой сайт, своя база данных.
+
+## RESCUE AI
+
+Отдельный проект в папке [`RescueAI/`](RescueAI/README.md) — справочный помощник для
+фельдшеров скорой помощи (PWA + FastAPI). Прототип, не для клинического использования.
