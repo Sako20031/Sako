@@ -5,6 +5,9 @@
  * project brief and must be confirmed by the owner before launch.
  */
 
+import type { Media } from './media';
+import { photos } from './photos';
+
 export type ScooterId = string;
 
 export interface Scooter {
@@ -15,10 +18,10 @@ export interface Scooter {
   /** Visual style of the placeholder illustration (until a real photo is added). */
   silhouette: 'compact' | 'touring' | 'maxi';
   /**
-   * Real photo of THIS model: import it (e.g. from '../assets/photos/pcx-125.jpg') and put the URL here.
-   * Leave null to show the neutral illustration. Never use a photo of another model.
+   * Photo of THIS model (see photos.ts). Leave null to show the neutral illustration.
+   * Never use a photo of another model.
    */
-  photo: string | null;
+  photo: Media | null;
   description: { es: string; en: string };
   /** Price per day (EUR) by rental length. */
   rates: {
@@ -60,7 +63,7 @@ export const rentalConfig = {
       name: 'Honda Vision 110',
       cc: 110,
       silhouette: 'compact',
-      photo: null,
+      photo: photos['vision-110'],
       description: {
         es: 'Ligera y práctica para moverte por el pueblo y las playas cercanas.',
         en: 'Lightweight and practical for getting around town and nearby beaches.',
@@ -72,7 +75,7 @@ export const rentalConfig = {
       name: 'Honda PCX 125',
       cc: 125,
       silhouette: 'touring',
-      photo: null,
+      photo: photos['pcx-125'],
       description: {
         es: 'Cómoda para trayectos más largos y para recorrer la costa.',
         en: 'Comfortable for longer rides and exploring the coast.',
@@ -84,7 +87,7 @@ export const rentalConfig = {
       name: 'Honda Forza 125',
       cc: 125,
       silhouette: 'maxi',
-      photo: null,
+      photo: photos['forza-125'],
       description: {
         es: 'Un scooter más grande para una conducción más confortable.',
         en: 'A larger scooter for a more comfortable ride.',

@@ -1,7 +1,7 @@
 import { Check, ArrowRight, Info } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { rentalConfig, type Scooter } from '../config/rental';
-import { scooterArt } from '../config/media';
+import { scooterArt, type Media } from '../config/media';
 import { estimate, formatPrice, fromPrice } from '../lib/pricing';
 import { useBooking } from '../state/booking';
 import { Stepper } from './ui/Stepper';
@@ -9,12 +9,15 @@ import { useReveal } from './ui/useReveal';
 
 export function ScooterImage({ scooter, priority = false }: { scooter: Scooter; priority?: boolean }) {
   const { t } = useI18n();
-  const art = scooterArt[scooter.silhouette];
+  const img: Media = scooter.photo ?? scooterArt[scooter.silhouette];
   return (
     <img
-      src={scooter.photo ?? art.src}
-      width={art.width}
-      height={art.height}
+      className={scooter.photo ? 'is-photo' : 'is-art'}
+      src={img.src}
+      srcSet={img.srcSet}
+      sizes="(min-width: 900px) 40vw, 90vw"
+      width={img.width}
+      height={img.height}
       alt={scooter.photo ? t.catalogue.photoAlt(scooter.name) : t.catalogue.artAlt(scooter.name)}
       loading={priority ? 'eager' : 'lazy'}
       decoding="async"
@@ -52,7 +55,7 @@ function ScooterRow({ scooter, index }: { scooter: Scooter; index: number }) {
 
       <figure className="scooter__figure">
         <ScooterImage scooter={scooter} />
-        {!scooter.photo && <figcaption>{t.catalogue.illustrationNote}</figcaption>}
+        <figcaption>{scooter.photo ? t.catalogue.photoNote : t.catalogue.illustrationNote}</figcaption>
       </figure>
 
       <div className="scooter__buy">

@@ -1,6 +1,7 @@
 import { ArrowUp } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { business, fullAddress, whatsappLink } from '../config/business';
+import { credits } from '../config/media';
 import { Wordmark } from './ui/Logo';
 import { LangSwitch } from './Header';
 
@@ -31,6 +32,17 @@ export function Footer() {
       </div>
       <div className="wrap footer__legal">
         <p>{t.footer.note} {t.footer.imagery}</p>
+        <details className="footer__credits">
+          <summary>{t.footer.credits}</summary>
+          <ul>
+            {credits.map((c) => (
+              <li key={c.source}>
+                <a href={c.source} target="_blank" rel="noopener noreferrer">{c.title}</a> — {c.author},{' '}
+                <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer license">{c.license}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
         <p>
           © {new Date().getFullYear()} {business.name}. {t.footer.rights}{' '}
           <a href="#top" className="footer__top">

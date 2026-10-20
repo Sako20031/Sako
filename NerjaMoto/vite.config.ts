@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import { business } from './src/config/business';
+import { photos } from './src/config/photos';
 
 /**
  * SEO tags that depend on the public URL. Set SITE_URL (e.g. https://nerjamotorent.com)
@@ -33,7 +34,8 @@ function seo(siteUrl: string): Plugin {
         closes: business.hours.close,
       },
     ],
-    ...(url ? { url, image: `${url}/og-image.png` } : {}),
+    image: photos.hero.src,
+    ...(url ? { url } : {}),
   };
 
   return {
@@ -41,6 +43,7 @@ function seo(siteUrl: string): Plugin {
     transformIndexHtml(html) {
       const tags = [
         `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
+        `<meta property="og:image" content="${photos.hero.src}" />`,
         ...(url
           ? [
               `<link rel="canonical" href="${url}/" />`,
@@ -48,9 +51,6 @@ function seo(siteUrl: string): Plugin {
               `<link rel="alternate" hreflang="en" href="${url}/?lang=en" />`,
               `<link rel="alternate" hreflang="x-default" href="${url}/" />`,
               `<meta property="og:url" content="${url}/" />`,
-              `<meta property="og:image" content="${url}/og-image.png" />`,
-              `<meta property="og:image:width" content="1200" />`,
-              `<meta property="og:image:height" content="630" />`,
             ]
           : []),
       ];

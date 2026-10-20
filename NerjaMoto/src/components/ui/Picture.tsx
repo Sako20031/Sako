@@ -14,6 +14,7 @@ export function Picture({ media, alt, className, priority = false, sizes }: Prop
     <img
       className={className}
       src={media.src}
+      srcSet={media.srcSet}
       width={media.width}
       height={media.height}
       alt={alt}

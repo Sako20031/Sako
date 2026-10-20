@@ -302,6 +302,9 @@ textarea.input {
 }
 .pick__item img {
   width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 2px;
 }
 .pick__name {
   font-size: 12.5px;
@@ -425,6 +428,9 @@ textarea.input {
 .review__media img {
   width: 60%;
   max-width: 220px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
 .review__list {
   margin: 0;

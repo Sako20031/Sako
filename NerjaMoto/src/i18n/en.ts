@@ -37,7 +37,7 @@ export const en: Dict = {
     fromLabel: 'From',
     perDay: '/day',
     priceNote: 'Indicative price',
-    artAlt: 'Illustration: a scooter parked by the Mediterranean at sunset in Nerja',
+    artAlt: 'View of the Nerja coastline and the Mediterranean from the Balcón de Europa',
   },
   catalogue: {
     eyebrow: 'Our scooters',
@@ -50,6 +50,7 @@ export const en: Dict = {
     choose: 'Choose this scooter',
     selected: 'Selected',
     illustrationNote: 'Indicative illustration · real photo of the model coming soon',
+    photoNote: 'Reference photo of the model, not our fleet',
     photoAlt: (name: string) => `Photograph of the ${name}`,
     artAlt: (name: string) => `Generic scooter illustration representing the ${name}`,
     availability:
@@ -130,7 +131,7 @@ export const en: Dict = {
       { title: 'Charming villages', text: 'Frigiliana, Maro and other corners of the Axarquía, to explore your way.' },
       { title: 'Simple booking', text: 'An instant price estimate and a WhatsApp request in a minute.' },
     ],
-    artAlt: 'Illustration: a coastal road between cliffs and the sea',
+    artAlt: 'View of Nerja, its beaches and the mountains',
     note: 'Always ride carefully and follow the traffic rules.',
   },
   destinations: {
@@ -141,7 +142,7 @@ export const en: Dict = {
     distance: 'Approx. distance',
     distanceUnknown: 'Check the distance and route on Google Maps.',
     disclaimer: 'Ask us on WhatsApp which model suits the route you have in mind before you book.',
-    artAlt: (name: string) => `Illustration of ${name}`,
+    artAlt: (name: string) => `Photograph of ${name}`,
   },
   advantages: {
     eyebrow: 'Why ride with us',
@@ -185,7 +186,8 @@ export const en: Dict = {
     tagline: 'Honda scooter rental in Nerja, Costa del Sol.',
     note: 'Prices shown are estimates. Every request is pending confirmation from the rental company.',
     rights: 'All rights reserved.',
-    imagery: 'Provisional illustrations until our own photographs are available.',
+    imagery: 'Photographs: Wikimedia Commons (free licences), until our own photos are available.',
+    credits: 'Photo credits',
     top: 'Back to top',
   },
 };

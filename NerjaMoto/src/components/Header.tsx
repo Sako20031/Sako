@@ -60,7 +60,7 @@ export function Header() {
   ];
 
   return (
-    <header className={`header ${solid || open ? 'header--solid' : ''}`}>
+    <header className={`header ${solid || open ? 'header--solid' : 'header--top'}`}>
       <div className="header__inner wrap">
         <a href="#top" className="header__brand" aria-label={`${business.name} — ${t.a11y.home}`} onClick={() => setOpen(false)}>
           <Wordmark />

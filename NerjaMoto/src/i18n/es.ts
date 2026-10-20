@@ -36,7 +36,7 @@ export const es = {
     fromLabel: 'Desde',
     perDay: '/día',
     priceNote: 'Precio orientativo',
-    artAlt: 'Ilustración: un scooter aparcado frente al Mediterráneo al atardecer en Nerja',
+    artAlt: 'Vista de la costa de Nerja y el Mediterráneo desde el Balcón de Europa',
   },
   catalogue: {
     eyebrow: 'Nuestros scooters',
@@ -49,6 +49,7 @@ export const es = {
     choose: 'Elegir este scooter',
     selected: 'Seleccionado',
     illustrationNote: 'Ilustración orientativa · foto real del modelo próximamente',
+    photoNote: 'Foto de referencia del modelo, no de nuestra flota',
     photoAlt: (name: string) => `Fotografía del ${name}`,
     artAlt: (name: string) => `Ilustración genérica de un scooter, representando el ${name}`,
     availability:
@@ -130,7 +131,7 @@ export const es = {
       { title: 'Pueblos con encanto', text: 'Frigiliana, Maro y otros rincones de la Axarquía, para descubrir a tu aire.' },
       { title: 'Reserva sencilla', text: 'Precio estimado al momento y solicitud por WhatsApp en un minuto.' },
     ],
-    artAlt: 'Ilustración: carretera costera entre acantilados y el mar',
+    artAlt: 'Vista de Nerja, sus playas y la sierra',
     note: 'Conduce siempre con precaución y respeta las normas de tráfico.',
   },
   destinations: {
@@ -142,7 +143,7 @@ export const es = {
     distanceUnknown: 'Consulta la distancia y la ruta en Google Maps.',
     disclaimer:
       'Pregúntanos por WhatsApp qué modelo encaja mejor con la ruta que tienes en mente antes de reservar.',
-    artAlt: (name: string) => `Ilustración de ${name}`,
+    artAlt: (name: string) => `Fotografía de ${name}`,
   },
   advantages: {
     eyebrow: 'Por qué con nosotros',
@@ -187,7 +188,8 @@ export const es = {
     tagline: 'Alquiler de scooters Honda en Nerja, Costa del Sol.',
     note: 'Los precios mostrados son orientativos. Toda solicitud queda pendiente de confirmación por parte del establecimiento.',
     rights: 'Todos los derechos reservados.',
-    imagery: 'Ilustraciones provisionales hasta disponer de fotografías propias.',
+    imagery: 'Fotografías: Wikimedia Commons (licencias libres), hasta disponer de fotos propias.',
+    credits: 'Créditos fotográficos',
     top: 'Volver arriba',
   },
 };
