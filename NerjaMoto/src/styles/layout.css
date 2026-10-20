@@ -154,6 +154,7 @@
 .mobile-menu {
   position: fixed;
   inset: var(--header-h) 0 0;
+  z-index: 39;
   background: var(--sand);
   padding: 24px var(--gutter) calc(24px + var(--safe-b));
   display: flex;

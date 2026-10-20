@@ -60,39 +60,42 @@ export function Header() {
   ];
 
   return (
-    <header className={`header ${solid || open ? 'header--solid' : 'header--top'}`}>
-      <div className="header__inner wrap">
-        <a href="#top" className="header__brand" aria-label={`${business.name} — ${t.a11y.home}`} onClick={() => setOpen(false)}>
-          <Wordmark />
-        </a>
-
-        <nav className="header__nav" aria-label={t.a11y.mainNav}>
-          {links.map((l) => (
-            <a key={l.href} href={l.href}>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="header__actions">
-          <LangSwitch className="header__lang" />
-          <a href="#scooters" className="btn btn--ocean header__cta">
-            {t.nav.book}
+    <>
+      <header className={`header ${solid || open ? 'header--solid' : 'header--top'}`}>
+        <div className="header__inner wrap">
+          <a href="#top" className="header__brand" aria-label={`${business.name} — ${t.a11y.home}`} onClick={() => setOpen(false)}>
+            <Wordmark />
           </a>
-          <button
-            ref={menuBtn}
-            type="button"
-            className="header__menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? t.a11y.closeMenu : t.a11y.menu}
-            onClick={() => setOpen((o) => !o)}
-          >
-            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-          </button>
-        </div>
-      </div>
 
+          <nav className="header__nav" aria-label={t.a11y.mainNav}>
+            {links.map((l) => (
+              <a key={l.href} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="header__actions">
+            <LangSwitch className="header__lang" />
+            <a href="#scooters" className="btn btn--ocean header__cta">
+              {t.nav.book}
+            </a>
+            <button
+              ref={menuBtn}
+              type="button"
+              className="header__menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? t.a11y.closeMenu : t.a11y.menu}
+              onClick={() => setOpen((o) => !o)}
+            >
+              {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Outside <header>: its backdrop-filter would make it the containing block of this fixed panel. */}
       <div id="mobile-menu" className={`mobile-menu ${open ? 'is-open' : ''}`} hidden={!open}>
         <nav aria-label={t.a11y.mainNav} className="mobile-menu__nav">
           {links.map((l, i) => (
@@ -111,6 +114,6 @@ export function Header() {
           </a>
         </div>
       </div>
-    </header>
+    </>
   );
 }
