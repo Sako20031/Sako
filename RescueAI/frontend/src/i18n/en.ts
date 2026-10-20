@@ -138,6 +138,7 @@ const en: Dict = {
   set_retention_text: "The server deletes analyses and saved images after the retention period set by the administrator. Deleting an encounter removes its analyses and files immediately.",
   done: "Done",
 
+  demo_banner: "Demo: interface only. No server is connected — sign-in, saving, AI analysis and the reference do not work. Emergency checklists work. Not for clinical use.",
   privacy_title: "Privacy and data",
   privacy_body: "Patient data is stored on your organization's server. The phone keeps only settings and the downloaded reference — no patient data. Images go to an external AI provider only if the administrator authorized it; the patient identifier is never sent. The original image is stored only if you tick “Save the original”. All actions on encounter records are written to an audit log without clinical content.",
   privacy_providers: "Details of data sent to providers: deployment documentation (docs/PRIVACY.md).",

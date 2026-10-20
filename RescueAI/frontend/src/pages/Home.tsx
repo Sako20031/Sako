@@ -36,6 +36,7 @@ export default function Home() {
     <main>
       <Header title={t("app_name")} home />
       <p class="subtitle">{t("app_subtitle")}</p>
+      {import.meta.env.VITE_DEMO === "1" && <p class="card warn warn-text" role="note">{t("demo_banner")}</p>}
       <nav class="tiles" aria-label={t("nav_home")}>
         {TILES.map(([href, key, icon]) => <a class="tile" href={`#/${href}`} key={href}><span aria-hidden="true">{icon}</span>{t(key)}</a>)}
       </nav>
