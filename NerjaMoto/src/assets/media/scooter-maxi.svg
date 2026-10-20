@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300"><defs><linearGradient id="shade-maxi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".22"/>
+    </linearGradient></defs>
+  <g class="scooter-maxi">
+    <ellipse cx="249" cy="272" rx="185" ry="9" fill="#1C2A30" opacity=".14"/>
+    <!-- swingarm / engine -->
+    <path d="M110 210 L226 202 C238 202 242 216 232 224 L122 234 Z" fill="#3A4A50"/>
+    <path d="M116 222 l84 -10" stroke="#5B6B71" stroke-width="3" stroke-linecap="round"/>
+    
+  <g>
+    <circle cx="116" cy="228" r="42" fill="#1C2A30"/>
+    <circle cx="116" cy="228" r="29.4" fill="#33444B"/>
+    <circle cx="116" cy="228" r="26.04" fill="none" stroke="#6E7F85" stroke-width="2"/>
+    <line x1="116" y1="228" x2="141.2" y2="228.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="116" y1="228" x2="123.8" y2="252.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="116" y1="228" x2="95.6" y2="242.8" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="116" y1="228" x2="95.6" y2="213.2" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="116" y1="228" x2="123.8" y2="204.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/>
+    
+    <circle cx="116" cy="228" r="6.72" fill="#D7DEE0"/>
+  </g>
+    <!-- fork -->
+    <path d="M364 158 L382 228" stroke="#6E7F85" stroke-width="9" stroke-linecap="round"/>
+    
+  <g>
+    <circle cx="382" cy="228" r="42" fill="#1C2A30"/>
+    <circle cx="382" cy="228" r="29.4" fill="#33444B"/>
+    <circle cx="382" cy="228" r="26.04" fill="none" stroke="#6E7F85" stroke-width="2"/>
+    <line x1="382" y1="228" x2="407.2" y2="228.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="382" y1="228" x2="389.8" y2="252.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="382" y1="228" x2="361.6" y2="242.8" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="382" y1="228" x2="361.6" y2="213.2" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/><line x1="382" y1="228" x2="389.8" y2="204.0" stroke="#8F9DA1" stroke-width="3.8" stroke-linecap="round"/>
+    <circle cx="382" cy="228" r="17.64" fill="none" stroke="#B9C3C6" stroke-width="3"/>
+    <circle cx="382" cy="228" r="6.72" fill="#D7DEE0"/>
+  </g>
+    <path d="M344 208 C350 186 368 178 386 180 C400 182 412 192 418 204" fill="none" stroke="#0E5B73" stroke-width="10" stroke-linecap="round"/>
+    <path d="M36 164 C40 138 80 124 132 124 L250 130 C268 134 274 160 276 190 L312 194
+            C322 176 326 132 332 104 C336 82 348 68 366 62 L388 66 C398 92 402 134 394 172
+            C390 188 374 198 356 196 L326 208 L268 210 C254 210 244 206 236 202 L122 204 C76 204 40 192 36 164 Z" fill="#0E5B73"/>
+    <path d="M36 164 C40 138 80 124 132 124 L250 130 C268 134 274 160 276 190 L312 194
+            C322 176 326 132 332 104 C336 82 348 68 366 62 L388 66 C398 92 402 134 394 172
+            C390 188 374 198 356 196 L326 208 L268 210 C254 210 244 206 236 202 L122 204 C76 204 40 192 36 164 Z" fill="none" stroke="#0A4659" stroke-width="2" opacity=".7"/>
+    <!-- lower shading -->
+    <path d="M36 164 C40 138 80 124 132 124 L250 130 C268 134 274 160 276 190 L312 194
+            C322 176 326 132 332 104 C336 82 348 68 366 62 L388 66 C398 92 402 134 394 172
+            C390 188 374 198 356 196 L326 208 L268 210 C254 210 244 206 236 202 L122 204 C76 204 40 192 36 164 Z" fill="url(#shade-maxi)"/>
+    <path d="M356 66 C356 40 364 16 380 4 L392 6 C388 24 386 46 388 66 Z" fill="#CFE3EA" opacity=".75"/><path d="M356 66 C356 40 364 16 380 4 L392 6 C388 24 386 46 388 66 Z" fill="none" stroke="#9FBCC6" stroke-width="2"/>
+    <path d="M90 124 C96 104 132 98 180 100 L250 108 C262 110 264 122 254 128 L98 132 C88 132 86 130 90 124 Z" fill="#26363C"/>
+    <path d="M90 124 C96 104 132 98 180 100 L250 108 C262 110 264 122 254 128 L98 132 C88 132 86 130 90 124 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="2"/>
+    <!-- grab rail -->
+    <path d="M64 136 C76 124 106 122 126 128" stroke="#8F9DA1" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M364 64 L352 40 M334 40 L376 36" stroke="#1C2A30" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M342 38 L330 16 M325 16 l12 -3" stroke="#1C2A30" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M390 76 C400 88 404 110 400 126 L390 124 C392 108 390 92 384 84 Z" fill="#FFF6E2"/>
+    <path d="M36 158 l15 -5 1 10 -14 5 Z" fill="#E0573A"/>
+    <!-- accent pinstripe -->
+    <path d="M76 184 C116 178 196 178 248 182" stroke="#FBF3E6" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+  </g></svg>

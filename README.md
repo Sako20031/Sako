@@ -25,3 +25,8 @@ Sakosakosako
 ## TULPAR — автосалон
 
 3D-сайт автосалона в папке [`Tulpar/`](Tulpar/README.md) (Vite + Three.js), отдельный проект.
+
+## Nerja Moto Rent — прокат скутеров
+
+Сайт проката скутеров Honda в Нерхе (Испания) в папке [`NerjaMoto/`](NerjaMoto/README.md)
+(Vite + React + TypeScript), отдельный проект.
