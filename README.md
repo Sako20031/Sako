@@ -25,3 +25,7 @@ Sakosakosako
 ## TULPAR — автосалон
 
 3D-сайт автосалона в папке [`Tulpar/`](Tulpar/README.md) (Vite + Three.js), отдельный проект.
+
+## LUMIÈRE CEILINGS — натяжные потолки
+
+Сайт с конфигуратором потолка и админ-панелью в папке [`Lumiere/`](Lumiere/README.md) — отдельный проект Next.js (Root Directory `Lumiere`).
