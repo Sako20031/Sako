@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кабинет администратора — ArtPOTOLKOFF</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="media/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="defaults.js"></script>
+<style>
+:root{--bg:#0c0c0e;--card:#16161a;--card2:#1d1d22;--line:rgba(255,255,255,.09);--text:#f4f1ec;--muted:#9d998f;--acc:#f08a2c;--ok:#2ecc71;--bad:#e5604f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:400 15px/1.5 Manrope,system-ui,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--acc)}
+.hidden{display:none!important}
+
+/* login */
+#login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-box{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px;text-align:center}
+.login-box img{width:96px;height:96px;border-radius:50%;margin:0 auto 18px;background:#fff}
+.login-box h1{font-size:22px;margin-bottom:6px}
+.login-box p{color:var(--muted);font-size:14px;margin-bottom:22px}
+
+/* layout */
+.top{position:sticky;top:0;z-index:20;background:rgba(12,12,14,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.top img{width:38px;height:38px;border-radius:50%;background:#fff}
+.top b{font-size:15px}
+.top small{display:block;color:var(--muted);font-size:12px}
+.top .sp{flex:1}
+.tabs{max-width:1100px;margin:0 auto;padding:0 16px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;white-space:nowrap;font-size:14px;color:var(--muted)}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#1b1006;font-weight:700}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 120px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px}
+.sec h2{font-size:18px;margin-bottom:4px}
+.sec .hint{color:var(--muted);font-size:13px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f.wide{grid-column:1/-1}
+.f>span{font-size:12px;color:var(--muted);font-weight:600}
+.in{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f0f12;outline:none;font-size:15px}
+.in:focus{border-color:var(--acc)}
+textarea.in{min-height:80px;resize:vertical}
+input[type=color].in{padding:4px;height:46px}
+input[type=range]{accent-color:var(--acc);width:100%}
+.chk{display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 0}
+.chk input{width:20px;height:20px;accent-color:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--card2);cursor:pointer;font-weight:600;font-size:14px;white-space:nowrap}
+.btn:hover{border-color:var(--acc)}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:#1b1006}
+.btn.bad{color:var(--bad)}
+.btn.sm{padding:8px 12px;font-size:13px;border-radius:10px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+
+/* list editor */
+.item{border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;background:var(--card2)}
+.item-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.item-head b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.media-f{display:flex;gap:12px;align-items:center}
+.thumb{width:84px;height:84px;border-radius:12px;background:#0f0f12 center/cover;border:1px solid var(--line);flex:none;overflow:hidden;position:relative}
+.thumb video,.thumb img{width:100%;height:100%;object-fit:cover}
+.media-f .col{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.media-f .row{display:flex;gap:8px;flex-wrap:wrap}
+.prog{height:4px;border-radius:4px;background:#0f0f12;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(12,12,14,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.savebar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
+.savebar .msg{flex:1;font-size:13px;color:var(--muted)}
+.dirty .msg{color:var(--acc)}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-120%);z-index:50;padding:12px 18px;border-radius:12px;background:var(--card2);border:1px solid var(--line);transition:transform .3s;font-weight:600;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--ok)}.toast.err{border-color:var(--bad)}
+.preview-hero{position:relative;height:220px;border-radius:16px;overflow:hidden;background:#000 center/cover;margin-bottom:16px}
+.preview-hero video{width:100%;height:100%;object-fit:cover}
+.preview-hero .sh{position:absolute;inset:0}
+.preview-hero .tx{position:absolute;left:18px;bottom:16px;font-size:24px;font-weight:800;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+@media(max-width:560px){.sec{padding:16px}.grid{grid-template-columns:1fr}.top small{display:none}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form class="login-box" id="loginForm">
+    <img src="media/logo-180.png" alt="">
+    <h1>Кабинет администратора</h1>
+    <p>Введите пароль, чтобы управлять сайтом</p>
+    <input class="in" type="password" id="pw" placeholder="Пароль" autocomplete="current-password" style="margin-bottom:12px;text-align:center">
+    <button class="btn acc" style="width:100%">Войти</button>
+    <p id="loginErr" style="color:var(--bad);margin:12px 0 0"></p>
+    <p style="margin:16px 0 0"><a href="/">← На сайт</a></p>
+  </form>
+</div>
+
+<div id="app" class="hidden">
+  <div class="top">
+    <div class="top-in">
+      <img src="media/logo-180.png" alt="" id="topLogo">
+      <div><b>Кабинет администратора</b><small>Изменения появятся на сайте после «Сохранить»</small></div>
+      <div class="sp"></div>
+      <a class="btn sm" href="/" target="_blank">Открыть сайт ↗</a>
+      <button class="btn sm" id="logout">Выйти</button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <main id="main"></main>
+  <div class="savebar" id="savebar">
+    <div class="savebar-in">
+      <div class="msg" id="saveMsg">Нет изменений</div>
+      <button class="btn" id="resetBtn" title="Вернуть стандартные настройки">Сброс</button>
+      <button class="btn acc" id="saveBtn">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { upload } from "./blob-upload.js";
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const isVideo = u => /\.(mp4|webm|mov|m4v)(\?|$)/i.test(u || "");
+function merge(def, over) {
+  if (Array.isArray(def)) return Array.isArray(over) ? over : def;
+  if (def && typeof def === "object") { const o = { ...def }; if (over && typeof over === "object") for (const k in over) o[k] = k in def ? merge(def[k], over[k]) : over[k]; return o; }
+  return over === undefined || over === null ? def : over;
+}
+const getP = (o, p) => p.split(".").reduce((a, k) => a == null ? a : a[k], o);
+const setP = (o, p, v) => { const ks = p.split("."); const last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
+
+let PW = sessionStorageGet("pw") || "";
+let C, dirty = false;
+function sessionStorageGet(k) { try { return sessionStorage.getItem(k); } catch { return null; } }
+function sessionStorageSet(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} }
+
+function toast(t, kind = "ok") {
+  const el = $("#toast"); el.textContent = t; el.className = "toast show " + kind;
+  clearTimeout(el._t); el._t = setTimeout(() => el.className = "toast", 3200);
+}
+function markDirty() { dirty = true; $("#savebar").classList.add("dirty"); $("#saveMsg").textContent = "Есть несохранённые изменения"; }
+
+/* ---------------- schema ---------------- */
+const artOpts = [["matte","Обычный"],["float","Парящий"],["lines","Световые линии"],["shadow","Теневой"],["multi","Двухуровневый"],["stars","Звёздное небо"],["fabric","Тканевый"],["photo","Фотопечать"]];
+const TABS = [
+  { id: "main", name: "Основное", secs: [
+    { title: "Контакты и бренд", hint: "Номер WhatsApp — только цифры с кодом страны, например 77058726929.", fields: [
+      { p: "brand.name", l: "Название компании" },
+      { p: "brand.tagline", l: "Подпись под названием" },
+      { p: "brand.whatsapp", l: "Номер WhatsApp (цифры)" },
+      { p: "brand.phone", l: "Телефон для показа" },
+      { p: "brand.handle", l: "Instagram (ник без @)" },
+      { p: "brand.instagram", l: "Ссылка на Instagram" },
+      { p: "brand.city", l: "Город по умолчанию в заявке" },
+      { p: "brand.area", l: "Где работаете" },
+      { p: "brand.accent", l: "Фирменный цвет", t: "color" },
+      { p: "brand.logo", l: "Логотип (в шапке)", t: "media", accept: "image/*" }
+    ]}
+  ]},
+  { id: "video", name: "Видео и главный экран", secs: [
+    { title: "Фоновое видео", hint: "Видео играет на первом экране без звука. Пока оно грузится — показывается логотип и картинка-обложка. Лучше загружать видео до 10–15 МБ.", preview: true, fields: [
+      { p: "hero.videoOn", l: "Показывать видео", t: "bool" },
+      { p: "hero.video", l: "Видео (mp4)", t: "media", accept: "video/*" },
+      { p: "hero.poster", l: "Обложка (картинка, пока грузится видео)", t: "media", accept: "image/*" },
+      { p: "hero.overlay", l: "Затемнение видео", t: "range", min: 0, max: 95, unit: "%" },
+      { p: "hero.blur", l: "Размытие видео", t: "range", min: 0, max: 20, unit: "px" }
+    ]},
+    { title: "Тексты первого экрана", fields: [
+      { p: "hero.eyebrow", l: "Надпись сверху" },
+      { p: "hero.title1", l: "Заголовок — строка 1" },
+      { p: "hero.title2", l: "Заголовок — строка 2 (цветная)" },
+      { p: "hero.title3", l: "Заголовок — строка 3" },
+      { p: "hero.text", l: "Описание", t: "textarea", wide: true },
+      { p: "hero.cta1", l: "Кнопка 1" },
+      { p: "hero.cta2", l: "Кнопка 2" }
+    ]},
+    { title: "Цифры (карточки на первом экране)", list: "hero.stats", itemName: "Карточка", add: { value: "", label: "" }, fields: [
+      { k: "value", l: "Значение (крупно)" }, { k: "label", l: "Подпись" }
+    ]},
+    { title: "Бегущая строка", list: "marquee", scalar: true, itemName: "Слово", add: "" }
+  ]},
+  { id: "prices", name: "Цены", secs: [
+    { title: "Базовая цена", hint: "Цена за 1 м² «от–до» для обычного потолка. Для остальных видов умножается на коэффициент (вкладка «Виды потолков»).", fields: [
+      { p: "pricing.min", l: "Цена за м², от (₸)", t: "number" },
+      { p: "pricing.max", l: "Цена за м², до (₸)", t: "number" },
+      { p: "pricing.spot", l: "Точечный светильник, за шт. (₸)", t: "number" },
+      { p: "pricing.chandelier", l: "Люстра, за шт. (₸)", t: "number" },
+      { p: "pricing.pipe", l: "Обход трубы, за шт. (₸)", t: "number" },
+      { p: "pricing.minOrder", l: "Минимальный заказ (₸)", t: "number" },
+      { p: "pricing.note", l: "Подпись под ценой", t: "textarea", wide: true }
+    ]},
+    { title: "Фактуры", list: "textures", itemName: "Фактура", add: { name: "Новая фактура", k: 1 }, fields: [
+      { k: "name", l: "Название" }, { k: "k", l: "Коэффициент цены (1 = без наценки)", t: "number", step: 0.05 }
+    ]},
+    { title: "Цвета полотна", list: "colors", itemName: "Цвет", add: { name: "Новый цвет", hex: "#ffffff" }, fields: [
+      { k: "name", l: "Название" }, { k: "hex", l: "Цвет", t: "color" }
+    ]}
+  ]},
+  { id: "types", name: "Виды потолков", secs: [
+    { title: "Виды потолков", hint: "Показываются в разделе «Виды» и в калькуляторе. Коэффициент: 1,6 — значит в 1,6 раза дороже базовой цены.", list: "types", itemName: "Вид", add: () => ({ id: "t" + Date.now().toString(36), name: "Новый вид", k: 1, art: "matte", img: "", desc: "" }), fields: [
+      { k: "name", l: "Название" },
+      { k: "k", l: "Коэффициент цены", t: "number", step: 0.05 },
+      { k: "art", l: "Рисунок, если нет фото", t: "select", opts: artOpts },
+      { k: "img", l: "Фото / видео", t: "media", accept: "image/*,video/*" },
+      { k: "desc", l: "Описание", t: "textarea", wide: true }
+    ]}
+  ]},
+  { id: "works", name: "Наши работы", secs: [
+    { title: "Работы (портфолио)", hint: "Добавляйте фото или видео объектов. «Большая карточка» — занимает две строки.", list: "works", itemName: "Работа", addTop: true, add: { img: "", title: "Новая работа", cat: "single", area: "", tall: false }, fields: [
+      { k: "img", l: "Фото / видео", t: "media", accept: "image/*,video/*", wide: true },
+      { k: "title", l: "Подпись" },
+      { k: "cat", l: "Вид потолка (для фильтра)", t: "select", opts: () => C.types.map(t => [t.id, t.name]) },
+      { k: "area", l: "Площадь (например «24 м²»)" },
+      { k: "tall", l: "Большая карточка", t: "bool" }
+    ]}
+  ]},
+  { id: "texts", name: "Тексты", secs: [
+    { title: "Блок «Почему выбирают нас»", fields: [{ p: "features.title", l: "Заголовок (после запятой — цветом)", wide: true }] },
+    { title: "Преимущества", list: "features.items", itemName: "Преимущество", add: { title: "", text: "" }, fields: [
+      { k: "title", l: "Заголовок" }, { k: "text", l: "Текст", t: "textarea" }
+    ]},
+    { title: "Этапы работы", list: "steps", itemName: "Этап", add: { title: "", text: "" }, fields: [
+      { k: "title", l: "Заголовок" }, { k: "text", l: "Текст", t: "textarea" }
+    ]},
+    { title: "Частые вопросы", list: "faq", itemName: "Вопрос", add: { q: "", a: "" }, fields: [
+      { k: "q", l: "Вопрос" }, { k: "a", l: "Ответ", t: "textarea" }
+    ]}
+  ]},
+  { id: "pass", name: "Пароль", custom: "password" }
+];
+let tab = TABS[0].id;
+
+/* ---------------- field rendering ---------------- */
+function fieldHTML(f, val, id) {
+  const lab = `<span>${esc(f.l)}</span>`;
+  const w = f.wide || f.t === "textarea" ? " wide" : "";
+  switch (f.t) {
+    case "textarea": return `<label class="f${w}">${lab}<textarea class="in" data-id="${id}">${esc(val)}</textarea></label>`;
+    case "number": return `<label class="f">${lab}<input class="in" type="number" step="${f.step || 1}" data-id="${id}" data-num value="${esc(val)}"></label>`;
+    case "color": return `<label class="f">${lab}<input class="in" type="color" data-id="${id}" value="${esc(/^#[0-9a-f]{6}$/i.test(val) ? val : "#ffffff")}"></label>`;
+    case "bool": return `<label class="chk f${w}"><input type="checkbox" data-id="${id}" data-bool ${val ? "checked" : ""}> ${esc(f.l)}</label>`;
+    case "range": return `<label class="f">${lab.replace("</span>", ` — <b data-out="${id}">${esc(val)}${f.unit || ""}</b></span>`)}<input type="range" min="${f.min}" max="${f.max}" data-id="${id}" data-num data-unit="${f.unit || ""}" value="${esc(val)}"></label>`;
+    case "select": {
+      const opts = typeof f.opts === "function" ? f.opts() : f.opts;
+      return `<label class="f">${lab}<select class="in" data-id="${id}">${opts.map(([v, n]) => `<option value="${esc(v)}" ${v === val ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></label>`;
+    }
+    case "media": return `<div class="f wide">${lab}<div class="media-f">
+        <div class="thumb" data-thumb="${id}">${thumb(val)}</div>
+        <div class="col">
+          <input class="in" data-id="${id}" value="${esc(val)}" placeholder="Ссылка или загрузите файл">
+          <div class="row">
+            <label class="btn sm">Загрузить файл<input type="file" hidden accept="${f.accept || "image/*"}" data-upload="${id}"></label>
+            ${val ? `<button type="button" class="btn sm bad" data-clear="${id}">Убрать</button>` : ""}
+          </div>
+          <div class="prog hidden" data-prog="${id}"><i></i></div>
+        </div></div></div>`;
+    default: return `<label class="f${w}">${lab}<input class="in" data-id="${id}" value="${esc(val)}"></label>`;
+  }
+}
+function thumb(u) {
+  if (!u) return "";
+  return isVideo(u) ? `<video src="${esc(u)}" muted playsinline preload="metadata"></video>` : `<img src="${esc(u)}" alt="">`;
+}
+
+// map of input id -> path into config
+let paths = {};
+let seq = 0;
+const reg = p => { const id = "x" + (seq++); paths[id] = p; return id; };
+
+function render() {
+  paths = {}; seq = 0;
+  $("#tabs").innerHTML = TABS.map(t => `<button class="tab ${t.id === tab ? "on" : ""}" data-tab="${t.id}">${esc(t.name)}</button>`).join("");
+  const T = TABS.find(t => t.id === tab);
+  if (T.custom === "password") return renderPassword();
+  $("#main").innerHTML = T.secs.map(sec => {
+    let body = "";
+    if (sec.list) {
+      const arr = getP(C, sec.list) || [];
+      body = arr.map((it, i) => {
+        const base = `${sec.list}.${i}`;
+        const name = sec.scalar ? it : (it.title || it.name || it.q || it.value || "");
+        const inner = sec.scalar
+          ? fieldHTML({ l: sec.itemName }, it, reg(base))
+          : `<div class="grid">${sec.fields.map(f => fieldHTML(f, it[f.k], reg(`${base}.${f.k}`))).join("")}</div>`;
+        return `<div class="item"><div class="item-head"><b>${esc(sec.itemName)} ${i + 1}${name ? " · " + esc(name) : ""}</b>
+          <button class="btn sm" data-move="${sec.list}|${i}|-1" ${i ? "" : "disabled"} title="Выше">↑</button>
+          <button class="btn sm" data-move="${sec.list}|${i}|1" ${i < arr.length - 1 ? "" : "disabled"} title="Ниже">↓</button>
+          <button class="btn sm bad" data-del="${sec.list}|${i}">Удалить</button></div>${inner}</div>`;
+      }).join("");
+      body += `<button class="btn" data-add="${sec.list}">+ Добавить: ${esc(sec.itemName.toLowerCase())}</button>`;
+    } else {
+      body = `<div class="grid">${sec.fields.map(f => fieldHTML(f, getP(C, f.p), reg(f.p))).join("")}</div>`;
+    }
+    const pv = sec.preview ? `<div class="preview-hero" id="pvHero"></div>` : "";
+    return `<section class="sec"><h2>${esc(sec.title)}</h2>${sec.hint ? `<p class="hint">${esc(sec.hint)}</p>` : `<div style="height:12px"></div>`}${pv}${body}</section>`;
+  }).join("");
+  drawPreview();
+}
+
+function drawPreview() {
+  const el = $("#pvHero"); if (!el) return;
+  const h = C.hero, ov = (+h.overlay || 0) / 100;
+  el.style.backgroundImage = h.poster ? `url("${h.poster}")` : "";
+  el.innerHTML = `${h.videoOn && h.video ? `<video src="${esc(h.video)}" muted loop autoplay playsinline style="filter:blur(${+h.blur || 0}px)"></video>` : ""}
+    <div class="sh" style="background:rgba(12,12,14,${ov})"></div><div class="tx">${esc(h.title1)}<br><span style="color:${esc(C.brand.accent)}">${esc(h.title2)}</span></div>`;
+}
+
+function renderPassword() {
+  $("#main").innerHTML = `<section class="sec"><h2>Сменить пароль</h2><p class="hint">Новый пароль будет нужен для входа в кабинет. Запомните его.</p>
+    <div class="grid">
+      <label class="f"><span>Новый пароль</span><input class="in" type="password" id="np1" autocomplete="new-password"></label>
+      <label class="f"><span>Повторите пароль</span><input class="in" type="password" id="np2" autocomplete="new-password"></label>
+    </div><div style="height:14px"></div><button class="btn acc" id="npBtn">Сменить пароль</button></section>`;
+  $("#npBtn").onclick = async () => {
+    const a = $("#np1").value, b = $("#np2").value;
+    if (a.length < 4) return toast("Минимум 4 символа", "err");
+    if (a !== b) return toast("Пароли не совпадают", "err");
+    const r = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: PW, newPassword: a }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) return toast(j.error || "Ошибка", "err");
+    PW = a; sessionStorageSet("pw", a); toast("Пароль изменён");
+    $("#np1").value = $("#np2").value = "";
+  };
+}
+
+/* ---------------- events ---------------- */
+$("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b) { tab = b.dataset.tab; render(); scrollTo(0, 0); } });
+$("#main").addEventListener("input", e => {
+  const id = e.target.dataset.id; if (!id || !(id in paths)) return;
+  let v = e.target.dataset.bool !== undefined ? e.target.checked : e.target.value;
+  if (e.target.dataset.num !== undefined) v = v === "" ? 0 : +v;
+  setP(C, paths[id], v);
+  const out = document.querySelector(`[data-out="${id}"]`); if (out) out.textContent = v + (e.target.dataset.unit || "");
+  if (paths[id].match(/\.(img|logo|video|poster)$/)) { const t = document.querySelector(`[data-thumb="${id}"]`); if (t) t.innerHTML = thumb(v); }
+  markDirty();
+  if (/^hero\.|^brand\.accent/.test(paths[id])) drawPreview();
+});
+$("#main").addEventListener("change", e => {
+  if (e.target.dataset.bool !== undefined || e.target.tagName === "SELECT") e.target.dispatchEvent(new Event("input", { bubbles: true }));
+  const up = e.target.dataset.upload; if (up && e.target.files[0]) doUpload(up, e.target.files[0], e.target);
+});
+$("#main").addEventListener("click", e => {
+  const t = e.target.closest("[data-add],[data-del],[data-move],[data-clear]"); if (!t) return;
+  if (t.dataset.clear) { setP(C, paths[t.dataset.clear], ""); markDirty(); return render(); }
+  if (t.dataset.add) {
+    const arr = getP(C, t.dataset.add);
+    const sec = TABS.flatMap(x => x.secs || []).find(s => s.list === t.dataset.add);
+    const item = typeof sec.add === "function" ? sec.add() : clone(sec.add);
+    sec.addTop ? arr.unshift(item) : arr.push(item);
+  }
+  if (t.dataset.del) {
+    const [p, i] = t.dataset.del.split("|"); const arr = getP(C, p);
+    if (!confirm("Удалить этот элемент?")) return;
+    arr.splice(+i, 1);
+  }
+  if (t.dataset.move) {
+    const [p, i, d] = t.dataset.move.split("|"); const arr = getP(C, p); const a = +i, b = a + +d;
+    [arr[a], arr[b]] = [arr[b], arr[a]];
+  }
+  markDirty(); render();
+});
+
+async function doUpload(id, file, input) {
+  const prog = document.querySelector(`[data-prog="${id}"]`);
+  prog.classList.remove("hidden");
+  try {
+    const ext = (file.name.split(".").pop() || "bin").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const blob = await upload(`media/${Date.now()}.${ext}`, file, {
+      access: "public",
+      handleUploadUrl: "/api/upload",
+      clientPayload: JSON.stringify({ password: PW }),
+      multipart: file.size > 8 * 1024 * 1024,
+      onUploadProgress: p => { prog.firstChild.style.width = p.percentage + "%"; }
+    });
+    setP(C, paths[id], blob.url);
+    markDirty();
+    toast("Файл загружен. Не забудьте нажать «Сохранить»");
+    render();
+  } catch (err) {
+    console.error(err);
+    toast("Не удалось загрузить: " + (err.message || err), "err");
+    prog.classList.add("hidden");
+  }
+  input.value = "";
+}
+
+$("#saveBtn").onclick = async () => {
+  $("#saveBtn").disabled = true; $("#saveMsg").textContent = "Сохраняю…";
+  try {
+    const r = await fetch("/api/config", { method: "POST", headers: { "Content-Type": "application/json", "x-admin-password": PW }, body: JSON.stringify({ config: C }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || r.status);
+    dirty = false; $("#savebar").classList.remove("dirty");
+    $("#saveMsg").textContent = "Сохранено ✓ На сайте обновится в течение ~15 секунд";
+    toast("Сохранено!");
+  } catch (e) { toast("Ошибка сохранения: " + e.message, "err"); $("#saveMsg").textContent = "Ошибка — попробуйте ещё раз"; }
+  $("#saveBtn").disabled = false;
+};
+$("#resetBtn").onclick = () => {
+  if (!confirm("Вернуть все стандартные настройки? (Изменения применятся после «Сохранить»)")) return;
+  C = clone(window.DEFAULT_CONFIG); markDirty(); render();
+};
+$("#logout").onclick = () => { sessionStorageSet("pw", null); location.reload(); };
+addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+/* ---------------- login ---------------- */
+async function tryLogin(pw) {
+  const r = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw }) });
+  return r.ok;
+}
+async function enter() {
+  const r = await fetch("/api/config?fresh=1", { cache: "no-store" });
+  const j = await r.json().catch(() => ({}));
+  C = merge(clone(window.DEFAULT_CONFIG), j.config || {});
+  $("#login").classList.add("hidden"); $("#app").classList.remove("hidden");
+  render();
+}
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const pw = $("#pw").value; $("#loginErr").textContent = "";
+  if (await tryLogin(pw)) { PW = pw; sessionStorageSet("pw", pw); enter(); }
+  else $("#loginErr").textContent = "Неверный пароль";
+});
+if (PW) tryLogin(PW).then(ok => ok ? enter() : sessionStorageSet("pw", null));
+</script>
+</body>
+</html>
